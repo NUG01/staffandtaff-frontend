@@ -1,0 +1,176 @@
+.mainWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    flex-direction: row;
+}
+
+.formHolder,
+.regNow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.formController {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    max-width: 490px;
+    padding: 40px 0px;
+}
+
+.singleInput {
+    border: 2px solid var(--color-6);
+    padding: 15px 40px 15px 40px;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.singleInput:focus {
+    border-color: #8B4F3C;
+}
+
+.formController h3 {
+    color: var(--color-1);
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.formController h1 {
+    color: var(--color-1);
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.inputControl {
+    margin-top: 10px;
+    width: 80%;
+    position: relative;
+}
+
+.inputControl svg {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transition: 0.3s;
+    transform: translateY(-50%);
+    fill: var(-color-4) !important;
+}
+
+#hideUnhide {
+    left: unset;
+    right: 10px;
+    cursor: pointer;
+}
+
+.passwordRecovery {
+    display: block;
+    margin-left: auto;
+    width: fit-content;
+    margin-top: 5px;
+    color: var(--color-1);
+}
+
+.submitInput {
+    background: var(--color-1);
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+    border: 2px solid var(--color-6);
+    padding: 15px 40px 15px 40px;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.focusedSVG {
+    fill: var(--color-1);
+}
+
+.formController p {
+    padding-top: 30px;
+}
+
+.formController p a {
+    color: var(--color-1);
+}
+
+.regNow {
+    min-height: 100vh;
+    background: rgba(71, 46, 35, 0.85) url('/login-background.png') center center no-repeat;
+    background-size: cover;
+    background-blend-mode: multiply;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+    padding: 30px 0px;
+}
+
+.regBlock {
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    color: white;
+}
+
+.regBlock h3 {
+    font-size: 18px;
+}
+
+.regBlock p {
+    padding-top: 20px;
+}
+
+.regBlock a {
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 2px;
+    border: 1px solid white;
+    color: white;
+    padding: 10px;
+    width: fit-content;
+    display: block;
+    margin-top: 20px;
+    min-height: 63px;
+}
+
+.regNow img {
+    width: 90%;
+    max-width: 370px;
+}
+
+.regNow i {
+    transform: rotate(45deg);
+}
+
+
+/* Media */
+
+@media (max-width: 992px) {
+    .mainWrapper {
+        flex-direction: column;
+        padding-top: 80px;
+    }
+
+    .formHolder,
+    .regNow {
+        width: 100%;
+    }
+}
+
+@media (max-width: 620px) {
+    .regBlock {
+        flex-direction: column;
+    }
+}

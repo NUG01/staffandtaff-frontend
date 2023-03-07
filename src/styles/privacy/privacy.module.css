@@ -1,0 +1,31 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainHeader {
+    color: var(--color-1);
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.section {
+    margin-top: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-5);
+    width: 90%;
+    max-width: 800px;
+}
+
+.sectionHeader {
+    font-size: 24px;
+    color: var(--color-1);
+    font-weight: bold;
+}
+
+.sectionContent {
+    font-size: 14px;
+    padding: 10px 0px;
+}
