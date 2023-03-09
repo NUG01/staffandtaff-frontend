@@ -1,8 +1,8 @@
 import Link from "next/link"
 
-export default function Footer() {
+export default function Footer({className}) {
     return (
-        <footer>
+        <footer className={className}> 
             <div className="top-footer">
                 <div className="column column-1">
                     <Link href="/">

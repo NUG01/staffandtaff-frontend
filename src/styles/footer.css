@@ -3,6 +3,7 @@ footer {
     flex-direction: column;
     background-color: var(--color-1);
     padding-top: 20px;
+    margin-top: 60px;
 }
 
 footer * {
@@ -55,6 +56,10 @@ footer .column-2 a {
 
 .bottom-footer a {
     text-decoration: underline;
+}
+
+.noMargin{
+    margin-top: 0px !important;
 }
 
 /* Media */

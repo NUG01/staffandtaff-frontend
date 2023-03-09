@@ -1,10 +1,15 @@
 import Header from './header';
 import Footer from './footer';
 import Head from 'next/head';
+import Jobs from './jobs/index';
 import { useAuth } from '@/hooks/auth'
+import { useRouter } from 'next/router';
 
 export default function Homepage() {
     const { user } = useAuth({ middleware: 'guest' })
+    const router = useRouter()
+
+    router.replace('/jobs')
 
     return (
         <>
@@ -13,10 +18,6 @@ export default function Homepage() {
         </Head>
 
         <Header active="home"/>
-
-        <main>
-            Homepage
-        </main>
 
         <Footer />
         </>

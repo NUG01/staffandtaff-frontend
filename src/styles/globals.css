@@ -302,6 +302,7 @@ header a {
   color: black;
   cursor: pointer;
   position: relative;
+  font-size: 14px;
 }
 
 .auth-nav {
@@ -323,13 +324,14 @@ header a {
 }
 
 .auth-nav a {
+  letter-spacing: 2px;
   color: white;
 }
 
 header a.active:after {
   content: '';
   width: 100%;
-  height: 2px;
+  height: 2.5px;
   position: absolute;
   bottom: -20.5px;
   left: 0;
@@ -406,4 +408,8 @@ header.scrolled {
 
 .openAccordion:after {
   transform: rotate(-135deg) !important;
+}
+
+.d-none{
+  display: none;
 }

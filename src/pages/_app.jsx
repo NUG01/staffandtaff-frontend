@@ -19,9 +19,7 @@ const App = ({ Component, pageProps }) => {
     if(loading) return <Loader />
     
     return(
-        <>
-            <Component {...pageProps} />
-        </>
+        <Component {...pageProps} />
     )
 }
 

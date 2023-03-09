@@ -86,7 +86,7 @@
     color: white;
     border: 0px;
     width: 142px;
-    height: 50px;
+    height: 53px;
     font-size: 15px;
 }
 
@@ -101,7 +101,7 @@
 
 .mainpageList {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     width: 90vw;
     max-width: 1200px;
@@ -111,17 +111,19 @@
     gap: 10px;
 }
 
-.mainpageList .job-holder {
+.mainpageList .jobHolder {
     position: relative;
     margin: 15px 0px;
     width: calc(33% - 5px);
     display: flex;
     flex-wrap: wrap;
     background-color: white;
+    color: black;
     padding: 20px 15px;
     cursor: pointer;
     text-transform: capitalize;
     flex-direction: column;
+    min-height: 195px;
 }
 
 .jobTop {
@@ -146,7 +148,14 @@
 }
 
 .jobDetails>div {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
     width: calc(50% - 20px);
+}
+
+.jobDetails>div img{
+    padding-right: 5px;
 }
 
 .jobDate {
@@ -183,7 +192,7 @@
 
 .filter {
     width: 70px;
-    height: 50px;
+    height: 53px;
     background-position: center center;
     background-size: contain;
     background-color: var(--color-3);
@@ -247,7 +256,7 @@
     padding: 10px 0px;
 }
 
-.explanation-cards {
+.explanationCards {
     display: flex;
     width: 90%;
     max-width: 1220px;
@@ -262,7 +271,7 @@
     background-color: white;
     flex-direction: column;
     gap: 10px;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     padding: 20px 10px;
 }

@@ -20,13 +20,13 @@ export default function Header({active}) {
     return (
         <header className={scrl > 5 || expanded ? 'scrolled' : ''} id={active === "home" || active === "job" ? 'home' : ''}>
             <h1>
-                <Link href="/">
+                <Link href="/jobs">
                     <img src="/logo-sm.png" alt="" />
                 </Link>
             </h1>
 
             <div className="nav">
-                <Link href="/jobs" className={active == "home" || active == "job" ? "active" : ""}>Jobs</Link>
+                <Link href="/jobs" className={active == "home" || active == "job" || active == 'singleJob' ? "active" : ""}>Jobs</Link>
                 <Link href="/about" className={active == "about" ? "active" : ""}>About Us</Link>
                 <Link href="/tips" className={active == "tips" ? "active" : ""}>Tips</Link>
                 <Link href="/faq" className={active == "faq" ? "active" : ""}>F.A.Q</Link>
