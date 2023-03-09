@@ -27,12 +27,12 @@ const ForgotPassword = () => {
     return (
         <>
             <Head>
-                <title>F.A.Q</title>
+                <title>Password Recovery</title>
             </Head>
 
             <Header active=""/>
 
-            <main>
+            <main className={styles.main}>
                 <form className={styles.mainForm} ref={form} onSubmit={submitForm}>
                     <h1>RESET PASSWORD</h1>
                     <p>

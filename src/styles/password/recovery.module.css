@@ -1,5 +1,6 @@
-.main-wrapper {
+.main {
     justify-content: center;
+    padding-top: 70px;
 }
 
 .mainForm {
