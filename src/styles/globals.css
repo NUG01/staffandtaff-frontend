@@ -379,7 +379,7 @@ header.scrolled {
     display: block;
   }
 
-  .nav {
+  .nav, .auth-nav {
     display: none;
   }
 
