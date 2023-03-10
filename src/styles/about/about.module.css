@@ -4,7 +4,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 70%;
+    width: 90%;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -78,15 +79,23 @@
     left: 10px;
     transition: 0.3s;
     transform: translateY(-50%);
-    fill: var(-color-4) !important;
+    z-index: 2;
+    pointer-events: none;
 }
 
+.inputControl svg path{
+    fill: var(--color-4) !important;
+}
 
 .singleInput {
     border: 2px solid var(--color-6);
     padding: 15px 40px 15px 40px;
     width: 100%;
     transition: 0.3s;
+}
+
+textarea.singleInput{
+    padding-left: 15px;
 }
 
 .singleInput:focus {
@@ -118,11 +127,18 @@
     margin-right: 10px;
     width: 18px;
     height: 18px;
+    accent-color: var(--color-1);
 }
 
 .checkbox a {
     color: var(--color-1);
     font-weight: 700;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.checkbox span{
+    color: var(--red);
 }
 
 .submitInput {
