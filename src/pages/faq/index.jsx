@@ -5,7 +5,6 @@ import styles from '../../styles/faq/faq.module.css'
 
 export default function Faq() {
 
-
     let faqData = {
       "Category 1":[
         {

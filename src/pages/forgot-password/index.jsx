@@ -50,7 +50,7 @@ const ForgotPassword = () => {
                     <div className={styles.inputContainer}>
                         <InputError messages={errors.email} className="error-text" id={styles.errorText} />
                     </div>
-                    <button>SUBMIT</button>
+                    <input type="submit" value="SIGN IN" className={styles.submitInput} />
                     <Link href="/login">Go back to the login page</Link>
                 </form>
             </main>
