@@ -7,7 +7,6 @@ import Footer from '../footer';
 import Head from 'next/head';
 
 export default function Jobs({jobDataList}) {
-    
     return (
         <>
             <Head>

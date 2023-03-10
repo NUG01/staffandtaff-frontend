@@ -6,7 +6,6 @@ import { useAuth } from '@/hooks/auth'
 import { useRouter } from 'next/router';
 
 export default function Homepage() {
-    const { user } = useAuth({ middleware: 'guest' })
     const router = useRouter()
 
     router.replace('/jobs')

@@ -9,7 +9,7 @@
 .top {
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: flex-start;
     width: 90%;
     max-width: 570px;
     gap: 20px;
@@ -41,7 +41,7 @@
 .companyTop {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     gap: 20px;
 }
 

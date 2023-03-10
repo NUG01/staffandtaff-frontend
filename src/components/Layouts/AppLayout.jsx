@@ -1,23 +1,17 @@
-import Navigation from '@/components/Layouts/Navigation'
-import { useAuth } from '@/hooks/auth'
+import Header from '@/pages/header';
+import Footer from '@/pages/footer';
 
-const AppLayout = ({ header, children }) => {
-    const { user } = useAuth({ middleware: 'auth' })
-
+const AppLayout = ({ head, child, active }) => {
     return (
-        <div className="min-h-screen bg-gray-100">
-            <Navigation user={user} />
+        <>
+            {head}
 
-            {/* Page Heading */}
-            <header className="bg-white shadow">
-                <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {header}
-                </div>
-            </header>
+            <Header active={active}/>
+            
+            {child}
 
-            {/* Page Content */}
-            <main>{children}</main>
-        </div>
+            <Footer />
+        </>
     )
 }
 

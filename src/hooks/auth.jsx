@@ -9,7 +9,8 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     const { data: user, error, mutate } = useSWR('/api/v1/user', () =>
         axios
             .get('/api/v1/user')
-            .then(res => res.data)
+            .then(res => {
+            })
             .catch(error => {
                 if (error.response.status !== 409) throw error;
 
@@ -45,6 +46,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         axios
             .post('/login', props)
             .then(() => {
+                router.push('/jobs')
                 mutate()
             })
             .catch(error => {
@@ -103,7 +105,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             await axios.post('/logout').then(() => mutate());
         }
 
-        window.location.pathname = '/login';
+        window.location.pathname = '/';
     };
 
     useEffect(() => {

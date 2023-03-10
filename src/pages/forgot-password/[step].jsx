@@ -6,7 +6,6 @@ import Head from "next/head";
 
 export default function Job() {
     const router = useRouter();
-    console.log(router)
     const step = router.query.step;
 
     return (

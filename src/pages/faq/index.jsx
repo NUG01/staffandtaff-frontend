@@ -2,9 +2,11 @@ import Header from '../header';
 import Footer from '../footer';
 import Head from 'next/head';
 import styles from '../../styles/faq/faq.module.css'
+import { useRef } from 'react';
 
 export default function Faq() {
 
+    const parent = useRef()
 
     let faqData = {
       "Category 1":[
@@ -64,7 +66,7 @@ export default function Faq() {
                                     <h1>{item}</h1>
                                     {faqValues[mainIndex].map((item, index) =>{
                                         return(
-                                            <div key={index} className={`expandAccordion ${styles.accordion}`}>
+                                            <div key={index} className={`expandAccordion ${styles.accordion}`} ref={parent} >
                                                 <h1 className={styles.header} onClick={()=> toggleAccordion(mainIndex, index)}>
                                                     {item.heading}
                                                 </h1>
