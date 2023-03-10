@@ -54,14 +54,14 @@
     fill: #757575 !important;
 }
 
-.mainForm button {
+/* .mainForm button {
     background: var(--color-1);
     font-size: 16px;
     color: white;
     cursor: pointer;
     margin-top: 20px;
     height: 60px;
-}
+} */
 
 .mainForm a {
     text-decoration: underline;
@@ -70,4 +70,13 @@
 
 .inputContainer{
     text-align: center;
+}
+
+.submitInput{
+    background: var(--color-1);
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+    height: 60px;
 }
