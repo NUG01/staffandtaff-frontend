@@ -21,7 +21,7 @@ export default function About() {
                     Il est convenu que le client souhaite commercialiser une nouvelle plateforme permettant aux recruteurs et candidats du secteur de la restauration et de l'hôtellerie de s'inscrire et de proposer leurs offres d'emploi en ligne ou de postuler à une offre d'emploi.
                     </p>
                 </div>
-                <div class={styles.vl}></div>
+                <div className={styles.vl}></div>
                 <div className={styles.formContent}>
                     <h3>Contactez-Nous</h3>
                     <h4>Do you have any questions or suggestions? Reach us out.</h4>
