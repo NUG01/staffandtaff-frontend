@@ -1,17 +1,25 @@
 import useSWR from 'swr';
 import axios from '@/lib/axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     const router = useRouter();
+    const [user, setUser] = useState()
+    const [isLogged, setLogged] = useState()
 
-    const { data: user, error, mutate } = useSWR('/api/v1/user', () =>
+    const { error, mutate } = useSWR('/api/v1/user', () =>
         axios
             .get('/api/v1/user')
             .then(res => {
+                setUser(res.data)
+                setLogged(1)
             })
             .catch(error => {
+                if(error.response.status === 401){
+                    setLogged(0)
+                    return
+                }
                 if (error.response.status !== 409) throw error;
 
                 router.push('/verify-email');
@@ -121,6 +129,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     return {
         user,
+        isLogged,
         register,
         login,
         forgotPassword,

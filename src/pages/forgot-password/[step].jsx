@@ -4,7 +4,7 @@ import Footer from '../footer';
 import Head from "next/head";
 
 
-export default function Job() {
+export default function Job({isLogged, user}) {
     const router = useRouter();
     const step = router.query.step;
 
@@ -14,7 +14,7 @@ export default function Job() {
                 <title>About</title>
             </Head>
 
-            <Header active=""/>
+            <Header isLogged={isLogged} user={user} active=""/>
 
             <main>
                 {step}

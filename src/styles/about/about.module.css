@@ -1,5 +1,5 @@
 .main {
-    padding-top: 140px;
+    padding-top: 90px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -8,11 +8,6 @@
     max-width: 1200px;
     margin: 0 auto;
 }
-
-/* .main div {
-    width: 50%;
-    padding: 50px;
-} */
 
 .title {
     display: flex;

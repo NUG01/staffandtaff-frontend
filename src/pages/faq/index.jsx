@@ -4,7 +4,7 @@ import Head from 'next/head';
 import styles from '../../styles/faq/faq.module.css'
 import { useRef } from 'react';
 
-export default function Faq() {
+export default function Faq({isLogged, user}) {
 
     const parent = useRef()
 
@@ -47,7 +47,7 @@ export default function Faq() {
                 <title>F.A.Q</title>
             </Head>
 
-            <Header active="faq"/>
+            <Header isLogged={isLogged} user={user} active="faq"/>
 
             <main className={styles.main}>
                 <h1 className={styles.mainHeader}>Frequently Asked Questions</h1>

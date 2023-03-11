@@ -9,8 +9,12 @@ import Footer from '../footer';
 import Head from 'next/head';
 import styles from '../../styles/login/login.module.css'
 
-const Login = () => {
+const Login = ({isLogged, user})=> {
     const router = useRouter()
+
+    if(isLogged === 1 && user){
+        router.replace('/jobs')
+    }
 
     const { login } = useAuth({
         middleware: 'guest',
@@ -59,7 +63,7 @@ const Login = () => {
                 <title>Log In</title>
             </Head>
 
-            <Header active="login"/>
+            <Header isLogged={isLogged} user={user} active="login"/>
 
             <div className={styles.mainWrapper}>
                     <div className={styles.formHolder}>

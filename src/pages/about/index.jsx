@@ -4,14 +4,14 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../../styles/about/about.module.css'
 
-export default function About() {
+export default function About({isLogged, user}) {
     return (
         <>
             <Head>
                 <title>About</title>
             </Head>
 
-            <Header active="about"/>
+            <Header isLogged={isLogged} user={user} active="about"/>
             
             <main className={styles.main}>
                 <div className={styles.box}>

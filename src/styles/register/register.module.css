@@ -1,0 +1,81 @@
+.mainWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    flex-direction: row;
+    min-height: 100vh;
+}
+
+
+.formHolder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.form >div{
+    display: flex;
+    flex-direction: column;
+}
+
+.singleInput {
+    border: 2px solid var(--color-6);
+    padding: 15px 40px 15px 40px;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.singleInput:focus {
+    border-color: #8B4F3C;
+}
+
+.inputControl {
+    margin-top: 10px;
+    position: relative;
+}
+
+
+#hideUnhide {
+    left: unset;
+    right: 10px;
+    cursor: pointer;
+}
+
+.inputControl svg {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transition: 0.3s;
+    transform: translateY(-50%);
+    fill: var(-color-4) !important;
+}
+
+.submitInput {
+    background: var(--color-1);
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+    border: 2px solid var(--color-6);
+    padding: 15px 40px 15px 40px;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.alreadyReg {
+    display: block;
+    margin-left: auto;
+    width: fit-content;
+    margin-top: 5px;
+    color: var(--color-1);
+}

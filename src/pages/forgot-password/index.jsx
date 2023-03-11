@@ -7,7 +7,7 @@ import Footer from '../footer';
 import styles from '../../styles/password/recovery.module.css'
 import Head from 'next/head';
 
-const ForgotPassword = () => {
+const ForgotPassword = ({isLogged, user})=> {
     const { forgotPassword } = useAuth({ middleware: 'guest' })
 
     const [email, setEmail] = useState('')
@@ -30,7 +30,7 @@ const ForgotPassword = () => {
                 <title>Password Recovery</title>
             </Head>
 
-            <Header active=""/>
+            <Header isLogged={isLogged} user={user} active=""/>
 
             <main className={styles.main}>
                 <form className={styles.mainForm} ref={form} onSubmit={submitForm}>

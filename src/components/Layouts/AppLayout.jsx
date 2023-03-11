@@ -1,12 +1,12 @@
 import Header from '@/pages/header';
 import Footer from '@/pages/footer';
 
-const AppLayout = ({ head, child, active }) => {
+const AppLayout = ({ head, child, active, isLogged, user}) => {
     return (
         <>
             {head}
 
-            <Header active={active}/>
+            <Header isLogged={isLogged} user={user} active={active}/>
             
             {child}
 

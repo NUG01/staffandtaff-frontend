@@ -5,7 +5,7 @@ import Jobs from './jobs/index';
 import { useAuth } from '@/hooks/auth'
 import { useRouter } from 'next/router';
 
-export default function Homepage() {
+export default function Homepage({isLogged, user}) {
     const router = useRouter()
 
     router.replace('/jobs')
@@ -16,7 +16,7 @@ export default function Homepage() {
             <title>Staff&Taff</title>
         </Head>
 
-        <Header active="home"/>
+        <Header isLogged={isLogged} user={user} active="home"/>
 
         <Footer />
         </>

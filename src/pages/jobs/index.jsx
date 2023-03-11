@@ -6,14 +6,14 @@ import Header from '../header';
 import Footer from '../footer';
 import Head from 'next/head';
 
-export default function Jobs({jobDataList}) {
+export default function Jobs({jobDataList, isLogged, user}) {
     return (
         <>
             <Head>
                 <title>Jobs</title>
             </Head>
 
-            <Header active="job"/>
+            <Header isLogged={isLogged} user={user} active="job"/>
 
             <Banner />
 

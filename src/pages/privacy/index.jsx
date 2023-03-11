@@ -3,14 +3,14 @@ import Footer from '../footer';
 import Head from 'next/head';
 import styles from '../../styles/privacy/privacy.module.css'
 
-export default function Privacy() {
+export default function Privacy({isLogged, user}) {
     return (
         <>
             <Head>
                 <title>Privacy</title>
             </Head>
 
-            <Header active="privacy"/>
+            <Header isLogged={isLogged} user={user} active="privacy"/>
 
             <main className={styles.main}>
                 <h1 className={styles.mainHeader}>Privacy Policy</h1>

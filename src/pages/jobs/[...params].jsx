@@ -4,13 +4,13 @@ import Head from "next/head";
 import styles from '../../styles/jobs/singleJob.module.css'
 import { useEffect, useRef, useState} from 'react';
 
-export default function Job(data) {
+export default function Job({isLogged, user, data}) {
 
     let [longer, setLonger] = useState(false)
     let [loadText, setText] = useState('See more')
     let [expanded, setExpand] = useState(false)
 
-    const obj = data.data
+    const obj = data
 
     const descriptionBlock = useRef()
 
@@ -31,7 +31,7 @@ export default function Job(data) {
                 <title>{obj.title}</title>
             </Head>
 
-            <Header active="singleJob"/>
+            <Header isLogged={isLogged} user={user} active="singleJob"/>
 
             <div className={styles.mainWrapper}>
                 <div className={styles.top}>
