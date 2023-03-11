@@ -158,6 +158,12 @@
     padding-right: 5px;
 }
 
+.jobCountry img{
+    width: 32px;
+    height: 20px;
+    object-fit: cover;
+}
+
 .jobDate {
     padding-top: 15px;
     display: flex;
