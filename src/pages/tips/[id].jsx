@@ -3,7 +3,7 @@ import Header from '../header';
 import Footer from '../footer';
 import Head from "next/head";
 
-export default function Tip({isLogged, user, data}){
+export default function Tip({isLogged, user, logout, data}){
 
     return(
         <>
@@ -11,7 +11,7 @@ export default function Tip({isLogged, user, data}){
                 <title>Email verification</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} active="tips"/>
+            <Header isLogged={isLogged} user={user} logout={logout} active="tips"/>
 
             <main>
                 {data.title}

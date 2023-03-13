@@ -1,20 +1,28 @@
 import { useRouter } from "next/router";
 import Router from "next/router";
 import styles from '../../styles/recovery/recovery.module.css'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from '../header';
 import Footer from '../footer';
 import Head from "next/head";
 import Link from "next/link";
 
-export default function Job({isLogged, user}) {
+export default function Job({isLogged, user, logout}) {
     const router = useRouter();
     const step = router.query.step;
 
-    if(step > 3 || step < 1 || isNaN(Number(step))) {
-        Router.replace(`/forgot-password`)
-        return
-    }
+    useEffect(()=>{
+        if(step > 3 ) {
+            Router.replace(`/forgot-password`)
+            return
+        }else if(step < 1){
+            Router.replace(`/forgot-password`)
+            return
+        }else if(isNaN(Number(step))){
+            Router.replace(`/forgot-password`)
+            return
+        }
+    })
 
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirmation ] = useState('')
@@ -41,7 +49,7 @@ export default function Job({isLogged, user}) {
                     <title>Email verification</title>
                 </Head>
     
-                <Header isLogged={isLogged} user={user} active=""/>
+                <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
     
                 <div className={styles.mainWrapper}>
                     <div className={styles.inboxCheck}>
@@ -82,7 +90,7 @@ export default function Job({isLogged, user}) {
                     <title>Set new password</title>
                 </Head>
 
-                <Header isLogged={isLogged} user={user} active=""/>
+                <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
 
                 <div className={styles.mainWrapper}>
                     <form>
@@ -159,7 +167,7 @@ export default function Job({isLogged, user}) {
                 <title>Password changed successfully!</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} active="login"/>
+            <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
 
                 <div className={`${styles.last} ${styles.mainWrapper}`}>
                     <div className={styles.inboxCheck}>

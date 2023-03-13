@@ -1,13 +1,11 @@
 import { FaBars } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useAuth } from '@/hooks/auth'
 
-export default function Header({active, isLogged, user}) {
+export default function Header({active, isLogged, user, logout}) {
     const [expanded, setExpanded] = useState(false);
     const [scrl, setScroll] = useState(0)
 
-    const { logout } = useAuth()
 
     useEffect(()=>{
         onscroll = ()=>{
@@ -33,7 +31,7 @@ export default function Header({active, isLogged, user}) {
             <div className={active === 'login' || active === 'register' ? 'hide-nav' : 'auth-nav'}>
                 <Link className={isLogged === 1 ? 'hide-nav' : ''} href="/login">LOG IN / </Link> 
                 <Link className={isLogged === 1 ? 'hide-nav' : ''} href="/register">REGISTER</Link>
-                <p className={isLogged === 0 ? 'hide-nav' : ''} onClick={logout}>LOG OUT</p>
+                <p className={isLogged === 0 || isLogged === 0 ? 'hide-nav' : ''} onClick={logout}>LOG OUT</p>
             </div>
 
             <FaBars className='menu-toggler' onClick={() => setExpanded(!expanded)} />

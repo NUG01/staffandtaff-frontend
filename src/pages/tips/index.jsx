@@ -4,7 +4,7 @@ import Head from 'next/head';
 import styles from '../../styles/tips/tips.module.css'
 import Link from 'next/link';
 
-export default function Tips({isLogged, user}) {
+export default function Tips({isLogged, user, logout}) {
 
 
     let tipsData = {
@@ -60,7 +60,7 @@ export default function Tips({isLogged, user}) {
                 <title>Tips</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} active="tips"/>
+            <Header isLogged={isLogged} user={user} logout={logout} active="tips"/>
 
             <main className={styles.main}>
                 <h1 className={styles.mainHeader}>Tips from Staff&Taff</h1>

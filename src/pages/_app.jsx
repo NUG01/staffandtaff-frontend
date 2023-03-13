@@ -4,16 +4,11 @@ import Loader from '@/components/loader';
 import Router from 'next/router';
 import { useState } from 'react';
 import { useAuth } from '@/hooks/auth';
-import Head from 'next/head';
 
 const App = ({ Component, pageProps }) => {
-    const { user, isLogged } = useAuth()
+    const { user, isLogged, logout } = useAuth()
 
     const [loading, setLoading] = useState(false)
-
-    if (isLogged === undefined) {
-        return <Loader />
-    }
 
     Router.events.on('routeChangeStart', () => {
         setLoading(true)
@@ -23,21 +18,21 @@ const App = ({ Component, pageProps }) => {
         setLoading(false)
     })
 
-    if (loading) return <Loader />
+    if (loading) return <Loader className="show-loader" />
 
     console.log(isLogged)
     console.log(user)
     if (isLogged) {
         return (
             <>
-                {Router.asPath === '/stripe' ? <Head><script src="https://js.stripe.com/v3/"></script></Head> : ''}
-                <Component isLogged={isLogged} user={user} {...pageProps} />
+                <Loader className={isLogged === undefined ? 'show-loader' : ''} />
+                <Component isLogged={isLogged} user={user} {...pageProps} logout={logout} />
             </>
         )
     } else {
         return (
             <>
-                {Router.asPath === '/stripe' ? <Head><script src="https://js.stripe.com/v3/"></script></Head> : ''}
+                <Loader className={isLogged === undefined ? 'show-loader' : ''} />
                 <Component isLogged={isLogged} {...pageProps} />
             </>
         )

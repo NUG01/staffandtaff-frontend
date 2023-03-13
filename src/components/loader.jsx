@@ -1,6 +1,6 @@
-export default function Loader() {
+export default function Loader({className}) {
     return(
-        <div className="loader show-loader">
+        <div className={`loader ${className}`}>
             <div className="lds-roller">
                 <div></div>
                 <div></div>

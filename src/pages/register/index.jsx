@@ -8,7 +8,7 @@ import styles from '@/styles/register/register.module.css'
 import Header from '../header'
 import Footer from '../footer'
 
-const Register = ({isLogged, user}) => {
+const Register = ({isLogged, user, logout}) => {
     const router = useRouter()
 
     if(isLogged === 1 && user){
@@ -55,7 +55,7 @@ const Register = ({isLogged, user}) => {
                 <title>Register</title>
             </Head>
             
-            <Header isLogged={isLogged} user={user} active="register"/>
+            <Header isLogged={isLogged} user={user} logout={logout} active="register"/>
 
             <div className={styles.mainWrapper}>
                     <div className={styles.formHolder}>

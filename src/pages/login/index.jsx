@@ -9,7 +9,7 @@ import Footer from '../footer';
 import Head from 'next/head';
 import styles from '../../styles/login/login.module.css'
 
-const Login = ({isLogged, user})=> {
+const Login = ({isLogged, user, logout})=> {
     const router = useRouter()
 
     if(isLogged === 1 && user){
@@ -63,7 +63,7 @@ const Login = ({isLogged, user})=> {
                 <title>Log In</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} active="login"/>
+            <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
 
             <div className={styles.mainWrapper}>
                     <div className={styles.formHolder}>

@@ -8,7 +8,7 @@ import styles from '../../styles/password/password.module.css'
 import Head from 'next/head';
 import Router from 'next/router';
 
-const ForgotPassword = ({isLogged, user})=> {
+const ForgotPassword = ({isLogged, user, logout})=> {
     const { forgotPassword } = useAuth({ middleware: 'guest' })
 
     const [email, setEmail] = useState('')
@@ -33,7 +33,7 @@ const ForgotPassword = ({isLogged, user})=> {
                 <title>Password Recovery</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} active="login"/>
+            <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
 
             <main className={styles.main}>
                 <form className={styles.mainForm} ref={form} onSubmit={submitForm}>
