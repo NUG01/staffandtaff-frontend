@@ -4,8 +4,9 @@ import { useAuth } from '@/hooks/auth'
 import { useState, useRef } from 'react'
 import Header from '../header';
 import Footer from '../footer';
-import styles from '../../styles/password/recovery.module.css'
+import styles from '../../styles/password/password.module.css'
 import Head from 'next/head';
+import Router from 'next/router';
 
 const ForgotPassword = ({isLogged, user})=> {
     const { forgotPassword } = useAuth({ middleware: 'guest' })
@@ -19,9 +20,11 @@ const ForgotPassword = ({isLogged, user})=> {
     const submitForm = event => {
         event.preventDefault()
 
-        form.current.classList.add('disabledSection')
+        // form.current.classList.add('disabledSection')
 
-        forgotPassword({ email, setErrors, setStatus, form })
+        // forgotPassword({ email, setErrors, setStatus, form })
+        Router.push('/forgot-password/1')
+
     }
 
     return (
@@ -30,7 +33,7 @@ const ForgotPassword = ({isLogged, user})=> {
                 <title>Password Recovery</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} active=""/>
+            <Header isLogged={isLogged} user={user} active="login"/>
 
             <main className={styles.main}>
                 <form className={styles.mainForm} ref={form} onSubmit={submitForm}>

@@ -13,7 +13,6 @@ export default function JobList({data}) {
                                 <div className={styles.addToFavourites}></div>
                                 <div>
                                     <div className={styles.jobTop}>
-                                        <img className={styles.jobImg} src="/job-profile.png" />
                                         <div className={styles.jobsDesc}>
                                             <div className={styles.name}>{item.id}</div>
                                             <div className={styles.company}>Company</div>

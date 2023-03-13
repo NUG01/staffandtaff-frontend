@@ -4,6 +4,7 @@ import Loader from '@/components/loader';
 import Router from 'next/router';
 import { useState } from 'react';
 import { useAuth } from '@/hooks/auth';
+import Head from 'next/head';
 
 const App = ({ Component, pageProps }) => {
     const { user, isLogged } = useAuth()
@@ -29,12 +30,14 @@ const App = ({ Component, pageProps }) => {
     if (isLogged) {
         return (
             <>
+                {Router.asPath === '/stripe' ? <Head><script src="https://js.stripe.com/v3/"></script></Head> : ''}
                 <Component isLogged={isLogged} user={user} {...pageProps} />
             </>
         )
     } else {
         return (
             <>
+                {Router.asPath === '/stripe' ? <Head><script src="https://js.stripe.com/v3/"></script></Head> : ''}
                 <Component isLogged={isLogged} {...pageProps} />
             </>
         )

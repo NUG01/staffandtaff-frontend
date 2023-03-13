@@ -1,4 +1,3 @@
-import Button from '@/components/Button'
 import InputError from '@/components/InputError'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
@@ -6,6 +5,8 @@ import { useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import styles from '@/styles/register/register.module.css'
+import Header from '../header'
+import Footer from '../footer'
 
 const Register = ({isLogged, user}) => {
     const router = useRouter()
@@ -53,6 +54,9 @@ const Register = ({isLogged, user}) => {
             <Head>
                 <title>Register</title>
             </Head>
+            
+            <Header isLogged={isLogged} user={user} active="register"/>
+
             <div className={styles.mainWrapper}>
                     <div className={styles.formHolder}>
                     <form ref={form} className={styles.form} onSubmit={submitForm}>
@@ -161,6 +165,8 @@ const Register = ({isLogged, user}) => {
                     </form>
                 </div>
             </div>
+
+            <Footer />
         </>
     )
 }

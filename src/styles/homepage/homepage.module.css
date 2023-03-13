@@ -100,21 +100,17 @@
 }
 
 .mainpageList {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
     width: 90vw;
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 20px auto;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(330px, 1fr));
     gap: 10px;
 }
 
 .mainpageList .jobHolder {
     position: relative;
     margin: 15px 0px;
-    width: calc(33% - 5px);
     display: flex;
     flex-wrap: wrap;
     background-color: white;
@@ -123,7 +119,7 @@
     cursor: pointer;
     text-transform: capitalize;
     flex-direction: column;
-    min-height: 195px;
+    min-height: 185px;
 }
 
 .jobTop {
@@ -136,6 +132,15 @@
     object-fit: cover;
 }
 
+.name{
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.company{
+    padding-bottom: 20px;
+}
+
 .jobDesc {
     width: calc(100% - 80px);
     margin-left: 10px;
@@ -144,10 +149,11 @@
 .jobDetails {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     gap: 10px;
 }
 
-.jobDetails>div {
+.jobDetails>div:nth-child(odd) {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -177,6 +183,7 @@
     background: var(--red);
     padding: 5px 7px;
     border-radius: 5px;
+    font-size: 13px;
 }
 
 .jobDate .expiration span {
@@ -353,4 +360,10 @@
         max-width: 500px;
     }
 
+}
+
+@media (max-width: 576px){
+    .mainpageList {
+        grid-template-columns: repeat(auto-fit,minmax(280px, 1fr));
+    }
 }
