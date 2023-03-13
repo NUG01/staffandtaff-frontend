@@ -147,3 +147,11 @@ textarea.singleInput{
     width: 100%;
     transition: 0.3s;
 }
+
+@media(max-width: 768px) {
+
+    .main {
+        display: block;
+        text-align: center;
+    }
+}
