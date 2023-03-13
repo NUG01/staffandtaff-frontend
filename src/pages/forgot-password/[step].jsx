@@ -10,7 +10,7 @@ import Link from "next/link";
 export default function Job({isLogged, user}) {
     const router = useRouter();
     const step = router.query.step;
-    console.log(Number(step))
+
     if(step > 3 || step < 1 || isNaN(Number(step))) {
         Router.replace(`/forgot-password`)
         return
