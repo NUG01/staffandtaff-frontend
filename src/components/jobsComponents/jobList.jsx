@@ -9,7 +9,7 @@ export default function JobList({data}) {
                 {
                     data.map((item, index) =>{
                         return (
-                            <Link href={`jobs/${item.id}`} key={index} className={styles.jobHolder}>
+                            <Link href={`jobs/${item.id}`} key={item.id} className={styles.jobHolder}>
                                 <div className={styles.addToFavourites}></div>
                                 <div>
                                     <div className={styles.jobTop}>
