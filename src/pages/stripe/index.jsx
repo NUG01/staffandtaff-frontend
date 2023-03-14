@@ -5,7 +5,6 @@ import Head from "next/head";
 import Script from "next/script";
 import Header from "../header";
 import Footer from "../footer";
-import Loader from "@/components/loader";
 import styles from "@/styles/stripe/stripe.module.css"
 import Link from "next/link";
 
@@ -18,14 +17,23 @@ import CheckoutForm from "@/components/CheckoutForm";
 
 export default function App({ user, isLogged, logout }) {
 	const [isLoading, setLoading] = useState(true)
+	const [secretIntent, setIntent] = useState(false)
+	const [duplicatedStripe, setStripe] = useState(false)
+	const [duplicatedCardNumber, setCardNumber] = useState(false)
 
 	let intent;
 	let stripe;
 	let elements;
+
+
 	function load() {
 		axios.get('/api/v1/user-intent').then((res) => {
 			intent = res.data.intent
+			setIntent(intent)
+			
 			stripe = Stripe('pk_test_51MRB4YGAxhWdhlP58Xjttd8NaeIGqSbVL36xEgi2yOtk16IIilw3qYMtDdqjelbCsfRFkPQlU13Ms9pODFzQugud00u6d4SNyh');
+			setStripe(stripe)
+
 			elements = stripe.elements({
 				clientSecret: intent.intent.client_secret,
 			});
@@ -51,6 +59,7 @@ export default function App({ user, isLogged, logout }) {
 			});
 
 			cardNumber.mount('#card-element');
+			setCardNumber(cardNumber)
 
 			let cardExpire = elements.create('cardExpiry', {
 				style: style,
@@ -95,6 +104,7 @@ export default function App({ user, isLogged, logout }) {
 	return (
 		<>
 			<Script
+				crossOrigin
 				src="https://js.stripe.com/v3/"
 				strategy="lazyOnload"
 				onLoad={() => load()}
@@ -109,7 +119,7 @@ export default function App({ user, isLogged, logout }) {
 			<main className="stripe mainWrapper">
 				<h3>Payer</h3>
 
-				<CheckoutForm isLoading={isLoading}/>
+				<CheckoutForm isLoading={isLoading} intent={secretIntent} user={user} stripe={duplicatedStripe} cardNumber={duplicatedCardNumber}/>
 
                 <h1 className={styles.mainHeader}>Foire Aux Questions</h1>
                 <h2 className={styles.intro}>Avez-vous des questions ? Nous sommes là pour vous répondre.</h2>
