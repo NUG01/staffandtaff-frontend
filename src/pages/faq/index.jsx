@@ -62,22 +62,10 @@ export default function Faq({isLogged, user, logout, search}) {
 
     function submitForm(e){
         e.preventDefault()
-        console.log(input.current.value)
         if(input.current.value.length > 0) form.current.submit()
     }
     
     if(search) {
-        // faqValues.forEach((value, index) =>{
-        //     value.forEach(item =>{
-        //         if(item.heading.includes(search) || item.content.includes(search)) {
-        //             if(!searchedDataCategories.includes(faqKeys[index])) {
-        //                 searchedDataCategories.push(faqKeys[index])
-        //             }
-        //             searchedData.push(item)
-        //         }
-        //     })
-        // })
-
         faqKeys.forEach((key, keyIndex) =>{
             let newArr = []
             faqValues[keyIndex].forEach(value =>{
