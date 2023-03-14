@@ -5,8 +5,8 @@ import { useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import styles from '@/styles/register/register.module.css'
-import Header from '../header'
-import Footer from '../footer'
+import Header from '@/pages/header';
+import Footer from '@/pages/footer';
 
 const Register = ({isLogged, user, logout}) => {
     const router = useRouter()

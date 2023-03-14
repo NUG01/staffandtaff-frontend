@@ -1,9 +1,8 @@
-import Banner from '../../components/jobsComponents/banner';
-import JobList from '../../components/jobsComponents/jobList'
-import GeneralInformation from '../../components/jobsComponents/generalInformation'
-import { useState, useEffect } from 'react';
-import Header from '../header';
-import Footer from '../footer';
+import Banner from '@/components/jobsComponents/banner';
+import JobList from '@/components/jobsComponents/jobList'
+import GeneralInformation from '@/components/jobsComponents/generalInformation'
+import Header from '@/pages/header';
+import Footer from '@/pages/footer';
 import Head from 'next/head';
 
 export default function Jobs({jobDataList, isLogged, user, logout}) {

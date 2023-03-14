@@ -30,7 +30,7 @@ export default function Header({active, isLogged, user, logout}) {
             
             <div className={active === 'login' || active === 'register' ? 'hide-nav' : 'auth-nav'}>
                 <Link className={isLogged === 1 ? 'hide-nav' : ''} href="/login">LOG IN / </Link> 
-                <Link className={isLogged === 1 ? 'hide-nav' : ''} href="/register">REGISTER</Link>
+                <Link className={isLogged === 1 ? 'hide-nav' : ''} href="/login">REGISTER</Link>
                 <p className={isLogged === 0 || isLogged === 0 ? 'hide-nav' : ''} onClick={logout}>LOG OUT</p>
             </div>
 

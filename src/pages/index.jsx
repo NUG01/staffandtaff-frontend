@@ -1,7 +1,7 @@
-import Header from './header';
-import Footer from './footer';
+import Header from '@/pages/header';
+import Footer from '@/pages/footer';
 import Head from 'next/head';
-import Jobs from './jobs/index';
+import Jobs from '@/pages/jobs/index';
 import { useAuth } from '@/hooks/auth'
 import { useRouter } from 'next/router';
 

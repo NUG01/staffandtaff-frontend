@@ -1,5 +1,5 @@
-import Header from '../header';
-import Footer from '../footer';
+import Header from '@/pages/header';
+import Footer from '@/pages/footer';
 import Head from 'next/head';
 
 export default function Terms({isLogged, user, logout}) {

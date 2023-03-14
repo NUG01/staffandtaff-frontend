@@ -1,19 +1,21 @@
-import { useRouter } from "next/router";
-import Header from '../header';
-import Footer from '../footer';
+import Header from '@/pages/header';
+import Footer from '@/pages/footer';
 import Head from "next/head";
+import styles from "@/styles/tips/singleTip.module.css"
 
 export default function Tip({isLogged, user, logout, data}){
+
+    console.log(styles)
 
     return(
         <>
             <Head>
-                <title>Email verification</title>
+                <title>{data.title}</title>
             </Head>
 
             <Header isLogged={isLogged} user={user} logout={logout} active="tips"/>
 
-            <main>
+            <main className={styles.mainWrapper}>
                 {data.title}
             </main>
             

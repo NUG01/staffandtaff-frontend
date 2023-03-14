@@ -1,7 +1,7 @@
-import Header from '../header';
-import Footer from '../footer';
+import Header from '@/pages/header';
+import Footer from '@/pages/footer';
 import Head from 'next/head';
-import styles from '../../styles/faq/faq.module.css'
+import styles from '@/styles/faq/faq.module.css'
 import { useRef } from 'react';
 
 export default function Faq({isLogged, user, logout}) {

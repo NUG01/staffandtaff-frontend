@@ -4,10 +4,10 @@ import { useAuth } from '@/hooks/auth'
 import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 
-import Header from '../header';
-import Footer from '../footer';
+import Header from '@/pages/header';
+import Footer from '@/pages/footer';
 import Head from 'next/head';
-import styles from '../../styles/login/login.module.css'
+import styles from '@/styles/login/login.module.css'
 
 const Login = ({isLogged, user, logout})=> {
     const router = useRouter()

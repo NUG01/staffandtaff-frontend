@@ -11,7 +11,7 @@ const NotFoundPage = () => (
                 </div>
 
                 <div className="ml-4 text-lg text-gray-500 uppercase tracking-wider">
-                    <Link href="/   ">Return to hompage</Link>
+                    <Link href="/">Return to hompage</Link>
                 </div>
             </div>
         </div>

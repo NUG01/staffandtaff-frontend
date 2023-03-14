@@ -1,7 +1,7 @@
-import Header from '../header';
-import Footer from '../footer';
+import Header from '@/pages/header';
+import Footer from '@/pages/footer';
 import Head from 'next/head';
-import styles from '../../styles/tips/tips.module.css'
+import styles from '@/styles/tips/tips.module.css'
 import Link from 'next/link';
 
 export default function Tips({isLogged, user, logout}) {

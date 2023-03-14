@@ -1,8 +1,8 @@
-import Header from '../header';
-import Footer from '../footer';
+import Header from '@/pages/header';
+import Footer from '@/pages/footer';
 import Head from 'next/head';
 import Link from 'next/link';
-import styles from '../../styles/about/about.module.css'
+import styles from '@/styles/about/about.module.css'
 
 export default function About({isLogged, user, logout}) {
     return (

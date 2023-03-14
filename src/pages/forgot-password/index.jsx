@@ -2,9 +2,9 @@ import InputError from '@/components/InputError'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useState, useRef } from 'react'
-import Header from '../header';
-import Footer from '../footer';
-import styles from '../../styles/password/password.module.css'
+import Header from '@/pages/header';
+import Footer from '@/pages/footer';
+import styles from '@/styles/password/password.module.css'
 import Head from 'next/head';
 import Router from 'next/router';
 

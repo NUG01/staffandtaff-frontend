@@ -1,7 +1,7 @@
-import Header from '../header';
-import Footer from '../footer';
+import Header from '@/pages/header';
+import Footer from '@/pages/footer';
 import Head from "next/head";
-import styles from '../../styles/jobs/singleJob.module.css'
+import styles from '@/styles/jobs/singleJob.module.css'
 import { useEffect, useRef, useState} from 'react';
 
 export default function Job({isLogged, user, logout, data}) {
