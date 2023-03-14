@@ -16,7 +16,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
                 setLogged(1)
             })
             .catch(error => {
-                if(error.response.status === 401){
+                if (error.response.status === 401) {
                     setLogged(0)
                     return
                 }
@@ -47,19 +47,17 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     const login = async ({ setErrors, setStatus, form, ...props }) => {
         await csrf();
-        
+
         setErrors([]);
         setStatus(null);
 
         axios
             .post('/api/v1/login', props)
             .then(() => {
-                console.log('asd')
                 router.push('/jobs')
                 mutate()
             })
             .catch(error => {
-                console.log(error)
                 if (error.response.status !== 422) throw error;
                 form.current.classList.remove('disabledSection')
                 setErrors(error.response.data.errors);

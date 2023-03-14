@@ -126,9 +126,6 @@ export default function Faq({isLogged, user, logout, search}) {
         })
     }
 
-    console.log(searchedDataCategories)
-    console.log(searchedData)
-
     if(displayData.length === 0){
         return(
             <>

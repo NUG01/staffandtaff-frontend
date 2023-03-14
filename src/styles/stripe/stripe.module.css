@@ -1,0 +1,115 @@
+.mainHeader {
+    color: var(--color-1);
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 50px;
+}
+
+.intro {
+    font-size: 14px;
+    margin-top: 20px;
+    font-weight: normal;
+}
+.accordionContainer {
+    width: 90%;
+    max-width: 780px;
+    margin-top: 20px;
+}
+
+.accordionParent {
+    margin-top: 50px;
+    width: 90%;
+    max-width: 780px;
+}
+
+.accordionParent>h1 {
+    font-size: 24px;
+    text-transform: uppercase;
+    color: var(--color-1);
+}
+
+.accordion {
+    position: relative;
+    margin-top: 15px;
+    padding-bottom: 25px;
+    transition: 0.3s;
+    max-height: 50px;
+    padding-right: 10px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-5);
+}
+
+.accordion:after {
+    content: '';
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    transform: rotate(45deg);
+    padding: 5px;
+    transition: 0.3s;
+    border-right: 2px solid var(--color-1);
+    border-bottom: 2px solid var(--color-1);
+}
+
+.accordion::-webkit-scrollbar {
+    width: 4px;
+}
+
+.accordion::-webkit-scrollbar-thumb {
+    background: var(--color-1);
+}
+
+.header {
+    font-size: 16px;
+    color: var(--color-1);
+    cursor: pointer;
+    padding: 10px 0px;
+}
+
+.content {
+    font-size: 14px;
+    padding: 10px 0px;
+}
+
+.sendRequest{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 70px;
+    width: 100%;
+    padding: 40px 20px;
+    background: var(--color-7);
+}
+
+.sendRequest a{
+    padding: 10px 20px;
+    text-transform: uppercase;
+    color: white;
+    background: var(--color-1);
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.goBack{
+    width: 100%;
+    text-transform: uppercase;
+    color: var(--color-1);
+    padding: 40px 0px;
+    position: relative;
+}
+
+.goBack i{
+    position: absolute;
+    transform: translate(-120%, -55%);
+    top: 50%;
+}
+
+.goBack span{
+    cursor: pointer;
+    position: absolute;
+    left: 30%;
+    top: 30px;
+}
