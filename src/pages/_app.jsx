@@ -20,8 +20,8 @@ const App = ({ Component, pageProps }) => {
 
     if (loading) return <Loader className="show-loader" />
 
-    console.log(isLogged)
-    console.log(user)
+    // console.log(isLogged)
+    // console.log(user)
     if (isLogged) {
         return (
             <>
