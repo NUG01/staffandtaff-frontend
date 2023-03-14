@@ -1,11 +1,9 @@
 import Header from '@/pages/header';
 import Footer from '@/pages/footer';
-import Head from "next/head";
 import styles from "@/styles/tips/singleTip.module.css"
+import Head from "next/head";
 
 export default function Tip({isLogged, user, logout, data}){
-
-    console.log(styles)
 
     return(
         <>
@@ -13,10 +11,17 @@ export default function Tip({isLogged, user, logout, data}){
                 <title>{data.title}</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} logout={logout} active="tips"/>
+            <Header isLogged={isLogged} user={user} logout={logout} active=""/>
 
             <main className={styles.mainWrapper}>
-                {data.title}
+                <div className={styles.banner} style={{backgroundImage: 'url("/tip-template-img.png")'}}></div>
+                
+                <h1>
+                    {data.title}
+                </h1>
+                
+                <div className={styles.content}>
+                </div>
             </main>
             
             <Footer />
