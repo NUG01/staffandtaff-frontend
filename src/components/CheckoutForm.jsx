@@ -9,24 +9,24 @@ export default function CheckoutForm() {
 
 	return (
 		<>
-			<body>
-				<form id="payment-form">
-					<div id="card-element">
+			{/* <body id="body-stripe"> */}
+			<form id="payment-form">
+				<div id="card-element">
 
-					</div>
-					<div id="card-expiry">
+				</div>
+				<div id="card-expiry">
 
-					</div>
-					<div id="card-cvc">
+				</div>
+				<div id="card-cvc">
 
-					</div>
-					{/* 
+				</div>
+				{/* 
 					<div id="card-element-errors" role="alert">
 
 					</div> */}
-					<button type="submit">Subscribe</button>
-				</form>
-			</body>
+				<button id="#button-stripe" type="submit">Subscribe</button>
+			</form>
+			{/* </body> */}
 		</>
 	);
 }

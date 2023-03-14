@@ -13,56 +13,77 @@ import CheckoutForm from "../../components/CheckoutForm";
 
 
 export default function App({ user }) {
+	let intent;
+	let stripe;
+	let elements;
+	function load() {
+		axios.get('/api/v1/user-intent').then((res) => {
+			intent = res.data.intent
+			console.log(intent)
 
-	function loadStripe() {
-		let style;
-
-		style = {
-			base: {
-				iconColor: '#666EE8',
-				color: '#31325F',
-				lineHeight: '45px',
-				fontSize: '15px',
-			},
-			complete: {
-				color: 'green'
-			},
-		};
-
-
-		let stripe = Stripe('pk_test_51MRB4YGAxhWdhlP58Xjttd8NaeIGqSbVL36xEgi2yOtk16IIilw3qYMtDdqjelbCsfRFkPQlU13Ms9pODFzQugud00u6d4SNyh');
-		let elements = stripe.elements({
-			clientSecret: user.token.intent.client_secret,
-		});
+			stripe = Stripe('pk_test_51MRB4YGAxhWdhlP58Xjttd8NaeIGqSbVL36xEgi2yOtk16IIilw3qYMtDdqjelbCsfRFkPQlU13Ms9pODFzQugud00u6d4SNyh');
+			console.log(intent.intent.client_secret)
+			elements = stripe.elements({
+				clientSecret: intent.intent.client_secret,
+			});
 
 
 
-		const cardNumber = elements.create('cardNumber', {
-			showIcon: true, iconStyle: 'solid',
-			style: style,
-			placeholder: 'Card number',
-		});
-		cardNumber.mount('#card-element');
 
-		let cardExpire = elements.create('cardExpiry', {
-			style: style,
-			placeholder: 'Expiration: mm/yy',
-		});
-		cardExpire.mount('#card-expiry');
+			let style;
 
-		let cardCVC = elements.create('cardCvc', {
-			style: style,
-			placeholder: 'CVC code',
-		});
-		cardCVC.mount('#card-cvc');
+			style = {
+				base: {
+					iconColor: '#666EE8',
+					color: '#31325F',
+					lineHeight: '45px',
+					fontSize: '15px',
+				},
+				complete: {
+					color: 'green'
+				},
+			};
+
+
+			// let stripe = Stripe('pk_test_51MRB4YGAxhWdhlP58Xjttd8NaeIGqSbVL36xEgi2yOtk16IIilw3qYMtDdqjelbCsfRFkPQlU13Ms9pODFzQugud00u6d4SNyh');
+			// console.log(intent.intent.client_secret)
+			// let elements = stripe.elements({
+			// 	clientSecret: intent.intent.client_secret,
+			// });
+
+
+
+			const cardNumber = elements.create('cardNumber', {
+				showIcon: true, iconStyle: 'solid',
+				style: style,
+				placeholder: 'Card number',
+			});
+			cardNumber.mount('#card-element');
+
+			let cardExpire = elements.create('cardExpiry', {
+				style: style,
+				placeholder: 'Expiration: mm/yy',
+			});
+			cardExpire.mount('#card-expiry');
+
+			let cardCVC = elements.create('cardCvc', {
+				style: style,
+				placeholder: 'CVC code',
+			});
+			cardCVC.mount('#card-cvc');
+
+
+		})
+
 	}
+	// load();
 
 	return (
 		<>
 			<Script
 				src="https://js.stripe.com/v3/"
 				strategy="lazyOnload"
-				onLoad={() => loadStripe()}
+				onLoad={() => load()}
 			/>
 			<div className="App">
 				<CheckoutForm />
