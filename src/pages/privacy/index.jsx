@@ -24,6 +24,24 @@ export default function Privacy({isLogged, user, logout}) {
                         for a specific job offer according to pre-defined criteria and to apply for it.
                     </div>
                 </div>
+
+                <div className={styles.section}>
+                    <h1 className={styles.sectionHeader}>Other Policy Title</h1>
+                    <div className={styles.sectionContent}>
+                    It is agreed that the client wishes to market a new platform allowing recruiters and candidates in the restaurant and hotel sector to register and offer their job offers online or to apply for a job offer. Thus, it will be possible for candidates to search on the platform for a specific job offer according to pre-defined criteria and to apply for it.
+                    <br/><br/>
+                    It is agreed that the client wishes to market a new platform allowing recruiters and candidates in the restaurant and hotel sector to register and offer their job offers online or to apply for a job offer. Thus, it will be possible for candidates to search on the platform for a specific job offer according to pre-defined criteria and to apply for it.
+                    </div>
+                </div>
+
+                
+
+                <div className={styles.section}>
+                    <h1 className={styles.sectionHeader}>Other Policy Title</h1>
+                    <div className={styles.sectionContent}>
+                    It is agreed that the client wishes to market a new platform allowing recruiters and candidates in the restaurant and hotel sector to register and offer their job offers online or to apply for a job offer. Thus, it will be possible for candidates to search on the platform for a specific job offer according to pre-defined criteria and to apply for it.
+                    </div>
+                </div>
             </main>
 
             <Footer />
