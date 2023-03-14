@@ -41,6 +41,9 @@
     text-align: center;
     padding: 50px;
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .formContent h3 {
@@ -89,18 +92,13 @@
     transition: 0.3s;
 }
 
+
 textarea.singleInput{
     padding-left: 15px;
 }
 
 .singleInput:focus {
     border-color: #8B4F3C;
-}
-
-
-.formContent form {
-    display: flex;
-    flex-direction: column;
 }
 
 #message {
@@ -152,6 +150,15 @@ textarea.singleInput{
 
     .main {
         display: block;
-        text-align: center;
+        width: 96%;
+    }
+
+    .box, .formContent  {
+        width: 100%;
+        align-items: center;
+    }
+
+    .vl {
+        display: none;
     }
 }
