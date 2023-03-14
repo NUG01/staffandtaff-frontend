@@ -25,14 +25,14 @@ const App = ({ Component, pageProps }) => {
     if (isLogged) {
         return (
             <>
-                {/* <Loader className={isLogged === undefined ? 'show-loader' : ''} /> */}
+                <Loader className={isLogged === undefined ? 'show-loader' : ''} />
                 <Component isLogged={isLogged} user={user} {...pageProps} logout={logout} />
             </>
         )
     } else {
         return (
             <>
-                {/* <Loader className={isLogged === undefined ? 'show-loader' : ''} /> */}
+                <Loader className={isLogged === undefined ? 'show-loader' : ''} />
                 <Component isLogged={isLogged} {...pageProps} />
             </>
         )
