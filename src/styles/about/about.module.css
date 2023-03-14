@@ -226,4 +226,10 @@ textarea.singleInput{
     .vl {
         display: none;
     }
+
+    .errorMessage {
+        top: -50px;
+        right: 0;
+        width: 100%;
+    }
 }
