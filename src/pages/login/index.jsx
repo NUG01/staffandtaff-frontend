@@ -9,17 +9,12 @@ import Footer from '@/pages/footer';
 import Head from 'next/head';
 import styles from '@/styles/login/login.module.css'
 
-const Login = ({isLogged, user, logout})=> {
+const Login = ({isLogged, user, login, logout})=> {
     const router = useRouter()
 
     if(isLogged === 1 && user){
         router.replace('/jobs')
     }
-
-    const { login } = useAuth({
-        middleware: 'guest',
-        redirectIfAuthenticated: '/jobs',
-    })
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

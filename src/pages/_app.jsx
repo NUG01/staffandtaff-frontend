@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useAuth } from '@/hooks/auth';
 
 const App = ({ Component, pageProps }) => {
-    const { user, isLogged, logout } = useAuth()
+    const { user, isLogged, logout, login } = useAuth()
 
     const [loading, setLoading] = useState(false)
 
@@ -33,7 +33,7 @@ const App = ({ Component, pageProps }) => {
         return (
             <>
                 <Loader className={isLogged === undefined ? 'show-loader' : ''} />
-                <Component isLogged={isLogged} {...pageProps} />
+                <Component isLogged={isLogged} login={login} {...pageProps} />
             </>
         )
     }
