@@ -12,7 +12,6 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         axios
             .get('/api/v1/user')
             .then(res => {
-                console.log(res)
                 setUser(res.data)
                 setLogged(1)
             })
@@ -55,12 +54,10 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         axios
             .post('/api/v1/login', props)
             .then(() => {
-                console.log('asd')
                 router.push('/jobs')
                 mutate()
             })
             .catch(error => {
-                console.log(error)
                 if (error.response.status !== 422) throw error;
                 form.current.classList.remove('disabledSection')
                 setErrors(error.response.data.errors);

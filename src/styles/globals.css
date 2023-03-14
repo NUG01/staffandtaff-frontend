@@ -415,27 +415,120 @@ header.scrolled {
   display: none;
 }
 
-#payment-form {
-  width: 200px;
-  height: 200px;
-  background-color: #DBCCC5;
-  margin-top: 50px;
-  margin-left: 50px;
+/* Stripe */
+
+main.stripe{
+  padding-bottom: 0px;
 }
 
-#card-element,
-#card-expiry,
-#card-cvc {
-  width: 100px;
-  height: 100px;
-  background-color: #472E23;
-  margin-bottom: 20px;
-  color: #000000;
+main.stripe h3{
+  text-transform: uppercase;
+  font-size: 24px;
 }
 
-#button-stripe {
-  padding: 10px;
-  font-size: 20px;
-  background-color: #000000;
-  color: #00A944;
+#form-holder{
+  background: white;
+  width: 100%;
+  padding: 30px 20px;
+  margin-top: 30px;
+}
+
+#payment-form{
+  width: 90%;
+  max-width: 490px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#button-stripe{
+  display: block;
+  margin-left: auto;
+  margin-top: 15px;
+  background: var(--color-1);
+  padding: 10px 15px;
+  font-size: 16px;
+  color: white;
+  border: 1px solid var(--color-6);
+  cursor: pointer;
+}
+
+.StripeElement, #form-holder input{
+  padding: 3px 10px;
+  border: 1px solid var(--color-6);
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.input{
+  width: calc(50% - 7.5px);
+  flex-direction: column;
+  display: flex;
+  margin-top: 20px;
+}
+
+.input:first-child{
+  width: 100%;
+  position: relative;
+}
+
+.input:first-child:after{
+  content: '';
+  position: absolute;
+  width: 73px;
+  height: 32px;
+  pointer-events: none;
+  right: 8px;
+  bottom: 12px;
+  background: url('/accepted-cards.png') center center no-repeat;
+  background-size: contain;
+}
+
+#form-holder.skeleton button{
+  color: transparent;
+}
+
+#form-holder.skeleton .input:first-child:after{
+  display: none;
+}
+
+#form-holder.skeleton #card-element, #form-holder.skeleton #card-expiry, #form-holder.skeleton #card-cvc{
+  width: 100%;
+  border: 1px solid var(--color-6);
+  margin-top: 10px;
+  height: 53.19px;
+  display: inline-block;
+  background: rgba(130, 130, 130, 0.2);
+  background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(130, 130, 130, 0.2)), color-stop(18%, rgba(130, 130, 130, 0.3)), color-stop(33%, rgba(130, 130, 130, 0.2)));
+  background: linear-gradient(to right, rgba(130, 130, 130, 0.2) 8%, rgba(130, 130, 130, 0.3) 18%, rgba(130, 130, 130, 0.2) 33%);
+  background-size: 800px 100px;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+#form-holder.skeleton #button-stripe{
+  background: rgba(130, 130, 130, 0.2);
+  background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(130, 130, 130, 0.2)), color-stop(18%, rgba(130, 130, 130, 0.3)), color-stop(33%, rgba(130, 130, 130, 0.2)));
+  background: linear-gradient(to right, rgba(130, 130, 130, 0.2) 8%, rgba(130, 130, 130, 0.3) 18%, rgba(130, 130, 130, 0.2) 33%);
+  background-size: 800px 100px;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@media(max-width: 576px){
+  .input{
+    width: 100%;
+  }
+
+  .input:first-child:after{
+    width: 63px;
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+      background-position: -468px 0;
+  }
+   100% {
+      background-position: 468px 0;
+  }
 }

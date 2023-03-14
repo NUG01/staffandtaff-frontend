@@ -1,32 +1,34 @@
-import React, { useEffect, useState } from "react";
-import Head from 'next/head'
-
-
-
-export default function CheckoutForm() {
-	// let card = elements.create('card', { style: style });
-	// card.mount('#card-element');
+export default function CheckoutForm({isLoading}) {
+	
 
 	return (
-		<>
-			{/* <body id="body-stripe"> */}
+		<div id="form-holder" className={isLoading ? 'skeleton' : ''}>
+
 			<form id="payment-form">
-				<div id="card-element">
-
+				<div className="input">
+					<label htmlFor="">Numéro de carte</label>
+					<div id="card-element">
+					
+					</div>
 				</div>
-				<div id="card-expiry">
 
+				<div className="input">
+					<label htmlFor="">Date d'expiration</label>
+					<div id="card-expiry">
+
+					</div>
 				</div>
-				<div id="card-cvc">
 
+				<div className="input">
+					<label htmlFor="">Code CVC</label>
+					<div id="card-cvc">
+
+					</div>
 				</div>
-				{/* 
-					<div id="card-element-errors" role="alert">
-
-					</div> */}
-				<button id="#button-stripe" type="submit">Subscribe</button>
+				<button id="button-stripe" type="submit">PAYER</button>
 			</form>
-			{/* </body> */}
-		</>
+			
+		</div>
 	);
+
 }
