@@ -5,6 +5,7 @@ import Header from '@/pages/header';
 import Footer from '@/pages/footer';
 import Wizard from '@/components/registerComponents/wizardSteps';
 import RegisterForm from '@/components/registerComponents/registerForm';
+import Plans from '@/components/registerComponents/plans';
 
 export default function recruiterRegister({isLogged, user, login, logout, register}){
     const [step, setStep] = useState(1)
@@ -20,7 +21,8 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
 
             <main className={styles.mainWrapper}>
                 <Wizard styles={styles} step={step} maxSteps={maxSteps}/>
-                <RegisterForm isLogged={isLogged} user={user} register={register} type="recruiter"/>
+                {/* <RegisterForm isLogged={isLogged} user={user} register={register} type="recruiter"/> */}
+                <Plans/>
             </main>
             
             <Footer />
