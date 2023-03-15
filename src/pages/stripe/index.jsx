@@ -6,6 +6,7 @@ import Script from "next/script";
 import Header from "../header";
 import Footer from "../footer";
 import styles from "@/styles/stripe/stripe.module.css"
+import StripeSuccess from "@/components/StripeSuccess";
 import Link from "next/link";
 
 import CheckoutForm from "@/components/CheckoutForm";
@@ -20,6 +21,12 @@ export default function App({ user, isLogged, logout }) {
 	const [secretIntent, setIntent] = useState(false)
 	const [duplicatedStripe, setStripe] = useState(false)
 	const [duplicatedCardNumber, setCardNumber] = useState(false)
+
+	const [cardNumberValidation, setNumberValidation] = useState(false)
+	const [cardExpiryValidation, setExpiryValidation] = useState(false)
+	const [cardCvcValidation, setCvcValidation] = useState(false)
+
+	const [successPayment, setPaymentSuccess] = useState(false)
 
 	let intent;
 	let stripe;
@@ -57,21 +64,30 @@ export default function App({ user, isLogged, logout }) {
 				style: style,
 				placeholder: '1234 1234 1234 1234',
 			});
-
+			cardNumber.on('change', (event)=>{
+				setNumberValidation(event.complete)
+			})
 			cardNumber.mount('#card-element');
 			setCardNumber(cardNumber)
 
-			let cardExpire = elements.create('cardExpiry', {
+			const cardExpire = elements.create('cardExpiry', {
 				style: style,
 				placeholder: 'MM / YY',
 			});
+			cardExpire.on('change', (event)=>{
+				setExpiryValidation(event.complete)
+			})
 			cardExpire.mount('#card-expiry');
 
-			let cardCVC = elements.create('cardCvc', {
+			const cardCVC = elements.create('cardCvc', {
 				style: style,
 				placeholder: 'CVC',
 			});
+			cardCVC.on('change', (event)=>{
+				setCvcValidation(event.complete)
+			})
 			cardCVC.mount('#card-cvc');
+
 			setLoading(false)
 		})
 
@@ -100,6 +116,10 @@ export default function App({ user, isLogged, logout }) {
 	  let faqValues = Object.values(faqData)
 
 
+	if(successPayment){
+		return <StripeSuccess isLogged={isLogged} user={user} logout={logout} styles={styles}/>
+	}
+
 
 	return (
 		<>
@@ -119,7 +139,7 @@ export default function App({ user, isLogged, logout }) {
 			<main className="stripe mainWrapper">
 				<h3>Payer</h3>
 
-				<CheckoutForm isLoading={isLoading} intent={secretIntent} user={user} stripe={duplicatedStripe} cardNumber={duplicatedCardNumber}/>
+				<CheckoutForm isLoading={isLoading} intent={secretIntent} user={user} stripe={duplicatedStripe} cardNumber={duplicatedCardNumber} numberVal={cardNumberValidation} expVal={cardExpiryValidation} cvcVal={cardCvcValidation} setPaymentSuccess={setPaymentSuccess}/>
 
                 <h1 className={styles.mainHeader}>Foire Aux Questions</h1>
                 <h2 className={styles.intro}>Avez-vous des questions ? Nous sommes là pour vous répondre.</h2>

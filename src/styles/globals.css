@@ -532,3 +532,10 @@ main.stripe h3{
       background-position: 468px 0;
   }
 }
+
+.stripeError{
+  color: var(--red);
+  text-align: center;
+  margin-top: 10px;
+  width: 100%;
+}
