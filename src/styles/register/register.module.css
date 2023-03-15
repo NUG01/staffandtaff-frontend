@@ -6,8 +6,29 @@
     flex-direction: column;
     min-height: 100vh;
     padding-top: 80px;
+    width: 100%;
+    position: relative;
+    padding-bottom: 40px;
 }
 
+.nextButton{
+    text-transform: uppercase;
+    padding: 15px;
+    background-color: var(--color-1);
+    color: white;
+    cursor: pointer;
+    margin-top: 30px;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: -65px;
+    right: 0;
+}
+
+.nextButton i{
+    padding-left: 10px;
+}
 
 .formHolder{
     display: flex;
@@ -22,6 +43,7 @@
     flex-direction: column;
     gap: 10px;
     width: 100%;
+    position: relative;
 }
 
 .form >div{
@@ -157,6 +179,14 @@
     width: 18px;
     height: 18px;
     background-color: var(--color-1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+}
+
+.wizard > div.completedStep i{
+    display: inherit;
 }
 
 .wizard > div.currentStep{
@@ -192,4 +222,304 @@
 
 .seeker > div:nth-child(5){
     left: 100% !important;
+}
+
+.inboxCheck {
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.heading {
+    display: flex;
+    gap: 15px;
+    color: var(--color-1);
+}
+
+.heading h1 {
+    font-size: 24px;
+}
+
+.bottom span{
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.resendEmail {
+    width: 100%;
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 30px 20px;
+    width: 100%;
+    margin: 80px 0px;
+    background: var(--color-7);
+}
+
+.sendAgain {
+    border: 1px solid var(--color-1);
+    padding: 15px 20px;
+    color: var(--color-1);
+    cursor: pointer;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.consideration{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 90%;
+    max-width: 1600px;
+}
+
+.consideration p{
+    max-width: 710px;
+}
+
+.consideration span{
+    font-weight: bold;
+}
+
+.form{
+    margin: 0px auto;
+    width: 90%;
+    max-width: 850px;
+    text-align: center;
+}
+
+.form h4 span, .intro span{
+    display: inline;
+    color: red;
+}
+
+.form .intro{
+    padding-bottom: 20px;
+}
+
+.form .intro p{
+    margin-top: 20px;
+}
+
+.section{
+    width: 100%;
+    background-color: white;
+    padding: 30px 40px;
+    margin-top: 10px;
+    border: 2px solid var(--color-6);
+}
+
+.section h5{
+    padding-top: 10px;
+}
+
+.section input, .section select, .section textarea{
+    border: 2px solid var(--color-6);
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px 15px;
+    resize: none;
+}
+
+.textareaParent{
+    border: 2px solid var(--color-6);
+    padding-bottom: 30px;
+    margin-top: 20px;
+    position: relative;
+}
+
+.textareaParent textarea{
+    border: 0px;
+    margin-top: 0px;
+    height: 250px;
+}
+
+.wordCount{
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    font-size: 13px;
+    color: var(--color-4);
+}
+
+.section select{
+    cursor: pointer;
+}
+
+.locationSelect select{
+    width: unset;
+    flex: 1;
+}
+
+.locationSelect > div {
+    display: flex;
+    gap: 20px;
+}
+
+.socialInputs input{
+    padding-left: 40px;
+}
+
+.socialInputs .inputParent{
+    display: flex;
+    margin-top: 30px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.socialInputs .inputParent >div{
+    position: relative;
+    width: calc(50% - 20px);
+}
+
+.socialInputs .inputParent >div input{
+    margin-top: 0px;
+}
+
+.socialInputs i{
+    color: var(--color-4);
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.disabledInput{
+    pointer-events: none;
+    background-color: var(--color-6);
+}
+
+.section.hasImageUpload .logoUpload{
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.section.hasImageUpload label, .galleryParentHolder label{
+    text-transform: uppercase;
+    padding: 15px;
+    background-color: var(--color-1);
+    color: white;
+    cursor: pointer;
+}
+
+.section.hasImageUpload .imageInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    gap: 30px;
+}
+
+.section.hasImageUpload .imageInfo p{
+    width: 140px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.section.hasImageUpload .imageInfo input, .galleryParentHolder input{
+    display: none;
+}
+
+.galleryParentHolder label{
+    margin-top: 40px;
+    display: inline-block;
+}
+
+.disabledLabel{
+    background-color: var(--color-4) !important;
+    pointer-events: none !important;
+}
+
+.section.hasImageUpload img{
+    width: 131px;
+    height: 131px;
+    object-fit: contain;
+}
+
+.section input[type=number]::-webkit-outer-spin-button,
+.section input[type=number]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+.section input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.deleteImage{
+    background: url('/delete-cross.png') center center no-repeat;
+    background-size: contain;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+.galleryParent{
+    margin-top: 50px;
+    gap: 30px;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.gallery{
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    width: 200px;
+    gap: 5px;
+    width: 20%;
+    flex-direction: column;
+}
+
+.gallery.hide{
+    display: none;
+    justify-content: baseline;
+}
+
+
+.gallery img{
+    width: 100%;
+    height: 130px;
+    object-fit: contain;
+}
+
+.gallery .deleteImage{
+    right: 0;
+    bottom: 5px;
+}
+
+.gallery .imageName{
+    width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media(max-width: 576px){
+    .last .inboxCheck{
+        flex-wrap: wrap;
+        text-align: center;
+    }
+    .bottom {
+        text-align: center;
+    }
+    .socialInputs .inputParent >div{
+        width: 100%;
+    }
 }
