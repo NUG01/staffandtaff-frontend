@@ -7,8 +7,9 @@
 }
 
 .mainHeader {
+    text-align: center;
     color: var(--color-1);
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
 }
 
@@ -61,6 +62,7 @@
 }
 
 .tipsContainer{
+    margin: 0 auto;
     width: 90%;
     max-width: 1600px;
 }
