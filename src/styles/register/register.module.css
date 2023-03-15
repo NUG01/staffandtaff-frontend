@@ -511,6 +511,18 @@
     text-overflow: ellipsis;
 }
 
+.hideSection{
+    display: none !important;
+}
+
+.verificationMain{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 @media(max-width: 576px){
     .last .inboxCheck{
         flex-wrap: wrap;

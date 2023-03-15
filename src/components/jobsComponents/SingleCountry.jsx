@@ -9,7 +9,7 @@ const SingleCountry = ({country}) => {
             <div className={styles.main} key={country.id}>
                 <h2 onClick={() => setCitiesShown(!citiesShown)} className={
                     citiesShown ? styles.headingUp : styles.heading
-                }>Jobs In {country.name} <i class="fa-solid fa-chevron-down"></i></h2>
+                }>Jobs In {country.name} <i className="fa-solid fa-chevron-down"></i></h2>
                 <ul className={
                     citiesShown ? styles.cityListExpanded : styles.cityList
                 }>

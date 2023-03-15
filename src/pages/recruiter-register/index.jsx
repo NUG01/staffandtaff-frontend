@@ -23,6 +23,20 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
 
             <main className={styles.mainWrapper}>
                 <Wizard styles={styles} step={step} maxSteps={maxSteps}/>
+                <RegisterForm className={step != 1 ? styles.hideSection : ''} isLogged={isLogged} user={user} register={register} type="recruiter" setStep={setStep}/>
+                <EmailVerification className={step != 1.5 ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep}/>
+                <RecruiterFlow className={step != 2 ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep}
+
+                    nextButton={
+                        <div className={styles.nextButton} onClick={()=> setStep(1.5)}>
+                            suivant
+                            <i className="fa-solid fa-chevron-right"></i>
+                        </div>
+                    }
+
+                />
+                {/* <Plans/> */}
+
                 {/* {step === 1 &&(
                     <RegisterForm isLogged={isLogged} user={user} register={register} type="recruiter" setStep={setStep}/>
                 )}
@@ -35,13 +49,12 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                         nextButton={
                             <div className={styles.nextButton} onClick={()=> setStep(3)}>
                                 suivant
-                                <i class="fa-solid fa-chevron-right"></i>
+                                <i className="fa-solid fa-chevron-right"></i>
                             </div>
                         }
 
                     />
                 )} */}
-                <Plans/>
             </main>
             
             <Footer />

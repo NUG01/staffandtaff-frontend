@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 
-export default function RecruiterFlow({styles, nextButton}){
+export default function RecruiterFlow({styles, nextButton, className}){
     const logo = useRef()
 
     const [wordCount, setWords] = useState(0)
@@ -58,7 +58,7 @@ export default function RecruiterFlow({styles, nextButton}){
     }
 
     return(
-        <form className={styles.form}>
+        <form className={`${styles.form} ${className}`}>
             <div className={styles.intro}>
                 Présentez l'établissement pour lequel vous cherchez du personnel.
                 <br />

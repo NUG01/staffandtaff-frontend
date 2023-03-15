@@ -1,7 +1,7 @@
-export default function EmailVerification({styles, setStep}){
+export default function EmailVerification({styles, setStep, className}){
     return(
-        <>
-            <div className={styles.inboxCheck}>
+        <div className={`${styles.verificationMain}  ${className}`}>
+            <div className={`${styles.inboxCheck}`}>
                 <div className={styles.heading}>
                     <img src="/attention-envelope-icon.png" alt="" />
                 </div>
@@ -30,6 +30,6 @@ export default function EmailVerification({styles, setStep}){
                     If you found the verification email in a spam folder, please mark it as “Not Spam” to be able to receive the applicant notifications in the future.
                 </p>
             </div>
-        </>
+        </div>
     )
 }

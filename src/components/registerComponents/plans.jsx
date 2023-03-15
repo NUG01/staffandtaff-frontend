@@ -218,7 +218,7 @@ const Plans = ({}) => {
                                     return(
                                         <li key={"Description du service" + privladge.id}
                                          className={privladge.included ? styles.listItem : styles.listItemNotIncluded}>
-                                            {privladge.included ? <i class="fa-solid fa-check"></i> : <i class="fa-solid fa-xmark"></i>} 
+                                            {privladge.included ? <i className="fa-solid fa-check"></i> : <i className="fa-solid fa-xmark"></i>} 
                                             {privladge.desc}
                                         </li>
                                     )

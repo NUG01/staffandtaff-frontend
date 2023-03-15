@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useState, useRef } from 'react'
 import styles from '@/styles/register/register.module.css'
 
-export default function RegisterForm({isLogged, user, register, type, setStep}) {
+export default function RegisterForm({isLogged, user, register, type, setStep, className}) {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -41,7 +41,7 @@ export default function RegisterForm({isLogged, user, register, type, setStep}) 
 
     return (
         <>
-                <div className={styles.formHolder}>
+                <div className={`${styles.formHolder} ${className}`}>
                     <form ref={form} className={styles.form} onSubmit={submitForm}>
 
                         <div className={styles.inputControl}>
