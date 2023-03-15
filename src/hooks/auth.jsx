@@ -110,10 +110,10 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     const logout = async () => {
         if (!error) {
             document.body.classList.add('disabledSection')
-            await axios.post('/logout').then(() => mutate());
+            await axios.post('/api/v1/logout').then(() => {
+                window.location.pathname = '/';
+            });
         }
-
-        window.location.pathname = '/';
     };
 
     useEffect(() => {
