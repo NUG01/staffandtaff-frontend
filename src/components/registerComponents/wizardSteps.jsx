@@ -30,7 +30,7 @@ export default function wizard({styles, step, maxSteps, type}){
     }else{
         return(
             <div className={styles.wizardMain}>
-                <h1>Devenez Recruteur sur Staff&Taff</h1>
+                <h1>Find Your Workplace on Staff&Taff</h1>
                 <p>Les informations saisies maintenant peuvent être modifiées après la connexion.</p>
 
                 <div className={`${styles.wizard} ${type === 'seeker' ? styles.seeker : ''}`}>
