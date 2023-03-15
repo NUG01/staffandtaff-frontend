@@ -55,7 +55,7 @@ export default function Jobs({jobDataList, isLogged, user, logout}) {
 
             <TipsList data={tipsData} isHeader={true}/>
             <CountryJobs data={countries}/>
-            <Footer />
+            <Footer className="noMargin"/>
         </>
     );
 }

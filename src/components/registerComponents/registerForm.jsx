@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useState, useRef } from 'react'
 import styles from '@/styles/register/register.module.css'
 
-export default function registerForm({isLogged, user, register, type}) {
+export default function RegisterForm({isLogged, user, register, type}) {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')

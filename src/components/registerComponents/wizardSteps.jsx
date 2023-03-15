@@ -1,4 +1,4 @@
-export default function wizard({styles, step, maxSteps, type}){
+export default function Wizard({styles, step, maxSteps, type}){
 
     if(maxSteps === 3){
         return(

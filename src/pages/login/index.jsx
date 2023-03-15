@@ -113,7 +113,7 @@ const Login = ({isLogged, user, login, logout})=> {
                                 </h3>
                                 <p>Sign up for free and find the best talent for your team. Increase credibility of your company. Make
                                     the recruitment process efficient.</p>
-                                <Link href="/recruiterRegister">
+                                <Link href="/recruiter-register">
                                     Register As a Recruiter <i className="fa-solid fa-arrow-up"></i>
                                 </Link>
                             </div>
@@ -123,7 +123,7 @@ const Login = ({isLogged, user, login, logout})=> {
                                 </h3>
                                 <p>Sign up for free and introduce yourself to recruiters. Find a job matching your criteria. Apply
                                     quickly and easily.</p>
-                                <Link href="/seekerRegister">
+                                <Link href="/seeker-register">
                                     Register As a Job Seeker <i className="fa-solid fa-arrow-up"></i>
                                 </Link>
                             </div>
