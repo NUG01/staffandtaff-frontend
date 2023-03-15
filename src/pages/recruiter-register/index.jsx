@@ -7,6 +7,7 @@ import Wizard from '@/components/registerComponents/WizardSteps';
 import RegisterForm from '@/components/registerComponents/RegistrationForm';
 import EmailVerification from '@/components/registerComponents/EmailVerification';
 import RecruiterFlow from '@/components/registerComponents/RecruiterFlow';
+import Plans from '@/components/registerComponents/plans';
 
 export default function recruiterRegister({isLogged, user, login, logout, register}){
     const [step, setStep] = useState(1)
@@ -22,7 +23,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
 
             <main className={styles.mainWrapper}>
                 <Wizard styles={styles} step={step} maxSteps={maxSteps}/>
-                {step === 1 &&(
+                {/* {step === 1 &&(
                     <RegisterForm isLogged={isLogged} user={user} register={register} type="recruiter" setStep={setStep}/>
                 )}
                 {step === 1.5 &&(
@@ -39,7 +40,8 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                         }
 
                     />
-                )}
+                )} */}
+                <Plans/>
             </main>
             
             <Footer />
