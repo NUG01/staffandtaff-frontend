@@ -3,8 +3,10 @@ import Head from 'next/head'
 import styles from '@/styles/register/register.module.css'
 import Header from '@/pages/header';
 import Footer from '@/pages/footer';
-import Wizard from '@/components/registerComponents/wizardSteps';
-import RegisterForm from '@/components/registerComponents/registerForm';
+import Wizard from '@/components/registerComponents/WizardSteps';
+import RegisterForm from '@/components/registerComponents/RegisterForm';
+import EmailVerification from '@/components/registerComponents/EmailVerification';
+import RecruiterFlow from '@/components/registerComponents/RecruiterFlow';
 
 export default function recruiterRegister({isLogged, user, login, logout, register}){
     const [step, setStep] = useState(1)
@@ -20,7 +22,24 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
 
             <main className={styles.mainWrapper}>
                 <Wizard styles={styles} step={step} maxSteps={maxSteps}/>
-                <RegisterForm isLogged={isLogged} user={user} register={register} type="recruiter"/>
+                {step === 1 &&(
+                    <RegisterForm isLogged={isLogged} user={user} register={register} type="recruiter" setStep={setStep}/>
+                )}
+                {step === 1.5 &&(
+                    <EmailVerification styles={styles} step={step} setStep={setStep}/>
+                )}
+                {step === 2 &&(
+                    <RecruiterFlow styles={styles} step={step} setStep={setStep}
+
+                        nextButton={
+                            <div className={styles.nextButton} onClick={()=> setStep(3)}>
+                                suivant
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                        }
+
+                    />
+                )}
             </main>
             
             <Footer />

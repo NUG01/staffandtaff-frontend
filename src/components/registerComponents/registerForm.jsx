@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useState, useRef } from 'react'
 import styles from '@/styles/register/register.module.css'
 
-export default function RegisterForm({isLogged, user, register, type}) {
+export default function RegisterForm({isLogged, user, register, type, setStep}) {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -27,16 +27,16 @@ export default function RegisterForm({isLogged, user, register, type}) {
     const submitForm = event => {
         event.preventDefault()
 
-        form.current.classList.add('disabledSection')
+        // form.current.classList.add('disabledSection')
 
-        register({
-            name,
-            email,
-            password,
-            password_confirmation: passwordConfirmation,
-            setErrors,
-            form
-        })
+        // register({
+        //     name,
+        //     email,
+        //     password,
+        //     password_confirmation: passwordConfirmation,
+        //     setErrors,
+        //     form
+        // })
     }
 
     return (
@@ -127,7 +127,7 @@ export default function RegisterForm({isLogged, user, register, type}) {
 
 
                         <div className={styles.inputControl}>
-                            <input type="submit" value="SUBMIT" className={styles.submitInput} />
+                            <input type="submit" value="SUBMIT" className={styles.submitInput} onClick={()=>setStep(1.5)} />
                         </div>
                                 
                         <div className={styles.inputControl}>

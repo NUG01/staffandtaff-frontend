@@ -128,11 +128,6 @@
     transition: 0.3s;
 }
 
-.sendAgain:hover{
-    background-color: var(--color-1);
-    color: white;
-}
-
 .mainWrapper a {
     text-decoration: underline;
     padding-top: 10px;
