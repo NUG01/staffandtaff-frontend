@@ -35,7 +35,7 @@ export default function CheckoutForm({isLoading, intent, user, stripe, cardNumbe
 				plan: selectedProduct,
 				payment_method: setupIntent.payment_method,
 				// Plan id refers element numeration
-				plan_id: 4
+				plan_id: 'plan_4'
 			}).then(()=> setPaymentSuccess(true))
 		}
 
