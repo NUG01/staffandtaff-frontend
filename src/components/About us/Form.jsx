@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styles from '@/styles/about/about.module.css'
 import Link from 'next/link';
 import ValidationHint from '../ValidationHint';
 import CheckIcon from '../../../public/check-icon.png'
 import Image from 'next/image.js';
 const Form = ({}) => {
-
+    
     const [submited,setSubmited] = useState(false)
 
     const [inputValues, setInputValue] = useState({
@@ -14,6 +14,8 @@ const Form = ({}) => {
         message: "",
         confirm: false,
       });
+
+      const [inputFocused, setInputFocused] = useState('');
 
       const [isValid,setIsValid] = useState(false)
       const [sent,setSent] = useState(false)
@@ -75,13 +77,16 @@ const Form = ({}) => {
                  inputValues.name == '' &&
                   <ValidationHint text="Please complete the required field."/>}
                 <input 
+                onFocus={(e) => setInputFocused(e.target.name)}
                 value={inputValues.name}
                 onChange={(e) => handleChange(e)} 
-                placeholder='Full Name' 
                 className={submited && inputValues.name == '' ? styles.singleInputInvalid : styles.singleInput} 
                 type="text" 
+                placeholder="Full Name"
                 name='name' 
+                readOnly={sent}
                 id='name'/>
+                {!submited && inputFocused != 'name' && inputValues.name == '' && <p>Full Name<span>*</span></p>}
                 {/* <input type="email" placeholder="Email" className={styles.singleInput} required name="log-email" onChange={event => setEmail(event.target.value)} value={email}/> */}
             </div>
             <div className={styles.inputControl}>
@@ -94,26 +99,32 @@ const Form = ({}) => {
                 !isValidEmail(inputValues.email) &&
                  <ValidationHint text="Please enter your email address in format yourname@exemple.com"/>}
                 <input
+                onFocus={(e) => setInputFocused(e.target.name)}
                  onChange={(e) => handleChange(e)}
                   value={inputValues.email}
-                  placeholder='E-mail' 
+                  placeholder="E-mail"
                   className={submited && !isValidEmail(inputValues.email) ? styles.singleInputInvalid : styles.singleInput} 
                   type="text" 
+                  readOnly={sent}
                   name='email' 
                   id='email'/>
+                  {!submited && inputFocused != 'email' && inputValues.email == '' && <p>E-mail<span>*</span></p>}
             </div>
             <div className={styles.inputControl}>
             {submited &&
              inputValues.message == '' &&
              <ValidationHint text="Please complete the required field."/>}
                 <textarea 
+                onFocus={(e) => setInputFocused(e.target.name)}
                 value={inputValues.message}
-                onChange={(e) => handleChange(e)} 
+                onChange={(e) => handleChange(e)}  
                 placeholder='Message' 
                 maxLength={1000} 
+                readOnly={sent}
                 className={submited && inputValues.message == '' ? styles.singleInputInvalid : styles.singleInput} 
                 name="message" 
                 id={styles.message}></textarea>
+                {!submited && inputFocused != 'message' && inputValues.message == '' && <p id={styles.messageHolder}>Message<span>*</span></p>}
             </div>
             
             <div className={styles.checkbox}>
@@ -125,6 +136,7 @@ const Form = ({}) => {
                 className={submited && inputValues.confirm == false ? styles.checkboxInputInvalid : styles.checkboxInput} 
                 onChange={(e) => handleChange(e)} 
                 type="checkbox"
+                disabled={sent}
                 name="confirm" 
                 />
                 <p className={submited && inputValues.confirm == false && styles.checkboxTextInvalid}>I agree to the <Link href="/terms">Terms and Conditions</Link> and the <Link href="/privacy">Privacy Policy</Link> <span>*</span></p>

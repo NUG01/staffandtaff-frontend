@@ -36,9 +36,19 @@ const Login = ({isLogged, user, login, logout})=> {
         passwordType === 'password' ? setType('text') : setType('password')
     }
 
+    const [isValid,setIsValid] = useState(false)
+    const [submited,setSubmited] = useState(false)
+    function isValidEmail(email) {
+        return String(email)
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          );
+      }
+
     const submitForm = async event => {
         event.preventDefault()
-
+        setSubmited(true)
         form.current.classList.add('disabledSection')
 
         login({
@@ -70,7 +80,12 @@ const Login = ({isLogged, user, login, logout})=> {
                                         fill="#757575" />
                                 </svg>
 
-                                <input type="email" placeholder="Email" className={styles.singleInput} required name="log-email" onChange={event => setEmail(event.target.value)} value={email}/>
+                                <input
+                                 type="text" placeholder="Email" className={
+                                    submited && !isValid ? styles.singleInputInvalid : styles.singleInput
+                                    } required name="email" id='email' onChange={event =>{
+                                    setIsValid(isValidEmail(event.target.value))
+                                     setEmail(event.target.value)}} value={email}/>
                                 
                             </div>
                             <div className={styles.inputControl}>
