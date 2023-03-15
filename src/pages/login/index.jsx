@@ -1,6 +1,5 @@
 import InputError from '@/components/InputError'
 import Link from 'next/link'
-import { useAuth } from '@/hooks/auth'
 import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 
@@ -114,7 +113,7 @@ const Login = ({isLogged, user, login, logout})=> {
                                 </h3>
                                 <p>Sign up for free and find the best talent for your team. Increase credibility of your company. Make
                                     the recruitment process efficient.</p>
-                                <Link href="/register">
+                                <Link href="/recruiterRegister">
                                     Register As a Recruiter <i className="fa-solid fa-arrow-up"></i>
                                 </Link>
                             </div>
@@ -124,7 +123,7 @@ const Login = ({isLogged, user, login, logout})=> {
                                 </h3>
                                 <p>Sign up for free and introduce yourself to recruiters. Find a job matching your criteria. Apply
                                     quickly and easily.</p>
-                                <Link href="/register">
+                                <Link href="/seekerRegister">
                                     Register As a Job Seeker <i className="fa-solid fa-arrow-up"></i>
                                 </Link>
                             </div>

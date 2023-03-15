@@ -3,8 +3,9 @@
     justify-content: center;
     align-items: center;
     padding: 0px;
-    flex-direction: row;
+    flex-direction: column;
     min-height: 100vh;
+    padding-top: 80px;
 }
 
 
@@ -71,10 +72,122 @@
     transition: 0.3s;
 }
 
-.alreadyReg {
-    display: block;
-    margin-left: auto;
-    width: fit-content;
-    margin-top: 5px;
+.alreadyRegParent{
+    text-align: center;
     color: var(--color-1);
+    font-weight: bold;
+}
+
+.alreadyReg {
+    color: var(--color-1);
+    text-decoration: underline;
+    display: inline;
+}
+
+.wizardMain{
+    display: flex;
+    width: 90%;
+    max-width: 600px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 130px;
+}
+
+.wizardMain h1{
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.wizardMain p{
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.wizard{
+    background: var(--color-6);
+    width: 100%;
+    height: 3px;
+    margin-top: 40px;
+    position: relative;
+}
+
+.wizard > div{
+    position: absolute;
+    transform: translateX(-50%);
+    top: -5px;
+}
+
+.wizard > div > div{
+    width: 14px;
+    height: 14px;
+    background-color: var(--color-4);
+    border-radius: 50%;
+}
+
+.wizard > div i{
+    display: none;
+    color: white;
+}
+
+.wizard > div:nth-child(2){
+    left: 50%;
+}
+
+.wizard > div:nth-child(3){
+    left: 100%;
+}
+
+.wizard > div:before{
+    content: attr(txt);
+    position: absolute;
+    width: 90px;
+    text-align: center;
+    left: 50%;
+    top: 30px;
+    transform: translateX(-50%);
+}
+
+.wizard > div.currentStep > div, .wizard > div.completedStep > div{
+    position: relative;
+    width: 18px;
+    height: 18px;
+    background-color: var(--color-1);
+}
+
+.wizard > div.currentStep{
+    background-color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--color-5);
+    top: -12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wizard > div.completeStep > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.seeker > div:nth-child(2){
+    left: 25% !important;
+}
+
+.seeker > div:nth-child(3){
+    left: 50% !important;
+}
+
+.seeker > div:nth-child(4){
+    left: 75% !important;
+}
+
+
+.seeker > div:nth-child(5){
+    left: 100% !important;
 }
