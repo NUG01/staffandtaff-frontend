@@ -3,8 +3,8 @@ import Head from 'next/head'
 import styles from '@/styles/register/register.module.css'
 import Header from '@/pages/header';
 import Footer from '@/pages/footer';
-import Wizard from '@/components/registerComponents/WizardSteps';
-import RegisterForm from '@/components/registerComponents/RegisterForm';
+import Wizard from '@/components/registerComponents/w';
+import RegisterForm from '@/components/registerComponents/rf';
 import EmailVerification from '@/components/registerComponents/EmailVerification';
 import RecruiterFlow from '@/components/registerComponents/RecruiterFlow';
 

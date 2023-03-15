@@ -3,8 +3,8 @@ import Head from 'next/head'
 import styles from '@/styles/register/register.module.css'
 import Header from '@/pages/header';
 import Footer from '@/pages/footer';
-import Wizard from '@/components/registerComponents/WizardSteps';
-import RegisterForm from '@/components/registerComponents/RegisterForm';
+import Wizard from '@/components/registerComponents/w';
+import RegisterForm from '@/components/registerComponents/rf';
 
 export default function seekerRegister({isLogged, user, login, logout, register}){
     const [step, setStep] = useState(1)
