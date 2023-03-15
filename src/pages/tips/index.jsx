@@ -2,10 +2,9 @@ import Header from '@/pages/header';
 import Footer from '@/pages/footer';
 import Head from 'next/head';
 import styles from '@/styles/tips/tips.module.css'
-import Link from 'next/link';
+import TipsList from '@/components/TipsList';
 
 export default function Tips({isLogged, user, logout}) {
-
 
     let tipsData = {
         "Category 1":[
@@ -50,9 +49,6 @@ export default function Tips({isLogged, user, logout}) {
           }
         ]
       }
-  
-      let tipKeys = Object.keys(tipsData)
-      let tipValues = Object.values(tipsData)
 
     return (
         <>
@@ -70,39 +66,8 @@ export default function Tips({isLogged, user, logout}) {
                     <input type="text" name="search" placeholder="Search" required />
                     <i className={`fa-solid fa-arrow-right ${styles.arrowRight}`}></i>
                 </form>
-
-                <div className={styles.tipsContainer}>
-                    {
-                        tipKeys.map((item, mainIndex) => {
-                            return(
-                                <div key={mainIndex} className={styles.tipsParent}>
-                                    <h1>{item}</h1>
-                                    <div className={styles.tipsRow}>
-                                        {tipValues[mainIndex].map((item, index) =>{
-                                            return(
-                                                <Link href={`/tips/${item.id}`} key={index} className={styles.tip}>
-                                                    <img src="/tip-template-img.png" alt="" />
-                                                    <div className={styles.tipContent}>
-                                                        <h1 className={styles.header}>
-                                                            {item.heading}
-                                                        </h1>
-                                                        <p>{item.date}</p>
-                                                        <div className={styles.content}>
-                                                            {item.content.substring(0, 150)}
-                                                            { item.content.length > 150 ? <span className="viewMore">... <p>View more</p></span> : ''}
-                                                        </div>
-                                                    </div>
-                                                </Link>
-                                            )
-                                        })}
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
-                </div>
+                <TipsList data={tipsData} isHeader={false}/> 
             </main>
-            
             <Footer />
         </>
     );
