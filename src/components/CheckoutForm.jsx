@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import Router from "next/router";
 import axios from '@/lib/axios';
 
 export default function CheckoutForm({isLoading, intent, user, stripe, cardNumber, numberVal, expVal, cvcVal, setPaymentSuccess }) {
