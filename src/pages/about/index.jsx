@@ -2,8 +2,8 @@ import Header from '@/pages/header';
 import Footer from '@/pages/footer';
 import Head from 'next/head';
 import styles from '@/styles/about/about.module.css'
-import AboutText from '@/components/About us/AboutText';
-import Form from '@/components/About us/Form';
+import AboutText from '@/components/aboutUs/AboutText';
+import Form from '@/components/aboutUs/Form';
 
 export default function About({isLogged, user, logout}) {
     return (

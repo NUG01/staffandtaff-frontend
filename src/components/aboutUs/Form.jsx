@@ -4,6 +4,8 @@ import Link from 'next/link';
 import ValidationHint from '../ValidationHint';
 import CheckIcon from '../../../public/check-icon.png'
 import Image from 'next/image.js';
+import axios from '@/lib/axios';
+
 const Form = ({}) => {
     
     const [submited,setSubmited] = useState(false)
@@ -23,8 +25,22 @@ const Form = ({}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSubmited(true)
-        if(isValid) setSent(true)
+        if(isValid) {
+          setSent(true)
+        }else{
+          return
+        }
         // setValidation(inputValues)
+
+        axios
+        .post('/api/v1/user-mail', {
+          name: inputValues.name,
+          email: inputValues.email,
+          sms: inputValues.message
+        })
+        .then((res) => {
+          console.log(res)
+        })
     }
 
   function handleChange(event) {
@@ -56,7 +72,6 @@ const Form = ({}) => {
     else if(inputValues.confirm == false){
         setIsValid(false)
     }
-    console.log(isValid)
   };
 
   useEffect(() => {
