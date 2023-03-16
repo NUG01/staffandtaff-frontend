@@ -9,6 +9,7 @@ import axios from '@/lib/axios';
 const Form = ({}) => {
     
     const [submited,setSubmited] = useState(false)
+    const [formError, setFormError] = useState("")
 
     const [inputValues, setInputValue] = useState({
         name: "",
@@ -24,6 +25,7 @@ const Form = ({}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setFormError('')
         setSubmited(true)
         if(!isValid) return
         // setValidation(inputValues)
@@ -39,6 +41,7 @@ const Form = ({}) => {
           setSent(true)
           console.log(res)
         }).catch(()=>{
+          setFormError('failed text here')
           e.target.querySelector('input[type="submit"]').style.opacity = '1'
           e.target.querySelector('input[type="submit"]').style.pointerEvents = 'unset'
         })
@@ -162,7 +165,10 @@ const Form = ({}) => {
                 <Image src={CheckIcon} alt="check" />
                 <p>Your message has been sent successfully. <br/> We will get back to you as soon as possible.</p>
             </div> :
-            <input type="submit" value="SEND" className={styles.submitInput}/>
+              <>
+                <p className={styles.mailFailed}>{formError}</p>
+                <input type="submit" value="SEND" className={styles.submitInput}/>
+              </>
             }
             
         </form>
