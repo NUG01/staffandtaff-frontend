@@ -3,8 +3,6 @@
 import { useRef, useState } from "react";
 
 export default function ({styles, nextButton, className, setStep, data}){
-    console.log(data)
-
     const [wordCount, setWords] = useState(0)
 
     function setWordCount(e){

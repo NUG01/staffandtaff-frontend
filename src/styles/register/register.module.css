@@ -566,6 +566,7 @@
     min-width: 350px !important;
 }
 
+
 @media (max-width: 992px){
     .multipleChild{
         flex-wrap: wrap;
@@ -575,7 +576,6 @@
         width: 100%;
         max-width: 500px;
         margin: 20px auto;
-        gap: 20px;
     }
 }
 

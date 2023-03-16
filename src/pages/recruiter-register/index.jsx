@@ -12,7 +12,6 @@ import RecruiterFlow from '@/components/registerComponents/recruiter/RecruiterFl
 import PostJob from '@/components/registerComponents/recruiter/PostJob'
 import Plans from '@/components/registerComponents/Plans.jsx';
 import Stripe from '@/pages/stripe';
-import Router from 'next/router';
 
 export default function recruiterRegister({isLogged, user, login, logout, register}){
     const [step, setStep] = useState(1)
@@ -23,25 +22,23 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
 
     const [data, setData] = useState(
         {
-            establishmentName: '',
-            establishmentOwner: '',  
-            establishmentLogo: '',
-            establishmentType: '',
-            establishmentCountry: '',
-            establishmentCity: '',
-            establishmentEmployeeNumber: '',
-            establishmentDescription: '',
-            establishmentSocials: {
-                website: '',
-                instagram: '',
-                linkedin: '',
-                facebook: '',
-                twitter: '',
-                pinterest: '',
-                youtube: '',
-                tiktok: ''
-            },
-            establishmentGallery: [],
+            establishment_name: '',
+            company_name: '',  
+            logo: '',
+            industry: '',
+            country: '',
+            city: '',
+            number_of_employees: '',
+            description: '',
+            website: '',
+            instagram: '',
+            linkedin: '',
+            facebook: '',
+            twitter: '',
+            pinterest: '',
+            youtube: '',
+            tiktok: '',
+            gallery: [],
 
         })
 
@@ -54,20 +51,28 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
     })
 
     function nextStep(stepNum){
-        console.log(data)
 
         let validated = true
         
         document.querySelectorAll('.required-record').forEach(inp => {
-
             if(inp.value === '') {
-                inp.classList.add('inputError')
+                if(inp.type === 'file'){
+                    inp.parentNode.classList.add('inputParentError')
+                }else if(inp.tagName === 'TEXTAREA'){
+                    inp.classList.add('input-error')
+                    inp.parentNode.classList.add('input-error')
+                }else{
+                    inp.classList.add('input-error')
+                }
                 validated = false
-
             }
         })
 
-        if(validated) setStep(stepNum)
+        if(validated) {
+            setStep(stepNum)
+        }
+
+        scrollTo(0, 0)
     }
 
     return(

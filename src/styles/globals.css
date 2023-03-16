@@ -395,6 +395,10 @@ header.scrolled {
   border-color: var(--red) !important;
 }
 
+.inputParentError{
+  color: var(--red) !important;
+}
+
 .mobile-nav.expanded {
   pointer-events: inherit;
   opacity: 1;
@@ -405,7 +409,7 @@ header.scrolled {
 }
 
 @media(max-width: 992px) {
-  ..mobile-auth-nav{
+  .mobile-auth-nav{
     display: block;
   }
   

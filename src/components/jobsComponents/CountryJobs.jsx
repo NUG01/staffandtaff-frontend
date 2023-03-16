@@ -5,8 +5,8 @@ import SingleCountry from './SingleCountry'
 const CountryJobs = ({data}) => {
     return (
         <section className={styles.section}>
-            {data.map(country => {
-                return <SingleCountry country={country} />
+            {data.map((country, index) => {
+                return <SingleCountry key={index} country={country} />
             })}
         </section>
     )
