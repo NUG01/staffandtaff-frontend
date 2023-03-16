@@ -7,7 +7,7 @@ import Wizard from '@/components/registerComponents/WizardSteps';
 import RegisterForm from '@/components/registerComponents/RegistrationForm';
 import EmailVerification from '@/components/registerComponents/EmailVerification';
 import RecruiterFlow from '@/components/registerComponents/RecruiterFlow';
-import Plans from '@/components/registerComponents/plans';
+import Plans from '@/components/registerComponents/Plans.jsx';
 
 export default function recruiterRegister({isLogged, user, login, logout, register}){
     const [step, setStep] = useState(1)
@@ -23,7 +23,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
 
             <main className={styles.mainWrapper}>
                 <Wizard styles={styles} step={step} maxSteps={maxSteps}/>
-                <RegisterForm className={step != 1 ? styles.hideSection : ''} isLogged={isLogged} user={user} register={register} type="recruiter" setStep={setStep}/>
+                {/* <RegisterForm className={step != 1 ? styles.hideSection : ''} isLogged={isLogged} user={user} register={register} type="recruiter" setStep={setStep}/>
                 <EmailVerification className={step != 1.5 ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep}/>
                 <RecruiterFlow className={step != 2 ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep}
 
@@ -34,8 +34,8 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                         </div>
                     }
 
-                />
-                {/* <Plans/> */}
+                /> */}
+                <Plans />
 
                 {/* {step === 1 &&(
                     <RegisterForm isLogged={isLogged} user={user} register={register} type="recruiter" setStep={setStep}/>

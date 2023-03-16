@@ -35,6 +35,7 @@ const Plans = ({}) => {
                 },
             ],
             isPopular: false,
+            price: 'price_1Mk5DOGAxhWdhlP53UxnOElf',
         },
         {
             id: 2,
@@ -68,6 +69,7 @@ const Plans = ({}) => {
                 },
             ],
             isPopular: true,
+            price: 'price_1Mk5DOGAxhWdhlP53UxnOElf',
         },
         {
             id: 3,
@@ -101,6 +103,7 @@ const Plans = ({}) => {
                 },
             ],
             isPopular: false,
+            price: 'price_1Mk5DOGAxhWdhlP53UxnOElf',
         },
         {
             id: 4,
@@ -134,6 +137,7 @@ const Plans = ({}) => {
                 },
             ],
             isPopular: false,
+            price: 'price_1Mk5DOGAxhWdhlP53UxnOElf',
         },
         {
             id: 5,
@@ -167,6 +171,7 @@ const Plans = ({}) => {
                 },
             ],
             isPopular: false,
+            price: 'price_1Mk5DOGAxhWdhlP53UxnOElf',
         },
         {
             id: 6,
@@ -200,6 +205,7 @@ const Plans = ({}) => {
                 },
             ],
             isPopular: false,
+            price: 'price_1Mk5DOGAxhWdhlP53UxnOElf',
         },
     ]
 
