@@ -25,13 +25,10 @@ const Form = ({}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSubmited(true)
-        if(isValid) {
-          setSent(true)
-        }else{
-          return
-        }
+        if(!isValid) return
         // setValidation(inputValues)
-
+        e.target.querySelector('input[type="submit"]').style.opacity = '0.4'
+        e.target.querySelector('input[type="submit"]').style.pointerEvents = 'none'
         axios
         .post('/api/v1/user-mail', {
           name: inputValues.name,
@@ -39,7 +36,11 @@ const Form = ({}) => {
           sms: inputValues.message
         })
         .then((res) => {
+          setSent(true)
           console.log(res)
+        }).catch(()=>{
+          e.target.querySelector('input[type="submit"]').style.opacity = '1'
+          e.target.querySelector('input[type="submit"]').style.pointerEvents = 'unset'
         })
     }
 
