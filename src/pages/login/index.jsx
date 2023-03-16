@@ -1,3 +1,5 @@
+"use client"
+
 import InputError from '@/components/InputError'
 import Link from 'next/link'
 import { useEffect, useState, useRef } from 'react'
@@ -21,6 +23,7 @@ const Login = ({isLogged, user, login, logout})=> {
     const [errors, setErrors] = useState([])
     const [status, setStatus] = useState(null)
     const [passwordType, setType] = useState('password')
+    const [mobilePreview, setMobilePreview] = useState('')
 
     const form = useRef()
 
@@ -30,6 +33,8 @@ const Login = ({isLogged, user, login, logout})=> {
         } else {
             setStatus(null)
         }
+
+        setMobilePreview(location.hash)
     })
     
     const changePasswordType = ()=>{
@@ -70,7 +75,7 @@ const Login = ({isLogged, user, login, logout})=> {
             <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
 
             <div className={styles.mainWrapper}>
-                    <div className={styles.formHolder}>
+                    <div className={`${styles.formHolder} ${mobilePreview == '#registerView' ? 'hideSection' : ''}`}>
                         <form ref={form} className={styles.formController} onSubmit={submitForm}>
                             <h3>Log In</h3>
                             <div className={styles.inputControl}>
@@ -118,8 +123,7 @@ const Login = ({isLogged, user, login, logout})=> {
 
                         </form>
                     </div>
-
-                    <div className={styles.regNow}>
+                    <div className={`${styles.regNow} ${mobilePreview == '#loginView' ? 'hideSection' : ''}`}>
                         <img src="/logo.png" alt="" />
                         <div className={styles.regBlock}>
                             <div className={styles.leftSide}>

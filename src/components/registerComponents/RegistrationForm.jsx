@@ -127,7 +127,7 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
 
 
                         <div className={styles.inputControl}>
-                            <input type="submit" value="SUBMIT" className={styles.submitInput} onClick={()=>setStep(1.5)} />
+                            <input type="submit" value="SUBMIT" className={styles.submitInput} onClick={()=>{setStep(1.5); scrollTo(0, 0)}} />
                         </div>
                                 
                         <div className={styles.inputControl}>

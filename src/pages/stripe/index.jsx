@@ -1,10 +1,8 @@
 "use client"
+
 import React, { useState, useEffect } from "react";
 import axios from "@/lib/axios";
-import Head from "next/head";
 import Script from "next/script";
-import Header from "../header";
-import Footer from "../footer";
 import styles from "@/styles/stripe/stripe.module.css"
 import StripeSuccess from "@/components/StripeSuccess";
 import Link from "next/link";
@@ -16,7 +14,7 @@ import CheckoutForm from "@/components/CheckoutForm";
 // const stripePromise = loadStripe("pk_test_51MRB4YGAxhWdhlP58Xjttd8NaeIGqSbVL36xEgi2yOtk16IIilw3qYMtDdqjelbCsfRFkPQlU13Ms9pODFzQugud00u6d4SNyh");
 
 
-export default function App({ user, isLogged, logout }) {
+export default function App({ user, isLogged, className, setShowPlans, setShowStripe }) {
 	const [isLoading, setLoading] = useState(true)
 	const [secretIntent, setIntent] = useState(false)
 	const [duplicatedStripe, setStripe] = useState(false)
@@ -130,13 +128,7 @@ export default function App({ user, isLogged, logout }) {
 				onLoad={() => load()}
 			/>
 
-			<Head>
-				<title>Subscription</title>
-			</Head>
-
-            <Header isLogged={isLogged} user={user} logout={logout} active="register"/>
-
-			<main className="stripe mainWrapper">
+			<main className={`stripe mainWrapper ${className}`}>
 				<h3>Payer</h3>
 
 				<CheckoutForm isLoading={isLoading} intent={secretIntent} user={user} stripe={duplicatedStripe} cardNumber={duplicatedCardNumber} numberVal={cardNumberValidation} expVal={cardExpiryValidation} cvcVal={cardCvcValidation} setPaymentSuccess={setPaymentSuccess}/>
@@ -173,13 +165,12 @@ export default function App({ user, isLogged, logout }) {
                 </div>
 
 				<div className={styles.goBack}>
-					<span onClick={()=> history.back()}>
+					<span onClick={()=> {setShowPlans(true); setShowStripe(false); scrollTo(0,0) }}>
 						<i className="fa-solid fa-chevron-left"></i> précédent
 					</span>
 				</div>
 			</main>
 
-			<Footer className="noMargin"/>
 		</>
 	);
 }

@@ -306,13 +306,35 @@ header a {
   font-size: 14px;
 }
 
-.auth-nav {
+.auth-nav{
   padding: 10px 20px;
   position: absolute;
   transition: 0.3s;
   right: 25px;
   color: white;
   background: var(--color-1);
+}
+
+.mobile-auth-nav{
+  padding: 10px 20px;
+  color: white;
+  background: var(--color-1);
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+  z-index: 1000;
+  text-align: center;
+  left: 0;
+  right: 0;
+  display: none;
+}
+
+.hideSection{
+  display: none !important;
+}
+
+.mobile-auth-nav a{
+  color: white;
 }
 
 .auth-nav {
@@ -357,7 +379,7 @@ header.scrolled {
   gap: 5px;
   flex-direction: column;
   position: absolute;
-  top: 62.22px;
+  top: 52px;
   left: 0;
   width: 100vw;
   background-color: white;
@@ -369,12 +391,24 @@ header.scrolled {
   transition: 0.3s;
 }
 
+.inputError{
+  border-color: var(--red) !important;
+}
+
 .mobile-nav.expanded {
   pointer-events: inherit;
   opacity: 1;
 }
 
+.mobile-nav a{
+  color: black !important;
+}
+
 @media(max-width: 992px) {
+  ..mobile-auth-nav{
+    display: block;
+  }
+  
   .menu-toggler {
     display: block;
   }
@@ -419,6 +453,9 @@ header.scrolled {
 
 main.stripe{
   padding-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  width: 100%;
 }
 
 main.stripe h3{
@@ -538,4 +575,19 @@ main.stripe h3{
   text-align: center;
   margin-top: 10px;
   width: 100%;
+}
+
+input[type=date]{
+  cursor: pointer;
+  position: relative;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  cursor: pointer;
+  height: auto;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
 }

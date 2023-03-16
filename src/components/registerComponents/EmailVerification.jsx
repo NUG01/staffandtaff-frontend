@@ -18,7 +18,8 @@ export default function EmailVerification({styles, setStep, className}){
                     or click the “Resend” button
                 </p>
 
-                <p className={styles.sendAgain} onClick={()=> setStep(2)}>
+                {/* <p className={styles.sendAgain} onClick={()=> {setStep(2); scrollTo(0, 0)}}> */}
+                <p className={styles.sendAgain}>
                     RESEND EMAIL
                 </p>
             </div>

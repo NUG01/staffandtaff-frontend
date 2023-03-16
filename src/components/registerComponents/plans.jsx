@@ -1,6 +1,6 @@
-import styles from '../../styles/register/plans.module.css'
+import styles from '@/styles/register/plans.module.css'
 
-const Plans = ({}) => {
+const Plans = ({className, setShowStripe, setShowPlans, inheritedStyles}) => {
     const data = 
     [
         {
@@ -210,7 +210,7 @@ const Plans = ({}) => {
     ]
 
   return (
-    <div className={styles.main}>
+    <div className={`${styles.main} ${className}`}>
         {
             data.map(item => {
                 return(
@@ -231,11 +231,17 @@ const Plans = ({}) => {
                                 })
                             }
                         </ul>
-                        <button className={styles.button}>subscribe</button>
+                        <button className={styles.button} onClick={()=>{setShowStripe(true); setShowPlans(false); scrollTo(0, 0)}}>subscribe</button>
                     </div>
                 )
             })
         }
+
+        <div className={`${inheritedStyles.goBack} ${styles.plansGoBack}`}>
+            <span onClick={()=> {setShowPlans(false); setShowStripe(false); scrollTo(0,0) }}>
+                <i className="fa-solid fa-chevron-left"></i> précédent
+            </span>
+        </div>
     </div>
   )
 }

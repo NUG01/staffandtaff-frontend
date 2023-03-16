@@ -14,6 +14,7 @@ export default function Header({active, isLogged, user, logout}) {
     })
 
     return (
+    <>
         <header className={scrl > 5 || expanded ? 'scrolled' : ''} id={active === "home" || active === "job" ? 'home' : ''}>
             <h1>
                 <Link href="/jobs">
@@ -28,11 +29,17 @@ export default function Header({active, isLogged, user, logout}) {
                 <Link href="/faq" className={active == "faq" ? "active" : ""}>F.A.Q</Link>
             </div>
             
-            <div className={active === 'login' || active === 'register' ? 'hide-nav' : 'auth-nav'}>
-                <Link className={isLogged === 1 ? 'hide-nav' : ''} href="/login">LOG IN / </Link> 
-                <Link className={isLogged === 1 ? 'hide-nav' : ''} href="/login">REGISTER</Link>
-                <p className={isLogged === 0 || isLogged === 0 ? 'hide-nav' : ''} onClick={logout}>LOG OUT</p>
-            </div>
+            {isLogged === 0 &&(
+                <Link href="/login" className={`${active === 'login' || active === 'register' ? 'hide-nav' : 'auth-nav'}`} >
+                    <p className={isLogged === 1 ? 'hide-nav' : ''}>LOG IN / REGISTER</p>
+                </Link>
+            )}
+
+            {isLogged === 1 &&(
+                <div className={`${active === 'login' || active === 'register' ? 'hide-nav' : 'auth-nav'}`} onClick={logout}>
+                    <p>LOG OUT</p>
+                </div>
+            )}
 
             <FaBars className='menu-toggler' onClick={() => setExpanded(!expanded)} />
             <div className={`mobile-nav ${expanded ? 'expanded' : ''}`}>
@@ -42,5 +49,19 @@ export default function Header({active, isLogged, user, logout}) {
                 <Link href="/faq">F.A.Q</Link>
             </div>
         </header>
+
+        {isLogged === 0 &&(
+            <div className={`${active === 'login' || active === 'register' ? 'hide-nav' : 'mobile-auth-nav'}`} >
+                <Link href="/login#loginView" >LOG IN / </Link>
+                <Link href="/login#registerView">REGISTER</Link>
+            </div>
+        )}
+
+        {isLogged === 1 &&(
+            <div className={`${active === 'login' || active === 'register' ? 'hide-nav' : 'mobile-auth-nav'}`} onClick={logout}>
+                <p>LOG OUT</p>
+            </div>
+        )}
+    </>
     );
 }

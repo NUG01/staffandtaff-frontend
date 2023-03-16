@@ -167,7 +167,7 @@
 .wizard > div.currentStep:before{
     content: attr(txt);
     position: absolute;
-    width: 90px;
+    width: 130px;
     text-align: center;
     left: 50%;
     top: 30px;
@@ -304,10 +304,11 @@
 
 .form .intro{
     padding-bottom: 20px;
+    font-weight: bold;
 }
 
 .form .intro p{
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .section{
@@ -483,7 +484,7 @@
     position: relative;
     width: 200px;
     gap: 5px;
-    width: 20%;
+    width: 16%;
     flex-direction: column;
 }
 
@@ -495,7 +496,7 @@
 
 .gallery img{
     width: 100%;
-    height: 130px;
+    height: 110px;
     object-fit: contain;
 }
 
@@ -505,7 +506,7 @@
 }
 
 .gallery .imageName{
-    width: 140px;
+    width: 100px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -521,6 +522,61 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.postGoBack{
+    position: absolute !important;
+    left: 20px;
+    width: unset !important;
+    bottom: -80px;
+}
+
+.goBack{
+    width: 100%;
+    text-transform: uppercase;
+    color: var(--color-1);
+    padding: 40px 0px;
+    position: relative;
+}
+
+.goBack i{
+    position: absolute;
+    transform: translate(-120%, -55%);
+    top: 50%;
+}
+
+.goBack span{
+    cursor: pointer;
+    position: absolute;
+    left: 30%;
+    top: 30px;
+}
+
+.multipleChild{
+    display: flex;
+    gap: 15px;
+}
+
+.multipleChild > div, .multipleChild > select{
+    width: 100%;
+    min-width: 200px;
+}
+
+.multipleChild > input, .selectF{
+    min-width: 350px !important;
+}
+
+@media (max-width: 992px){
+    .multipleChild{
+        flex-wrap: wrap;
+    }
+
+    .gallery{
+        width: 100%;
+        max-width: 500px;
+        margin: 20px auto;
+        gap: 20px;
+    }
 }
 
 @media(max-width: 576px){

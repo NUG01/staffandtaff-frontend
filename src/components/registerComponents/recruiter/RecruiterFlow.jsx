@@ -2,24 +2,15 @@
 
 import { useRef, useState } from "react";
 
-export default function RecruiterFlow({styles, nextButton, className}){
+export default function RecruiterFlow({styles, nextButton, className, data, galleryPictures}){
     const logo = useRef()
+    const city = useRef()
 
     const [wordCount, setWords] = useState(0)
 
     const [logoPreview, setLogo] = useState('/default.png')
     const [logoPreviewName, setLogoName] = useState('Aucune image.')
     const [galleryImages, setGalleryImage] = useState([])
-        
-    var blobToBase64 = function (blob, callback) {
-        var reader = new FileReader();
-        reader.onload = function () {
-            var dataUrl = reader.result;
-            var base64 = dataUrl.split(',')[1];
-            callback(base64);
-        };
-        reader.readAsDataURL(blob);
-    };
 
     function clearLogo(){
         setLogo('/default.png')
@@ -28,16 +19,14 @@ export default function RecruiterFlow({styles, nextButton, className}){
 
     function removeImage(mainItem, mainIndex){
         setGalleryImage(items => items.filter((item, index) => index != mainIndex))
+        data.establishmentGallery.splice(mainIndex, 1)
     }
 
     function previewLogo(e){
         if(e.target.files.length != 0){
             setLogoName(e.target.files[0].name)
             setLogo(URL.createObjectURL(e.target.files[0]))
-    
-            blobToBase64(e.target.files[0], res => {
-                console.log(res);
-            });
+            data.establishmentLogo = {file: e.target.files[0], preview: URL.createObjectURL(e.target.files[0])}
         }
     }
 
@@ -50,11 +39,24 @@ export default function RecruiterFlow({styles, nextButton, className}){
 
     function uploadGalleryImage(e){
         if(e.target.files.length != 0){
-            blobToBase64(e.target.files[0], res => {
-                setGalleryImage([...galleryImages,  {preview: URL.createObjectURL(e.target.files[0]), base: res, name: e.target.files[0].name}])
-            });
-        }
 
+            if(data.establishmentGallery.length > 10 || galleryImages.length + e.target.files.length > 10){
+                alert('Can no upload more than 10 images')
+                return
+            }
+
+            for(var i = 0; i < e.target.files.length; i++){
+                galleryPictures.push({preview: URL.createObjectURL(e.target.files[i]), name: e.target.files[i].name})
+                data.establishmentGallery.push(e.target.files[i])
+            }
+            
+            setGalleryImage([...galleryImages, ...galleryPictures])
+        }
+    }
+
+    function setCountry(e){
+        data.establishmentCountry = e.target.value
+        city.current.className = 'required-record'
     }
 
     return(
@@ -69,14 +71,14 @@ export default function RecruiterFlow({styles, nextButton, className}){
             <section className={styles.section}>
                 <h4>Quel est le nom de votre établissement ?<span> *</span></h4>
                 <div className={styles.inputParent}>
-                    <input type="text" required placeholder="Nom de l'établissement"/>
+                    <input type="text" placeholder="Nom de l'établissement" onInput={(e)=> data.establishmentName = e.target.value} className='required-record' onChange={(e)=>e.target.classList.remove('inputError')}/>
                 </div>
             </section>
 
             <section className={styles.section}>
                 <h4>Qui est le propriétaire de votre établissement ?</h4>
                 <div className={styles.inputParent}>
-                    <input type="text" placeholder="Nom de l'entreprise"/>
+                    <input type="text" placeholder="Nom de l'entreprise" onInput={(e)=> data.establishmentOwner = e.target.value}/>
                 </div>
             </section>
 
@@ -91,16 +93,19 @@ export default function RecruiterFlow({styles, nextButton, className}){
                             <span className={styles.deleteImage} onClick={()=> clearLogo()}></span>
                         )}
                         <label htmlFor="logo-upload">Télécharger un logo</label>
-                        <input type="file" id="logo-upload" onInput={(e)=> previewLogo(e)} ref={logo}/>
+                        <input type="file" id="logo-upload" onInput={(e)=> previewLogo(e)} ref={logo} accept="image/png, image/jpeg"/>
                     </div>
                 </div>
             </section>
 
             <section className={styles.section}>
-                <h4>Votre établissement est-il un hôtel ou un restaurant ?</h4>
+                <h4>Votre établissement est-il un hôtel ou un restaurant ?<span> *</span></h4>
                 <div className={styles.inputParent}>
-                    <select>
-                        <option value="">Sous-catégorie de l'établissement</option>
+                    <select onInput={(e)=> data.establishmentType = e.target.value} className='required-record' onChange={(e)=>e.target.classList.remove('inputError')}>
+                        <option value="" disabled selected>Disabled</option>
+                        <option value="Type">Sous-catégorie de l'établissement 1</option>
+                        <option value="Type">Sous-catégorie de l'établissement 2</option>
+                        <option value="Type">Sous-catégorie de l'établissement 3</option>
                     </select>
                 </div>
             </section>
@@ -108,11 +113,15 @@ export default function RecruiterFlow({styles, nextButton, className}){
             <section className={`${styles.section} ${styles.locationSelect}`}>
                 <h4>Où se trouve votre établissement ? <span> *</span></h4>
                 <div className={styles.inputParent}>
-                    <select>
-                        <option value="">Pays</option>
+                    <select onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('inputError')}>
+                        <option value="" disabled selected>Disabled</option>
+                        <option value="Pays">Pays 2</option>
+                        <option value="Pays">Pays 3</option>
                     </select>
-                    <select className={styles.disabledInput}>
-                        <option value="">Ville</option>
+                    <select className={`required-record ${styles.disabledInput}`} onInput={(e)=> data.establishmentCity = e.target.value} ref={city} onChange={(e)=>e.target.classList.remove('inputError')}>
+                        <option value="" disabled selected>Disabled</option>
+                        <option value="Ville">Ville 2</option>
+                        <option value="Ville">Ville 3</option>
                     </select>
                 </div>
             </section>
@@ -120,7 +129,7 @@ export default function RecruiterFlow({styles, nextButton, className}){
             <section className={styles.section}>
                 <h4>Qui est le propriétaire de votre établissement ?</h4>
                 <div className={styles.inputParent}>
-                    <input type="number" placeholder="Nombre d'employés"/>
+                    <input type="number" placeholder="Nombre d'employés" onInput={(e)=> data.establishmentEmployeeNumber = e.target.value}/>
                 </div>
             </section>
 
@@ -139,42 +148,42 @@ export default function RecruiterFlow({styles, nextButton, className}){
 
                     <div>
                         <i className="fa-solid fa-earth-americas"></i>
-                        <input type="text" placeholder="Site web"/>
+                        <input type="text" placeholder="Site web" onInput={(e)=> data.establishmentSocials.website = e.target.value}/>
                     </div>
 
                     <div>
                         <i className="fa-brands fa-instagram"></i>
-                        <input type="text" placeholder="Instagram"/>
+                        <input type="text" placeholder="Instagram" onInput={(e)=> data.establishmentSocials.instagram = e.target.value}/>
                     </div>
 
                     <div>
                         <i className="fa-brands fa-linkedin"></i>
-                        <input type="text" placeholder="Linkedin"/>
+                        <input type="text" placeholder="Linkedin" onInput={(e)=> data.establishmentSocials.linkedin = e.target.value}/>
                     </div>
 
                     <div>
                         <i className="fa-brands fa-facebook"></i>
-                        <input type="text" placeholder="Facebook"/>
+                        <input type="text" placeholder="Facebook" onInput={(e)=> data.establishmentSocials.facebook = e.target.value}/>
                     </div>
 
                     <div>
                         <i className="fa-brands fa-twitter"></i>
-                        <input type="text" placeholder="Twitter"/>
+                        <input type="text" placeholder="Twitter" onInput={(e)=> data.establishmentSocials.twitter = e.target.value}/>
                     </div>
 
                     <div>
                         <i className="fa-brands fa-pinterest"></i>
-                        <input type="text" placeholder="Pinterest"/>
+                        <input type="text" placeholder="Pinterest" onInput={(e)=> data.establishmentSocials.pinterest = e.target.value}/>
                     </div>
 
                     <div>
                         <i className="fa-brands fa-youtube"></i>
-                        <input type="text" placeholder="Youtube"/>
+                        <input type="text" placeholder="Youtube" onInput={(e)=> data.establishmentSocials.youtube = e.target.value}/>
                     </div>
 
                     <div>
                         <i className="fa-brands fa-tiktok"></i>
-                        <input type="text" placeholder="TikTok"/>
+                        <input type="text" placeholder="TikTok" onInput={(e)=> data.establishmentSocials.tiktok = e.target.value}/>
                     </div>
 
                 </div>
@@ -199,7 +208,7 @@ export default function RecruiterFlow({styles, nextButton, className}){
                     }
                 </div>
                     <label htmlFor="gallery-upload" className={galleryImages.length === 10 ? styles.disabledLabel : ''}>Télécharger un logo</label>
-                    <input type="file" id="gallery-upload" onInput={(e)=> uploadGalleryImage(e)}/>
+                    <input type="file" id="gallery-upload" onInput={(e)=> uploadGalleryImage(e)} multiple accept="image/png, image/jpeg"/>
             </section>
             {nextButton}
         </form>
