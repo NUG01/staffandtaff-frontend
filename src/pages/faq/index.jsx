@@ -185,7 +185,7 @@ export default function Faq({isLogged, user, logout, search}) {
                 <h2 className={styles.intro}>Do you have questions? We’re here to help.</h2>
                 <form action="" className={styles.faqForm} ref={form}>
                     <i className={`fa-solid fa-magnifying-glass ${styles.glass}`}></i>
-                    <input type="text" name="search" placeholder="Search" required ref={input} defaultValue={search != false ? search : ''}/>
+                    <input type="text" name="search" placeholder="Rechercher" required ref={input} defaultValue={search != false ? search : ''}/>
                     <i className={`fa-solid fa-arrow-right ${styles.arrowRight}`} onClick={(e)=>{submitForm(e)}}></i>
                 </form>
 

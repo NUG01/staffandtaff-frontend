@@ -169,10 +169,27 @@
     transform: rotate(45deg);
 }
 
+.mobileViewLogo{
+    display: none;
+}
 
 /* Media */
 
 @media (max-width: 992px) {
+    .inputControl{
+        width: 100%;
+    }
+
+    .formController{
+        padding-top: 0px;
+    }
+
+    .mobileViewLogo{
+        display: block;
+        width: 100%;
+        padding-bottom: 20px;
+    }
+
     .mainWrapper {
         flex-direction: column;
         padding-top: 80px;

@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import axios from '@/lib/axios'
 
-export default function Header({active, isLogged, user}) {
+export default function Header({active, isLogged, user, isMobile}) {
+    console.log(isMobile)
     const [expanded, setExpanded] = useState(false);
     const [scrl, setScroll] = useState(0)
 
 
     useEffect(()=>{
+        setScroll(scrollY)
         onscroll = ()=>{
             setScroll(scrollY)
         }
@@ -24,7 +26,7 @@ export default function Header({active, isLogged, user}) {
     return (
     <>
         <header className={scrl > 5 || expanded ? 'scrolled' : ''} id={active === "home" || active === "job" ? 'home' : ''}>
-            <h1>
+            <h1 className={isMobile ? 'hide-nav' : ''}>
                 <Link href="/jobs">
                     <img src="/logo-sm.png" alt="" />
                 </Link>
@@ -60,7 +62,7 @@ export default function Header({active, isLogged, user}) {
 
         {isLogged === 0 &&(
             <div className={`${active === 'login' || active === 'register' ? 'hide-nav' : 'mobile-auth-nav'}`} >
-                <Link href="/login#loginView" >SE CONNECTER / </Link>
+                <Link href="/login#loginView">SE CONNECTER</Link>
                 <Link href="/login#registerView">S'INSCRIRE</Link>
             </div>
         )}

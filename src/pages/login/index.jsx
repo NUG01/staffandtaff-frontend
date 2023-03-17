@@ -72,12 +72,15 @@ const Login = ({isLogged, user, login, logout})=> {
                 <title>Connexion</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
+            <Header isLogged={isLogged} user={user} logout={logout} active="login" isMobile={mobilePreview == '#loginView' ? true : ''}/>
 
             <div className={styles.mainWrapper}>
                     <div className={`${styles.formHolder} ${mobilePreview == '#registerView' ? 'hideSection' : ''}`}>
                         <form ref={form} className={styles.formController} onSubmit={submitForm}>
-                            <h3>Connexion</h3>
+                            <Link href="/jobs">
+                                <img src="/logo-login.png" alt="" className={styles.mobileViewLogo} />
+                            </Link>
+                            <h3>CONNEXION</h3>
                             <div className={styles.inputControl}>
                                 <svg width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg">
                                     <path

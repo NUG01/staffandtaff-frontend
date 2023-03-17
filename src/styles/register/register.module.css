@@ -314,7 +314,7 @@
 .section{
     width: 100%;
     background-color: white;
-    padding: 30px 40px;
+    padding: 30px 20px;
     margin-top: 10px;
     border: 2px solid var(--color-6);
 }
@@ -366,7 +366,8 @@
 }
 
 .cityList{
-    width: 100%;
+    width: 200px;
+    right: 0;
     height: 200px;
     background-color: white;
     position: absolute;
@@ -602,6 +603,10 @@
 
 
 @media (max-width: 992px){
+    .multipleChild > input, .selectF{
+        min-width: unset !important;
+    }
+
     .multipleChild{
         flex-wrap: wrap;
     }
@@ -610,6 +615,19 @@
         width: 100%;
         max-width: 500px;
         margin: 20px auto;
+    }
+    
+    .wizard > div.currentStep:before{
+        width: 90px;
+    }
+
+    .inboxCheck{
+        flex-direction: column;
+    }
+
+    .bottom h1{
+        font-size: 24px;
+        padding-bottom: 10px;
     }
 }
 

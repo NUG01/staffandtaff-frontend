@@ -358,7 +358,7 @@
     text-align: center;
     color: white;
     margin: 15px auto;
-    width: 380px;
+    max-width: 380px;
 }
 
 @media (max-width: 992px) {

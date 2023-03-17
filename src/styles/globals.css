@@ -279,11 +279,11 @@ header img {
   transition: 0.3s;
 }
 
-header#home img {
+header#home img, header#home.scrolled svg {
   filter: unset;
 }
 
-header#home.scrolled img {
+header#home.scrolled img, header#home svg  {
   filter: invert(1);
 }
 
@@ -316,9 +316,7 @@ header a {
 }
 
 .mobile-auth-nav{
-  padding: 10px 20px;
   color: white;
-  background: var(--color-1);
   width: 100%;
   bottom: 0;
   position: fixed;
@@ -335,6 +333,19 @@ header a {
 
 .mobile-auth-nav a{
   color: white;
+  width: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-1);
+  font-weight: bold;
+  padding: 18px 10px;
+}
+
+.mobile-auth-nav a:first-child{
+  background: var(--color-9);
+  color: black;
 }
 
 .auth-nav {
@@ -410,7 +421,7 @@ header.scrolled {
 
 @media(max-width: 992px) {
   .mobile-auth-nav{
-    display: block;
+    display: flex;
   }
   
   .menu-toggler {
