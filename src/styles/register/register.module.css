@@ -366,7 +366,8 @@
 }
 
 .cityList{
-    width: 200px;
+    width: 100%;
+    min-width: 200px;
     right: 0;
     height: 200px;
     background-color: white;
@@ -629,6 +630,50 @@
         font-size: 24px;
         padding-bottom: 10px;
     }
+}
+
+.showCase{
+    display: flex;
+    margin: 30px auto;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.showCase h1{
+    padding-bottom: 15px;
+}
+
+.showCase > img{
+    width: 132px;
+    height: 132px;
+    object-fit: contain;
+    border: 2px solid var(--color-6);
+    padding: 5px;
+}
+
+.showCaseInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.showCaseInfo *{
+    text-align: left;
+}
+
+.showCaseLocation{
+    display: flex;
+    margin-top: 10px;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.showCaseLocation p{
+    display: flex;
+    gap: 5px;
 }
 
 @media(max-width: 576px){

@@ -4,7 +4,6 @@ import Link from 'next/link';
 import axios from '@/lib/axios'
 
 export default function Header({active, isLogged, user, isMobile}) {
-    console.log(isMobile)
     const [expanded, setExpanded] = useState(false);
     const [scrl, setScroll] = useState(0)
 

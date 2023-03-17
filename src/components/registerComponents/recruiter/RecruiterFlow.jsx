@@ -6,6 +6,7 @@ import axios from '@/lib/axios'
 export default function RecruiterFlow({styles, nextButton, className, data, galleryPictures}){
     const logo = useRef()
     const cityInp = useRef()
+    const cityMainInp = useRef()
 
     const [wordCount, setWords] = useState(0)
 
@@ -15,8 +16,8 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
 
     const [country, setCurrCountry] = useState("")
 
-    const [cities, setCities] = useState([1, 2, 3])
-    const [cityInpValue, setCityInpValue] = useState("")
+    const [cities, setCities] = useState(['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'])
+    const [citySelected, setCitySelected] = useState()
 
     function clearLogo(){
         setLogo('/default.png')
@@ -62,14 +63,21 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
     }
     const csrf = () => axios.get('/sanctum/csrf-cookie');
 
+    function setCityFunc(item){
+        setCitySelected(true)
+        data.city = item; 
+        cityInp.current.value = item
+        cityMainInp.current.value = item
+        
+        document.querySelector('.shown-city-inp').classList.remove('input-error')
+    }
 
     async function setCountry(e){
         setCurrCountry(e.target.value)
         data.country = e.target.value
         
 
-        await csrf()
-        console.log(csrf)
+        // await csrf()
 
         // axios
         //     .post('/api/v1/login', props)
@@ -135,18 +143,27 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
                         <option value="0">Suisse</option>
                         <option value="1">France</option>
                     </select>
+
                     <div className={styles.cityListHolder}>
-                        <input className={`required-record ${country.length === 0 ? styles.disabledInput : ''}`} type="text" placeholder="Ville" ref={cityInp} onInput={(e)=> setCityInpValue(e.target.value)}/>
-                        <div className={`${styles.cityList} ${cityInpValue.length > 0 ? styles.showCityList : ''}`}>
+                        <input ref={cityMainInp} className={`shown-city-inp required-record ${country.length === 0 ? styles.disabledInput : ''}`} type="text" placeholder="Ville" onInput={(e)=>{
+                            cityInp.current.value = ''
+                            setCitySelected(false)
+                        }}/>
+
+                        <input type="hidden" ref={cityInp} className='required-record hidden-city-inp'/>
+
+                        <div className={`${styles.cityList} ${!citySelected && citySelected != undefined ? styles.showCityList : ''}`}>
                             {
                                 cities.map((item, index) =>{
                                     return(
-                                        <div onClick={(e)=> {data.city = item; cityInp.current.value = item}}>City</div>
+                                        <div key={index} onClick={(e)=> setCityFunc(item)}>{item}</div>
                                     )
                                 })
                             }
                         </div>
+
                     </div>
+
                 </div>
             </section>
 

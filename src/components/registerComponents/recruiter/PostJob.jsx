@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 
 export default function ({styles, nextButton, className, setStep, data}){
+    console.log(data)
     const [wordCount, setWords] = useState(0)
 
     function setWordCount(e){
@@ -19,6 +20,25 @@ export default function ({styles, nextButton, className, setStep, data}){
                 <br />
                 <p>Veuillez noter que les champs marqués de (<span>*</span>) sont obligatoires.</p>
             </div>
+
+            <section className={styles.showCase}>
+                <img src={data.logo.preview } alt="" />
+                <div className={styles.showCaseInfo}>
+                    <h1>{data.company_name}</h1>
+                    <p>{data.industry === 0 ? 'Restaurant' : 'Hotel'}</p>
+                    <div className={styles.showCaseLocation}>
+                        <img src={data.country === 0 ? '/ch.svg' : '/fr.svg'} alt="" />
+                        <p>
+                            <span>
+                                {data.city}, 
+                            </span>
+                            <span>
+                                {data.country === 0 ? 'Suisse' : 'France'}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </section>
 
             <section className={styles.section}>
                 <h4>Votre établissement est-il un hôtel ou un restaurant ?</h4>
