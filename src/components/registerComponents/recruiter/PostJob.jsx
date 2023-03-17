@@ -1,10 +1,14 @@
 "use client"
 
 import { useRef, useState } from "react";
+import DatePicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css'
 
 export default function ({styles, nextButton, className, setStep, data}){
-    console.log(data)
     const [wordCount, setWords] = useState(0)
+
+    const [startDate, setStartDate] = useState(null)
+    const [endDate, setEndDate] = useState(null)
 
     function setWordCount(e){
         if(e.target.value.length > 1000){
@@ -68,11 +72,31 @@ export default function ({styles, nextButton, className, setStep, data}){
                     <select className={styles.selectF}>
                         <option value="">Sous-catégorie de l'établissement</option>
                     </select>
-                    <div className={`${styles.dateInput} ${styles.inputF}`}>
-                        <input type="date" id="start"/>
+                    <div className={styles.datePickerHolder}>
+                        <DatePicker 
+                            selected={startDate}
+                            onKeyDown={(e) => {
+                              e.preventDefault();
+                            }}
+                            onChange={date => setStartDate(date)}
+                            dateFormat='dd/MM/yyyy'
+                            showYearDropdown
+                            scrollableMonthYearDropdown
+                        />
+                        <img src="/datepicker.png" alt="" className={styles.datePickerImg}/>
                     </div>
-                    <div className={`${styles.dateInput} ${styles.inputS}`}>
-                        <input type="date" id="end"/>
+                    <div className={styles.datePickerHolder}>
+                        <DatePicker 
+                            selected={endDate}
+                            onKeyDown={(e) => {
+                              e.preventDefault();
+                            }}
+                            onChange={date => setEndDate(date)}
+                            dateFormat='dd/MM/yyyy'
+                            showYearDropdown
+                            scrollableMonthYearDropdown
+                        />
+                        <img src="/datepicker.png" alt="" className={styles.datePickerImg}/>
                     </div>
                 </div>
             </section>

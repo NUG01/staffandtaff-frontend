@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 export default function Banner({callBack}) {
     const router = useRouter()
+    const [expanded, setExpanded] = useState(false)
 
     const [searchValue, setValue] = useState('')
 
@@ -25,12 +26,20 @@ export default function Banner({callBack}) {
                 <img src="/logo.png" alt="" className={styles.bannerLogo} />
                 <p>Texte énumérant tous les avantages de la plateforme et invitant l'utilisateur à s'inscrire en ligne.</p>
                 <form onSubmit={formSubmit} className={styles.searchContainer}>
-                    <input type="text" placeholder="Trouver un emploi" onChange={event => setValue(event.target.value)}/>
+                    <div className={styles.filterHolder}>
+                        <input type="text" placeholder="Trouver un emploi" onChange={event => setValue(event.target.value)}/>
+                        <div className={`${styles.filter} ${expanded ? styles.expandedFilter : ''}`}>
+
+                        </div>
+                    </div>
                     <FaSearch className={styles.searchButton}/>
-                    <div className={styles.filter}>
+                    <div className={styles.filterButton} onClick={()=> setExpanded(!expanded)}>
                         <img src="/filter.png" alt="" />
                     </div>
-                    <button>RECHERCHE</button>
+                    <button>
+                        <span>RECHERCHE</span>
+                        <FaSearch className={styles.mobileSearchButton}/>
+                    </button>
                 </form>
             </div>
         </div>

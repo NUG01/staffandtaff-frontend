@@ -67,9 +67,32 @@
     text-align: center;
 }
 
-.searchContainer input {
-    border: 1px solid rgb(189, 189, 189);
+.filterHolder{
     width: 100%;
+    position: relative;
+}
+
+.filter{
+    width: 100%;
+    min-width: 270px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: red;
+    height: 300px;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.expandedFilter{
+    pointer-events: unset;
+    opacity: 1;
+}
+
+.searchContainer input {
+    width: 100%;
+    border: 1px solid rgb(189, 189, 189);
     transition: 0.3s;
     font-size: 15px;
     padding: 15px 15px 15px 40px;
@@ -203,7 +226,7 @@
     position: relative;
 }
 
-.filter {
+.filterButton {
     width: 70px;
     height: 53px;
     background-position: center center;
@@ -361,7 +384,37 @@
     max-width: 380px;
 }
 
+.mobileSearchButton{
+    display: none;
+}
+
 @media (max-width: 992px) {
+
+    .searchContainer input{
+        padding-left: 15px;
+    }
+    
+    .searchPlace button{
+        width: 70px;
+        height: 53px;
+        background-color: var(--color-1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .searchPlace button span{
+        display: none;
+    }
+
+    .searchButton{
+        display: none;
+    }
+
+    .mobileSearchButton{
+        display: block;
+    }
 
     .counts,
     .explanation-cards {

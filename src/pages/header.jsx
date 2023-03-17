@@ -67,7 +67,7 @@ export default function Header({active, isLogged, user, isMobile}) {
         )}
 
         {isLogged === 1 &&(
-            <div className={`${active === 'login' || active === 'register' ? 'hide-nav' : 'mobile-auth-nav'}`} onClick={logout}>
+            <div className={`${active === 'login' || active === 'register' ? 'hide-nav' : 'mobile-auth-nav logout-auth-nav'}`} onClick={logout}>
                 <p>DÉCONNEXION</p>
             </div>
         )}

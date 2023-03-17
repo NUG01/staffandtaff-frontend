@@ -1,12 +1,28 @@
-export default function Wizard({styles, step, maxSteps, type, showStripe}){
-
+export default function Wizard({styles, step, maxSteps, type, showStripe, completedSteps}){
+    
+    if(step === 2){
+        completedSteps[0] = true
+    }
+    
+    if(step === 3){
+        completedSteps[1] = true
+    }
+    
+    if(step === 4){
+        completedSteps[2] = true
+    }
+    
+    if(step === 5){
+        completedSteps[3] = true
+    }
+    
     if(maxSteps === 3){
         return(
             <div className={`${styles.wizardMain} ${showStripe ? styles.hideSection : ''}`}>
                 <h1>Devenez Recruteur sur Staff&Taff</h1>
                 <p>Les informations saisies maintenant peuvent être modifiées après la connexion.</p>
 
-                <div className={styles.wizard}>
+                <div className={`${styles.wizard} ${completedSteps[0] ? styles.recruiterWizardStepOne : ''} ${completedSteps[1] ? styles.recruiterWizardStepTwo : ''}`}>
                     <div className={step < 2 ? styles.currentStep : styles.completedStep} txt="Créez un compte">
                         <div>
                             <i className="fa-solid fa-check"></i>

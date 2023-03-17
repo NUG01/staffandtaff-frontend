@@ -141,7 +141,26 @@
 .wizard > div{
     position: absolute;
     transform: translateX(-50%);
-    top: -5px;
+    z-index: 2;
+    top: -6px;
+}
+
+.recruiterWizardStepOne::after{
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 5px;
+    top: -1px;
+    background-color: var(--color-5);
+}
+
+.recruiterWizardStepTwo::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    top: -1px;
+    background-color: var(--color-5);
 }
 
 .wizard > div > div{
@@ -164,14 +183,23 @@
     left: 100%;
 }
 
-.wizard > div.currentStep:before{
+.wizard > div:before{
     content: attr(txt);
+    font-weight: bold;
     position: absolute;
     width: 130px;
     text-align: center;
     left: 50%;
     top: 30px;
+    font-size: 16px;
     transform: translateX(-50%);
+}
+
+@media(min-width: 576px){
+    .wizard > div.currentStep:before{
+        top: 35px;
+        font-size: 17px;
+    }
 }
 
 .wizard > div.currentStep > div, .wizard > div.completedStep > div{
@@ -650,7 +678,6 @@
     height: 132px;
     object-fit: contain;
     border: 2px solid var(--color-6);
-    padding: 5px;
 }
 
 .showCaseInfo{
@@ -674,6 +701,33 @@
 .showCaseLocation p{
     display: flex;
     gap: 5px;
+}
+
+.datePickerHolder{
+    position: relative;
+}
+
+.datePickerImg{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 10px;
+    bottom: 18px;
+    pointer-events: none;
+}
+
+.datePickerHolder input{
+    cursor: pointer;
+    caret-color: transparent;
+}
+
+@media(max-width: 768px){
+    .wizard > div:before{
+        display: none;
+    }
+    .wizard > div.currentStep:before{
+        display: block;
+    }
 }
 
 @media(max-width: 576px){

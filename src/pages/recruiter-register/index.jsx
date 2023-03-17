@@ -18,6 +18,8 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
     const [showPlans, setShowPlans] = useState(false)
     const [showStripe, setShowStripe] = useState(false)
 
+    let completedSteps = [false, false, false, false]
+
     const galleryPictures = []
 
     const [data, setData] = useState(
@@ -73,6 +75,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
         })
 
         if(validated) {
+            scrollTo(0, 0)
             setStep(stepNum)
         }
         scrollTo(0, 0)
@@ -87,7 +90,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
             <Header isLogged={isLogged} user={user} logout={logout} active="register"/>
 
             <main className={styles.mainWrapper}>
-                <Wizard styles={styles} step={step} maxSteps={maxSteps} showStripe={showStripe}/>
+                <Wizard styles={styles} step={step} maxSteps={maxSteps} showStripe={showStripe} completedSteps={completedSteps}/>
 
                 {isLogged === 0 && (
                     <>
