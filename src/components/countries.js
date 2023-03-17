@@ -1,7 +1,7 @@
 export const countries = [
     {
         id: 1001,
-        name: "France",
+        name: "FRANCE",
         cities: [
             {
                 id: 1,
@@ -263,7 +263,7 @@ export const countries = [
     },
     {
         id: 1002,
-        name: "Switzerland",
+        name: "SUISSE",
         cities: [
             {
                 id: 1,

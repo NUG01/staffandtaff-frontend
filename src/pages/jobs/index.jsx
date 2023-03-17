@@ -7,6 +7,7 @@ import Head from 'next/head';
 import TipsList from '@/components/TipsList';
 import CountryJobs from '@/components/jobsComponents/CountryJobs';
 import {countries} from '@/components/countries';
+import styles from '@/styles/homepage/homepage.module.css'
 
 export default function Jobs({jobDataList, isLogged, user, logout}) {
 
@@ -42,12 +43,14 @@ export default function Jobs({jobDataList, isLogged, user, logout}) {
     return (
         <>
             <Head>
-                <title>Jobs</title>
+                <title>Emplois</title>
             </Head>
 
             <Header isLogged={isLogged} user={user} logout={logout} active="job"/>
 
             <Banner />
+              
+            <h1 className={styles.jobListHeading}>Trouver un emploi</h1>
 
             <JobList data={jobDataList}/>
 

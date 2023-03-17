@@ -1,16 +1,22 @@
 "use client"
 
 import { useRef, useState } from "react";
+import axios from '@/lib/axios'
 
 export default function RecruiterFlow({styles, nextButton, className, data, galleryPictures}){
     const logo = useRef()
+    const cityInp = useRef()
 
     const [wordCount, setWords] = useState(0)
 
     const [logoPreview, setLogo] = useState('/default.png')
     const [logoPreviewName, setLogoName] = useState('Aucune image.')
     const [galleryImages, setGalleryImage] = useState([])
-    const [cities, setCities] = useState([])
+
+    const [country, setCurrCountry] = useState("")
+
+    const [cities, setCities] = useState([1, 2, 3])
+    const [cityInpValue, setCityInpValue] = useState("")
 
     function clearLogo(){
         setLogo('/default.png')
@@ -54,9 +60,21 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
             setGalleryImage([...galleryImages, ...galleryPictures])
         }
     }
+    const csrf = () => axios.get('/sanctum/csrf-cookie');
 
-    function setCountry(e){
+
+    async function setCountry(e){
+        setCurrCountry(e.target.value)
         data.country = e.target.value
+        
+
+        await csrf()
+        console.log(csrf)
+
+        // axios
+        //     .post('/api/v1/login', props)
+        //     .then(() => {
+        //     })
     }
 
     return(
@@ -102,10 +120,9 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
                 <h4>Votre établissement est-il un hôtel ou un restaurant ?<span> *</span></h4>
                 <div className={styles.inputParent}>
                     <select onInput={(e)=> data.industry = e.target.value} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')}>
-                        <option value="" disabled selected>Disabled</option>
-                        <option value="Type">Sous-catégorie de l'établissement 1</option>
-                        <option value="Type">Sous-catégorie de l'établissement 2</option>
-                        <option value="Type">Sous-catégorie de l'établissement 3</option>
+                        <option value="" disabled selected>Sous-catégorie de l'établissement</option>
+                        <option value="0">Restaurant</option>
+                        <option value="1">Hotel</option>
                     </select>
                 </div>
             </section>
@@ -114,15 +131,22 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
                 <h4>Où se trouve votre établissement ? <span> *</span></h4>
                 <div className={styles.inputParent}>
                     <select onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')}>
-                        <option value="" disabled selected>Disabled</option>
-                        <option value="Pays">Pays 2</option>
-                        <option value="Pays">Pays 3</option>
+                        <option value="" disabled selected>Pays</option>
+                        <option value="0">Suisse</option>
+                        <option value="1">France</option>
                     </select>
-                    <select className={`required-record ${cities.length === 0 ? styles.disabledInput : ''}`} onInput={(e)=> data.city = e.target.value} onChange={(e)=>e.target.classList.remove('input-error')}>
-                        <option value="" disabled selected>Disabled</option>
-                        <option value="Ville">Ville 2</option>
-                        <option value="Ville">Ville 3</option>
-                    </select>
+                    <div className={styles.cityListHolder}>
+                        <input className={`required-record ${country.length === 0 ? styles.disabledInput : ''}`} type="text" placeholder="Ville" ref={cityInp} onInput={(e)=> setCityInpValue(e.target.value)}/>
+                        <div className={`${styles.cityList} ${cityInpValue.length > 0 ? styles.showCityList : ''}`}>
+                            {
+                                cities.map((item, index) =>{
+                                    return(
+                                        <div onClick={(e)=> {data.city = item; cityInp.current.value = item}}>City</div>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
                 </div>
             </section>
 

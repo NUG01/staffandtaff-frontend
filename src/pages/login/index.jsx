@@ -69,7 +69,7 @@ const Login = ({isLogged, user, login, logout})=> {
     return (
         <>              
             <Head>
-                <title>Log In</title>
+                <title>Connexion</title>
             </Head>
 
             <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
@@ -77,7 +77,7 @@ const Login = ({isLogged, user, login, logout})=> {
             <div className={styles.mainWrapper}>
                     <div className={`${styles.formHolder} ${mobilePreview == '#registerView' ? 'hideSection' : ''}`}>
                         <form ref={form} className={styles.formController} onSubmit={submitForm}>
-                            <h3>Log In</h3>
+                            <h3>Connexion</h3>
                             <div className={styles.inputControl}>
                                 <svg width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -86,7 +86,7 @@ const Login = ({isLogged, user, login, logout})=> {
                                 </svg>
 
                                 <input
-                                 type="text" placeholder="Email" className={
+                                 type="text" placeholder="example@staffandtaff.com" className={
                                     submited && !isValid ? styles.singleInputInvalid : styles.singleInput
                                     } required name="email" id='email' onChange={event =>{
                                     setIsValid(isValidEmail(event.target.value))
@@ -101,7 +101,7 @@ const Login = ({isLogged, user, login, logout})=> {
                                 </svg>
 
 
-                                <input placeholder="Password" required className={styles.singleInput}  name="log-password" type={passwordType} autoComplete="current-password" onChange={event => setPassword(event.target.value)} value={password}/>
+                                <input placeholder="Mot de passe" required className={styles.singleInput}  name="log-password" type={passwordType} autoComplete="current-password" onChange={event => setPassword(event.target.value)} value={password}/>
 
                                 <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg" id={styles.hideUnhide} onClick={()=> changePasswordType()}>
                                     <path
@@ -111,14 +111,14 @@ const Login = ({isLogged, user, login, logout})=> {
                             </div>
 
                             <div className={styles.inputControl}>
-                                <Link href="/forgot-password" className={styles.passwordRecovery}> Forgot password? </Link>
+                                <Link href="/forgot-password" className={styles.passwordRecovery}> Mot de passe oublié ? </Link>
                             </div>
 
                                 <InputError messages={errors.email} className="error-text" />
                                 <InputError messages={errors.password} className="error-text"/>
 
                             <div className={styles.inputControl}>
-                                <input type="submit" value="SIGN IN" className={styles.submitInput} />
+                                <input type="submit" value="CONNEXION" className={styles.submitInput} />
                             </div>
 
                         </form>
@@ -128,22 +128,20 @@ const Login = ({isLogged, user, login, logout})=> {
                         <div className={styles.regBlock}>
                             <div className={styles.leftSide}>
                                 <h3>
-                                    I am a Recruiter
+                                    JE SUIS UN RECRUTEUR
                                 </h3>
-                                <p>Sign up for free and find the best talent for your team. Increase credibility of your company. Make
-                                    the recruitment process efficient.</p>
+                                <p>SInscrivez-vous gratuitement et trouvez les meilleurs talents pour votre équipe. Renforcez la notoriété de votre entreprise. Rendez le processus de recrutement efficace.</p>
                                 <Link href="/recruiter-register">
-                                    Register As a Recruiter <i className="fa-solid fa-arrow-up"></i>
+                                INSCRIVEZ-VOUS EN TANT QUE RECRUTEUR <i className="fa-solid fa-arrow-up"></i>
                                 </Link>
                             </div>
                             <div className={styles.rightSide}>
                                 <h3>
-                                    I am a job Seeker
+                                    JE CHERCHE UN EMPLOI
                                 </h3>
-                                <p>Sign up for free and introduce yourself to recruiters. Find a job matching your criteria. Apply
-                                    quickly and easily.</p>
+                                <p>Inscrivez-vous gratuitement et présentez-vous aux recruteurs. Trouvez un emploi selon vos critères. Postulez rapidement et facilement.</p>
                                 <Link href="/seeker-register">
-                                    Register As a Job Seeker <i className="fa-solid fa-arrow-up"></i>
+                                    INSCRIVEZ-VOUS EN TANT QUE CHERCHEUR D'EMPLOI <i className="fa-solid fa-arrow-up"></i>
                                 </Link>
                             </div>
                         </div>

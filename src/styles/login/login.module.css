@@ -131,6 +131,13 @@
     color: white;
 }
 
+.regBlock > div{
+    width: 50%;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
 .regBlock h3 {
     font-size: 18px;
 }
@@ -148,8 +155,9 @@
     padding: 10px;
     width: fit-content;
     display: block;
-    margin-top: 20px;
+    margin-top: auto;
     min-height: 63px;
+    font-size: 14px;
 }
 
 .regNow img {
@@ -173,6 +181,16 @@
     .formHolder,
     .regNow {
         width: 100%;
+    }
+
+    .regBlock > div{
+        width: 100%;
+        min-height: unset;
+        margin-top: 20px;
+    }
+    
+    .regBlock a {
+        margin-top: 20px;
     }
 }
 

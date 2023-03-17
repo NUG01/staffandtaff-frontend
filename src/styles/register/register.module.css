@@ -356,9 +356,43 @@
     cursor: pointer;
 }
 
-.locationSelect select{
+.locationSelect select, .locationSelect .cityListHolder{
     width: unset;
     flex: 1;
+}
+
+.cityListHolder{
+    position: relative;
+}
+
+.cityList{
+    width: 100%;
+    height: 200px;
+    background-color: white;
+    position: absolute;
+    top: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.showCityList{
+    opacity: 1;
+    pointer-events: unset;
+}
+
+.cityList div{
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 20px 0px;
+    border-bottom: 1px solid var(--color-6);
+}
+
+.cityList div:hover{
+    background-color: rgba(0,0,0,0.03);
 }
 
 .locationSelect > div {

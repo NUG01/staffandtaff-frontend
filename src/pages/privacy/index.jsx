@@ -7,39 +7,40 @@ export default function Privacy({isLogged, user, logout}) {
     return (
         <>
             <Head>
-                <title>Privacy</title>
+                <title>Politique de Confidentialité</title>
             </Head>
 
             <Header isLogged={isLogged} user={user} logout={logout} active="privacy"/>
 
             <main className={styles.main}>
-                <h1 className={styles.mainHeader}>Privacy Policy</h1>
+                <h1 className={styles.mainHeader}>Politique de Confidentialité</h1>
 
                 <div className={styles.section}>
-                    <h1 className={styles.sectionHeader}>Security and Safety</h1>
+                    <h1 className={styles.sectionHeader}>PRINCIPE</h1>
                     <div className={styles.sectionContent}>
-                        It is agreed that the client wishes to market a new platform allowing
-                        recruiters and candidates in the restaurant and hotel sector to register and offer their job offers
-                        online or to apply for a job offer. Thus, it will be possible for candidates to search on the platform
-                        for a specific job offer according to pre-defined criteria and to apply for it.
+                        La présente déclaration énonce notre politique de confidentialité, autrement dit le traitement des données à caractère personnel recueillies par l'intermédiaire de notre site Web ou de nos services en ligne, ou plus généralement, dans le cadre des prestations que nous fournissons.
                     </div>
                 </div>
 
                 <div className={styles.section}>
-                    <h1 className={styles.sectionHeader}>Other Policy Title</h1>
+                    <h1 className={styles.sectionHeader}>Comment collectons-nous vos données?</h1>
                     <div className={styles.sectionContent}>
-                    It is agreed that the client wishes to market a new platform allowing recruiters and candidates in the restaurant and hotel sector to register and offer their job offers online or to apply for a job offer. Thus, it will be possible for candidates to search on the platform for a specific job offer according to pre-defined criteria and to apply for it.
-                    <br/><br/>
-                    It is agreed that the client wishes to market a new platform allowing recruiters and candidates in the restaurant and hotel sector to register and offer their job offers online or to apply for a job offer. Thus, it will be possible for candidates to search on the platform for a specific job offer according to pre-defined criteria and to apply for it.
+                    Nous collectons vos données directement auprès de vous ou les recevons de la part de tiers, par ex. d’entreprises liées à nous, d’autorités, de conseillers, de nos prestataires de services ou de sources accessibles au public.
+                    <br/>
+                    <br/>
+                    Nous collectons vos données directement auprès de vous ou les recevons de la part de tiers, par ex. d’entreprises liées à nous, d’autorités, de conseillers, de nos prestataires de services ou de sources accessibles au public.
+                    <br/>
+                    <br/>
+                    Nous collectons vos données directement auprès de vous ou les recevons de la part de tiers, par ex. d’entreprises liées à nous, d’autorités, de conseillers, de nos prestataires de services ou de sources accessibles au public.
                     </div>
                 </div>
 
                 
 
                 <div className={styles.section}>
-                    <h1 className={styles.sectionHeader}>Other Policy Title</h1>
+                    <h1 className={styles.sectionHeader}>Ouverture d’un compte utilisateur</h1>
                     <div className={styles.sectionContent}>
-                    It is agreed that the client wishes to market a new platform allowing recruiters and candidates in the restaurant and hotel sector to register and offer their job offers online or to apply for a job offer. Thus, it will be possible for candidates to search on the platform for a specific job offer according to pre-defined criteria and to apply for it.
+                    Votre inscription ainsi que la création d’un compte utilisateur peuvent être requis pour utiliser des services personnalisés ou accéder à des espaces protégés, ou pour traiter des demandes et gérer vos abonnements. À cette fin, vous devrez saisir certaines données à caractère personnel.
                     </div>
                 </div>
             </main>

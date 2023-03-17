@@ -9,7 +9,7 @@ const TipsList = ({data , isHeader}) => {
   return (
     <>
       <div className={styles.tipsContainer}>
-        {isHeader && <h1 className={styles.mainHeader}>Tips from Staff&Taff</h1>}
+        {isHeader && <h1 className={styles.mainHeader}>Conseils de la part de Staff&Taff</h1>}
         {
           tipKeys.map((item, mainIndex) => {
               return(
@@ -27,7 +27,7 @@ const TipsList = ({data , isHeader}) => {
                                           <p>{item.date}</p>
                                           <div className={styles.content}>
                                               {item.content.substring(0, 150)}
-                                              { item.content.length > 150 ? <span className="viewMore">... <p>View more</p></span> : ''}
+                                              { item.content.length > 150 ? <span className="viewMore">... <p>Voir plus</p></span> : ''}
                                           </div>
                                       </div>
                                   </Link>

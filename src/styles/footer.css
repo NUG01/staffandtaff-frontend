@@ -16,7 +16,7 @@ footer .column-1 img {
 
 footer .column-2 a {
     display: flex;
-    gap: 5px;
+    gap: 10px;
 }
 
 .top-footer {
@@ -26,6 +26,7 @@ footer .column-2 a {
     align-items: center;
     padding: 0px 60px;
     flex-wrap: wrap;
+    font-size: 13px;
 }
 
 .top-footer>div {

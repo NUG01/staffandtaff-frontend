@@ -13,7 +13,10 @@ export default function Footer({className}) {
                     <div className="footer-contact">
                         <a href="https://goo.gl/maps/PVTyp9jp5HyCN9d59" target="_blank">
                             <img src="/pin.svg" alt="" />
-                            <p>Address of the headquarters Address</p>
+                            <p>
+                                Kornquaderweg 70, <br />
+                                Rheinklingen, Switzerland, 8259
+                            </p>
                         </a>
                     </div>
                     <div className="footer-contact">
@@ -24,21 +27,21 @@ export default function Footer({className}) {
                     </div>
                 </div>
                 <div className="column column-3">
-                    <Link href="/">Home</Link>
-                <Link href="/about">About Us</Link>
+                    <Link href="/">Emplois</Link>
+                <Link href="/about">À propos de nous</Link>
                 </div>
                 <div className="column column-4">
-                    <Link href="/tips">Tips</Link>
+                    <Link href="/tips">Conseils</Link>
                     <Link href="/faq">F.A.Q</Link>
                 </div>
                 <div className="column column-5">
-                    <p>Title of the articles from the tips secti...</p>
-                    <p>Title of the articles from the tips secti...</p>
-                    <p>Title of the articles from the tips secti...</p>
+                    <p>Titre d'un article Conseils Titre d'un a...</p>
+                    <p>Titre d'un article Conseils Titre d'un a...</p>
+                    <p>Titre d'un article Conseils Titre d'un a...</p>
                 </div>
             </div>
             <p className="bottom-footer">
-                All Rights Reserved © <Link href="/terms">Terms and Conditions</Link> | <Link href="/privacy">Privacy Policy</Link>
+            Tous Droits Réservés © <Link href="/terms">Termes et Conditions</Link> | <Link href="/privacy">Politique de Confidentialité</Link>
             </p>
         </footer>
     );

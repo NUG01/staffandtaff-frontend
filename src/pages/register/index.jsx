@@ -47,7 +47,7 @@ const Register = ({isLogged, user, logout, register}) => {
     return (
         <>
             <Head>
-                <title>Register</title>
+                <title>S'inscrire</title>
             </Head>
             
             <Header isLogged={isLogged} user={user} logout={logout} active="register"/>

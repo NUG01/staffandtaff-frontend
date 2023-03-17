@@ -9,7 +9,7 @@ export default function About({isLogged, user, logout}) {
     return (
         <>
             <Head>
-                <title>About</title>
+                <title>À propos de nous</title>
             </Head>
             <Header isLogged={isLogged} user={user} logout={logout} active="about"/>
             

@@ -46,7 +46,7 @@ export default function Job({isLogged, user, logout}) {
         return (
             <>
                 <Head>
-                    <title>Email verification</title>
+                    <title>Veuillez vérifier vos mails</title>
                 </Head>
     
                 <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
@@ -55,27 +55,26 @@ export default function Job({isLogged, user, logout}) {
                     <div className={styles.inboxCheck}>
                         <div className={styles.heading}>
                             <img src="/attention-envelope-icon.png" alt="" />
-                            <h1>Please check your inbox</h1>
+                            <h1>Veuillez vérifier vos mails</h1>
                         </div>
                         <div className={styles.bottom}>
-                            Your email address has been successfully submitted.
-                            Please check your email to reset your password
+                        Votre adresse mail a été enregistrée avec succès. Veuillez vérifier vos mails pour réinitialiser votre mot de passe.
                         </div>
                     </div>
     
                     <div className={styles.resendEmail}>
                         <p>
-                            The email might need several minutes to arrive into your mailbox.
+                        Le mail peut mettre plusieurs minutes à arriver dans votre boîte de réception.
                             <br />
-                            Still haven’t received it?
+                            Vous ne l'avez toujours pas reçu ?
                         </p>
     
                         <p className={styles.sendAgain} onClick={()=> nextStep()}>
-                            RESEND EMAIL
+                            RENVOYER L'EMAIL
                         </p>
                     </div>
                     
-                    <Link href="/">Go back to the homepage</Link>
+                    <Link href="/">Retourner à la page d'accueil</Link>
                 </div>
     
                 <Footer />
@@ -87,14 +86,14 @@ export default function Job({isLogged, user, logout}) {
         return(
             <>
                 <Head>
-                    <title>Set new password</title>
+                    <title>RÉINITIALISER LE MOT DE PASSE</title>
                 </Head>
 
                 <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
 
                 <div className={styles.mainWrapper}>
                     <form>
-                        <h1>RESET PASSWORD</h1>
+                        <h1>RÉINITIALISER LE MOT DE PASSE</h1>
                         <div className={styles.inputControl}>
                                     <svg width="16" height="21" viewBox="0 0 16 21" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -110,7 +109,7 @@ export default function Job({isLogged, user, logout}) {
                                     className={styles.singleInput}
                                     onChange={event => setPassword(event.target.value)}
                                     required
-                                    placeholder='Password'
+                                    placeholder='Nouveau mot de passe'
                                     autoComplete="new-password"/>
     
                                     <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg" id={styles.hideUnhide} onClick={()=> changePasswordType()}>
@@ -140,7 +139,7 @@ export default function Job({isLogged, user, logout}) {
                                         setPasswordConfirmation(event.target.value)
                                     }
                                     required
-                                    placeholder='Confirm password'
+                                    placeholder='Confirmer le nouveau mot de passe'
                                     autoComplete="new-password"/>
     
                                     <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg" id={styles.hideUnhide} onClick={()=> changeConfirmPasswordType()}>
@@ -150,8 +149,8 @@ export default function Job({isLogged, user, logout}) {
                                     </svg>
                             </div>
     
-                        <button >SUBMIT</button>
-                        <Link href="/login">Go back to the login page</Link>
+                        <button>RÉINITIALISER LE MOT DE PASSE</button>
+                        <Link href="/login">Retourner à la page de connexion</Link>
                     </form>
                 </div>
 
@@ -164,7 +163,7 @@ export default function Job({isLogged, user, logout}) {
         return(
             <>
             <Head>
-                <title>Password changed successfully!</title>
+                <title>Réinitialisation du mot de passe réussie !</title>
             </Head>
 
             <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
@@ -173,12 +172,12 @@ export default function Job({isLogged, user, logout}) {
                     <div className={styles.inboxCheck}>
                         <img src="/success-star.png" alt="" />
                         <div className={styles.side}>
-                            <h1>Password Reset Successfully!</h1>
-                            You can now use your new password to log in to your account.
+                            <h1>Réinitialisation du mot de passe réussie !</h1>
+                            Vous pouvez maintenant utiliser votre nouveau mot de passe pour vous connecter à votre compte.
                         </div>
                     </div>
 
-                    <Link href="/login">Log in</Link>
+                    <Link href="/login">CONNEXION</Link>
                 </div>
                 
             <Footer />

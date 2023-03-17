@@ -348,6 +348,19 @@
     right: 15px;
 }
 
+.jobListHeading{
+    font-size: 24px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.searchPlace p{
+    text-align: center;
+    color: white;
+    margin: 15px auto;
+    width: 380px;
+}
+
 @media (max-width: 992px) {
 
     .counts,

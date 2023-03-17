@@ -30,16 +30,16 @@ const ForgotPassword = ({isLogged, user, logout})=> {
     return (
         <>
             <Head>
-                <title>Password Recovery</title>
+                <title>RÉINITIALISER LE MOT DE PASSE</title>
             </Head>
 
             <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
 
             <main className={styles.main}>
                 <form className={styles.mainForm} ref={form} onSubmit={submitForm}>
-                    <h1>RESET PASSWORD</h1>
+                    <h1>RÉINITIALISER LE MOT DE PASSE</h1>
                     <p>
-                        Enter the email address associated with your account and we’ll send you a link to reset your password.
+                    Saisissez l'adresse électronique associée à votre compte et nous vous enverrons un lien pour réinitialiser votre mot de passe.
                     </p>
                     <div className={styles.inputControl}>
                         <svg width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg">
@@ -48,13 +48,13 @@ const ForgotPassword = ({isLogged, user, logout})=> {
                                 fill="#757575"/>
                         </svg>
 
-                        <input onChange={event => setEmail(event.target.value)} type="email" placeholder="Email" className={styles.singleInput} required name="email" />
+                        <input onChange={event => setEmail(event.target.value)} type="email" placeholder="exemple@staffandtaff.com" className={styles.singleInput} required name="email" />
                     </div>
                     <div className={styles.inputContainer}>
                         <InputError messages={errors.email} className="error-text" id={styles.errorText} />
                     </div>
-                    <input type="submit" value="SUBMIT" className={styles.submitInput} />
-                    <Link href="/login">Go back to the login page</Link>
+                    <input type="submit" value="ENVOYER" className={styles.submitInput} />
+                    <Link href="/login">Retourner à la page de connexion</Link>
                 </form>
             </main>
             

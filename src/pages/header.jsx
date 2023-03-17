@@ -1,8 +1,9 @@
 import { FaBars } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import axios from '@/lib/axios'
 
-export default function Header({active, isLogged, user, logout}) {
+export default function Header({active, isLogged, user}) {
     const [expanded, setExpanded] = useState(false);
     const [scrl, setScroll] = useState(0)
 
@@ -12,6 +13,13 @@ export default function Header({active, isLogged, user, logout}) {
             setScroll(scrollY)
         }
     })
+
+    const logout = async () => {
+        document.body.classList.add('disabledSection')
+        await axios.post('/api/v1/logout').then(() => {
+            window.location.pathname = '/';
+        });
+    };
 
     return (
     <>
@@ -23,43 +31,43 @@ export default function Header({active, isLogged, user, logout}) {
             </h1>
 
             <div className="nav">
-                <Link href="/jobs" className={active == "home" || active == "job" || active == 'singleJob' ? "active" : ""}>Jobs</Link>
-                <Link href="/about" className={active == "about" ? "active" : ""}>About Us</Link>
-                <Link href="/tips" className={active == "tips" ? "active" : ""}>Tips</Link>
+                <Link href="/jobs" className={active == "home" || active == "job" || active == 'singleJob' ? "active" : ""}>Emplois</Link>
+                <Link href="/about" className={active == "about" ? "active" : ""}>À propos de nous</Link>
+                <Link href="/tips" className={active == "tips" ? "active" : ""}>Conseils</Link>
                 <Link href="/faq" className={active == "faq" ? "active" : ""}>F.A.Q</Link>
             </div>
             
             {isLogged === 0 &&(
                 <Link href="/login" className={`${active === 'login' || active === 'register' ? 'hide-nav' : 'auth-nav'}`} >
-                    <p className={isLogged === 1 ? 'hide-nav' : ''}>LOG IN / REGISTER</p>
+                    <p className={isLogged === 1 ? 'hide-nav' : ''}>SE CONNECTER / S'INSCRIRE</p>
                 </Link>
             )}
 
             {isLogged === 1 &&(
                 <div className={`${active === 'login' || active === 'register' ? 'hide-nav' : 'auth-nav'}`} onClick={logout}>
-                    <p>LOG OUT</p>
+                    <p>DÉCONNEXION</p>
                 </div>
             )}
 
             <FaBars className='menu-toggler' onClick={() => setExpanded(!expanded)} />
             <div className={`mobile-nav ${expanded ? 'expanded' : ''}`}>
-                <Link href="/">Jobs</Link>
-                <Link href="/about">About Us</Link>
-                <Link href="/tips">Tips</Link>
+                <Link href="/">Emplois</Link>
+                <Link href="/about">À propos de nous</Link>
+                <Link href="/tips">Conseils</Link>
                 <Link href="/faq">F.A.Q</Link>
             </div>
         </header>
 
         {isLogged === 0 &&(
             <div className={`${active === 'login' || active === 'register' ? 'hide-nav' : 'mobile-auth-nav'}`} >
-                <Link href="/login#loginView" >LOG IN / </Link>
-                <Link href="/login#registerView">REGISTER</Link>
+                <Link href="/login#loginView" >SE CONNECTER / </Link>
+                <Link href="/login#registerView">S'INSCRIRE</Link>
             </div>
         )}
 
         {isLogged === 1 &&(
             <div className={`${active === 'login' || active === 'register' ? 'hide-nav' : 'mobile-auth-nav'}`} onClick={logout}>
-                <p>LOG OUT</p>
+                <p>DÉCONNEXION</p>
             </div>
         )}
     </>

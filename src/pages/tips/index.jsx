@@ -53,17 +53,17 @@ export default function Tips({isLogged, user, logout}) {
     return (
         <>
             <Head>
-                <title>Tips</title>
+                <title>Conseils</title>
             </Head>
 
             <Header isLogged={isLogged} user={user} logout={logout} active="tips"/>
 
             <main className={styles.main}>
-                <h1 className={styles.mainHeader}>Tips from Staff&Taff</h1>
-                <h2 className={styles.intro}>The professionals from our team are sharing useful tips.</h2>
+                <h1 className={styles.mainHeader}>Conseils de la part de Staff&Taff</h1>
+                <h2 className={styles.intro}>Nos professionnels partagent des conseils utiles.</h2>
                 <form action="" className={styles.faqForm}>
                     <i className={`fa-solid fa-magnifying-glass ${styles.glass}`}></i>
-                    <input type="text" name="search" placeholder="Search" required />
+                    <input type="text" name="search" placeholder="Recherche" required />
                     <i className={`fa-solid fa-arrow-right ${styles.arrowRight}`}></i>
                 </form>
                 <TipsList data={tipsData} isHeader={false}/> 

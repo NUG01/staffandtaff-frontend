@@ -6,7 +6,7 @@ export default function Terms({isLogged, user, logout}) {
     return (
         <>
             <Head>
-                <title>Terms & Conditions</title>
+                <title>Termes et Conditions</title>
             </Head>
 
             <Header isLogged={isLogged} user={user} logout={logout} active="terms"/>

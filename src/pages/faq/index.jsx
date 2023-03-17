@@ -14,15 +14,15 @@ export default function Faq({isLogged, user, logout, search}) {
     let faqData = {
       "Category 1":[
         {
-          heading: "Do aliens really exist?",
+          heading: "Question? 1",
           content: "It is agreed that the client wishes to market a new platform allowing recruiters and candidates in the restaurant and hotel sector to register and offer their job offers online or to apply for a job offer. Thus, it will be possible for candidates to search on the platform for a specific job offer according to pre-defined criteria and to apply for it."
         },
         {
-          heading: "How to contact aliens?",
+          heading: "Question? 2",
           content: "It is agreed that the client wishes to market a new platform allowing recruiters and candidates in the restaurant and hotel sector to register and offer their job offers online or to apply for a job offer. Thus, it will be possible for candidates to search on the platform for a specific job offer according to pre-defined criteria and to apply for it."
         },
         {
-          heading: "How to learn alien sign language?",
+          heading: "Question? 3",
           content: "It is agreed that the client wishes to market a new platform allowing recruiters and candidates in the restaurant and hotel sector to register and offer their job offers online or to apply for a job offer. Thus, it will be possible for candidates to search on the platform for a specific job offer according to pre-defined criteria and to apply for it."
         }
       ],
@@ -30,19 +30,19 @@ export default function Faq({isLogged, user, logout, search}) {
       "Category 2":[
         
         {
-            heading: "How to apologize an alien for a mistaken sign?",
+            heading: "Question? 4",
             content: "It is agreed that the client wishes to market a new platform allowing recruiters and candidates in the restaurant and hotel sector to register and offer their job offers online or to apply for a job offer. Thus, it will be possible for candidates to search on the platform for a specific job offer according to pre-defined criteria and to apply for it."
         },
         {
-          heading: "How to run from an alien?",
+          heading: "Question? 5",
           content: "It is agreed that the client wishes to market a new platform allowing recruiters and candidates in the restaurant and hotel sector to register and offer their job offers online or to apply for a job offer. Thus, it will be possible for candidates to search on the platform for a specific job offer according to pre-defined criteria and to apply for it."
         },
         {
-          heading: "Where can i hide dead alien body?",
+          heading: "Question? 6",
           content: "It is agreed that the client wishes to market a new platform allowing recruiters and candidates in the restaurant and hotel sector to register and offer their job offers online or to apply for a job offer. Thus, it will be possible for candidates to search on the platform for a specific job offer according to pre-defined criteria and to apply for it."
         },
         {
-          heading: "How to really kill an alien if he or she or whatever can revive?",
+          heading: "Question? 7",
           content: "It is agreed that the client wishes to market a new platform allowing recruiters and candidates in the restaurant and hotel sector to register and offer their job offers online or to apply for a job offer. Thus, it will be possible for candidates to search on the platform for a specific job offer according to pre-defined criteria and to apply for it."
         }
       ]
@@ -136,33 +136,33 @@ export default function Faq({isLogged, user, logout, search}) {
                 <Header isLogged={isLogged} user={user} logout={logout} active="faq"/>
     
                 <main className={styles.main}>
-                    <h1 className={styles.mainHeader}>Frequently Asked Questions</h1>
-                    <h2 className={styles.intro}>Do you have questions? We’re here to help.</h2>
+                    <h1 className={styles.mainHeader}>Foire Aux Questions</h1>
+                    <h2 className={styles.intro}>Avez-vous des questions ? Nous sommes là pour vous répondre.</h2>
                     <form action="" className={styles.faqForm} ref={form}>
                         <i className={`fa-solid fa-magnifying-glass ${styles.glass}`}></i>
-                        <input type="text" name="search" placeholder="Search" required ref={input} defaultValue={search != false ? search : ''}/>
+                        <input type="text" name="search" placeholder="Recherche" required ref={input} defaultValue={search != false ? search : ''}/>
                         <i className={`fa-solid fa-arrow-right ${styles.arrowRight}`} onClick={(e)=>{submitForm(e)}}></i>
                     </form>
     
                     <div className={styles.noResults}>
                         <img src="/no-results-character.png" alt="" />
-                        <h3>Sorry, we couldn’t find any results matching <br/>“{search}”.</h3>
+                        <h3>Désolé, nous n'avons pas trouvé de résultats correspondant à <br/>“{search}”.</h3>
                     </div>
 
                     <div className={styles.searchTips}>
-                        <h3>SEARCH TIPS</h3>
+                        <h3>CONSEILS POUR LA RECHERCHE</h3>
                         <ul>
-                            <li>Check your spelling and try again;</li>
-                            <li>Try a similar, but a different search term;</li>
-                            <li>Keep your search term siple;</li>
-                            <li>Try looking within categories</li>
+                            <li>Vérifiez l'orthographe et réessayez;</li>
+                            <li>Essayez un mot différent mais similaire;</li>
+                            <li>Utilisez des mots simples;</li>
+                            <li>Essayez de rechercher dans les catégories.</li>
                         </ul>
                     </div>
 
                     <div className={styles.sendRequest}>
-                        <h3>Would you like to reach out?</h3>
-                        <p>Send us your question and our support team will reply as soon as possible.</p>
-                        <Link href="/about">Reach out now</Link>
+                        <h3>Vous souhaitez nous contacter ?</h3>
+                        <p>Envoyez-nous votre question et notre équipe vous reviendra dans les plus brefs délais.</p>
+                        <Link href="/about">CONTACTEZ-NOUS</Link>
                     </div>
                 </main>
     
