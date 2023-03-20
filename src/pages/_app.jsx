@@ -1,6 +1,6 @@
 import '@/styles/globals.css';
 import '@/styles/footer.css'
-import Loader from '@/components/loader';
+import Loader from '@/components/Loader';
 import Router from 'next/router';
 import { useState } from 'react';
 import { useAuth } from '@/hooks/auth';

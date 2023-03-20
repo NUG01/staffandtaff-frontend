@@ -1,5 +1,5 @@
-import Banner from '@/components/jobsComponents/banner';
-import JobList from '@/components/jobsComponents/jobList'
+import Banner from '@/components/jobsComponents/Banner';
+import JobList from '@/components/jobsComponents/JobList'
 import GeneralInformation from '@/components/jobsComponents/generalInformation'
 import Header from '@/pages/header';
 import Footer from '@/pages/footer';

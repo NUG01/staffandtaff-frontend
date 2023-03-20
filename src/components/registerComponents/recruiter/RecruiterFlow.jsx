@@ -161,7 +161,6 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
                                 })
                             }
                         </div>
-
                     </div>
 
                 </div>

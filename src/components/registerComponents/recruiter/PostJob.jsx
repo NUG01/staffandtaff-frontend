@@ -82,6 +82,7 @@ export default function ({styles, nextButton, className, setStep, data}){
                             dateFormat='dd/MM/yyyy'
                             showYearDropdown
                             scrollableMonthYearDropdown
+                            placeholderText="jj/mm/aaaa"
                         />
                         <img src="/datepicker.png" alt="" className={styles.datePickerImg}/>
                     </div>
@@ -95,6 +96,7 @@ export default function ({styles, nextButton, className, setStep, data}){
                             dateFormat='dd/MM/yyyy'
                             showYearDropdown
                             scrollableMonthYearDropdown
+                            placeholderText="jj/mm/aaaa"
                         />
                         <img src="/datepicker.png" alt="" className={styles.datePickerImg}/>
                     </div>

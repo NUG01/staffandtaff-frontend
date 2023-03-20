@@ -72,17 +72,123 @@
     position: relative;
 }
 
+.filter select{
+    cursor: pointer;
+}
+
 .filter{
     width: 100%;
-    min-width: 270px;
+    min-width: 600px;
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: red;
-    height: 300px;
+    background-color: white;
     opacity: 0;
     pointer-events: none;
     transition: 0.3s;
+    gap: 20px;
+    border: 2px solid var(--color-6);
+    padding: 20px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.filter label{
+    font-size: 13px;
+}
+
+.filter input[type=number]::-webkit-outer-spin-button,
+.filter input[type=number]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+.filter input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.datePickerHolder{
+    position: relative;
+}
+
+.datePickerImg{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 10px;
+    top: 45px;
+    pointer-events: none;
+}
+
+.datePickerHolder input{
+    cursor: pointer;
+    caret-color: transparent;
+}
+
+.cityListHolder{
+    position: relative;
+}
+
+.filterRow{
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+.cityList{
+    width: 100%;
+    min-width: 200px;
+    right: 0;
+    height: 200px;
+    background-color: white;
+    position: absolute;
+    top: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.showCityList{
+    opacity: 1;
+    pointer-events: unset;
+}
+
+.cityList div{
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 20px 10px;
+    border-bottom: 1px solid var(--color-6);
+}
+
+.cityList div:hover{
+    background-color: rgba(0,0,0,0.03);
+}
+
+.filterInputParent{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 50%;
+}
+
+.filterInputParent input, .filterInputParent select, .filterInputParent textarea{
+    border: 2px solid var(--color-6) !important;
+    width: 100%;
+    padding: 15px 15px;
+    resize: none;background-color: white;
+}
+
+.disabledInput{
+    pointer-events: none;
+    background-color: var(--color-6) !important;
+}
+
+.disabledLabel{
+    background-color: var(--color-4) !important;
+    pointer-events: none !important;
 }
 
 .expandedFilter{
@@ -95,6 +201,10 @@
     border: 1px solid rgb(189, 189, 189);
     transition: 0.3s;
     font-size: 15px;
+    padding: 15px;
+}
+
+.searchContainer > div > input {
     padding: 15px 15px 15px 40px;
 }
 
@@ -389,6 +499,18 @@
 }
 
 @media (max-width: 992px) {
+    .filter{
+        min-width: 270px;
+    }
+
+    .filterRow{
+        flex-direction: column;
+    }
+
+    .filter .filterInputParent{
+        width: 100%;
+        flex-wrap: wrap;
+    }
 
     .searchContainer input{
         padding-left: 15px;
