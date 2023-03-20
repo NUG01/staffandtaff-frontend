@@ -12,9 +12,12 @@ import RecruiterFlow from '@/components/registerComponents/recruiter/RecruiterFl
 import PostJob from '@/components/registerComponents/recruiter/PostJob'
 import Plans from '@/components/registerComponents/Plans.jsx';
 import Stripe from '@/pages/stripe';
+import axios from '@/lib/axios'
+import mediaAxios from '@/lib/mediaAxios';
+import { clearConfigCache } from 'prettier';
 
 export default function recruiterRegister({isLogged, user, login, logout, register}){
-    const [step, setStep] = useState(1)
+    const [step, setStep] = useState(2)
     const [showPlans, setShowPlans] = useState(false)
     const [showStripe, setShowStripe] = useState(false)
 
@@ -73,14 +76,21 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                 validated = false
             }
         })
+        validated = true
 
         if(validated) {
             scrollTo(0, 0)
-            setStep(stepNum)
+            // setStep(stepNum)
         }
-        scrollTo(0, 0)
+        console.log(data.logo.get('logo'))
+        mediaAxios
+            .post('/api/v1/establishment/store', data.logo)
+            .then(() => {
+            })
+            .catch(error => {
+            });
     }
-
+    console.log(step)
     return(
         <>
             <Head>
@@ -106,7 +116,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                         <RecruiterFlow className={step != 2 ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep} data={data} galleryPictures={galleryPictures}
         
                             nextButton={
-                                <div className={styles.nextButton} onClick={()=> {nextStep(3)}}>
+                                <div className={styles.nextButton} onClick={()=> {nextStep(3); console.log(data)}}>
                                     suivant
                                     <i className="fa-solid fa-chevron-right"></i>
                                 </div>
