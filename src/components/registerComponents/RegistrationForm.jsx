@@ -2,10 +2,10 @@ import InputError from '@/components/InputError'
 import Link from 'next/link'
 import { useState, useRef } from 'react'
 import styles from '@/styles/register/register.module.css'
+import axios from '@/lib/axios'
 
 export default function RegisterForm({isLogged, user, register, type, setStep, className}) {
 
-    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
@@ -24,19 +24,25 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
 
     const form = useRef()
 
-    const submitForm = event => {
+    const submitForm = async function (event) {
         event.preventDefault()
-
         // form.current.classList.add('disabledSection')
 
-        // register({
-        //     name,
-        //     email,
-        //     password,
-        //     password_confirmation: passwordConfirmation,
-        //     setErrors,
-        //     form
-        // })
+        const csrf = () => axios.get('/sanctum/csrf-cookie');
+        await csrf();
+        
+        axios
+            .post('/api/v1/recruiter-register', {email, password, password_confirm: passwordConfirmation})
+            .then(() => {
+                 mutate()
+                    setStep(1.5); 
+                    scrollTo(0, 0)
+            })
+            .catch(error => {
+                if (error.response.status !== 422) throw error;
+                form.current.classList.remove('disabledSection')
+                setErrors(error.response.data.errors);
+            });
     }
 
     return (
@@ -127,7 +133,7 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
 
 
                         <div className={styles.inputControl}>
-                            <input type="submit" value="SUBMIT" className={styles.submitInput} onClick={()=>{setStep(1.5); scrollTo(0, 0)}} />
+                            <input type="submit" value="SUBMIT" className={styles.submitInput} />
                         </div>
                                 
                         <div className={styles.inputControl}>
