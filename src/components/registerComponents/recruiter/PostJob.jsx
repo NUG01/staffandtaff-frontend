@@ -26,7 +26,7 @@ export default function ({styles, nextButton, className, setStep, data}){
             </div>
 
             <section className={styles.showCase}>
-                <img src={data.logo.preview } alt="" />
+                <img src={data.preview } alt="" />
                 <div className={styles.showCaseInfo}>
                     <h1>{data.company_name}</h1>
                     <p>{data.industry === 0 ? 'Restaurant' : 'Hotel'}</p>

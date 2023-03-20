@@ -35,8 +35,8 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
             setLogo(URL.createObjectURL(e.target.files[0]))
             var formData = new FormData();
             formData.append('logo', e.target.files[0]);
-            // data.logo = {file: formData, preview: URL.createObjectURL(e.target.files[0])}
             data.logo =formData
+            data.preview = URL.createObjectURL(e.target.files[0])
         }
     }
 
@@ -58,7 +58,9 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
 
             for(var i = 0; i < e.target.files.length; i++){
                 galleryPictures.push({preview: URL.createObjectURL(e.target.files[i]), name: e.target.files[i].name})
-                data.gallery.push(e.target.files[i])
+                var formData = new FormData();
+                formData.append(`image-${i}`, e.target.files[i]);
+                data.gallery.push(formData)
             }
             
             setGalleryImage([...galleryImages, ...galleryPictures])

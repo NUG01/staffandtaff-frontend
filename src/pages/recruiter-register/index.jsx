@@ -77,20 +77,19 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
             }
         })
         validated = true
+        console.log(data)
 
         if(validated) {
-            scrollTo(0, 0)
+            // scrollTo(0, 0)
             // setStep(stepNum)
         }
-        console.log(data.logo.get('logo'))
         mediaAxios
-            .post('/api/v1/establishment/store', data.logo)
+            .post('/api/v1/establishment/store', data)
             .then(() => {
             })
             .catch(error => {
             });
     }
-    console.log(step)
     return(
         <>
             <Head>
