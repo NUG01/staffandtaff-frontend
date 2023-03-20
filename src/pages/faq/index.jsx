@@ -69,7 +69,7 @@ export default function Faq({isLogged, user, logout, search}) {
         faqKeys.forEach((key, keyIndex) =>{
             let newArr = []
             faqValues[keyIndex].forEach(value =>{
-                if(value.heading.includes(search) || value.content.includes(search)) {
+                if(value.heading.toLowerCase().includes(search.toLowerCase()) || value.content.toLowerCase().includes(search.toLowerCase())) {
                     if(!searchedDataCategories.includes(key)) {
                         searchedDataCategories.push(key)
                     }

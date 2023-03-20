@@ -111,3 +111,49 @@
     display: inline;
     color: var(--color-4);
 }
+
+.noResults{
+    margin-top: 30px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    padding: 40px 20px;
+}
+
+.noResults h3{
+    font-size: 24px;
+    max-width: 300px;
+    word-break: break-all;
+}
+
+.searchTips{
+    background: var(--color-10);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    padding: 40px 20px;
+}
+
+.searchTips h3, .sendRequest h3{
+    font-size: 24px;
+}
+
+.searchTips ul li{
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.recentTips{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0px;
+}
