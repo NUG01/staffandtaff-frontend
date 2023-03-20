@@ -34,9 +34,8 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
         axios
             .post('/api/v1/recruiter-register', {email, password, password_confirm: passwordConfirmation})
             .then(() => {
-                 mutate()
-                    setStep(1.5); 
-                    scrollTo(0, 0)
+                setStep(1.5); 
+                scrollTo(0, 0)
             })
             .catch(error => {
                 if (error.response.status !== 422) throw error;
