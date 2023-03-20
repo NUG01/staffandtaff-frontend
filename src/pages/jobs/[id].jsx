@@ -88,8 +88,8 @@ export default function Job({isLogged, user, logout, data}) {
 }
 
 export async function getServerSideProps(context){
-    if(context.query.params){
-        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${Number(context.query.params[0])}`)
+    if(context.query.id){
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${Number(context.query.id)}`)
         const jobsData = await response.json()
         return{
             props: {
