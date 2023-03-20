@@ -33,7 +33,10 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
         if(e.target.files.length != 0){
             setLogoName(e.target.files[0].name)
             setLogo(URL.createObjectURL(e.target.files[0]))
-            data.logo = {file: e.target.files[0], preview: URL.createObjectURL(e.target.files[0])}
+            var formData = new FormData();
+            formData.append('logo', e.target.files[0]);
+            // data.logo = {file: formData, preview: URL.createObjectURL(e.target.files[0])}
+            data.logo =formData
         }
     }
 
@@ -86,7 +89,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
     }
 
     return(
-        <form className={`${styles.form} ${className}`}>
+        <form className={`${styles.form} ${className}`} enctype="multipart/form-data">
             <div className={styles.intro}>
                 Présentez l'établissement pour lequel vous cherchez du personnel.
                 <br />
