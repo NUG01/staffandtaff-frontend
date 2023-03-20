@@ -26,7 +26,7 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
 
     const submitForm = async function (event) {
         event.preventDefault()
-        // form.current.classList.add('disabledSection')
+        form.current.classList.add('disabledSection')
 
         const csrf = () => axios.get('/sanctum/csrf-cookie');
         await csrf();
