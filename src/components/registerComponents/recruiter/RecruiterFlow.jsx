@@ -56,12 +56,12 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
                 return
             }
 
+            var formData = new FormData();
             for(var i = 0; i < e.target.files.length; i++){
                 galleryPictures.push({preview: URL.createObjectURL(e.target.files[i]), name: e.target.files[i].name})
-                var formData = new FormData();
-                formData.append(`image-${i}`, e.target.files[i]);
-                data.gallery.push(formData)
+                formData.append(`file[]`, e.target.files[i]);
             }
+            data.gallery = formData
             
             setGalleryImage([...galleryImages, ...galleryPictures])
         }
