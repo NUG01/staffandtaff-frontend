@@ -3,8 +3,11 @@ import Footer from '@/pages/footer';
 import Head from "next/head";
 import styles from '@/styles/jobs/singleJob.module.css'
 import { useEffect, useRef, useState} from 'react';
+import { useRouter } from 'next/router';
 
 export default function Job({isLogged, user, logout, data}) {
+
+    const router = useRouter()
 
     let [longer, setLonger] = useState(false)
     let [loadText, setText] = useState('See more')
@@ -70,7 +73,7 @@ export default function Job({isLogged, user, logout, data}) {
                         </div>
 
                         <div className={`${styles.companyBottom} ${longer ? styles.longText : ''} ${expanded ? styles.expand : ''}`} ref={descriptionBlock}>
-                            {obj.body}
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam eum assumenda odio a! Quidem harum recusandae quia atque omnis. Ducimus facere officiis sunt, ipsa sequi quia commodi, id aperiam minima, earum incidunt iste consectetur ab blanditiis possimus eaque nostrum velit. Sapiente fuga culpa perferendis consequuntur minima laborum nostrum! Ratione, voluptatum?
                         </div>
                         {longer ? (
                             <div className={`${styles.seeMore} ${!longer ? styles.hide : ''}`} onClick={()=> expandText()}>{loadText}
@@ -89,7 +92,7 @@ export default function Job({isLogged, user, logout, data}) {
 
 export async function getServerSideProps(context){
     if(context.query.id){
-        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${Number(context.query.id)}`)
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${Number(context.query.id)}`)
         const jobsData = await response.json()
         return{
             props: {

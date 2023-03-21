@@ -9,6 +9,7 @@ import CountryJobs from '@/components/jobsComponents/CountryJobs';
 import {countries} from '@/components/countries';
 import styles from '@/styles/homepage/homepage.module.css'
 
+
 export default function Jobs({jobDataList, isLogged, user, logout}) {
 
     let tipsData = {
@@ -66,21 +67,20 @@ export default function Jobs({jobDataList, isLogged, user, logout}) {
 }
 
 export async function getServerSideProps(context){
-    
     let data = []
 
     if(context.query.search){
-        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${context.query.search}`)
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${context.query.search}`)
         const sData = await response.json()
         data.push(sData)
     }else{
-        const response = await fetch(`https://jsonplaceholder.typicode.com/posts`)
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users`)
         data = await response.json()
     }
 
     return{
         props: {
-            jobDataList: data
+            jobDataList: data,
         }
     }
 }

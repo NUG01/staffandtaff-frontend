@@ -2,11 +2,18 @@ import { FaBars } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import axios from '@/lib/axios'
+import Router from 'next/router';
+import { useDispatch } from 'react-redux'
+import { pushData } from '@/redux/jobsData';
 
 export default function Header({active, isLogged, user, isMobile}) {
     const [expanded, setExpanded] = useState(false);
     const [scrl, setScroll] = useState(0)
 
+    const dispatch = useDispatch()
+    Router.events.on('routeChangeComplete', () => {
+        if(!Router.router._inFlightRoute.includes('/jobs')) dispatch(pushData([]))
+    })
 
     useEffect(()=>{
         setScroll(scrollY)

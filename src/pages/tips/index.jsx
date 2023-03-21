@@ -10,8 +10,6 @@ export default function Tips({isLogged, user, logout, search}) {
   const form = useRef()
   const input = useRef()
 
-  console.log(search)
-
     let tipsData = {
       "Category 1":[
         {

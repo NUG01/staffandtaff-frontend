@@ -4,6 +4,8 @@ import Loader from '@/components/Loader';
 import Router from 'next/router';
 import { useState } from 'react';
 import { useAuth } from '@/hooks/auth';
+import store from '@/redux/store'
+import { Provider } from 'react-redux'
 
 const App = ({ Component, pageProps }) => {
     const { user, isLogged, logout, login, register } = useAuth()
@@ -24,17 +26,17 @@ const App = ({ Component, pageProps }) => {
     // console.log(user)
     if (isLogged) {
         return (
-            <>
+            <Provider store={store}>
                 <Loader className={isLogged === undefined ? 'show-loader' : ''} />
                 <Component isLogged={isLogged} user={user} {...pageProps} logout={logout} />
-            </>
+            </Provider>
         )
     } else {
         return (
-            <>
+            <Provider store={store}>
                 <Loader className={isLogged === undefined ? 'show-loader' : ''} />
                 <Component isLogged={isLogged} login={login} {...pageProps} register={register} />
-            </>
+            </Provider>
         )
     }
 }

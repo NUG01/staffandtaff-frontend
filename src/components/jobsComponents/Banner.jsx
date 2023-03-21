@@ -28,7 +28,7 @@ export default function Banner({callBack}) {
                 <p>Texte énumérant tous les avantages de la plateforme et invitant l'utilisateur à s'inscrire en ligne.</p>
                 <form onSubmit={formSubmit} className={styles.searchContainer}>
                     <div className={styles.filterHolder}>
-                        <input type="text" placeholder="Trouver un emploi près de chez soi" onChange={event => setValue(event.target.value)}/>
+                        <input type="text" placeholder="Trouver un emploi près de chez soi" value={router.query.search} onChange={event => setValue(event.target.value)}/>
                         <Filter expanded={expanded}/>
                     </div>
                     <FaSearch className={styles.searchButton}/>

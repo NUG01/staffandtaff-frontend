@@ -3,7 +3,6 @@ import Header from "@/pages/header";
 import Footer from "@/pages/footer";
 
 export default function StripeSuccess({isLogged, user, logout, styles}) {
-    console.log(styles)
 	return (
         <>
         <Head>

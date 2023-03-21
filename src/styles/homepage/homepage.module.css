@@ -498,6 +498,17 @@
     display: none;
 }
 
+.loadMore{
+    max-width: 180px;
+    padding: 20px 0px;
+    background: var(--color-1);
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
 @media (max-width: 992px) {
     .filter{
         min-width: 270px;

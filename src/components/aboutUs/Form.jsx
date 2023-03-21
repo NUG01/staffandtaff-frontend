@@ -158,7 +158,7 @@ const Form = ({}) => {
                 disabled={sent}
                 name="confirm" 
                 />
-                <p className={submited && inputValues.confirm == false && styles.checkboxTextInvalid}>I agree to the <Link href="/terms">Terms and Conditions</Link> and the <Link href="/privacy">Privacy Policy</Link> <span>*</span></p>
+                <p className={submited && inputValues.confirm == false ? styles.checkboxTextInvalid : ''}>I agree to the <Link href="/terms">Terms and Conditions</Link> and the <Link href="/privacy">Privacy Policy</Link> <span>*</span></p>
             </div>
             {sent ? 
             <div className={styles.successText}>

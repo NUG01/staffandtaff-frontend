@@ -1,15 +1,45 @@
 import styles from '../../styles/homepage/homepage.module.css'
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useSelector, useDispatch } from 'react-redux'
+import { pushData } from '@/redux/jobsData';
 
 export default function JobList({data}) {
+    const jobsData = useSelector(state => state.jobsData.value)
 
+    const dispatch = useDispatch()
+
+    const [loadedData, setLoadedData] = useState(data)
+
+    const [page, setPage] = useState(1)
+
+    useEffect(()=> {
+        if(jobsData.length != 0){
+            scrollTo(0, localStorage.getItem('jobsScroll'))
+            setLoadedData(jobsData)
+        }
+    }, [])
+
+    async function loadMore(e){
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users`)
+        const jobsData = await response.json()
+
+        e.target.style.opacity = '1'; 
+        e.target.style.pointerEvents = 'unset'; 
+
+        setLoadedData([...loadedData, ...jobsData])
+        setPage(page + 1)
+
+        dispatch(pushData([...loadedData, ...jobsData]))
+    }
     
     return (
+        <>
             <div className={styles.mainpageList} id={styles.jobListing}>   
                 {
-                    data.map((item, index) =>{
+                    loadedData.map((item, index) =>{
                         return (
-                            <Link href={`jobs/${item.id}`} key={item.id} className={styles.jobHolder}>
+                            <Link onClick={()=>localStorage.setItem("jobsScroll", scrollY)} href={`jobs/${item.id}`} key={Math.random()} className={styles.jobHolder}>
                                 <div className={styles.addToFavourites}></div>
                                 <div>
                                     <div className={styles.jobTop}>
@@ -47,6 +77,11 @@ export default function JobList({data}) {
                         )
                     })
                 }
-                </div>
+            </div>
+
+            <div className={styles.loadMore} onClick={ (e) => {loadMore(e); e.target.style.opacity = '0.4'; e.target.style.pointerEvents = 'none';}}>
+                LOAD MORE
+            </div>
+        </>
     );
 }

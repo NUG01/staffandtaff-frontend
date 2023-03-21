@@ -31,7 +31,7 @@ export default function Tip({isLogged, user, logout, data}){
 }
 
 export async function getServerSideProps(context){
-        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${context.query.id}`)
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${context.query.id}`)
         const tipData = await response.json()
 
         return{
