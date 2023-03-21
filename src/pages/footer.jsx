@@ -1,6 +1,15 @@
 import Link from "next/link"
+import Router from 'next/router';
+import { useDispatch } from 'react-redux'
+import { pushData } from '@/redux/jobsData';
 
 export default function Footer({className}) {
+
+    const dispatch = useDispatch()
+    Router.events.on('routeChangeComplete', () => {
+        if(!Router.router._inFlightRoute.includes('/jobs')) dispatch(pushData([]))
+    })
+
     return (
         <footer className={className}> 
             <div className="top-footer">

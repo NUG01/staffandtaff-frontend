@@ -15,8 +15,10 @@ export default function JobList({data}) {
 
     useEffect(()=> {
         if(jobsData.length != 0){
-            scrollTo(0, localStorage.getItem('jobsScroll'))
             setLoadedData(jobsData)
+            setTimeout(() => {
+                scrollTo({top: localStorage.getItem('jobsScroll')})
+            }, 1);
         }
     }, [])
 
