@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
 
-export default function ({styles, nextButton, className, setStep, data}){
+export default function ({styles, nextButton, className, setStep, data, jobData}){
     const [wordCount, setWords] = useState(0)
 
     const [startDate, setStartDate] = useState(null)

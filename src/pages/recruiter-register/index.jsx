@@ -12,14 +12,14 @@ import RecruiterFlow from '@/components/registerComponents/recruiter/RecruiterFl
 import PostJob from '@/components/registerComponents/recruiter/PostJob'
 import Plans from '@/components/registerComponents/Plans.jsx';
 import Stripe from '@/pages/stripe';
-import axios from '@/lib/axios'
-import mediaAxios from '@/lib/mediaAxios';
-import { clearConfigCache } from 'prettier';
+import { useAjax } from '@/hooks/ajax';
 
 export default function recruiterRegister({isLogged, user, login, logout, register}){
     const [step, setStep] = useState(2)
     const [showPlans, setShowPlans] = useState(false)
     const [showStripe, setShowStripe] = useState(false)
+
+    const {sendMediaData, sendData} = useAjax()
 
     let completedSteps = [false, false, false, false]
 
@@ -44,7 +44,27 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
             youtube: '',
             tiktok: '',
             gallery: [],
+        })
 
+    const [jobData, setJobData] = useState(
+        {
+            establishment_name: '',
+            company_name: '',  
+            logo: '',
+            industry: '',
+            country: '',
+            city: '',
+            number_of_employees: '',
+            description: '',
+            website: '',
+            instagram: '',
+            linkedin: '',
+            facebook: '',
+            twitter: '',
+            pinterest: '',
+            youtube: '',
+            tiktok: '',
+            gallery: [],
         })
 
     const maxSteps = 3
@@ -77,19 +97,37 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
             }
         })
         validated = true
-        console.log(data)
 
         if(validated) {
             // scrollTo(0, 0)
             // setStep(stepNum)
         }
-        mediaAxios
-            .post('/api/v1/establishment/store', data)
-            .then(() => {
-            })
-            .catch(error => {
-            });
+
+        let formData = new FormData()
+        formData.append('establishment_name', data.establishment_name)
+        formData.append('company_name', data.company_name)
+        formData.append('logo', data.logo)
+        formData.append('industry', data.industry)
+        formData.append('country', data.country)
+        formData.append('city', data.city)
+        formData.append('number_of_employees', data.number_of_employees)
+        formData.append('description', data.description)
+        formData.append('website', data.website)
+        formData.append('instagram', data.instagram)
+        formData.append('linkedin', data.linkedin)
+        formData.append('facebook', data.facebook)
+        formData.append('twitter', data.twitter)
+        formData.append('pinterest', data.pinterest)
+        formData.append('youtube', data.youtube)
+        formData.append('tiktok', data.tiktok)
+
+        data.gallery.forEach(item => {
+            formData.append('file[]', item)
+        })
+
+        sendMediaData('/api/v1/establishment/store', formData)
     }
+
     return(
         <>
             <Head>
@@ -115,7 +153,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                         <RecruiterFlow className={step != 2 ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep} data={data} galleryPictures={galleryPictures}
         
                             nextButton={
-                                <div className={styles.nextButton} onClick={()=> {nextStep(3); console.log(data)}}>
+                                <div className={styles.nextButton} onClick={()=> {nextStep(3)}}>
                                     suivant
                                     <i className="fa-solid fa-chevron-right"></i>
                                 </div>
@@ -124,7 +162,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                         />
                         
         
-                        <PostJob className={step != 3 || showPlans || showStripe ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep} data={data}
+                        <PostJob className={step != 3 || showPlans || showStripe ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep} data={data} jobData={jobData}
         
                             nextButton={
                                 <div className={styles.nextButton} onClick={()=> {setShowPlans(true); scrollTo(0, 0)}}>
