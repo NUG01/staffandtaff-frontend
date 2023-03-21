@@ -13,59 +13,17 @@ import PostJob from '@/components/registerComponents/recruiter/PostJob'
 import Plans from '@/components/registerComponents/Plans.jsx';
 import Stripe from '@/pages/stripe';
 import { useAjax } from '@/hooks/ajax';
+import useCheckRequired from '@/hooks/requiredInputs';
 
 export default function recruiterRegister({isLogged, user, login, logout, register}){
     const [step, setStep] = useState(2)
     const [showPlans, setShowPlans] = useState(false)
     const [showStripe, setShowStripe] = useState(false)
 
+    let companyAjax = false
+    let jobAjax = false
+
     const {sendMediaData, sendData} = useAjax()
-
-    let completedSteps = [false, false, false, false]
-
-    const galleryPictures = []
-
-    const [data, setData] = useState(
-        {
-            establishment_name: '',
-            company_name: '',  
-            logo: '',
-            industry: '',
-            country: '',
-            city: '',
-            number_of_employees: '',
-            description: '',
-            website: '',
-            instagram: '',
-            linkedin: '',
-            facebook: '',
-            twitter: '',
-            pinterest: '',
-            youtube: '',
-            tiktok: '',
-            gallery: [],
-        })
-
-    const [jobData, setJobData] = useState(
-        {
-            establishment_name: '',
-            company_name: '',  
-            logo: '',
-            industry: '',
-            country: '',
-            city: '',
-            number_of_employees: '',
-            description: '',
-            website: '',
-            instagram: '',
-            linkedin: '',
-            facebook: '',
-            twitter: '',
-            pinterest: '',
-            youtube: '',
-            tiktok: '',
-            gallery: [],
-        })
 
     const maxSteps = 3
 
@@ -75,57 +33,96 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
         }
     })
 
-    function nextStep(stepNum){
+    let completedSteps = [false, false, false, false]
 
-        let validated = true
+    const galleryPictures = []
+
+    const [data, setData] = useState({
+        establishment_name: '',
+        company_name: '',  
+        logo: '',
+        industry: '',
+        country: '',
+        city: '',
+        number_of_employees: '',
+        description: '',
+        website: '',
+        instagram: '',
+        linkedin: '',
+        facebook: '',
+        twitter: '',
+        pinterest: '',
+        youtube: '',
+        tiktok: '',
+        gallery: [],
+    })
         
-        document.querySelectorAll('.required-record').forEach(inp => {
-            if(inp.value === '') {
-                if(inp.type === 'file'){
-                    inp.parentNode.classList.add('inputParentError')
-                }else if(inp.tagName === 'TEXTAREA'){
-                    inp.classList.add('input-error')
-                    inp.parentNode.classList.add('input-error')
-                }else if(inp.classList.contains('hidden-city-inp')){
-                    if(inp.value === ''){
-                        document.querySelector('.shown-city-inp').classList.add('input-error')
-                    }
-                }else{
-                    inp.classList.add('input-error')
-                }
-                validated = false
-            }
-        })
-        validated = true
+    function setNewData (key, value, arr){
+        companyAjax = false
+        
+        if(arr) {
+            data[key].push(value)
+            return
+        }
+
+        data[key] = value
+    }
+
+    const [jobData, setJobData] = useState({
+        establishment_name: '',
+        company_name: '',  
+        logo: '',
+        industry: '',
+        country: '',
+        city: '',
+        number_of_employees: '',
+        description: '',
+        website: '',
+        instagram: '',
+        linkedin: '',
+        facebook: '',
+        twitter: '',
+        pinterest: '',
+        youtube: '',
+        tiktok: '',
+        gallery: [],
+    })
+        
+    function setNewJobData (key, value, arr){
+        jobAjax = false
+        
+        if(arr) {
+            data[key].push(value)
+            return
+        }
+
+        data[key] = value
+    }
+
+    async function nextStep(stepNum){
+        const validated = useCheckRequired()
 
         if(validated) {
             // scrollTo(0, 0)
             // setStep(stepNum)
         }
 
-        let formData = new FormData()
-        formData.append('establishment_name', data.establishment_name)
-        formData.append('company_name', data.company_name)
-        formData.append('logo', data.logo)
-        formData.append('industry', data.industry)
-        formData.append('country', data.country)
-        formData.append('city', data.city)
-        formData.append('number_of_employees', data.number_of_employees)
-        formData.append('description', data.description)
-        formData.append('website', data.website)
-        formData.append('instagram', data.instagram)
-        formData.append('linkedin', data.linkedin)
-        formData.append('facebook', data.facebook)
-        formData.append('twitter', data.twitter)
-        formData.append('pinterest', data.pinterest)
-        formData.append('youtube', data.youtube)
-        formData.append('tiktok', data.tiktok)
-
-        data.gallery.forEach(item => {
-            formData.append('file[]', item)
-        })
-
-        sendMediaData('/api/v1/establishment/store', formData)
+        if(!companyAjax){
+            let formData = new FormData()
+            
+            Object.keys(data).forEach((item, index)=>{
+                if(item == 'gallery') {
+                    Object.values(data)[index].forEach(item => {
+                        formData.append('file[]', item)
+                    })
+                }else{
+                    formData.append(item, Object.values(data)[index])
+                }
+            })
+    
+            await sendMediaData('/api/v1/establishment/store', formData)
+            companyAjax = true
+        }
     }
 
     return(
@@ -150,7 +147,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                 {isLogged === 1 && (
                     <>
 
-                        <RecruiterFlow className={step != 2 ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep} data={data} galleryPictures={galleryPictures}
+                        <RecruiterFlow className={step != 2 ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep} data={data} galleryPictures={galleryPictures} setNewData={setNewData}
         
                             nextButton={
                                 <div className={styles.nextButton} onClick={()=> {nextStep(3)}}>

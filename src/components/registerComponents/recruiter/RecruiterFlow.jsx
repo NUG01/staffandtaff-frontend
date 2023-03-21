@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import axios from '@/lib/axios'
 
-export default function RecruiterFlow({styles, nextButton, className, data, galleryPictures}){
+export default function RecruiterFlow({styles, nextButton, className, data, galleryPictures, setNewData}){
     const logo = useRef()
     const cityInp = useRef()
     const cityMainInp = useRef()
@@ -33,8 +33,8 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
         if(e.target.files.length != 0){
             setLogoName(e.target.files[0].name)
             setLogo(URL.createObjectURL(e.target.files[0]))
-            data.logo = e.target.files[0]
-            data.preview = URL.createObjectURL(e.target.files[0])
+            setNewData('logo', e.target.files[0])
+            setNewData('preview', URL.createObjectURL(e.target.files[0]))
         }
     }
 
@@ -43,7 +43,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
             e.target.value = e.target.value.substring(0, 1000);
         }
         setWords(e.target.value.length)
-        data.description = e.target.value
+        setNewData('description', e.target.value)
     }
 
     function uploadGalleryImage(e){
@@ -56,7 +56,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
 
             for(var i = 0; i < e.target.files.length; i++){
                 galleryPictures.push({preview: URL.createObjectURL(e.target.files[i]), name: e.target.files[i].name})
-                data.gallery.push(e.target.files[i])
+                setNewData('gallery', e.target.files[i], true)
             }
             
             setGalleryImage([...galleryImages, ...galleryPictures])
@@ -66,7 +66,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
 
     function setCityFunc(item){
         setCitySelected(true)
-        data.city = item; 
+        setNewData('city', item)
         cityInp.current.value = item
         cityMainInp.current.value = item
         
@@ -75,7 +75,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
 
     async function setCountry(e){
         setCurrCountry(e.target.value)
-        data.country = e.target.value
+        setNewData('country', e.target.value)
         
 
         // await csrf()
@@ -98,14 +98,14 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
             <section className={styles.section}>
                 <h4>Quel est le nom de votre établissement ?<span> *</span></h4>
                 <div className={styles.inputParent}>
-                    <input type="text" placeholder="Nom de l'établissement" onInput={(e)=> data.establishment_name = e.target.value} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')}/>
+                    <input type="text" placeholder="Nom de l'établissement" onInput={(e)=> setNewData('establishment_name', e.target.value)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')}/>
                 </div>
             </section>
 
             <section className={styles.section}>
                 <h4>Qui est le propriétaire de votre établissement ?</h4>
                 <div className={styles.inputParent}>
-                    <input type="text" placeholder="Nom de l'entreprise" onInput={(e)=> data.company_name = e.target.value} onChange={(e)=>e.target.classList.remove('input-error')} className="required-record"/>
+                    <input type="text" placeholder="Nom de l'entreprise" onInput={(e)=> setNewData('company_name', e.target.value)} onChange={(e)=>e.target.classList.remove('input-error')} className="required-record"/>
                 </div>
             </section>
 
@@ -128,7 +128,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
             <section className={styles.section}>
                 <h4>Votre établissement est-il un hôtel ou un restaurant ?<span> *</span></h4>
                 <div className={styles.inputParent}>
-                    <select onInput={(e)=> data.industry = e.target.value} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')}>
+                    <select onInput={(e)=> setNewData('industry', e.target.value)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')}>
                         <option value="" disabled selected>Sous-catégorie de l'établissement</option>
                         <option value="0">Restaurant</option>
                         <option value="1">Hotel</option>
@@ -170,7 +170,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
             <section className={styles.section}>
                 <h4>Qui est le propriétaire de votre établissement ?</h4>
                 <div className={styles.inputParent}>
-                    <input type="number" className="required-record" placeholder="Nombre d'employés" onInput={(e)=> data.number_of_employees = e.target.value} onChange={(e)=>e.target.classList.remove('input-error')}/>
+                    <input type="number" className="required-record" placeholder="Nombre d'employés" onInput={(e)=> setNewData('number_of_employees', e.target.value)} onChange={(e)=>e.target.classList.remove('input-error')}/>
                 </div>
             </section>
 
@@ -189,42 +189,42 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
 
                     <div>
                         <i className="fa-solid fa-earth-americas"></i>
-                        <input type="text" placeholder="Site web" onInput={(e)=> data.website = e.target.value}/>
+                        <input type="text" placeholder="Site web" onInput={(e)=> setNewData('website', e.target.value)}/>
                     </div>
 
                     <div>
                         <i className="fa-brands fa-instagram"></i>
-                        <input type="text" placeholder="Instagram" onInput={(e)=> data.instagram = e.target.value}/>
+                        <input type="text" placeholder="Instagram" onInput={(e)=> setNewData('instagram', e.target.value)}/>
                     </div>
 
                     <div>
                         <i className="fa-brands fa-linkedin"></i>
-                        <input type="text" placeholder="Linkedin" onInput={(e)=> data.linkedin = e.target.value}/>
+                        <input type="text" placeholder="Linkedin" onInput={(e)=> setNewData('linkedin', e.target.value)}/>
                     </div>
 
                     <div>
                         <i className="fa-brands fa-facebook"></i>
-                        <input type="text" placeholder="Facebook" onInput={(e)=> data.facebook = e.target.value}/>
+                        <input type="text" placeholder="Facebook" onInput={(e)=> setNewData('facebook', e.target.value)}/>
                     </div>
 
                     <div>
                         <i className="fa-brands fa-twitter"></i>
-                        <input type="text" placeholder="Twitter" onInput={(e)=> data.twitter = e.target.value}/>
+                        <input type="text" placeholder="Twitter" onInput={(e)=> setNewData('twitter', e.target.value)}/>
                     </div>
 
                     <div>
                         <i className="fa-brands fa-pinterest"></i>
-                        <input type="text" placeholder="Pinterest" onInput={(e)=> data.pinterest = e.target.value}/>
+                        <input type="text" placeholder="Pinterest" onInput={(e)=> setNewData('pinterest', e.target.value)}/>
                     </div>
 
                     <div>
                         <i className="fa-brands fa-youtube"></i>
-                        <input type="text" placeholder="Youtube" onInput={(e)=> data.youtube = e.target.value}/>
+                        <input type="text" placeholder="Youtube" onInput={(e)=> setNewData('youtube', e.target.value)}/>
                     </div>
 
                     <div>
                         <i className="fa-brands fa-tiktok"></i>
-                        <input type="text" placeholder="TikTok" onInput={(e)=> data.tiktok = e.target.value}/>
+                        <input type="text" placeholder="TikTok" onInput={(e)=> setNewData('tiktok', e.target.value)}/>
                     </div>
 
                 </div>
