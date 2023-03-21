@@ -39,8 +39,8 @@ export default function Filter({expanded}){
             <div className={styles.filterRow}>
                 <div className={`${styles.filterInputParent}`}>         
                     <label htmlFor="">Pays</label>
-                    <select onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')}>
-                        <option value="" disabled selected>Sélectionner</option>
+                    <select onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
+                        <option value="">Sélectionner</option>
                         <option value="0">Suisse</option>
                         <option value="1">France</option>
                     </select>
@@ -73,8 +73,8 @@ export default function Filter({expanded}){
             <div className={styles.filterRow}>
                 <div className={`${styles.filterInputParent}`}>         
                     <label htmlFor="">Catégorie</label>
-                    <select onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')}>
-                        <option value="" disabled selected>Sélectionner</option>
+                    <select onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
+                        <option value="">Sélectionner</option>
                         <option value="0">Suisse</option>
                         <option value="1">France</option>
                     </select>
@@ -82,8 +82,8 @@ export default function Filter({expanded}){
 
                 <div className={`${styles.filterInputParent}`}>         
                     <label htmlFor="">Type de contrat</label>
-                    <select onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')}>
-                        <option value="" disabled selected>Sélectionner</option>
+                    <select onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
+                        <option value="">Sélectionner</option>
                          <option value="0">Suisse</option>
                         <option value="1">France</option>
                     </select>
@@ -141,15 +141,15 @@ export default function Filter({expanded}){
                 
                 <div className={`${styles.filterInputParent}`}>         
                     <label htmlFor="">Devise</label>
-                    <select className='required-record' onChange={(e)=>e.target.classList.remove('input-error')}>
-                        <option value="" disabled selected>Sélectionner</option>
+                    <select className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
+                        <option value="">Sélectionner</option>
                     </select>
                 </div>
 
                 <div className={`${styles.filterInputParent}`}>         
                     <label htmlFor="">Type de rémunération</label>
-                    <select className='required-record' onChange={(e)=>e.target.classList.remove('input-error')}>
-                        <option value="" disabled selected>Sélectionner</option>
+                    <select className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
+                        <option value="">Sélectionner</option>
                     </select>
                 </div>
 
