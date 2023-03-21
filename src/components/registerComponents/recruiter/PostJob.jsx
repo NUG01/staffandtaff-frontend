@@ -1,20 +1,26 @@
 "use client"
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
 
-export default function ({styles, nextButton, className, setStep, data, jobData}){
+export default function ({styles, nextButton, className, setStep, data, jobData, setNewJobData}){
     const [wordCount, setWords] = useState(0)
 
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
+
+    useEffect(()=>{
+        setNewJobData('start_date', startDate)
+        setNewJobData('end_date', endDate)
+    })
 
     function setWordCount(e){
         if(e.target.value.length > 1000){
             e.target.value = e.target.value.substring(0, 1000);
         }
         setWords(e.target.value.length)
+        setNewJobData('description', e.target.value)
     }
 
     return(
@@ -47,8 +53,9 @@ export default function ({styles, nextButton, className, setStep, data, jobData}
             <section className={styles.section}>
                 <h4>Votre établissement est-il un hôtel ou un restaurant ?</h4>
                 <div className={styles.inputParent}>
-                    <select>
-                        <option value="">Poste</option>
+                    <select defaultValue={""} onInput={(e)=> setNewJobData('first', e.target.value)}>
+                        <option value="" disabled>Poste</option>
+                        <option value="1">value</option>
                     </select>
                 </div>
             </section>
@@ -56,12 +63,14 @@ export default function ({styles, nextButton, className, setStep, data, jobData}
             <section className={styles.section}>
                 <h4>Quel salaire proposez-vous ?<span> *</span></h4>
                 <div className={`${styles.inputParent} ${styles.multipleChild}`}>
-                    <input type="text" placeholder="Salaire"/>
-                    <select>
-                        <option value="">Devise</option>
+                    <input type="text" placeholder="Salaire" onInput={(e)=> setNewJobData('second', e.target.value)}/>
+                    <select defaultValue={""} onInput={(e)=> setNewJobData('third', e.target.value)}>
+                        <option value="" disabled>Devise</option>
+                        <option value="1">value</option>
                     </select>
-                    <select>
-                        <option value="">Type de rémunération</option>
+                    <select defaultValue={""} onInput={(e)=> setNewJobData('fourth', e.target.value)}>
+                        <option value="" disabled>Type de rémunération</option>
+                        <option value="1">value</option>
                     </select>
                 </div>
             </section>
@@ -69,8 +78,9 @@ export default function ({styles, nextButton, className, setStep, data, jobData}
             <section className={styles.section}>
                 <h4>Quel type de contrat proposez-vous ?</h4>
                 <div className={`${styles.inputParent} ${styles.multipleChild}`}>
-                    <select className={styles.selectF}>
-                        <option value="">Sous-catégorie de l'établissement</option>
+                    <select defaultValue={""} className={styles.selectF} onInput={(e)=> setNewJobData('fifth', e.target.value)}>
+                        <option value="" disabled>Sous-catégorie de l'établissement</option>
+                        <option value="1">value</option>
                     </select>
                     <div className={styles.datePickerHolder}>
                         <DatePicker 
@@ -93,6 +103,7 @@ export default function ({styles, nextButton, className, setStep, data, jobData}
                               e.preventDefault();
                             }}
                             onChange={date => setEndDate(date)}
+                            onInput={date => setNewJobData('end_date', date)}
                             dateFormat='dd/MM/yyyy'
                             showYearDropdown
                             scrollableMonthYearDropdown
@@ -106,8 +117,9 @@ export default function ({styles, nextButton, className, setStep, data, jobData}
             <section className={styles.section}>
                 <h4>Le poste à pourvoir est-il en présentiel ou distanciel ?<span>*</span></h4>
                 <div className={styles.inputParent}>
-                    <select>
-                        <option value="">Sous-catégorie de l'établissement</option>
+                    <select defaultValue={""} onInput={(e)=> setNewJobData('sixth', e.target.value)}>
+                        <option value="" disabled>Sous-catégorie de l'établissement</option>
+                        <option value="1">value</option>
                     </select>
                 </div>
             </section>
@@ -115,8 +127,9 @@ export default function ({styles, nextButton, className, setStep, data, jobData}
             <section className={styles.section}>
                 <h4>Proposez-vous un contrat à temps plein ou à temps partiel ?<span>*</span></h4>
                 <div className={styles.inputParent}>
-                    <select>
-                        <option value="">Sous-catégorie de l'établissement</option>
+                    <select defaultValue={""} onInput={(e)=> setNewJobData('seventh', e.target.value)}>
+                        <option value="" disabled>Sous-catégorie de l'établissement</option>
+                        <option value="1">value</option>
                     </select>
                 </div>
             </section>
@@ -124,7 +137,7 @@ export default function ({styles, nextButton, className, setStep, data, jobData}
             <section className={styles.section}>
                 <h4>Qui est le propriétaire de votre établissement ?</h4>
                 <div className={styles.inputParent}>
-                    <input type="number" placeholder="Nombre d'employés"/>
+                    <input type="number" placeholder="Nombre d'employés" onInput={(e)=> setNewJobData('eighth', e.target.value)}/>
                 </div>
             </section>
 

@@ -128,8 +128,8 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
             <section className={styles.section}>
                 <h4>Votre établissement est-il un hôtel ou un restaurant ?<span> *</span></h4>
                 <div className={styles.inputParent}>
-                    <select onInput={(e)=> setNewData('industry', e.target.value)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')}>
-                        <option value="" disabled selected>Sous-catégorie de l'établissement</option>
+                    <select onInput={(e)=> setNewData('industry', e.target.value)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
+                        <option value="" disabled>Sous-catégorie de l'établissement</option>
                         <option value="0">Restaurant</option>
                         <option value="1">Hotel</option>
                     </select>
@@ -139,8 +139,8 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
             <section className={`${styles.section} ${styles.locationSelect}`}>
                 <h4>Où se trouve votre établissement ? <span> *</span></h4>
                 <div className={styles.inputParent}>
-                    <select onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')}>
-                        <option value="" disabled selected>Pays</option>
+                    <select onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
+                        <option value="" disabled>Pays</option>
                         <option value="0">Suisse</option>
                         <option value="1">France</option>
                     </select>

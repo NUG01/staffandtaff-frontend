@@ -16,7 +16,7 @@ import { useAjax } from '@/hooks/ajax';
 import useCheckRequired from '@/hooks/requiredInputs';
 
 export default function recruiterRegister({isLogged, user, login, logout, register}){
-    const [step, setStep] = useState(2)
+    const [step, setStep] = useState(3)
     const [showPlans, setShowPlans] = useState(false)
     const [showStripe, setShowStripe] = useState(false)
 
@@ -56,6 +56,19 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
         tiktok: '',
         gallery: [],
     })
+
+    const [jobData, setJobData] = useState({
+        start_date: null,
+        end_date: null,
+        first: '',
+        second: '',
+        third: '',
+        fourth: '',
+        fifth: '',
+        sixth: '',
+        seventh: '',
+        eighth: ''
+    })
         
     function setNewData (key, value, arr){
         companyAjax = false
@@ -67,36 +80,10 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
 
         data[key] = value
     }
-
-    const [jobData, setJobData] = useState({
-        establishment_name: '',
-        company_name: '',  
-        logo: '',
-        industry: '',
-        country: '',
-        city: '',
-        number_of_employees: '',
-        description: '',
-        website: '',
-        instagram: '',
-        linkedin: '',
-        facebook: '',
-        twitter: '',
-        pinterest: '',
-        youtube: '',
-        tiktok: '',
-        gallery: [],
-    })
         
-    function setNewJobData (key, value, arr){
+    function setNewJobData (key, value){
         jobAjax = false
-        
-        if(arr) {
-            data[key].push(value)
-            return
-        }
-
-        data[key] = value
+        jobData[key] = value
     }
 
     async function nextStep(stepNum){
@@ -159,7 +146,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                         />
                         
         
-                        <PostJob className={step != 3 || showPlans || showStripe ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep} data={data} jobData={jobData}
+                        <PostJob className={step != 3 || showPlans || showStripe ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep} data={data} jobData={jobData} setNewJobData={setNewJobData}
         
                             nextButton={
                                 <div className={styles.nextButton} onClick={()=> {setShowPlans(true); scrollTo(0, 0)}}>
