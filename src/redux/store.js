@@ -3,6 +3,6 @@ import jobsReducer from './jobsData.js'
 
 export default configureStore({
     reducer: {
-        jobsData: jobsReducer
+        jobsData: jobsReducer,
     }
 })

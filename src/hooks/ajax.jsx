@@ -7,7 +7,7 @@ export const useAjax = () => {
 
     const sendData = async (url, data, callback) => {
         await csrf();
-
+        
         axios
             .post(url, data)
             .then(callback)

@@ -26,10 +26,9 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
     const {sendMediaData, sendData} = useAjax()
 
     const maxSteps = 3
-    
     useEffect(()=>{
         if(step === 1){
-            if(isLogged === 1 && user && !user.verified) {
+            if(isLogged === 1 && user && !user.data.verified) {
                 setStep(1.5)
             }else{
                 isLogged === 1 ? setStep(2) : setStep(1)
@@ -131,11 +130,11 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                     <RegisterForm className={step != 1 ? styles.hideSection : ''} isLogged={isLogged} user={user} register={register} type="recruiter" setStep={setStep}/>
                 )}
 
-                {user && !user.verified && (
+                {user && !user.data.verified && (
                     <EmailVerification className={step != 1.5 ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep}/>
                 )}
 
-                {isLogged === 1 && user && user.verified && (
+                {isLogged === 1 && user && user.data.verified && (
                     <>
 
                         <RecruiterFlow className={step != 2 ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep} data={data} galleryPictures={galleryPictures} setNewData={setNewData}

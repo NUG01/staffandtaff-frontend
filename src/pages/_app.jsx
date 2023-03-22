@@ -10,8 +10,8 @@ import { Provider } from 'react-redux'
 const App = ({ Component, pageProps }) => {
     const { user, isLogged, logout, login, register } = useAuth()
 
-    const [loading, setLoading] = useState(false)
 
+    const [loading, setLoading] = useState(false)
     Router.events.on('routeChangeStart', () => {
         setLoading(true)
     })
@@ -19,6 +19,7 @@ const App = ({ Component, pageProps }) => {
     Router.events.on('routeChangeComplete', () => {
         setLoading(false)
     })
+
 
     if (loading) return <Loader className="show-loader" />
 
