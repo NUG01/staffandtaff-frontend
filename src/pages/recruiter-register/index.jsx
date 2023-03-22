@@ -16,7 +16,7 @@ import { useAjax } from '@/hooks/ajax';
 import useCheckRequired from '@/hooks/requiredInputs';
 
 export default function recruiterRegister({isLogged, user, login, logout, register}){
-    const [step, setStep] = useState(2)
+    const [step, setStep] = useState(1)
     const [showPlans, setShowPlans] = useState(false)
     const [showStripe, setShowStripe] = useState(false)
 
