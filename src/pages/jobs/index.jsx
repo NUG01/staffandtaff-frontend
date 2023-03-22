@@ -8,9 +8,13 @@ import TipsList from '@/components/TipsList';
 import CountryJobs from '@/components/jobsComponents/CountryJobs';
 import {countries} from '@/components/countries';
 import styles from '@/styles/homepage/homepage.module.css'
+import axios from '@/lib/axios';
+import { useAjax } from '@/hooks/ajax';
 
 
 export default function Jobs({jobDataList, isLogged, user, logout}) {
+
+  console.log(jobDataList)
 
     let tipsData = {
         "Category 1":[
@@ -67,20 +71,28 @@ export default function Jobs({jobDataList, isLogged, user, logout}) {
 }
 
 export async function getServerSideProps(context){
-    let data = []
+    const {getData} = useAjax()
+
+    var jobData = []
 
     if(context.query.search){
         const response = await fetch(`https://jsonplaceholder.typicode.com/users/${context.query.search}`)
         const sData = await response.json()
-        data.push(sData)
+        jobData.push(sData)
     }else{
+        // await getData('/api/v1/jobs', (res)=>{
+        //   jobData = res.data
+        //   jobData.push(res.data)
+        //   console.log(jobData)
+        // })
         const response = await fetch(`https://jsonplaceholder.typicode.com/users`)
-        data = await response.json()
+        const sData = await response.json()
+        jobData = sData
     }
 
     return{
         props: {
-            jobDataList: data,
+            jobDataList: jobData,
         }
     }
 }

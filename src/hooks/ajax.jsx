@@ -24,9 +24,19 @@ export const useAjax = () => {
             .catch(error => {
             });
     };
+
+    const getData = async (url, callback) =>{
+        
+        axios
+            .get(url)
+            .then(callback)
+            .catch(error => {
+            });
+    }
     
     return {
         sendData,
         sendMediaData,
+        getData
     };
 };
