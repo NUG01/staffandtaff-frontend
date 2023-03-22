@@ -1,9 +1,18 @@
-export default function Token({token}){
+import Loader from "@/components/Loader"
+import { useAjax } from "@/hooks/ajax"
+
+
+export default function Token({token, user}){
+    const {sendData} = useAjax()
+    
+    if(user){
+        sendData('/api/v1/verify-email', {code: token}, (res)=>{
+            console.log(res)
+        })
+    }
 
     return (
-        <div>
-            {token}
-        </div>
+        <Loader className='show-loader'/>
     )
 
 }
