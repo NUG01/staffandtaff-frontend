@@ -6,16 +6,13 @@ import { useEffect } from "react";
 export default function Token({info, user}){
     const {sendData} = useAjax()
 
-    console.log(info.params[0].split('&')[0].split('='))
-    console.log(info.params[0].split('&')[1].split('='))
-
     let code = info.params[0].split('&')[1].split('=')[1]
     let email = info.params[0].split('&')[0].split('=')[1]
 
     useEffect(()=>{
         if(user && !user.data.verified){
             sendData('/api/v1/verify-email', {code, email }, res => {
-                Router.push('/recruiter-register')
+                location.href = '/recruiter-register'
             })
         }
     })

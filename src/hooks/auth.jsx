@@ -3,6 +3,7 @@ import axios from '@/lib/axios';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
+
 export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     const router = useRouter();
     const [user, setUser] = useState()
