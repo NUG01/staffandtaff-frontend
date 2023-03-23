@@ -16,7 +16,7 @@ export default function seekerRegister({isLogged, user, login, logout, register}
                 <title>Seeker register</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} logout={logout} active="register"/>
+            <Header isLogged={isLogged} user={user} active="register"/>
 
             <main className={styles.mainWrapper}>
                 <Wizard styles={styles} step={step} maxSteps={maxSteps} type="seeker"/>

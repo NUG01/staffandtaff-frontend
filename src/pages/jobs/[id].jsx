@@ -34,7 +34,7 @@ export default function Job({isLogged, user, logout, data}) {
                 <title>{obj.title}</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} logout={logout} active="singleJob"/>
+            <Header isLogged={isLogged} user={user} active="singleJob"/>
 
             <div className={styles.mainWrapper}>
                 <div className={styles.top}>

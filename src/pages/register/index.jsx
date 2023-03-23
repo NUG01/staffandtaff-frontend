@@ -50,7 +50,7 @@ const Register = ({isLogged, user, logout, register}) => {
                 <title>S'inscrire</title>
             </Head>
             
-            <Header isLogged={isLogged} user={user} logout={logout} active="register"/>
+            <Header isLogged={isLogged} user={user} active="register"/>
 
             <div className={styles.mainWrapper}>
                     <div className={styles.formHolder}>

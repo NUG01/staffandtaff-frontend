@@ -10,7 +10,7 @@ export default function Privacy({isLogged, user, logout}) {
                 <title>Politique de Confidentialité</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} logout={logout} active="privacy"/>
+            <Header isLogged={isLogged} user={user} active="privacy"/>
 
             <main className={styles.main}>
                 <h1 className={styles.mainHeader}>Politique de Confidentialité</h1>

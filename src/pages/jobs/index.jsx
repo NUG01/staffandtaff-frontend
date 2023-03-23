@@ -45,7 +45,7 @@ export default function Jobs({jobDataList, isLogged, user, logout}, props) {
                 <title>Emplois</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} logout={logout} active="job"/>
+            <Header isLogged={isLogged} user={user} active="job"/>
 
             <Banner />
               

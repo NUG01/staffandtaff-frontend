@@ -10,7 +10,7 @@ export default function Homepage({isLogged, user, logout}) {
             <title>Staff&Taff</title>
         </Head>
 
-        <Header isLogged={isLogged} user={user} logout={logout} active="home"/>
+        <Header isLogged={isLogged} user={user} active="home"/>
 
         <Footer />
         </>

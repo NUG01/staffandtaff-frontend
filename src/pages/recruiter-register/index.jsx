@@ -122,7 +122,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                 <title>Recruiter register</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} logout={logout} active="register"/>
+            <Header isLogged={isLogged} user={user} active="register"/>
 
             <main className={styles.mainWrapper}>
                 <Wizard styles={styles} step={step} maxSteps={maxSteps} showStripe={showStripe} completedSteps={completedSteps}/>

@@ -9,7 +9,7 @@ export default function StripeSuccess({isLogged, user, logout, styles}) {
             <title>Success Payment</title>
         </Head>
 
-        <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
+        <Header isLogged={isLogged} user={user} active="login"/>
 
             <div className={styles.mainWrapper}>
                 <div className={styles.inboxCheck}>

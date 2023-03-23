@@ -133,7 +133,7 @@ export default function Faq({isLogged, user, logout, search}) {
                     <title>F.A.Q</title>
                 </Head>
     
-                <Header isLogged={isLogged} user={user} logout={logout} active="faq"/>
+                <Header isLogged={isLogged} user={user} active="faq"/>
     
                 <main className={styles.main}>
                     <h1 className={styles.mainHeader}>Foire Aux Questions</h1>
@@ -178,7 +178,7 @@ export default function Faq({isLogged, user, logout, search}) {
                 <title>F.A.Q</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} logout={logout} active="faq"/>
+            <Header isLogged={isLogged} user={user} active="faq"/>
 
             <main className={styles.main}>
                 <h1 className={styles.mainHeader}>Frequently Asked Questions</h1>

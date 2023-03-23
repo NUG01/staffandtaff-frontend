@@ -6,7 +6,7 @@ const AppLayout = ({ head, child, active, isLogged, user, logout}) => {
         <>
             {head}
 
-            <Header isLogged={isLogged} user={user} logout={logout} active={active}/>
+            <Header isLogged={isLogged} user={user} active={active}/>
             
             {child}
 

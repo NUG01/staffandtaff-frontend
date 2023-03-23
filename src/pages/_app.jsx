@@ -29,14 +29,14 @@ const App = ({ Component, pageProps }) => {
         return (
             <Provider store={store}>
                 <Loader className={isLogged === undefined ? 'show-loader' : ''} />
-                <Component isLogged={isLogged} user={user} {...pageProps} logout={logout} />
+                <Component isLogged={isLogged} user={user} {...pageProps} />
             </Provider>
         )
     } else {
         return (
             <Provider store={store}>
                 <Loader className={isLogged === undefined ? 'show-loader' : ''} />
-                <Component isLogged={isLogged} login={login} {...pageProps} register={register} />
+                <Component isLogged={isLogged} {...pageProps} register={register} />
             </Provider>
         )
     }

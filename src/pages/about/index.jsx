@@ -11,7 +11,7 @@ export default function About({isLogged, user, logout}) {
             <Head>
                 <title>À propos de nous</title>
             </Head>
-            <Header isLogged={isLogged} user={user} logout={logout} active="about"/>
+            <Header isLogged={isLogged} user={user} active="about"/>
             
             <main className={styles.main}>
                 <AboutText />

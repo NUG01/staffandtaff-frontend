@@ -41,7 +41,7 @@ export default function Tip({isLogged, user, logout, data}){
                 <title>{data.title}</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} logout={logout} active=""/>
+            <Header isLogged={isLogged} user={user} active=""/>
 
             <main className={`${styles.mainWrapper} ${styles.singleTipMainWrapper}`}>
                 <div className={styles.banner} style={{backgroundImage: 'url("/tip-template-img.png")'}}>

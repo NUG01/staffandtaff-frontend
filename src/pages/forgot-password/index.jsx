@@ -33,7 +33,7 @@ const ForgotPassword = ({isLogged, user, logout})=> {
                 <title>RÉINITIALISER LE MOT DE PASSE</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
+            <Header isLogged={isLogged} user={user} active="login"/>
 
             <main className={styles.main}>
                 <form className={styles.mainForm} ref={form} onSubmit={submitForm}>

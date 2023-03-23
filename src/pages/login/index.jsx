@@ -9,9 +9,16 @@ import Header from '@/pages/header';
 import Footer from '@/pages/footer';
 import Head from 'next/head';
 import styles from '@/styles/login/login.module.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAuthData } from '@/redux/userAuth';
+import { useAjax } from '@/hooks/ajax'
 
-const Login = ({isLogged, user, login, logout})=> {
+const Login = ({isLogged, user})=> {
     const router = useRouter()
+    const {sendData} = useAjax()
+    const userAuthCheck = useSelector(state => state.userAuthData.value)
+    
+    const dispatch = useDispatch()
 
     if(isLogged === 1 && user){
         router.replace('/jobs')
@@ -51,18 +58,21 @@ const Login = ({isLogged, user, login, logout})=> {
           );
       }
 
-    const submitForm = async event => {
-        event.preventDefault()
+    function submitForm(e){
+        e.preventDefault()
         setSubmited(true)
         form.current.classList.add('disabledSection')
 
-        login({
-            email,
-            password,
-            remember: shouldRemember,
-            setErrors,
-            setStatus,
-            form
+        sendData('/api/v1/login', {email, password}, ()=>{
+
+            dispatch(setAuthData(true))
+            window.location.pathname = '/jobs';
+
+        }, (error)=>{
+
+            console.log(error)
+            form.current.classList.remove('disabledSection')
+
         })
     }
 
@@ -72,7 +82,7 @@ const Login = ({isLogged, user, login, logout})=> {
                 <title>Connexion</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} logout={logout} active="login" isMobile={mobilePreview == '#loginView' ? true : ''}/>
+            <Header isLogged={isLogged} user={user} active="login" isMobile={mobilePreview == '#loginView' ? true : ''}/>
 
             <div className={styles.mainWrapper}>
                     <div className={`${styles.formHolder} ${mobilePreview == '#registerView' ? 'hideSection' : ''}`}>

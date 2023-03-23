@@ -151,7 +151,7 @@ export default function Tips({isLogged, user, logout, search}) {
                 <title>Conseils</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} logout={logout} active="faq"/>
+            <Header isLogged={isLogged} user={user} active="faq"/>
 
             <main className={styles.main}>
                 <h1 className={styles.mainHeader}>Foire Aux Questions</h1>
@@ -194,7 +194,7 @@ export default function Tips({isLogged, user, logout, search}) {
                 <title>Conseils</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} logout={logout} active="tips"/>
+            <Header isLogged={isLogged} user={user} active="tips"/>
 
             <main className={styles.main}>
                 <h1 className={styles.mainHeader}>Conseils de la part de Staff&Taff</h1>

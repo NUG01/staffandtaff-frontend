@@ -49,7 +49,7 @@ export default function Job({isLogged, user, logout}) {
                     <title>Veuillez vérifier vos mails</title>
                 </Head>
     
-                <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
+                <Header isLogged={isLogged} user={user} active="login"/>
     
                 <div className={styles.mainWrapper}>
                     <div className={styles.inboxCheck}>
@@ -89,7 +89,7 @@ export default function Job({isLogged, user, logout}) {
                     <title>RÉINITIALISER LE MOT DE PASSE</title>
                 </Head>
 
-                <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
+                <Header isLogged={isLogged} user={user} active="login"/>
 
                 <div className={styles.mainWrapper}>
                     <form>
@@ -166,7 +166,7 @@ export default function Job({isLogged, user, logout}) {
                 <title>Réinitialisation du mot de passe réussie !</title>
             </Head>
 
-            <Header isLogged={isLogged} user={user} logout={logout} active="login"/>
+            <Header isLogged={isLogged} user={user} active="login"/>
 
                 <div className={`${styles.last} ${styles.mainWrapper}`}>
                     <div className={styles.inboxCheck}>
