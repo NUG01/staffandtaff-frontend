@@ -12,10 +12,6 @@
     padding-top: 90px;
 }
 
-.mainWrapper * {
-    z-index: 2;
-}
-
 .backgroundGrad {
     position: absolute;
     top: 0;
@@ -30,6 +26,7 @@
 .searchPlace {
     width: 90vw;
     max-width: 650px;
+    z-index: 2;
 }
 
 .desc {
@@ -105,6 +102,10 @@
 }
 .filter input[type=number] {
     -moz-appearance: textfield;
+}
+
+.react-datepicker__navigation{
+    display: none !important;
 }
 
 .datePickerHolder{
@@ -213,7 +214,7 @@
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
 }
 
-.searchContainer button {
+.searchContainer > button {
     cursor: pointer;
     padding: 10px;
     background-color: var(--color-1);
@@ -528,7 +529,7 @@
         padding-left: 15px;
     }
     
-    .searchPlace button{
+    .searchPlace > button{
         width: 70px;
         height: 53px;
         background-color: var(--color-1);
@@ -538,7 +539,7 @@
         position: relative;
     }
 
-    .searchPlace button span{
+    .searchPlace > button span{
         display: none;
     }
 
@@ -567,4 +568,12 @@
     .mainpageList {
         grid-template-columns: repeat(auto-fit,minmax(280px, 1fr));
     }
+}
+
+.clearButton{
+    margin-left: auto;
+    margin-right: 2px;
+    display: block;
+    color: var(--color-4);
+    cursor: pointer;
 }
