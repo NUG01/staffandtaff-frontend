@@ -29,11 +29,14 @@ export default function Banner({callBack}) {
             if(i != 0) {
 
                 if(inputs[i].id === 'start_date' || inputs[i].id === 'end_date'){
+
                     filterData[inputs[i].id] = Math.floor(new Date(inputs[i].value).getTime())
                     urlKeys.push(inputs[i].id)
                     urlValues.push(Math.floor(new Date(inputs[i].value).getTime()))
                     filterUrl += `&${inputs[i].id}=${Math.floor(new Date(inputs[i].value).getTime())}`
+
                 }else{
+
                     filterData[inputs[i].id] = inputs[i].value
                     urlKeys.push(inputs[i].id)
                     urlValues.push(inputs[i].value)
@@ -44,10 +47,23 @@ export default function Banner({callBack}) {
         }
         
         for(var i=0; i < selects.length; i++){
-            filterData[selects[i].id] = selects[i].value
-            urlKeys.push(selects[i].id)
-            urlValues.push(selects[i].value)
-            filterUrl += `&${selects[i].id}=${selects[i].value}`
+            if(selects[i].id === 'currency' && selects[i].value.length === 0){
+                
+                filterData[selects[i].id] = 'CH'
+                urlKeys.push(selects[i].id)
+                urlValues.push('CH')
+                filterUrl += `&${selects[i].id}=${'CH'}`
+
+            }else{
+                
+                filterData[selects[i].id] = selects[i].value
+                urlKeys.push(selects[i].id)
+                urlValues.push(selects[i].value)
+                filterUrl += `&${selects[i].id}=${selects[i].value}`
+
+            }
+
+
         }
 
         filterData.lng = ''
