@@ -23,7 +23,7 @@ export default function JobList({data}) {
     }, [])
 
     async function loadMore(e){
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs`)
         const jobsData = await response.json()
 
         e.target.style.opacity = '1'; 
@@ -41,7 +41,7 @@ export default function JobList({data}) {
                 {
                     loadedData.map((item, index) =>{
                         return (
-                            <Link onClick={()=>localStorage.setItem("jobsScroll", scrollY)} href={`jobs/${item.id}`} key={Math.random()} className={styles.jobHolder}>
+                            <Link onClick={()=>localStorage.setItem("jobsScroll", scrollY)} href={`jobs/${item.id}`} key={item.id} className={styles.jobHolder}>
                                 <div className={styles.addToFavourites}></div>
                                 <div>
                                     <div className={styles.jobTop}>
@@ -52,8 +52,8 @@ export default function JobList({data}) {
                                     </div>
                                     <div className={styles.jobDetails}>
                                         <div className={styles.jobCountry}>
-                                            <img src={index % 2 === 0 ? '/ch.svg' : '/fr.svg'} alt="" />
-                                            {index % 2 === 0 ? ' Switzerland' : ' France'}
+                                            <img src={item.country_code === 'CH' ? '/ch.svg' : '/fr.svg'} alt="" />
+                                            {item.country_code === 'CH' ? ' Suisse' : ' France'}
                                         </div>
                                         <div className={styles.location}>
                                             <img src="/on-site.svg" alt="" />
@@ -61,7 +61,7 @@ export default function JobList({data}) {
                                         </div>
                                         <div className={styles.currency}>
                                             <img src="/coupon.svg" alt="" />
-                                            €3200-3500
+                                            {item.salary}
                                         </div>
                                         <div className={styles.period}>
                                             <img src="/clock.svg" alt="" />

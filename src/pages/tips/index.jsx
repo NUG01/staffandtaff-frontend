@@ -2,7 +2,6 @@ import Header from '@/pages/header';
 import Footer from '@/pages/footer';
 import Head from 'next/head';
 import styles from '@/styles/tips/tips.module.css'
-import TipsList from '@/components/TipsList';
 import { useRef } from 'react';
 import Link from 'next/link';
 
@@ -73,14 +72,79 @@ export default function Tips({isLogged, user, logout, search}) {
                     if(!searchedDataCategories.includes(key)) {
                         searchedDataCategories.push(key)
                     }
+                    newArr.push(value)
                 }
             })
             newArr.length > 0 ? searchedData.push(newArr) : ''
         })
     }
+    
+    let displayData
 
-    if(tipsData.length === 0){
-      
+
+
+    if(!search){
+      displayData = tipsKeys.map((item, mainIndex) => {
+          return(
+            <div key={mainIndex} className={styles.tipsContainer}>
+            <div key={mainIndex} className={styles.tipsParent}>
+                <h1>{item}</h1>
+                <div className={styles.tipsRow}>
+                    {tipsValues[mainIndex].map((item, index) =>{
+                        return(
+                            <Link href={`/tips/${item.id}`} key={index} className={styles.tip}>
+                                <img src="/tip-template-img.png" alt="" />
+                                <div className={styles.tipContent}>
+                                    <h1 className={styles.header}>
+                                        {item.heading}
+                                    </h1>
+                                    <p>{item.date}</p>
+                                    <div className={styles.content}>
+                                        {item.content.substring(0, 150)}
+                                        { item.content.length > 150 ? <span className="viewMore">... <p>Voir plus</p></span> : ''}
+                                    </div>
+                                </div>
+                            </Link>
+                        )
+                    })}
+                </div>
+            </div>
+            </div>
+          )
+      })
+    }else{
+        displayData = searchedDataCategories.map((item, mainIndex) => {
+            return(
+              <div key={mainIndex} className={styles.tipsContainer}>
+                  <div className={styles.tipsParent}>
+                      <h1>{item}</h1>
+                      <div className={styles.tipsRow}>
+                          {searchedData[mainIndex].map((item, index) =>{
+                              return(
+                                  <Link href={`/tips/${item.id}`} key={index} className={styles.tip}>
+                                      <img src="/tip-template-img.png" alt="" />
+                                      <div className={styles.tipContent}>
+                                          <h1 className={styles.header}>
+                                              {item.heading}
+                                          </h1>
+                                          <p>{item.date}</p>
+                                          <div className={styles.content}>
+                                              {item.content.substring(0, 150)}
+                                              { item.content.length > 150 ? <span className="viewMore">... <p>Voir plus</p></span> : ''}
+                                          </div>
+                                      </div>
+                                  </Link>
+                              )
+                          })}
+                      </div>
+                  </div>
+              </div>
+            )
+        })
+    }
+
+
+    if(displayData.length === 0){
       return(
         <>
             <Head>
@@ -140,7 +204,9 @@ export default function Tips({isLogged, user, logout, search}) {
                     <input type="text" name="search" placeholder="Recherche" required ref={input}/>
                     <i className={`fa-solid fa-arrow-right ${styles.arrowRight}`} onClick={(e)=>{submitForm(e)}}></i>
                 </form>
-                <TipsList data={tipsData} isHeader={false}/> 
+                    {
+                        displayData
+                    }
             </main>
             <Footer />
         </>

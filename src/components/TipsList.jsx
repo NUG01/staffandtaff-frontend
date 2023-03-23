@@ -1,15 +1,17 @@
 import styles from '@/styles/tips/tips.module.css'
 import Link from 'next/link';
 
-const TipsList = ({data , isHeader}) => {
+const TipsList = ({data , isHeader, singleTip, customHeader}) => {
 
   let tipKeys = Object.keys(data)
   let tipValues = Object.values(data)
 
   return (
     <>
-      <div className={styles.tipsContainer}>
-        {isHeader && <h1 className={styles.mainHeader}>Conseils de la part de Staff&Taff</h1>}
+      <div className={`${styles.tipsContainer} ${singleTip ? styles.singleTipsContainer : ''}`}>
+        {isHeader && <h1 className={styles.mainHeader}>
+          {customHeader ? customHeader : 'Conseils de la part de Staff&Taff'}
+        </h1>}
         {
           tipKeys.map((item, mainIndex) => {
               return(

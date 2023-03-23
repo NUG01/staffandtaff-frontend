@@ -10,17 +10,28 @@
     background-blend-mode: multiply;
     position: relative;
     height: 70vh;
-    padding-bottom: 50px;
+    padding-bottom: 70px;
     width: 100%;
     display: flex;
     justify-content: center;
-    padding-top: 90px;
+    align-items: center;
+    padding-top: 70px;
+    background-color: var(--color-1-05);
 }
 
-.mainWrapper h1{
-    color: var(--color-1);
-    font-size: 24px;
-    margin-top: 30px;
+.banner h1{
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+    word-break: break-word;
+    text-transform: uppercase;
+}
+
+.banner .date{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
 }
 
 .content{
@@ -28,4 +39,17 @@
     max-width: 1600px;
     margin-top: 20px;
     line-height: 19px;
+}
+
+.firstBlock{
+    margin-top: 40px;
+}
+
+.secondBlock img{
+    float: left;
+    padding: 0px 25px 20px 0px;
+}
+
+.secondBlock{
+    padding-top: 40px;
 }

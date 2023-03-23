@@ -26,6 +26,7 @@ export const useAjax = () => {
     };
 
     const getData = async (url, callback) =>{
+        await csrf()
         
         axios
             .get(url)

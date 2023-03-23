@@ -8,14 +8,8 @@ import TipsList from '@/components/TipsList';
 import CountryJobs from '@/components/jobsComponents/CountryJobs';
 import {countries} from '@/components/countries';
 import styles from '@/styles/homepage/homepage.module.css'
-import axios from '@/lib/axios';
-import { useAjax } from '@/hooks/ajax';
 
-
-export default function Jobs({jobDataList, isLogged, user, logout}) {
-
-  console.log(jobDataList)
-
+export default function Jobs({jobDataList, isLogged, user, logout}, props) {
     let tipsData = {
         "Category 1":[
           {
@@ -71,28 +65,19 @@ export default function Jobs({jobDataList, isLogged, user, logout}) {
 }
 
 export async function getServerSideProps(context){
-    const {getData} = useAjax()
-
-    var jobData = []
+    let sData;
 
     if(context.query.search){
         const response = await fetch(`https://jsonplaceholder.typicode.com/users/${context.query.search}`)
-        const sData = await response.json()
-        jobData.push(sData)
+        sData = await response.json()
     }else{
-        // await getData('/api/v1/jobs', (res)=>{
-        //   jobData = res.data
-        //   jobData.push(res.data)
-        //   console.log(jobData)
-        // })
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users`)
-        const sData = await response.json()
-        jobData = sData
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs`)
+        sData = await response.json()
     }
 
     return{
         props: {
-            jobDataList: jobData,
+            jobDataList: sData,
         }
     }
 }
