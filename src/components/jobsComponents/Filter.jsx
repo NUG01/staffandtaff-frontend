@@ -21,29 +21,32 @@ export default function Filter({expanded, filterData}){
     const [cities, setCities] = useState()
     const [citySelected, setCitySelected] = useState()
 
-    var timeOut;
+    const timeOut = useRef(null)
+
+    let lastRequest
 
     function timeOutFunction(e) {
         setCitySelected(undefined)
         setCities([])
 
-        const controller = new AbortController();
-        const signal = controller.signal;
+        timeOut.current = setTimeout(() => {
+            let city_name = e.target.value
+            let country_code = countrySelect.current.value
 
-        let city_name = e.target.value
-        let country_code = countrySelect.current.value
+            if(city_name.length > 2){
+                setSearching(true)
+                cityMainInp.current.blur()
+                    
+                lastRequest = sendData('/api/v1/cities', {city_name, country_code}, (res)=>{
+                    setCities(res.data.cities)
+                    setCitySelected(false)
+                    setSearching(false)
+                    console.log(res)
+                },)        
+            }
+            
+        }, 500);
 
-        if(city_name.length > 2){
-            setSearching(true)
-            cityMainInp.current.blur()
-                
-            sendData('/api/v1/cities', {city_name, country_code}, (res)=>{
-                setCities(res.data.cities)
-                setCitySelected(false)
-                setSearching(false)
-                console.log(res)
-            },)        
-        }
     }
 
     function setCityFunc(item, city_name){
@@ -56,7 +59,7 @@ export default function Filter({expanded, filterData}){
     }
 
     function searchCities(e){
-        clearTimeout(timeOut)
+        clearTimeout(timeOut.current)
         timeOutFunction(e)
     }
 
