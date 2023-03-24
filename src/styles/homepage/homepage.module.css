@@ -197,6 +197,7 @@
 .expandedFilter{
     pointer-events: unset;
     opacity: 1;
+    z-index: 3;
 }
 
 .searchContainer input {

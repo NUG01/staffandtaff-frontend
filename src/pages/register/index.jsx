@@ -1,7 +1,7 @@
 import InputError from '@/components/InputError'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
-import { useState, useRef } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import styles from '@/styles/register/register.module.css'
@@ -9,44 +9,48 @@ import Header from '@/pages/header';
 import Footer from '@/pages/footer';
 
 const Register = ({isLogged, user, logout, register}) => {
-    const router = useRouter()
+    // const router = useRouter()
 
-    if(isLogged === 1 && user){
-        router.replace('/jobs')
-    }
+    // if(isLogged === 1 && user){
+    //     router.replace('/jobs')
+    // }
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [passwordConfirmation, setPasswordConfirmation] = useState('')
-    const [errors, setErrors] = useState([])
-    const [passwordType, setType] = useState('password')
+    // const [name, setName] = useState('')
+    // const [email, setEmail] = useState('')
+    // const [password, setPassword] = useState('')
+    // const [passwordConfirmation, setPasswordConfirmation] = useState('')
+    // const [errors, setErrors] = useState([])
+    // const [passwordType, setType] = useState('password')
     
     
-    const changePasswordType = ()=>{
-        passwordType === 'password' ? setType('text') : setType('password')
-    }
+    // const changePasswordType = ()=>{
+    //     passwordType === 'password' ? setType('text') : setType('password')
+    // }
 
-    const form = useRef()
+    // const form = useRef()
 
-    const submitForm = event => {
-        event.preventDefault()
+    // const submitForm = event => {
+    //     event.preventDefault()
 
-        form.current.classList.add('disabledSection')
+    //     form.current.classList.add('disabledSection')
 
-        register({
-            name,
-            email,
-            password,
-            password_confirmation: passwordConfirmation,
-            setErrors,
-            form
-        })
-    }
+    //     register({
+    //         name,
+    //         email,
+    //         password,
+    //         password_confirmation: passwordConfirmation,
+    //         setErrors,
+    //         form
+    //     })
+    // }
+
+    useEffect(()=>{
+        location.href = '/login'
+    })
 
     return (
         <>
-            <Head>
+            {/* <Head>
                 <title>S'inscrire</title>
             </Head>
             
@@ -161,7 +165,7 @@ const Register = ({isLogged, user, logout, register}) => {
                 </div>
             </div>
 
-            <Footer />
+            <Footer /> */}
         </>
     )
 }

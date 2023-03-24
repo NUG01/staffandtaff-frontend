@@ -12,12 +12,15 @@ export default function Filter({expanded, filterData}){
     var timeOut;
 
     function timeOutFunction(e) {
+        setCitySelected(undefined)
+        setCities([])
         timeOut = setTimeout(() => {
             let city_name = e.target.value
             let country_code = countrySelect.current.value
 
             if(city_name.length > 2){
                 setSearching(true)
+                cityMainInp.current.blur()
                 
                 sendData('/api/v1/cities', {city_name, country_code}, (res)=>{
                     setCities(res.data.cities)
@@ -81,7 +84,6 @@ export default function Filter({expanded, filterData}){
         setCitySelected(undefined)
         cityInp.current.value = ''
         cityMainInp.current.value = ''
-        setCities([])
 
     }
 

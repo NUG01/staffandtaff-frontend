@@ -23,14 +23,13 @@ export const useAjax = () => {
             .catch(error);
     };
 
-    const getData = async (url, callback) =>{
+    const getData = async (url, callback, error) =>{
         await csrf()
         
         axios
             .get(url)
             .then(callback)
-            .catch(error => {
-            });
+            .catch(error);
     }
     
     return {

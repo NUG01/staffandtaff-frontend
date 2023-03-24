@@ -4,17 +4,16 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 
-export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
+export const useAuth = ({ middleware, redirectIfAuthenticated, setUser, setLogged } = {}) => {
     const router = useRouter();
-    const [user, setUser] = useState()
-    const [isLogged, setLogged] = useState()
 
-    const { error, mutate } = useSWR('/api/v1/user', () =>
+        const { error, mutate } = useSWR('/api/v1/user', () =>
         axios
             .get('/api/v1/user')
             .then(res => {
                 setUser(res.data)
                 setLogged(1)
+                console.log('asd')
             })
             .catch(error => {
                 if (error.response.status === 401) {
@@ -25,7 +24,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
                 router.push('/verify-email');
             }),
-    );
+        );
 
     const csrf = () => axios.get('/sanctum/csrf-cookie');
 
@@ -125,11 +124,9 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         )
             router.push(redirectIfAuthenticated);
         if (middleware === 'auth' && error) logout();
-    }, [user, error]);
+    }, [error]);
 
     return {
-        user,
-        isLogged,
         register,
         login,
         forgotPassword,
