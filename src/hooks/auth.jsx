@@ -13,7 +13,6 @@ export const useAuth = ({ middleware, redirectIfAuthenticated, setUser, setLogge
             .then(res => {
                 setUser(res.data)
                 setLogged(1)
-                console.log('asd')
             })
             .catch(error => {
                 if (error.response.status === 401) {

@@ -8,29 +8,6 @@ export default function Filter({expanded, filterData}){
     const {sendData} = useAjax()
 
     const [searching, setSearching] = useState(false)
-
-    var timeOut;
-
-    function timeOutFunction(e) {
-        setCitySelected(undefined)
-        setCities([])
-        timeOut = setTimeout(() => {
-            let city_name = e.target.value
-            let country_code = countrySelect.current.value
-
-            if(city_name.length > 2){
-                setSearching(true)
-                cityMainInp.current.blur()
-                
-                sendData('/api/v1/cities', {city_name, country_code}, (res)=>{
-                    setCities(res.data.cities)
-                    setCitySelected(false)
-                    setSearching(false)
-                })
-        
-            }
-        }, 500);
-    }
     
     const cityInp  = useRef()    
     const cityMainInp = useRef()
@@ -44,8 +21,34 @@ export default function Filter({expanded, filterData}){
     const [cities, setCities] = useState()
     const [citySelected, setCitySelected] = useState()
 
+    var timeOut;
+
+    function timeOutFunction(e) {
+        setCitySelected(undefined)
+        setCities([])
+
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        let city_name = e.target.value
+        let country_code = countrySelect.current.value
+
+        if(city_name.length > 2){
+            setSearching(true)
+            cityMainInp.current.blur()
+                
+            sendData('/api/v1/cities', {city_name, country_code}, (res)=>{
+                setCities(res.data.cities)
+                setCitySelected(false)
+                setSearching(false)
+                console.log(res)
+            },)        
+        }
+    }
+
     function setCityFunc(item, city_name){
         setCitySelected(true)
+        setCities([])
         cityInp.current.value = item
         cityMainInp.current.value = city_name
         
@@ -108,7 +111,7 @@ export default function Filter({expanded, filterData}){
                         searchCities(e)
                     }}/>
                     <input id="city" type="hidden" ref={cityInp} className='required-record hidden-city-inp'/>
-                    <div className={`${styles.cityList} ${!citySelected && citySelected != undefined ? styles.showCityList : ''}`}>
+                    <div className={`${styles.cityList} ${!citySelected && citySelected != undefined && cities.length != 0 ? styles.showCityList : ''}`}>
                         {cities != undefined && cities.length != 0  &&
                             (cities.map((item, index) =>{
                                 return(

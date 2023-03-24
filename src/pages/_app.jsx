@@ -7,6 +7,7 @@ import { useAuth } from '@/hooks/auth';
 import store from '@/redux/store'
 import { Provider } from 'react-redux'
 import { useAjax } from '@/hooks/ajax';
+import Head from 'next/head';
 
 const App = ({ Component, pageProps }) => {
     const [user, setUser] = useState()
@@ -21,7 +22,7 @@ const App = ({ Component, pageProps }) => {
         },(error)=>{
             setLogged(0)
             return
-        })    
+        })
     }, [])
 
     const [loading, setLoading] = useState(false)

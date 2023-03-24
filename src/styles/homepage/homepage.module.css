@@ -613,7 +613,7 @@
     position: absolute;
     animation: magnifyingRotate 12s linear infinite;    
     -webkit-animation: magnifyingRotate 12s linear infinite, pulse 2s infinite;
-    background: url(https://web.archive.org/web/20150807125159if_/http://www.noirextreme.com/digital/Earth-Color4096.jpg);
+    background: url('/map.jpg');
     border-radius: 50%;
     background-size: 900px;
     background-position: 50% 50%;
@@ -622,10 +622,10 @@
 .earth {
     height: 300px;
     width: 300px;
-    background: url(https://web.archive.org/web/20150807125159if_/http://www.noirextreme.com/digital/Earth-Color4096.jpg);
+    background: url('/map.jpg');
     border-radius: 50%;
     background-size: 610px;
-    box-shadow: inset 8px 36px 80px 36px rgb(0, 0, 0), inset -6px 0 12px 4px rgba(255, 255, 255, 0.3);
+    box-shadow: inset 8px 36px 80px 36px rgba(0, 0, 0, 0.5), inset -6px 0 12px 4px rgba(255, 255, 255, 0.3);
     animation: rotate 12s linear infinite;    
     -webkit-animation: rotate 12s linear infinite;
 }

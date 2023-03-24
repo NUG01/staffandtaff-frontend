@@ -16,7 +16,7 @@ export const useAjax = () => {
 
     const sendMediaData = async (url, data, callback, error) => {
         await csrf();
-
+        
         mediaAxios
             .post(url, data)
             .then(callback)
