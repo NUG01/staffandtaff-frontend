@@ -2,41 +2,87 @@ import styles from '../../styles/homepage/homepage.module.css'
 import { useState, useRef } from 'react';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
+import { useAjax } from '@/hooks/ajax';
 
 export default function Filter({expanded, filterData}){
+    const {sendData} = useAjax()
+
+    const [searching, setSearching] = useState(false)
+
+    var timeOut;
+
+    function timeOutFunction(e) {
+        timeOut = setTimeout(() => {
+            setSearching(true)
+            let city_name = e.target.value
+            let country_code = countrySelect.current.value
+
+            if(city_name.length > 2){
+
+                sendData('/api/v1/cities', {city_name, country_code}, (res)=>{
+                    setCities(res.data.cities)
+                    console.log(res.data.cities)
+                    setCitySelected(false)
+                    setSearching(false)
+                })
+        
+            }
+        }, 500);
+    }
     
     const cityInp  = useRef()    
     const cityMainInp = useRef()
+    const countrySelect = useRef()
 
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
     
     const [country, setCurrCountry] = useState("")
 
-    const [cities, setCities] = useState(['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'])
+    const [cities, setCities] = useState()
     const [citySelected, setCitySelected] = useState()
 
-    function setCityFunc(item){
+    function setCityFunc(item, city_name){
         setCitySelected(true)
         cityInp.current.value = item
-        cityMainInp.current.value = item
+        cityMainInp.current.value = city_name
         
         document.querySelector('.shown-city-inp').classList.remove('input-error')
     }
 
-    async function setCountry(e){
-        setCurrCountry(e.target.value)
-        
-
-        // await csrf()
-
-        // axios
-        //     .post('/api/v1/login', props)
-        //     .then(() => {
-        //     })
+    function searchCities(e){
+        clearTimeout(timeOut)
+        timeOutFunction(e)
     }
 
     function clearInputs(){
+        document.querySelector('#search').value = ''
+
+        let inputs = document.getElementById('filter').querySelectorAll('input')
+        let selects = document.getElementById('filter').querySelectorAll('select')
+
+        for(var i=0; i < inputs.length; i++){
+
+            inputs[i].value = ''
+
+        }
+
+        for(var i=0; i < selects.length; i++){
+
+            selects[i].value = ''
+
+        }
+
+        setCurrCountry('')
+    }
+
+    function setCountry(e){
+        setCurrCountry(e.target.value)
+
+        setCitySelected(undefined)
+        cityInp.current.value = ''
+        cityMainInp.current.value = ''
+        setCities([])
 
     }
 
@@ -46,10 +92,10 @@ export default function Filter({expanded, filterData}){
             <div className={styles.filterRow}>
                 <div className={`${styles.filterInputParent}`}>         
                     <label htmlFor="">Pays</label>
-                    <select id="country" onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
-                        <option value="">Sélectionner</option>
-                        <option value="0">Suisse</option>
-                        <option value="1">France</option>
+                    <select ref={countrySelect} id="country" onChange={(e)=> setCountry(e)} className='required-record' defaultValue={""}>
+                        <option value="" disabled>Sélectionner</option>
+                        <option value="CH">Suisse</option>
+                        <option value="FR">France</option>
                     </select>
                 </div>
 
@@ -57,18 +103,19 @@ export default function Filter({expanded, filterData}){
                     <label htmlFor="">Ville</label>
                     <input ref={cityMainInp} className={`shown-city-inp required-record ${country.length === 0 ? styles.disabledInput : ''}`} type="text" onInput={(e)=>{
                         cityInp.current.value = ''
-                        setCitySelected(false)
+                        searchCities(e)
                     }}/>
                     <input id="city" type="hidden" ref={cityInp} className='required-record hidden-city-inp'/>
                     <div className={`${styles.cityList} ${!citySelected && citySelected != undefined ? styles.showCityList : ''}`}>
-                        {
-                            cities.map((item, index) =>{
+                        {cities != undefined && cities.length != 0  &&
+                            (cities.map((item, index) =>{
                                 return(
-                                    <div key={index} onClick={(e)=> setCityFunc(item)}>{item}</div>
+                                    <div key={index} onClick={(e)=> setCityFunc(item.id, item.city_name)}>{item.city_name}</div>
                                 )
-                            })
+                            }))
                         }
                     </div>
+                    <img src="/load-spinner.gif" alt="" className={`${styles.loadSpinner} ${!searching ? 'd-none' : ''}`}/>
                 </div>
                 
                 <div className={`${styles.filterInputParent}`}>         
@@ -81,18 +128,18 @@ export default function Filter({expanded, filterData}){
                 <div className={`${styles.filterInputParent}`}>         
                     <label htmlFor="">Catégorie</label>
                     <select id="category" onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
-                        <option value="">Sélectionner</option>
-                        <option value="0">Suisse</option>
-                        <option value="1">France</option>
+                        <option value="" disabled>Sélectionner</option>
+                        <option value="0">Restaurant</option>
+                        <option value="1">Hôtel</option>
                     </select>
                 </div>
 
                 <div className={`${styles.filterInputParent}`}>         
                     <label htmlFor="">Type de contrat</label>
                     <select id="contract_type" onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
-                        <option value="">Sélectionner</option>
-                         <option value="0">Suisse</option>
-                        <option value="1">France</option>
+                        <option value="" disabled>Sélectionner</option>
+                         <option value="0">Contrat à durée déterminé</option>
+                        <option value="1">Contrat à durée indéterminé</option>
                     </select>
                 </div>
             </div>
@@ -151,14 +198,19 @@ export default function Filter({expanded, filterData}){
                 <div className={`${styles.filterInputParent}`}>         
                     <label htmlFor="">Devise</label>
                     <select className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""} id="currency">
-                        <option value="">Sélectionner</option>
+                        <option value="" disabled>Sélectionner</option>
+                        <option value="0">EUR</option>
+                        <option value="1">CHF</option>
                     </select>
                 </div>
 
                 <div className={`${styles.filterInputParent}`}>         
                     <label htmlFor="">Type de rémunération</label>
                     <select className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""} id="period">
-                        <option value="">Sélectionner</option>
+                        <option value="" disabled>Sélectionner</option>
+                        <option value="0">Par heure</option>
+                        <option value="1">Par mois</option>
+                        <option value="2">Par an</option>
                     </select>
                 </div>
 

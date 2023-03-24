@@ -1,6 +1,5 @@
 import Loader from "@/components/Loader"
 import { useAjax } from "@/hooks/ajax"
-import Router from "next/router"
 import { useEffect } from "react";
 
 export default function Token({info, user}){
