@@ -71,11 +71,15 @@
 
 .filter select{
     cursor: pointer;
+    font-size: 14px;
+}
+.filter input{
+    font-size: 14px;
 }
 
 .filter{
     width: 100%;
-    min-width: 600px;
+    min-width: 700px;
     position: absolute;
     top: 100%;
     left: 0;
@@ -92,7 +96,7 @@
 }
 
 .filter label{
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .filter input[type=number]::-webkit-outer-spin-button,
@@ -162,7 +166,8 @@
     word-wrap: break-word;
     cursor: pointer;
     transition: 0.3s;
-    padding: 20px 10px;
+    padding: 17.5px 10px;
+    font-size: 14px;
     border-bottom: 1px solid var(--color-6);
 }
 
@@ -538,27 +543,9 @@
     .searchContainer input{
         padding-left: 15px;
     }
-    
-    .searchPlace > button{
-        width: 70px;
-        height: 53px;
-        background-color: var(--color-1);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-    }
-
-    .searchPlace > button span{
-        display: none;
-    }
 
     .searchButton{
         display: none;
-    }
-
-    .mobileSearchButton{
-        display: block;
     }
 
     .counts,
@@ -577,6 +564,24 @@
 @media (max-width: 576px){
     .mainpageList {
         grid-template-columns: repeat(auto-fit,minmax(280px, 1fr));
+    }
+
+    .searchContainer > button span{
+        display: none;
+    }
+
+    .mobileSearchButton{
+        display: block;
+    }
+    
+    .searchContainer > button{
+        width: 70px;
+        height: 53px;
+        background-color: var(--color-1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
     }
 }
 
