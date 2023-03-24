@@ -3,6 +3,7 @@ import { useState, useRef } from 'react';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
 import { useAjax } from '@/hooks/ajax';
+import axios from 'axios';
 
 export default function Filter({expanded, filterData}){
     const {sendData} = useAjax()
@@ -23,30 +24,30 @@ export default function Filter({expanded, filterData}){
 
     const timeOut = useRef(null)
 
-    let lastRequest
-
     function timeOutFunction(e) {
         setCitySelected(undefined)
         setCities([])
 
+        let city_name = e.target.value
+        let country_code = countrySelect.current.value
+
         timeOut.current = setTimeout(() => {
-            let city_name = e.target.value
-            let country_code = countrySelect.current.value
 
             if(city_name.length > 2){
                 setSearching(true)
+                cityMainInp.current.style.pointerEvents = 'none'
                 cityMainInp.current.blur()
                     
-                lastRequest = sendData('/api/v1/cities', {city_name, country_code}, (res)=>{
+                sendData('/api/v1/cities', {city_name, country_code}, (res)=>{
                     setCities(res.data.cities)
                     setCitySelected(false)
                     setSearching(false)
-                    console.log(res)
+                    cityMainInp.current.style.pointerEvents = 'unset'
                 },)        
             }
             
-        }, 500);
-
+        }, 800);
+            
     }
 
     function setCityFunc(item, city_name){
@@ -228,11 +229,11 @@ export default function Filter({expanded, filterData}){
 
         </div>  
 
-        <div className={`${styles.earthContainer} ${!searching ? 'd-none' : ''}`}>
+        {/* <div className={`${styles.earthContainer} ${!searching ? 'd-none' : ''}`}> */}
         {/* <div className={`${styles.earthContainer} ${!searching ? '' : ''}`}> */}
-            <div className={styles.magnifierGLass}></div>
-            <div className={styles.earth}></div>
-        </div>
+            {/* <div className={styles.magnifierGLass}></div> */}
+            {/* <div className={styles.earth}></div> */}
+        {/* </div> */}
     </>
     )
 }

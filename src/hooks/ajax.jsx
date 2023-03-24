@@ -35,6 +35,7 @@ export const useAjax = () => {
     return {
         sendData,
         sendMediaData,
-        getData
+        getData,
+        csrf
     };
 };
