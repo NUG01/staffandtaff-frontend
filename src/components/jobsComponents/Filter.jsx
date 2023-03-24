@@ -13,15 +13,14 @@ export default function Filter({expanded, filterData}){
 
     function timeOutFunction(e) {
         timeOut = setTimeout(() => {
-            setSearching(true)
             let city_name = e.target.value
             let country_code = countrySelect.current.value
 
             if(city_name.length > 2){
-
+                setSearching(true)
+                
                 sendData('/api/v1/cities', {city_name, country_code}, (res)=>{
                     setCities(res.data.cities)
-                    console.log(res.data.cities)
                     setCitySelected(false)
                     setSearching(false)
                 })
@@ -87,6 +86,7 @@ export default function Filter({expanded, filterData}){
     }
 
     return(
+       <>
         <div className={`${styles.filter} ${expanded ? styles.expandedFilter : ''}`} id="filter">
 
             <div className={styles.filterRow}>
@@ -123,7 +123,7 @@ export default function Filter({expanded, filterData}){
                     <input id="distance" type="text" placeholder='0 km'/>
                 </div>
             </div>
-            
+
             <div className={styles.filterRow}>
                 <div className={`${styles.filterInputParent}`}>         
                     <label htmlFor="">Catégorie</label>
@@ -138,13 +138,13 @@ export default function Filter({expanded, filterData}){
                     <label htmlFor="">Type de contrat</label>
                     <select id="contract_type" onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
                         <option value="" disabled>Sélectionner</option>
-                         <option value="0">Contrat à durée déterminé</option>
+                        <option value="0">Contrat à durée déterminé</option>
                         <option value="1">Contrat à durée indéterminé</option>
                     </select>
                 </div>
             </div>
 
-            
+
             <div className={styles.filterRow}>
                 <div className={`${styles.datePickerHolder} ${styles.filterInputParent}`}>
                     <label htmlFor="">Date de début</label>
@@ -219,5 +219,12 @@ export default function Filter({expanded, filterData}){
             <span onClick={()=> clearInputs()} className={styles.clearButton}>EFFACER</span>
 
         </div>  
+
+        <div className={`${styles.earthContainer} ${!searching ? 'd-none' : ''}`}>
+        {/* <div className={`${styles.earthContainer} ${!searching ? '' : ''}`}> */}
+            <div className={styles.magnifierGLass}></div>
+            <div className={styles.earth}></div>
+        </div>
+    </>
     )
 }
