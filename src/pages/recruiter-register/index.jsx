@@ -59,6 +59,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
         youtube: '',
         tiktok: '',
         gallery: [],
+        address: ''
     })
 
     const [jobData, setJobData] = useState({
