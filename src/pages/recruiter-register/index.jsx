@@ -91,11 +91,11 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
         jobData[key] = value
     }
 
-    async function nextStep(stepNum){
+    async function sendEstablishmentData(stepNum){
         const validated = useCheckRequired()
+        scrollTo(0, 0)
 
         if(validated) {
-            scrollTo(0, 0)
             setStep(stepNum)
 
             if(!companyAjax){
@@ -111,7 +111,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                     }
                 })
         
-                await sendMediaData('/api/v1/establishment/store', formData)
+                await sendMediaData('/api/v1/establishment/store', formData, (res)=> console.log(res))
                 companyAjax = true
             }
         }
@@ -144,7 +144,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                         <RecruiterFlow className={step != 2 ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep} data={data} galleryPictures={galleryPictures} setNewData={setNewData}
         
                             nextButton={
-                                <div className={styles.nextButton} onClick={()=> {nextStep(3)}}>
+                                <div className={styles.nextButton} onClick={()=> {sendEstablishmentData(3)}}>
                                     suivant
                                     <i className="fa-solid fa-chevron-right"></i>
                                 </div>

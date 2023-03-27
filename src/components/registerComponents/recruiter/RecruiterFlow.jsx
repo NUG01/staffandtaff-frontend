@@ -52,7 +52,6 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
     }
 
     function uploadGalleryImage(e){
-        console.log(galleryPictures)
         if(e.target.files.length != 0){
 
             if(data.gallery.length > 10 || galleryImages.length + e.target.files.length > 10){
@@ -72,9 +71,10 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
     const lastRequest = useRef(null)
 
     function setCityFunc(item, city_name){
+        console.log(item)
         setCitySelected(true)
         setCities([])
-        cityInp.current.value = item
+        cityInp.current.value = item.id
         cityMainInp.current.value = city_name
         
         document.querySelector('.shown-city-inp').classList.remove('input-error')
@@ -102,15 +102,6 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
                 setSearching(false)
             });
         }
-    }
-
-    function setCityFunc(item){
-        setCitySelected(true)
-        setNewData('city', item.id)
-        cityInp.current.value = item.id
-        cityMainInp.current.value = item.city_name
-        
-        document.querySelector('.shown-city-inp').classList.remove('input-error')
     }
 
     function setCountry(e){
