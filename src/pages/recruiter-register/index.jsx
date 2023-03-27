@@ -94,25 +94,25 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
         const validated = useCheckRequired()
 
         if(validated) {
-            // scrollTo(0, 0)
-            // setStep(stepNum)
-        }
+            scrollTo(0, 0)
+            setStep(stepNum)
 
-        if(!companyAjax){
-            let formData = new FormData()
-            
-            Object.keys(data).forEach((item, index)=>{
-                if(item == 'gallery') {
-                    Object.values(data)[index].forEach(item => {
-                        formData.append('file[]', item)
-                    })
-                }else{
-                    formData.append(item, Object.values(data)[index])
-                }
-            })
-    
-            await sendMediaData('/api/v1/establishment/store', formData)
-            companyAjax = true
+            if(!companyAjax){
+                let formData = new FormData()
+                
+                Object.keys(data).forEach((item, index)=>{
+                    if(item == 'gallery') {
+                        Object.values(data)[index].forEach(item => {
+                            formData.append('file[]', item)
+                        })
+                    }else{
+                        formData.append(item, Object.values(data)[index])
+                    }
+                })
+        
+                await sendMediaData('/api/v1/establishment/store', formData)
+                companyAjax = true
+            }
         }
     }
 

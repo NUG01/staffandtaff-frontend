@@ -18,7 +18,6 @@ export default function useCheckRequired(){
             validated = false
         }
     })
-    validated = true
 
     return validated
 }

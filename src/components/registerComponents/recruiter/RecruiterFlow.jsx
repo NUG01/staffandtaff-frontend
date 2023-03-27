@@ -52,6 +52,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
     }
 
     function uploadGalleryImage(e){
+        console.log(galleryPictures)
         if(e.target.files.length != 0){
 
             if(data.gallery.length > 10 || galleryImages.length + e.target.files.length > 10){
@@ -64,7 +65,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
                 setNewData('gallery', e.target.files[i], true)
             }
             
-            setGalleryImage([...galleryImages, ...galleryPictures])
+            setGalleryImage([...galleryPictures])
         }
     }
     
@@ -92,8 +93,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
     
             lastRequest.current = Axios.CancelToken.source()
     
-            setSearching(true)
-            
+            setSearching(true)  
             axios.post('/api/v1/cities', {city_name, country_code}, {
                 cancelToken: lastRequest.current.token, 
             }).then(function(res) {
@@ -106,16 +106,16 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
 
     function setCityFunc(item){
         setCitySelected(true)
-        setNewData('city', item)
-        cityInp.current.value = item
-        cityMainInp.current.value = item
+        setNewData('city', item.id)
+        cityInp.current.value = item.id
+        cityMainInp.current.value = item.city_name
         
         document.querySelector('.shown-city-inp').classList.remove('input-error')
     }
 
     function setCountry(e){
         setCurrCountry(e.target.value)
-
+        data.country = e.target.value
         setCitySelected(undefined)
         cityInp.current.value = ''
         cityMainInp.current.value = ''
@@ -156,7 +156,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
                             <span className={styles.deleteImage} onClick={()=> clearLogo()}></span>
                         )}
                         <label htmlFor="logo-upload">Télécharger un logo</label>
-                        <input type="file" id="logo-upload" onInput={(e)=> previewLogo(e)} ref={logo} className="required-record" accept="image/png, image/jpeg" onChange={(e)=>e.target.parentNode.classList.remove('inputParentError')}/>
+                        <input type="file" id="logo-upload" onInput={(e)=> previewLogo(e)} ref={logo} accept="image/png, image/jpeg" onChange={(e)=>e.target.parentNode.classList.remove('inputParentError')}/>
                     </div>
                 </div>
             </section>
@@ -177,8 +177,8 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
                 <div className={styles.inputParent}>
                     <select ref={countrySelect}  onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
                         <option value="" disabled>Pays</option>
-                        <option value="0">Suisse</option>
-                        <option value="1">France</option>
+                        <option value="CH">Suisse</option>
+                        <option value="FR">France</option>
                     </select>
 
                     <div className={`${styles.cityListHolder} ${styles.filterInputParent}`}>
@@ -191,7 +191,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
                             {cities != undefined && cities.length != 0  &&
                                 (cities.map((item, index) =>{
                                     return(
-                                        <div key={index} onClick={(e)=> setCityFunc(item.id, item.city_name)}>{item.city_name}</div>
+                                        <div key={index} onClick={(e)=> setCityFunc(item, item.city_name)}>{item.city_name}</div>
                                     )
                                 }))
                             }
