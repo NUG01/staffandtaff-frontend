@@ -199,6 +199,10 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
                         <img src="/load-spinner.gif" alt="" className={`${styles.loadSpinner} ${!searching ? 'd-none' : ''}`}/>
                     </div>
 
+                    <div className={`${styles.inputParent} ${styles.inputParentFull}`}>
+                        <input type="text" placeholder="Adresse" onInput={(e)=> setNewData('address', e.target.value)} onChange={(e)=>e.target.classList.remove('input-error')} className="required-record"/>
+                    </div>
+
                 </div>
             </section>
 

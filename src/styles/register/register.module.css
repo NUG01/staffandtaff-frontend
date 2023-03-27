@@ -431,7 +431,16 @@
 
 .locationSelect > div {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
+}
+
+.inputParentFull{
+    width: 100%;
+}
+
+.inputParentFull input{
+    margin-top: 0px;
 }
 
 .socialInputs input{
@@ -737,8 +746,18 @@
     .wizard > div:before{
         display: none;
     }
+
     .wizard > div.currentStep:before{
         display: block;
+    }
+
+    .locationSelect select, .locationSelect .cityListHolder{
+        width: 100%;
+        flex: unset;
+    }
+
+    .cityInputPadding{
+        margin-top: 0px !important;
     }
 }
 
