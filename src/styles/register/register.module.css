@@ -409,6 +409,10 @@
     pointer-events: none;
 }
 
+.cityInputPadding{
+    padding-right: 40px;
+}
+
 .showCityList{
     opacity: 1;
     pointer-events: unset;
@@ -719,6 +723,14 @@
 .datePickerHolder input{
     cursor: pointer;
     caret-color: transparent;
+}
+
+.loadSpinner{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    top: 50%
 }
 
 @media(max-width: 768px){

@@ -518,6 +518,10 @@
     cursor: pointer;
 }
 
+.cityInputPadding{
+    padding-right: 40px;
+}
+
 .loadSpinner{
     width: 20px;
     height: 20px;

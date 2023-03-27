@@ -37,21 +37,23 @@ export default function Filter({expanded, filterData}){
 
         let city_name = e.target.value  
         let country_code = countrySelect.current.value
-
-        if(lastRequest.current != null) lastRequest.current.cancel()
-
-        lastRequest.current = Axios.CancelToken.source()
-
-        setSearching(true)
                 
-        axios.post('/api/v1/cities', {city_name, country_code}, {
-            cancelToken: lastRequest.current.token, 
-        }).then(function(res) {
-            setCities(res.data.cities)
-            setCitySelected(false)
-            setSearching(false)
-            cityMainInp.current.style.pointerEvents = 'unset'
-        });
+        if(city_name.length > 2){
+
+            if(lastRequest.current != null) lastRequest.current.cancel()
+    
+            lastRequest.current = Axios.CancelToken.source()
+    
+            setSearching(true)
+
+            axios.post('/api/v1/cities', {city_name, country_code}, {
+                cancelToken: lastRequest.current.token, 
+            }).then(function(res) {
+                setCities(res.data.cities)
+                setCitySelected(false)
+                setSearching(false)
+            });
+        }
     }
 
     function clearInputs(){
@@ -100,7 +102,7 @@ export default function Filter({expanded, filterData}){
 
                 <div className={`${styles.cityListHolder} ${styles.filterInputParent}`}>
                     <label htmlFor="">Ville</label>
-                    <input ref={cityMainInp} className={`shown-city-inp required-record ${country.length === 0 ? styles.disabledInput : ''}`} type="text" onInput={(e)=>{
+                    <input ref={cityMainInp} className={`shown-city-inp required-record ${styles.cityInputPadding} ${country.length === 0 ? styles.disabledInput : ''}`} type="text" onInput={(e)=>{
                         cityInp.current.value = ''
                         searchCities(e)
                     }}/>
