@@ -51,7 +51,7 @@ export default function Jobs({jobDataList, isLogged, user, logout}, props) {
               
             <h1 className={styles.jobListHeading}>Trouver un emploi</h1>
 
-            <JobList data={jobDataList}/>
+            <JobList data={jobDataList.data}/>
 
             <GeneralInformation />
 
