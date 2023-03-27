@@ -67,13 +67,16 @@ export default function Jobs({jobDataList, isLogged, user, logout}, props) {
 export async function getServerSideProps(context){
     let sData;
 
-    if(context.query.search){
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${context.query.search}`)
-        sData = await response.json()
+    if(context.query){
+        // const response = await fetch(`https://jsonplaceholder.typicode.com/users/${context.query.search}`)
+        // sData = await response.json()
+        console.log(context.resolvedUrl)
     }else{
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs`)
         sData = await response.json()
     }
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs`)
+    sData = await response.json()
 
     return{
         props: {

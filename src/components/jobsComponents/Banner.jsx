@@ -7,12 +7,17 @@ import Filter from './Filter';
 export default function Banner({callBack}) {
     const router = useRouter()
     const [expanded, setExpanded] = useState(false)
+    const [chosen, setChosenCity] = useState(null)
 
-    let filterData = {}
+    let filterData = {
+        establishment_name: '',
+        lng: '',
+        lat: ''
+    }
     let urlKeys = []
     let urlValues = []
 
-    let filterUrl = '?search='
+    let filterUrl = 'search='
 
     function formSubmit(e){
         e.preventDefault()
@@ -29,11 +34,12 @@ export default function Banner({callBack}) {
             if(i != 0) {
 
                 if(inputs[i].id === 'start_date' || inputs[i].id === 'end_date'){
-
-                    filterData[inputs[i].id] = Math.floor(new Date(inputs[i].value).getTime())
+                    let date = inputs[i].value.split('/')
+                    var newDate = new Date( date[2], date[1] - 1, date[0]);
+                    filterData[inputs[i].id] = newDate.getTime()
                     urlKeys.push(inputs[i].id)
-                    urlValues.push(Math.floor(new Date(inputs[i].value).getTime()))
-                    filterUrl += `&${inputs[i].id}=${Math.floor(new Date(inputs[i].value).getTime())}`
+                    urlValues.push(newDate.getTime())
+                    filterUrl += `&${inputs[i].id}=${newDate.getTime()}`
 
                 }else{
 
@@ -66,15 +72,20 @@ export default function Banner({callBack}) {
 
         }
 
-        filterData.lng = ''
-        filterUrl += `&lng=${filterData.lng}`
+        if(chosen != null){
+            filterData.lng = chosen.longitude
+            filterData.lat = chosen.latitude
+            
+            filterUrl += `&lng=${chosen.longitude}`
+            filterUrl += `&lat=${chosen.latitude}`
+        }   
 
-        console.log(filterUrl)
+        location.search = filterUrl
+    }
 
-        // router.push({
-        //     pathname: `/jobs`,
-        //     query: { search: searchValue },
-        // })
+    function checkExpandedFilter(){
+        if(document.querySelector(styles.showCityList)) console.log('asd')
+        setExpanded(!expanded)
     }
 
     return (
@@ -87,10 +98,10 @@ export default function Banner({callBack}) {
                 <form onSubmit={formSubmit} className={styles.searchContainer}>
                     <div className={styles.filterHolder}>
                         <input type="text" placeholder="Trouver un emploi près de chez soi" id="search"/>
-                        <Filter expanded={expanded} filterData={filterData}/>
+                        <Filter expanded={expanded} setChosenCity={setChosenCity}/>
                     </div>
                     <FaSearch className={styles.searchButton}/>
-                    <div className={styles.filterButton} onClick={()=> setExpanded(!expanded)}>
+                    <div className={styles.filterButton} onClick={()=> checkExpandedFilter()}>
                         <img src="/filter.png" alt="" />
                     </div>
                     <button>

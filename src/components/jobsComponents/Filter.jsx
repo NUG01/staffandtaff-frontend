@@ -5,7 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import axios from '@/lib/axios';
 import Axios from 'axios';
 
-export default function Filter({expanded, filterData}){
+export default function Filter({expanded, setChosenCity}){
     const [searching, setSearching] = useState(false)
     
     const cityInp  = useRef()    
@@ -25,8 +25,11 @@ export default function Filter({expanded, filterData}){
     function setCityFunc(item, city_name){
         setCitySelected(true)
         setCities([])
-        cityInp.current.value = item
+        cityInp.current.value = item.id
         cityMainInp.current.value = city_name
+
+
+        setChosenCity(item)
         
         document.querySelector('.shown-city-inp').classList.remove('input-error')
     }
@@ -111,7 +114,7 @@ export default function Filter({expanded, filterData}){
                         {cities != undefined && cities.length != 0  &&
                             (cities.map((item, index) =>{
                                 return(
-                                    <div key={index} onClick={(e)=> setCityFunc(item.id, item.city_name)}>{item.city_name}</div>
+                                    <div key={index} onClick={(e)=> setCityFunc(item, item.city_name)}>{item.city_name}</div>
                                 )
                             }))
                         }
@@ -121,14 +124,14 @@ export default function Filter({expanded, filterData}){
                 
                 <div className={`${styles.filterInputParent}`}>         
                     <label htmlFor="">Rayon</label>
-                    <input id="distance" type="text" placeholder='0 km'/>
+                    <input type="number" placeholder="0 km" id="distance"/>
                 </div>
             </div>
 
             <div className={styles.filterRow}>
                 <div className={`${styles.filterInputParent}`}>         
                     <label htmlFor="">Catégorie</label>
-                    <select id="category" onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
+                    <select id="category" className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
                         <option value="" disabled>Sélectionner</option>
                         <option value="0">Restaurant</option>
                         <option value="1">Hôtel</option>
@@ -137,7 +140,7 @@ export default function Filter({expanded, filterData}){
 
                 <div className={`${styles.filterInputParent}`}>         
                     <label htmlFor="">Type de contrat</label>
-                    <select id="contract_type" onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
+                    <select id="contract_type" className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
                         <option value="" disabled>Sélectionner</option>
                         <option value="0">Contrat à durée déterminé</option>
                         <option value="1">Contrat à durée indéterminé</option>
