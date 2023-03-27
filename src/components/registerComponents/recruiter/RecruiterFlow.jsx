@@ -71,12 +71,11 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
     const lastRequest = useRef(null)
 
     function setCityFunc(item, city_name){
-        console.log(item)
         setCitySelected(true)
         setCities([])
         cityInp.current.value = item.id
         cityMainInp.current.value = city_name
-        
+        setNewData('city', item.id)
         document.querySelector('.shown-city-inp').classList.remove('input-error')
     }
 
@@ -125,7 +124,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
             <section className={styles.section}>
                 <h4>Quel est le nom de votre établissement ?<span> *</span></h4>
                 <div className={styles.inputParent}>
-                    <input type="text" placeholder="Nom de l'établissement" onInput={(e)=> setNewData('establishment_name', e.target.value)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')}/>
+                    <input type="text" placeholder="Nom de l'établissement" onInput={(e)=> setNewData('name', e.target.value)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')}/>
                 </div>
             </section>
 
@@ -278,7 +277,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
                         })
                     }
                 </div>
-                    <label htmlFor="gallery-upload" className={galleryImages.length === 10 ? styles.disabledLabel : ''}>Télécharger un logo</label>
+                    <label htmlFor="gallery-upload" className={galleryImages.length === 10 ? styles.disabledLabel : ''}>AJOUTER DES PHOTOS</label>
                     <input type="file" id="gallery-upload" onInput={(e)=> uploadGalleryImage(e)} multiple accept="image/png, image/jpeg"/>
             </section>
             {nextButton}

@@ -42,7 +42,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
     const galleryPictures = []
 
     const [data, setData] = useState({
-        establishment_name: '',
+        name: '',
         company_name: '',  
         logo: '',
         industry: '',
@@ -77,7 +77,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
         
     function setNewData (key, value, arr){
         companyAjax = false
-        
+
         if(arr) {
             data[key].push(value)
             return
@@ -93,6 +93,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
 
     async function sendEstablishmentData(stepNum){
         const validated = useCheckRequired()
+
         scrollTo(0, 0)
 
         if(validated) {
