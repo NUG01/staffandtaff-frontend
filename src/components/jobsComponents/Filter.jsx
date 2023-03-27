@@ -2,12 +2,10 @@ import styles from '../../styles/homepage/homepage.module.css'
 import { useState, useRef } from 'react';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
-import { useAjax } from '@/hooks/ajax';
-import axios from 'axios';
+import axios from '@/lib/axios';
+import Axios from 'axios';
 
 export default function Filter({expanded, filterData}){
-    const {sendData} = useAjax()
-
     const [searching, setSearching] = useState(false)
     
     const cityInp  = useRef()    
@@ -22,33 +20,7 @@ export default function Filter({expanded, filterData}){
     const [cities, setCities] = useState()
     const [citySelected, setCitySelected] = useState()
 
-    const timeOut = useRef(null)
-
-    function timeOutFunction(e) {
-        setCitySelected(undefined)
-        setCities([])
-
-        let city_name = e.target.value
-        let country_code = countrySelect.current.value
-
-        timeOut.current = setTimeout(() => {
-
-            if(city_name.length > 2){
-                setSearching(true)
-                cityMainInp.current.style.pointerEvents = 'none'
-                cityMainInp.current.blur()
-                    
-                sendData('/api/v1/cities', {city_name, country_code}, (res)=>{
-                    setCities(res.data.cities)
-                    setCitySelected(false)
-                    setSearching(false)
-                    cityMainInp.current.style.pointerEvents = 'unset'
-                },)        
-            }
-            
-        }, 800);
-            
-    }
+    const lastRequest = useRef(null)
 
     function setCityFunc(item, city_name){
         setCitySelected(true)
@@ -60,8 +32,26 @@ export default function Filter({expanded, filterData}){
     }
 
     function searchCities(e){
-        clearTimeout(timeOut.current)
-        timeOutFunction(e)
+        setCitySelected(undefined)
+        setCities([])
+
+        let city_name = e.target.value  
+        let country_code = countrySelect.current.value
+
+        if(lastRequest.current != null) lastRequest.current.cancel()
+
+        lastRequest.current = Axios.CancelToken.source()
+
+        setSearching(true)
+                
+        axios.post('/api/v1/cities', {city_name, country_code}, {
+            cancelToken: lastRequest.current.token, 
+        }).then(function(res) {
+            setCities(res.data.cities)
+            setCitySelected(false)
+            setSearching(false)
+            cityMainInp.current.style.pointerEvents = 'unset'
+        });
     }
 
     function clearInputs(){

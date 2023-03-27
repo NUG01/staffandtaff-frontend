@@ -2,11 +2,16 @@
 
 import { useRef, useState } from "react";
 import axios from '@/lib/axios'
+import Axios from 'axios';
 
 export default function RecruiterFlow({styles, nextButton, className, data, galleryPictures, setNewData}){
     const logo = useRef()
-    const cityInp = useRef()
+    
+    const [searching, setSearching] = useState(false)
+
+    const cityInp  = useRef()    
     const cityMainInp = useRef()
+    const countrySelect = useRef()
 
     const [wordCount, setWords] = useState(0)
 
@@ -16,7 +21,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
 
     const [country, setCurrCountry] = useState("")
 
-    const [cities, setCities] = useState(['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'])
+    const [cities, setCities] = useState()
     const [citySelected, setCitySelected] = useState()
 
     function clearLogo(){
@@ -62,7 +67,40 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
             setGalleryImage([...galleryImages, ...galleryPictures])
         }
     }
-    const csrf = () => axios.get('/sanctum/csrf-cookie');
+    
+    const lastRequest = useRef(null)
+
+    function setCityFunc(item, city_name){
+        setCitySelected(true)
+        setCities([])
+        cityInp.current.value = item
+        cityMainInp.current.value = city_name
+        
+        document.querySelector('.shown-city-inp').classList.remove('input-error')
+    }
+
+    function searchCities(e){
+        setCitySelected(undefined)
+        setCities([])
+
+        let city_name = e.target.value  
+        let country_code = countrySelect.current.value
+
+        if(lastRequest.current != null) lastRequest.current.cancel()
+
+        lastRequest.current = Axios.CancelToken.source()
+
+        setSearching(true)
+                
+        axios.post('/api/v1/cities', {city_name, country_code}, {
+            cancelToken: lastRequest.current.token, 
+        }).then(function(res) {
+            setCities(res.data.cities)
+            setCitySelected(false)
+            setSearching(false)
+            cityMainInp.current.style.pointerEvents = 'unset'
+        });
+    }
 
     function setCityFunc(item){
         setCitySelected(true)
@@ -73,17 +111,13 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
         document.querySelector('.shown-city-inp').classList.remove('input-error')
     }
 
-    async function setCountry(e){
+    function setCountry(e){
         setCurrCountry(e.target.value)
-        setNewData('country', e.target.value)
-        
 
-        // await csrf()
+        setCitySelected(undefined)
+        cityInp.current.value = ''
+        cityMainInp.current.value = ''
 
-        // axios
-        //     .post('/api/v1/login', props)
-        //     .then(() => {
-        //     })
     }
 
     return(
@@ -139,29 +173,28 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
             <section className={`${styles.section} ${styles.locationSelect}`}>
                 <h4>Où se trouve votre établissement ? <span> *</span></h4>
                 <div className={styles.inputParent}>
-                    <select onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
+                    <select ref={countrySelect}  onInput={(e)=> setCountry(e)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
                         <option value="" disabled>Pays</option>
                         <option value="0">Suisse</option>
                         <option value="1">France</option>
                     </select>
 
-                    <div className={styles.cityListHolder}>
-                        <input ref={cityMainInp} className={`shown-city-inp required-record ${country.length === 0 ? styles.disabledInput : ''}`} type="text" placeholder="Ville" onInput={(e)=>{
+                    <div className={`${styles.cityListHolder} ${styles.filterInputParent}`}>
+                        <input ref={cityMainInp} className={`shown-city-inp required-record ${country.length === 0 ? styles.disabledInput : ''}`} type="text" onInput={(e)=>{
                             cityInp.current.value = ''
-                            setCitySelected(false)
+                            searchCities(e)
                         }}/>
-
-                        <input type="hidden" ref={cityInp} className='required-record hidden-city-inp'/>
-
-                        <div className={`${styles.cityList} ${!citySelected && citySelected != undefined ? styles.showCityList : ''}`}>
-                            {
-                                cities.map((item, index) =>{
+                        <input id="city" type="hidden" ref={cityInp} className='required-record hidden-city-inp'/>
+                        <div className={`${styles.cityList} ${!citySelected && citySelected != undefined && cities.length != 0 ? styles.showCityList : ''}`}>
+                            {cities != undefined && cities.length != 0  &&
+                                (cities.map((item, index) =>{
                                     return(
-                                        <div key={index} onClick={(e)=> setCityFunc(item)}>{item}</div>
+                                        <div key={index} onClick={(e)=> setCityFunc(item.id, item.city_name)}>{item.city_name}</div>
                                     )
-                                })
+                                }))
                             }
                         </div>
+                        <img src="/load-spinner.gif" alt="" className={`${styles.loadSpinner} ${!searching ? 'd-none' : ''}`}/>
                     </div>
 
                 </div>
