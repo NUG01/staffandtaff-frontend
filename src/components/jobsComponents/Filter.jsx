@@ -52,7 +52,7 @@ export default function Filter({expanded, setChosenCity}){
             axios.post('/api/v1/cities', {city_name, country_code}, {
                 cancelToken: lastRequest.current.token, 
             }).then(function(res) {
-                setCities(res.data.cities)
+                setCities(res.data)
                 setCitySelected(false)
                 setSearching(false)
             });
