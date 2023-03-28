@@ -51,7 +51,7 @@ export default function Jobs({jobDataList, isLogged, user, logout}, props) {
               
             <h1 className={styles.jobListHeading}>Trouver un emploi</h1>
 
-            {/* <JobList data={jobDataList.data}/> */}
+            <JobList data={jobDataList}/>
 
             <GeneralInformation />
 
@@ -71,13 +71,12 @@ export async function getServerSideProps(context){
         console.log(context.resolvedUrl)
     }else{
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs`)
-        console.log(response)
-        // data = await response.json()
+        data = await response.json()
     }
 
     return{
         props: {
-            jobDataList: [],
+            jobDataList: data.data,
         }
     }
 }
