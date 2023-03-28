@@ -257,11 +257,14 @@
     flex-wrap: wrap;
     background-color: white;
     color: black;
-    padding: 20px 15px;
     cursor: pointer;
     text-transform: capitalize;
     flex-direction: column;
     min-height: 185px;
+}
+
+.mainpageList .jobHolder a{
+    padding: 20px 15px;
 }
 
 .jobTop {
@@ -488,6 +491,7 @@
     height: 20px;
     position: absolute;
     right: 15px;
+    top: 20px;
 }
 
 .jobListHeading{

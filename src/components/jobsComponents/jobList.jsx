@@ -34,6 +34,10 @@ export default function JobList({data}) {
 
         dispatch(pushData([...loadedData, ...jobsData]))
     }
+
+    function addToFavourites(id){
+        alert(id)
+    }
     
     return (
         <>
@@ -41,9 +45,9 @@ export default function JobList({data}) {
                 {
                     loadedData.map((item, index) =>{
                         return (
-                            <Link onClick={()=>localStorage.setItem("jobsScroll", scrollY)} href={`jobs/${item.id}`} key={item.id} className={styles.jobHolder}>
-                                <div className={styles.addToFavourites}></div>
-                                <div>
+                            <div key={item.id} className={styles.jobHolder}>
+                                <div className={styles.addToFavourites} onClick={()=> addToFavourites(item.id)}></div>
+                                <Link onClick={()=>localStorage.setItem("jobsScroll", scrollY)} href={`jobs/${item.id}`} >
                                     <div className={styles.jobTop}>
                                         <div className={styles.jobsDesc}>
                                             <div className={styles.name}>{item.id}</div>
@@ -74,8 +78,8 @@ export default function JobList({data}) {
                                             Start / End: <span>12.12.23-17.12.23</span>
                                         </div>
                                     </div>
-                                </div>
-                            </Link>
+                                </Link>
+                            </div>
                         )
                     })
                 }
