@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
 
-export default function ({styles, nextButton, className, setStep, data, jobData, setNewJobData}){
+export default function ({styles, nextButton, className, setStep, companyData, jobData, setNewJobData}){
     const [wordCount, setWords] = useState(0)
 
     const [startDate, setStartDate] = useState(null)
@@ -22,7 +22,7 @@ export default function ({styles, nextButton, className, setStep, data, jobData,
         setWords(e.target.value.length)
         setNewJobData('description', e.target.value)
     }
-
+    
     return(
         <form className={`${styles.form} ${className}`}>
             <div className={styles.intro}>
@@ -31,24 +31,27 @@ export default function ({styles, nextButton, className, setStep, data, jobData,
                 <p>Veuillez noter que les champs marqués de (<span>*</span>) sont obligatoires.</p>
             </div>
 
-            <section className={styles.showCase}>
-                <img src={data.preview } alt="" />
-                <div className={styles.showCaseInfo}>
-                    <h1>{data.company_name}</h1>
-                    <p>{data.industry === 0 ? 'Restaurant' : 'Hotel'}</p>
-                    <div className={styles.showCaseLocation}>
-                        <img src={data.country === 0 ? '/ch.svg' : '/fr.svg'} alt="" />
-                        <p>
-                            <span>
-                                {data.city}, 
-                            </span>
-                            <span>
-                                {data.country === 0 ? 'Suisse' : 'France'}
-                            </span>
-                        </p>
+            
+            {companyData.logo != undefined && (
+                <section className={styles.showCase}>
+                    <img src={`http://localhost:8000/storage${companyData.logo}`} alt="" />
+                    <div className={styles.showCaseInfo}>
+                        <h1>{companyData.name}</h1>
+                        <p className={styles.industryName}>{companyData.industry[0].name}</p>
+                        <div className={styles.showCaseLocation}>
+                            <img src={companyData.country === 'CH' ? '/ch.svg' : '/fr.svg'} alt="" />
+                            <p>
+                                <span>
+                                    {companyData.city[0].city_name}, 
+                                </span>
+                                <span>
+                                    {companyData.country === 'CH' ? 'Suisse' : 'France'}
+                                </span>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            )}
 
             <section className={styles.section}>
                 <h4>Votre établissement est-il un hôtel ou un restaurant ?</h4>

@@ -1,10 +1,11 @@
 "use client"
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import axios from '@/lib/axios'
 import Axios from 'axios';
+import { useAjax } from '@/hooks/ajax';
 
-export default function RecruiterFlow({styles, nextButton, className, data, galleryPictures, setNewData}){
+export default function RecruiterFlow({styles, nextButton, className, companyData, galleryPictures, setNewData, industries}){
     const logo = useRef()
     
     const [searching, setSearching] = useState(false)
@@ -31,7 +32,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
 
     function removeImage(mainItem, mainIndex){
         setGalleryImage(items => items.filter((item, index) => index != mainIndex))
-        data.gallery.splice(mainIndex, 1)
+        companyData.gallery.splice(mainIndex, 1)
     }
 
     function previewLogo(e){
@@ -54,7 +55,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
     function uploadGalleryImage(e){
         if(e.target.files.length != 0){
 
-            if(data.gallery.length > 10 || galleryImages.length + e.target.files.length > 10){
+            if(companyData.gallery.length > 10 || galleryImages.length + e.target.files.length > 10){
                 alert('Can no upload more than 10 images')
                 return
             }
@@ -105,7 +106,7 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
 
     function setCountry(e){
         setCurrCountry(e.target.value)
-        data.country = e.target.value
+        companyData.country = e.target.value
         setCitySelected(undefined)
         cityInp.current.value = ''
         cityMainInp.current.value = ''
@@ -156,8 +157,11 @@ export default function RecruiterFlow({styles, nextButton, className, data, gall
                 <div className={styles.inputParent}>
                     <select onInput={(e)=> setNewData('industry', e.target.value)} className='required-record' onChange={(e)=>e.target.classList.remove('input-error')} defaultValue={""}>
                         <option value="" disabled>Sous-catégorie de l'établissement</option>
-                        <option value="0">Restaurant</option>
-                        <option value="1">Hotel</option>
+                        {industries.map(item =>{
+                            return(
+                                <option key={item.id} value={item.id}>{item.name}</option>
+                            )
+                        })}
                     </select>
                 </div>
             </section>

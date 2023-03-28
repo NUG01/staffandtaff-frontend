@@ -743,6 +743,14 @@
     top: 50%
 }
 
+.inputParent option::first{
+    text-transform: capitalize;
+}
+
+.industryName:first{
+    text-transform: capitalize;
+}
+
 @media(max-width: 768px){
     .wizard > div:before{
         display: none;

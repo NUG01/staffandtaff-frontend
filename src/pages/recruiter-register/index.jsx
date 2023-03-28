@@ -14,16 +14,17 @@ import Plans from '@/components/registerComponents/Plans.jsx';
 import Stripe from '@/pages/stripe';
 import { useAjax } from '@/hooks/ajax';
 import useCheckRequired from '@/hooks/requiredInputs';
+import { useRef } from 'react';
 
-export default function recruiterRegister({isLogged, user, login, logout, register}){
+export default function recruiterRegister({isLogged, user, login, logout, register, industries}){
     const [step, setStep] = useState(1)
     const [showPlans, setShowPlans] = useState(false)
     const [showStripe, setShowStripe] = useState(false)
+    const uploadedData = useRef({})
 
-    let companyAjax = false
     let jobAjax = false
 
-    const {sendMediaData, sendData} = useAjax()
+    const {sendMediaData, sendData, patchMediaData} = useAjax()
 
     const maxSteps = 3
 
@@ -41,7 +42,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
 
     const galleryPictures = []
 
-    const [data, setData] = useState({
+    const [companyData, setCompanyData] = useState({
         name: '',
         company_name: '',  
         logo: '',
@@ -76,14 +77,13 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
     })
         
     function setNewData (key, value, arr){
-        companyAjax = false
 
         if(arr) {
-            data[key].push(value)
+            companyData[key].push(value)
             return
         }
 
-        data[key] = value
+        companyData[key] = value
     }
         
     function setNewJobData (key, value){
@@ -94,27 +94,39 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
     async function sendEstablishmentData(stepNum){
         const validated = useCheckRequired()
 
-        scrollTo(0, 0)
-
         if(validated) {
-            setStep(stepNum)
+            document.body.classList.add('disabledSection')
 
-            if(!companyAjax){
-                let formData = new FormData()
-                
-                Object.keys(data).forEach((item, index)=>{
-                    if(item == 'gallery') {
-                        Object.values(data)[index].forEach(item => {
-                            formData.append('file[]', item)
-                        })
-                    }else{
-                        formData.append(item, Object.values(data)[index])
-                    }
+            let formData = new FormData()
+            Object.keys(companyData).forEach((item, index)=>{
+                if(item == 'gallery') {
+                    Object.values(companyData)[index].forEach(item => {
+                        formData.append('file[]', item)
+                    })
+                }else{
+                    formData.append(item, Object.values(companyData)[index])
+                }
+            })
+            if(uploadedData.current.id) {
+                await patchMediaData(`/api/v1/establishment/update/${uploadedData.current.id}`, formData, (res)=> {
+                    scrollTo(0, 0)
+                    setStep(stepNum)
+                    uploadedData.current = res.data.data
+                    document.body.classList.remove('disabledSection')
                 })
-        
-                await sendMediaData('/api/v1/establishment/store', formData, (res)=> console.log(res))
-                companyAjax = true
+                return
+            }else{
+                await sendMediaData('/api/v1/establishment/store', formData, (res)=> {
+                    scrollTo(0, 0)
+                    setStep(stepNum)
+                    console.log(res.data.data)
+                    uploadedData.current = res.data.data
+                    document.body.classList.remove('disabledSection')
+                })
             }
+                
+        }else{
+            scrollTo(0, 0)
         }
     }
 
@@ -142,7 +154,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                 {isLogged === 1 && user && user.data.verified && (
                     <>
 
-                        <RecruiterFlow className={step != 2 ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep} data={data} galleryPictures={galleryPictures} setNewData={setNewData}
+                        <RecruiterFlow className={step != 2 ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep} companyData={companyData} galleryPictures={galleryPictures} setNewData={setNewData} industries={industries}
         
                             nextButton={
                                 <div className={styles.nextButton} onClick={()=> {sendEstablishmentData(3)}}>
@@ -154,7 +166,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                         />
                         
         
-                        <PostJob className={step != 3 || showPlans || showStripe ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep} data={data} jobData={jobData} setNewJobData={setNewJobData}
+                        <PostJob className={step != 3 || showPlans || showStripe ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep} companyData={uploadedData.current} jobData={jobData} setNewJobData={setNewJobData}
         
                             nextButton={
                                 <div className={styles.nextButton} onClick={()=> {setShowPlans(true); scrollTo(0, 0)}}>
@@ -177,4 +189,16 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
         </>
     )
 
+}
+
+export async function getServerSideProps(){
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/industries`)
+    let data = await response.json()
+    console.log(data)
+
+     return{
+        props: {
+            industries: data.data,
+        }
+    }
 }
