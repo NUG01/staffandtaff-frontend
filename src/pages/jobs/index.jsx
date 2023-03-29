@@ -65,18 +65,19 @@ export default function Jobs({jobDataList, isLogged, user, logout}, props) {
 }
 
 export async function getServerSideProps(context){
-    // let data;
+    let data;
 
-    // if(context.resolvedUrl.includes('/jobs?search=&')){
-    //     console.log(context.resolvedUrl)
-    // }else{
-    //     const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs`)
-    //     data = await response.json()
-    // }
+    if(context.resolvedUrl.includes('/jobs?search=&')){
+        console.log(context.resolvedUrl)
+    }else{
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs`)
+        data = await response.json()
+        console.log(response)
+    }
 
     return{
         props: {
-            jobDataList: 'data.data',
+            jobDataList: data.data,
         }
     }
 }
