@@ -108,7 +108,8 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                 }
             })
             if(uploadedData.current.id) {
-                await patchMediaData(`/api/v1/establishment/update/${uploadedData.current.id}`, formData, (res)=> {
+                formData.append('_method', 'PATCH')
+                await sendMediaData(`/api/v1/establishment/update/${uploadedData.current.id}`, formData, (res)=> {
                     scrollTo(0, 0)
                     setStep(stepNum)
                     uploadedData.current = res.data.data
