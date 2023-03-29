@@ -95,13 +95,13 @@ footer .column-2 a {
     }
 
     .footer-contact p {
-        text-align: left;
     }
 
     .footer-contact a img {
         position: absolute;
         left: 0;
-        top: 5px;
+        top: 50%;
+        transform: translateY(-55%);
     }
 
 }

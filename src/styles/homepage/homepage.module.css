@@ -79,9 +79,8 @@
 
 .filter{
     width: 100%;
-    min-width: 700px;
     position: absolute;
-    top: 100%;
+    top: 99%;
     left: 0;
     background-color: white;
     opacity: 0;
@@ -535,18 +534,6 @@
 }
 
 @media (max-width: 992px) {
-    .filter{
-        min-width: 270px;
-    }
-
-    .filterRow{
-        flex-direction: column;
-    }
-
-    .filter .filterInputParent{
-        width: 100%;
-        flex-wrap: wrap;
-    }
 
     .searchContainer input{
         padding-left: 15px;
@@ -565,6 +552,19 @@
     .explanation-card {
         width: 90%;
         max-width: 500px;
+    }
+
+}
+
+@media (max-width: 704px){
+
+    .filterDifferRow{
+        flex-wrap: wrap;
+    }
+
+    .filterDifferRow .filterInputParent{
+        width: calc(50% - 10px);
+        flex-wrap: wrap;
     }
 
 }
@@ -590,6 +590,22 @@
         justify-content: center;
         align-items: center;
         position: relative;
+    }
+}
+
+@media (max-width: 400px){
+    .filterRow:not(.filterDifferRow){
+        flex-direction: column;
+    }
+
+    .filterInputParent{
+        width: 100%;
+    }
+    
+    .datePickerImg{
+        width: 15px;
+        height: 15px;
+        right: 7px;
     }
 }
 

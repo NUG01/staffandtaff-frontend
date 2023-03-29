@@ -149,7 +149,7 @@ export default function Filter({expanded, setChosenCity}){
             </div>
 
 
-            <div className={styles.filterRow}>
+            <div className={`${styles.filterRow} ${styles.filterDifferRow}`}>
                 <div className={`${styles.datePickerHolder} ${styles.filterInputParent}`}>
                     <label htmlFor="">Date de début</label>
                     <DatePicker 
@@ -187,7 +187,7 @@ export default function Filter({expanded, setChosenCity}){
 
             <h5>Fourchette salariale</h5>
 
-            <div className={styles.filterRow}>
+            <div className={`${styles.filterRow} ${styles.filterDifferRow}`}>
 
                 <div className={`${styles.filterInputParent}`}>         
                     <label htmlFor="">Min</label>

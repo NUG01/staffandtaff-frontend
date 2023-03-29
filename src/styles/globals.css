@@ -421,7 +421,10 @@ header.scrolled {
 }
 
 .mobile-nav a{
+  width: 100%;
   color: black !important;
+  padding: 5px 0px;
+  text-align: center;
 }
 
 select{

@@ -98,7 +98,6 @@ export default function Banner({callBack}) {
                 <form onSubmit={formSubmit} className={styles.searchContainer}>
                     <div className={styles.filterHolder}>
                         <input type="text" placeholder="Trouver un emploi près de chez soi" id="search"/>
-                        <Filter expanded={expanded} setChosenCity={setChosenCity}/>
                     </div>
                     <FaSearch className={styles.searchButton}/>
                     <div className={styles.filterButton} onClick={()=> checkExpandedFilter()}>
@@ -108,6 +107,7 @@ export default function Banner({callBack}) {
                         <span>RECHERCHE</span>
                         <FaSearch className={styles.mobileSearchButton}/>
                     </button>
+                    <Filter expanded={expanded} setChosenCity={setChosenCity}/>
                 </form>
             </div>
         </div>
