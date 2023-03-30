@@ -1,8 +1,9 @@
 import { useRef, useState } from "react";
 import axios from '@/lib/axios';
+import { useAjax } from "@/hooks/ajax";
 
-export default function CheckoutForm({isLoading, intent, user, stripe, cardNumber, numberVal, expVal, cvcVal, setPaymentSuccess }) {
-
+export default function CheckoutForm({isLoading, intent, user, stripe, cardNumber, numberVal, expVal, cvcVal, setPaymentSuccess, jobData, companyData }) {
+    const {sendMediaData} = useAjax()
 	const form = useRef()
 
 	const [selectedProduct, setProduct] = useState('price_1Mk5DOGAxhWdhlP53UxnOElf')
@@ -16,13 +17,13 @@ export default function CheckoutForm({isLoading, intent, user, stripe, cardNumbe
 			setError('Error')
 			return
 		}else{
-			form.current.classList.add('disabledSection')
+			document.body.classList.add('disabledSection')
 			setError('')
 			const { setupIntent, error } = await stripe.confirmCardSetup(
 				intent.intent.client_secret, {
 					payment_method: {
 						card: cardNumber,
-						billing_details: { name: user.name }
+						billing_details: { name: user.data.name }
 					}
 				}
 			);
@@ -36,7 +37,21 @@ export default function CheckoutForm({isLoading, intent, user, stripe, cardNumbe
 				payment_method: setupIntent.payment_method,
 				// Plan id refers element numeration
 				plan_id: 'plan_4'
-			}).then(()=> setPaymentSuccess(true))
+			}).then(()=> {
+
+				let formData = new FormData()
+				Object.keys(jobData).forEach((item, index)=>{
+					console.log(item)
+					console.log(Object.values(jobData)[index])
+					formData.append(item, Object.values(jobData)[index])
+				})
+				
+                sendMediaData(`/api/v1/job/store/${companyData.id}`, formData, (res)=> {
+					setPaymentSuccess(true)
+                    document.body.classList.remove('disabledSection')
+                })
+
+			})
 		}
 
 	}

@@ -5,7 +5,7 @@ import axios from '@/lib/axios'
 import Axios from 'axios';
 import { useAjax } from '@/hooks/ajax';
 
-export default function RecruiterFlow({styles, nextButton, className, companyData, galleryPictures, setNewData, industries}){
+export default function RecruiterFlow({styles, nextButton, className, companyData, galleryPictures, setNewData, industries, jobData}){
     const logo = useRef()
     
     const [searching, setSearching] = useState(false)
@@ -72,6 +72,9 @@ export default function RecruiterFlow({styles, nextButton, className, companyDat
     const lastRequest = useRef(null)
 
     function setCityFunc(item, city_name){
+        jobData.longitude = item.longitude
+        jobData.latitude = item.latitude
+        jobData.city_name = item.id
         setCitySelected(true)
         setCities([])
         cityInp.current.value = item.id
@@ -106,6 +109,7 @@ export default function RecruiterFlow({styles, nextButton, className, companyDat
 
     function setCountry(e){
         setCurrCountry(e.target.value)
+        jobData.country_code = e.target.value
         companyData.country = e.target.value
         setCitySelected(undefined)
         cityInp.current.value = ''

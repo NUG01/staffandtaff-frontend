@@ -5,11 +5,14 @@ import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
 
 export default function ({styles, nextButton, className, setStep, companyData, jobData, setNewJobData, positions}){
+
     const [wordCount, setWords] = useState(0)
-    console.log(positions)
-    console.log(companyData.industry)
+    
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
+    
+    const [startPickerDate, setStartPickerDate] = useState(null)
+    const [endPickerDate, setEndPickerDate] = useState(null)
 
     useEffect(()=>{
         setNewJobData('start_date', startDate)
@@ -23,7 +26,45 @@ export default function ({styles, nextButton, className, setStep, companyData, j
         setWords(e.target.value.length)
         setNewJobData('description', e.target.value)
     }
+
+    let jobPositions = []
     
+    if(companyData.logo != undefined){
+        
+        if(companyData.industry[0].name.toLowerCase() == 'restauration'){
+    
+            for(var i=0; i < positions.length; i++){
+                if(positions[i].restaurant == 1) jobPositions.push(positions[i])
+            }
+
+        }else{
+
+            for(var i=0; i < positions.length; i++){
+                if(positions[i].hotel == 1) jobPositions.push(positions[i])
+            }
+
+        }
+    }
+
+    function setDate(date, end){
+        var dateObj = new Date(date);
+        var month = dateObj.getMonth() + 1;
+        var day = dateObj.getDate();
+        var year = dateObj.getFullYear();
+        var newData = Date.parse(date);
+
+        // Generates timestamp
+        // var newDated = new Date( year, month - 1, day);
+        // console.log(newDated.getTime());
+
+        if(day.toString().length == 1) day = `0${day}`
+        if(month.toString().length == 1) month = `0${month}`    
+
+        
+        end ? setEndDate(year + "-" + month + "-" + day) : setStartDate(year + "-" + month + "-" + day)
+        end ? setEndPickerDate(date) : setStartPickerDate(date)
+    }
+
     return(
         <form className={`${styles.form} ${className}`}>
             <div className={styles.intro}>
@@ -35,7 +76,7 @@ export default function ({styles, nextButton, className, setStep, companyData, j
             
             {companyData.logo != undefined && (
                 <section className={styles.showCase}>
-                    <img src={`http://localhost:8000/storage${companyData.logo}`} alt="" />
+                    <img src={`http://localhost:8000/storage/${companyData.logo}`} alt="" />
                     <div className={styles.showCaseInfo}>
                         <h1>{companyData.name}</h1>
                         <p className={styles.industryName}>{companyData.industry[0].name}</p>
@@ -59,7 +100,11 @@ export default function ({styles, nextButton, className, setStep, companyData, j
                 <div className={styles.inputParent}>
                     <select defaultValue={""} onChange={e => e.target.classList.remove('input-error')} onInput={(e)=> setNewJobData('position', e.target.value)} className='required-record'>
                         <option value="" disabled>Poste</option>
-                        <option value="1">value</option>
+                        {jobPositions.map(item =>{
+                            return(
+                                <option key={item.id} value={item.id}>{item.name}</option>
+                            )
+                        })}
                     </select>
                 </div>
             </section>
@@ -67,17 +112,17 @@ export default function ({styles, nextButton, className, setStep, companyData, j
             <section className={styles.section}>
                 <h4>Quel salaire proposez-vous ?<span> *</span></h4>
                 <div className={`${styles.inputParent} ${styles.multipleChild}`}>
-                    <input type="text" placeholder="Salaire" onChange={e => e.target.classList.remove('input-error')} onInput={(e)=> setNewJobData('salary', e.target.value)} className='required-record'/>
+                    <input type="number" placeholder="Salaire" onChange={e => e.target.classList.remove('input-error')} onInput={(e)=> setNewJobData('salary', e.target.value)} className='required-record'/>
                     <select defaultValue={""} onChange={e => e.target.classList.remove('input-error')} onInput={(e)=> setNewJobData('currency', e.target.value)} className='required-record'>
                         <option value="" disabled>Devise</option>
-                        <option value="0">CHF</option>
-                        <option value="1">EUR</option>
+                        <option value="1">CHF</option>
+                        <option value="2">EUR</option>
                     </select>
-                    <select defaultValue={""} onChange={e => e.target.classList.remove('input-error')} onInput={(e)=> setNewJobData('period', e.target.value)} className='required-record'>
+                    <select defaultValue={""} onChange={e => e.target.classList.remove('input-error')} onInput={(e)=> setNewJobData('period_type', e.target.value)} className='required-record'>
                         <option value="" disabled>Type de rémunération</option>
-                        <option value="0">Par heure</option>
-                        <option value="1">Par mois</option>
-                        <option value="2">Par an</option>
+                        <option value="1">Par heure</option>
+                        <option value="2">Par mois</option>
+                        <option value="3">Par an</option>
                     </select>
                 </div>
             </section>
@@ -87,16 +132,16 @@ export default function ({styles, nextButton, className, setStep, companyData, j
                 <div className={`${styles.inputParent} ${styles.multipleChild}`}>
                     <select defaultValue={""} className={styles.selectF} onChange={e => e.target.classList.remove('input-error')} onInput={(e)=> setNewJobData('type_of_contract', e.target.value)}>
                         <option value="" disabled>Type de contrat</option>
-                        <option value="0">Contrat à durée déterminé</option>
-                        <option value="1">Contrat à durée indéterminé</option>
+                        <option value="1">Contrat à durée déterminé</option>
+                        <option value="2">Contrat à durée indéterminé</option>
                     </select>
                     <div className={styles.datePickerHolder}>
                         <DatePicker 
-                            selected={startDate}
+                            selected={startPickerDate}
                             onKeyDown={(e) => {
                               e.preventDefault();
                             }}
-                            onChange={date => setStartDate(date)}
+                            onChange={date => setDate(date)}
                             dateFormat='dd/MM/yyyy'
                             showYearDropdown
                             scrollableMonthYearDropdown
@@ -106,11 +151,11 @@ export default function ({styles, nextButton, className, setStep, companyData, j
                     </div>
                     <div className={styles.datePickerHolder}>
                         <DatePicker 
-                            selected={endDate}
+                            selected={endPickerDate}
                             onKeyDown={(e) => {
                               e.preventDefault();
                             }}
-                            onChange={date => setEndDate(date)}
+                            onChange={date => setDate(date, true)}
                             dateFormat='dd/MM/yyyy'
                             showYearDropdown
                             scrollableMonthYearDropdown
@@ -126,8 +171,8 @@ export default function ({styles, nextButton, className, setStep, companyData, j
                 <div className={styles.inputParent}>
                     <select defaultValue={""} onChange={e => e.target.classList.remove('input-error')} onInput={(e)=> setNewJobData('type_of_attendance', e.target.value)} className='required-record'>
                         <option value="" disabled>Type de poste</option>
-                        <option value="0">Présentiel</option>
-                        <option value="1">Distanciel </option>
+                        <option value="1">Présentiel</option>
+                        <option value="2">Distanciel </option>
                     </select>
                 </div>
             </section>
@@ -137,8 +182,8 @@ export default function ({styles, nextButton, className, setStep, companyData, j
                 <div className={styles.inputParent}>
                     <select defaultValue={""} onChange={e => e.target.classList.remove('input-error')} onInput={(e)=> setNewJobData('availability', e.target.value)} className='required-record'>
                         <option value="" disabled>Type de contrat</option>
-                        <option value="0">Temps plein</option>
-                        <option value="1">Temps partiel </option>
+                        <option value="1">Temps plein</option>
+                        <option value="2">Temps partiel </option>
                     </select>
                 </div>
             </section>

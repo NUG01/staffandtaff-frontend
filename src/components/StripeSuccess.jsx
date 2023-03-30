@@ -20,9 +20,6 @@ export default function StripeSuccess({isLogged, user, logout, styles}) {
                 </div>
             <div className={styles.adArea}></div>
             </div>
-
-            
-        <Footer />
         </>
 	);
 

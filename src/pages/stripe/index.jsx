@@ -14,7 +14,7 @@ import CheckoutForm from "@/components/CheckoutForm";
 // const stripePromise = loadStripe("pk_test_51MRB4YGAxhWdhlP58Xjttd8NaeIGqSbVL36xEgi2yOtk16IIilw3qYMtDdqjelbCsfRFkPQlU13Ms9pODFzQugud00u6d4SNyh");
 
 
-export default function App({ user, isLogged, className, setShowPlans, setShowStripe }) {
+export default function App({ user, isLogged, className, setShowPlans, setShowStripe, jobData, companyData }) {
 	const [isLoading, setLoading] = useState(true)
 	const [secretIntent, setIntent] = useState(false)
 	const [duplicatedStripe, setStripe] = useState(false)
@@ -131,7 +131,7 @@ export default function App({ user, isLogged, className, setShowPlans, setShowSt
 			<main className={`stripe mainWrapper ${className}`}>
 				<h3>Payer</h3>
 
-				<CheckoutForm isLoading={isLoading} intent={secretIntent} user={user} stripe={duplicatedStripe} cardNumber={duplicatedCardNumber} numberVal={cardNumberValidation} expVal={cardExpiryValidation} cvcVal={cardCvcValidation} setPaymentSuccess={setPaymentSuccess}/>
+				<CheckoutForm jobData={jobData} isLoading={isLoading} intent={secretIntent} user={user} stripe={duplicatedStripe} cardNumber={duplicatedCardNumber} numberVal={cardNumberValidation} expVal={cardExpiryValidation} cvcVal={cardCvcValidation} setPaymentSuccess={setPaymentSuccess} companyData={companyData}/>
 
                 <h1 className={styles.mainHeader}>Foire Aux Questions</h1>
                 <h2 className={styles.intro}>Avez-vous des questions ? Nous sommes là pour vous répondre.</h2>

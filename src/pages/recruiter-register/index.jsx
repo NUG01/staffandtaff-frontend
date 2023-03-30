@@ -42,27 +42,27 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
 
     const galleryPictures = []
 
-    let companyData = {
+    const companyData = useRef({
         name: '', company_name: '', logo: '', industry: '', country: '', city: '', number_of_employees: '', description: '', website: '', instagram: '', linkedin: '', facebook: '', twitter: '', pinterest: '', youtube: '', tiktok: '', gallery: [], address: ''
-    }
+    })
 
-    let jobData = {
-        start_date: null, end_date: null, position: '', salary: '', curreny: '', type_of_contract: '', type_of_attendance: '', period_type: '', period: '', availability: ''
-    }
+    const jobData = useRef({
+        start_date: null, end_date: null, position: '', salary: '', currency: '', type_of_contract: '', type_of_attendance: '', period_type: '', availability: ''
+    })
         
     function setNewData (key, value, arr){
 
         if(arr) {
-            companyData[key].push(value)
+            companyData.current[key].push(value)
             return
         }
 
-        companyData[key] = value
+        companyData.current[key] = value
     }
         
     function setNewJobData (key, value){
         jobAjax = false
-        jobData[key] = value
+        jobData.current[key] = value
     }
 
     async function sendEstablishmentData(stepNum){
@@ -70,15 +70,14 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
 
         if(validated) {
             document.body.classList.add('disabledSection')
-
-            let formData = new FormData()
-            Object.keys(companyData).forEach((item, index)=>{
+            let formData = new FormData()   
+            Object.keys(companyData.current).forEach((item, index)=>{
                 if(item == 'gallery') {
-                    Object.values(companyData)[index].forEach(item => {
+                    Object.values(companyData.current)[index].forEach(item => {
                         formData.append('file[]', item)
                     })
                 }else{
-                    formData.append(item, Object.values(companyData)[index])
+                    formData.append(item, Object.values(companyData.current)[index])
                 }
             })
             if(uploadedData.current.id) {
@@ -107,36 +106,15 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
     async function sendJobData(){
         const validated = useCheckRequired({parentClass: 'job-register'})
 
-        // if(validated) {
-        //     document.body.classList.add('disabledSection')
+        if(validated) {
 
-        //     let formData = new FormData()
-        //     Object.keys(companyData).forEach((item, index)=>{
-        //         formData.append(item, Object.values(companyData)[index])
-        //     })
-        //     if(uploadedData.current.id) {
-        //         formData.append('_method', 'PATCH')
-        //         await sendMediaData(`/api/v1/job/update/${uploadedData.current.id}`, formData, (res)=> {
-        //             setShowPlans(true); 
-        //             scrollTo(0, 0)
-        //             uploadedData.current = res.data.data
-        //             document.body.classList.remove('disabledSection')
-        //         })
-        //         return
-        //     }else{
-        //         await sendMediaData('/api/v1/job/store', formData, (res)=> {
-        //             setShowPlans(true); 
-        //             scrollTo(0, 0)
-        //             uploadedData.current = res.data.data
-        //             document.body.classList.remove('disabledSection')
-        //         })
-        //     }
-                
-        // }else{
-        //     scrollTo(0, 0)
-        // }
+            if(validated){
+                setShowPlans(true); 
+                scrollTo(0, 0)
+            }
+            
+        }
 
-        console.log(jobData)
     }
 
     return(
@@ -163,7 +141,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                 {isLogged === 1 && user && user.data.verified && (
                     <>
 
-                        <RecruiterFlow className={`${step != 2 ? styles.hideSection : ''} establishment-register`} styles={styles} step={step} setStep={setStep} companyData={companyData} galleryPictures={galleryPictures} setNewData={setNewData} industries={industries}
+                        <RecruiterFlow className={`${step != 2 ? styles.hideSection : ''} establishment-register`} styles={styles} step={step} setStep={setStep} companyData={companyData.current} galleryPictures={galleryPictures} setNewData={setNewData} industries={industries} jobData={jobData.current}
         
                             nextButton={
                                 <div className={styles.nextButton} onClick={()=> {sendEstablishmentData(3)}}>
@@ -175,7 +153,7 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                         />
                         
         
-                        <PostJob className={`${step != 3 || showPlans || showStripe ? styles.hideSection : ''} job-register`} styles={styles} step={step} setStep={setStep} companyData={uploadedData.current} jobData={jobData} setNewJobData={setNewJobData} positions={positions}
+                        <PostJob className={`${step != 3 || showPlans || showStripe ? styles.hideSection : ''} job-register`} styles={styles} step={step} setStep={setStep} companyData={uploadedData.current} jobData={jobData.current} setNewJobData={setNewJobData} positions={positions}
         
                             nextButton={
                                 <div className={styles.nextButton} onClick={()=> sendJobData()}>
@@ -186,9 +164,9 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
         
                         />
         
-                        <Plans className={!showPlans || showStripe ? styles.hideSection : ''} inheritedStyles={styles} step={step} setStep={setStep} setShowStripe={setShowStripe} setShowPlans={setShowPlans} />
+                        <Plans className={!showPlans || showStripe ? styles.hideSection : ''} inheritedStyles={styles} step={step} setStep={setStep} setShowStripe={setShowStripe} setShowPlans={setShowPlans}/>
         
-                        <Stripe className={!showStripe || showPlans ? styles.hideSection : ''} inheritedStyles={styles} step={step} setShowPlans={setShowPlans} setShowStripe={setShowStripe}/>
+                        <Stripe className={!showStripe || showPlans ? styles.hideSection : ''} inheritedStyles={styles} step={step} setShowPlans={setShowPlans} setShowStripe={setShowStripe} jobData={jobData.current} user={user} companyData={uploadedData.current}/>
                     </>
                 )}
 
