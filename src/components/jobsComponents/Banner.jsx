@@ -39,7 +39,12 @@ export default function Banner({callBack}) {
                     filterData[inputs[i].id] = newDate.getTime()
                     urlKeys.push(inputs[i].id)
                     urlValues.push(newDate.getTime())
-                    filterUrl += `&${inputs[i].id}=${newDate.getTime()}`
+
+                    if(isNaN(newDate.getTime())){
+                        filterUrl += `&${inputs[i].id}=`
+                    }else{
+                        filterUrl += `&${inputs[i].id}=${newDate.getTime()}`
+                    }
 
                 }else{
 
@@ -84,7 +89,6 @@ export default function Banner({callBack}) {
     }
 
     function checkExpandedFilter(){
-        if(document.querySelector(styles.showCityList)) console.log('asd')
         setExpanded(!expanded)
     }
 

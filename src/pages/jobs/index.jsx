@@ -10,6 +10,7 @@ import {countries} from '@/components/countries';
 import styles from '@/styles/homepage/homepage.module.css'
 
 export default function Jobs({jobDataList, isLogged, user, logout}, props) {
+
     let tipsData = {
         "Category 1":[
           {
@@ -51,7 +52,7 @@ export default function Jobs({jobDataList, isLogged, user, logout}, props) {
               
             <h1 className={styles.jobListHeading}>Trouver un emploi</h1>
 
-            {/* <JobList data={jobDataList}/> */}
+            <JobList data={jobDataList}/>
 
             <GeneralInformation />
 
@@ -67,17 +68,25 @@ export default function Jobs({jobDataList, isLogged, user, logout}, props) {
 export async function getServerSideProps(context){
     let data;
 
-    if(context.resolvedUrl.includes('/jobs?search=&')){
-        console.log(context.resolvedUrl)
+    if(context.resolvedUrl.includes('/jobs?search=')){
+        const response = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL+'/api/v1'+context.resolvedUrl)
+        data = await response.json()
     }else{
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs`)
         data = await response.json()
-        console.log(response)
     }
 
-    return{
-        props: {
-            jobDataList: data.data,
-        }
+    if(data.data){
+      return{
+          props: {
+              jobDataList: data.data,
+          }
+      }
+    }else{
+      return{
+          props: {
+              jobDataList: data,
+          }
+      }
     }
 }

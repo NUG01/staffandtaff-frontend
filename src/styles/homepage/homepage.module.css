@@ -255,7 +255,6 @@
     display: flex;
     flex-wrap: wrap;
     background-color: white;
-    color: black;
     cursor: pointer;
     text-transform: capitalize;
     flex-direction: column;
@@ -264,6 +263,7 @@
 
 .mainpageList .jobHolder a{
     padding: 20px 15px;
+    color: black;
 }
 
 .jobTop {
