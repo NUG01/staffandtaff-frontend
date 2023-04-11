@@ -1,6 +1,6 @@
 import Banner from '@/components/jobsComponents/Banner'
 import JobList from '@/components/jobsComponents/JobList'
-import GeneralInformation from '@/components/jobsComponents/generalInformation'
+import GeneralInformation from '@/components/jobsComponents/GeneralInformation'
 import Header from '@/pages/header'
 import Footer from '@/pages/footer'
 import Head from 'next/head'
