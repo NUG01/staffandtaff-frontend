@@ -431,11 +431,11 @@ select{
   background-color: transparent;
 }
 
-.auth-nav{
-  display: none;
-}
-
 @media(max-width: 992px) {
+  .hover-panel{
+    display: none;
+  }
+
   .logout-auth-nav{
     display: flex;
   }
@@ -586,6 +586,9 @@ main.stripe h3{
 }
 
 @media(max-width: 576px){
+  .account-panel-wrapper span{
+    display: none;
+  }
   .input{
     width: 100%;
   }
@@ -632,6 +635,7 @@ main.stripe h3{
 .account-panel:hover .hover-panel{
   pointer-events: unset;
   opacity: 1;
+  display: flex;
 }
 
 .hover-panel{

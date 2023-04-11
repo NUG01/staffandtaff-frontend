@@ -8,7 +8,7 @@ import AccountPanelIcon from '@/components/Icons'
 
 export default function Header({active, isLogged, user, isMobile}) {
     const {sendData} = useAjax()
-    console.log(user)
+
     const userAuthCheck = useSelector(state => state.userAuthData.value)
     
     const dispatch = useDispatch()
@@ -69,12 +69,9 @@ export default function Header({active, isLogged, user, isMobile}) {
 
             {userAuthCheck && user &&(
                 <>
-                    {/* <div className={`${active === 'login' || active === 'register' ? 'hide-nav' : 'auth-nav'}`} onClick={logout}>
-                        <p>DÉCONNEXION</p>
-                    </div> */}
                     <div className={`${active === 'login' || active === 'register' ? 'hide-nav' : 'account-panel'}`}>
                         <div className='account-panel-wrapper'>
-                            <AccountPanelIcon /> Bonjour, {user.data.name}
+                            <AccountPanelIcon /> <span>Bonjour, {user.data.name}</span>
                             <div className='hover-panel'>
                                 <Link href="/">
                                     <img src="profile.png" alt="" /> My Profile
@@ -96,7 +93,7 @@ export default function Header({active, isLogged, user, isMobile}) {
 
             <FaBars className='menu-toggler' onClick={() => setExpanded(!expanded)} />
             <div className={`mobile-nav ${expanded ? 'expanded' : ''}`}>
-                <Link href="/">Emplois</Link>
+                <Link href="/jobs">Emplois</Link>
                 <Link href="/about">À propos de nous</Link>
                 <Link href="/tips">Conseils</Link>
                 <Link href="/faq">F.A.Q</Link>
