@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { useState, useRef } from 'react'
 import styles from '@/styles/register/register.module.css'
 import axios from '@/lib/axios'
+import InputError from '@/components/InputError'
 
 export default function RegisterForm({isLogged, user, register, type, setStep, className}) {
 

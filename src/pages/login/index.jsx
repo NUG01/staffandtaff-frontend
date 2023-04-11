@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
+import InputError from '@/components/InputError'
 
 import Header from '@/pages/header';
 import Footer from '@/pages/footer';

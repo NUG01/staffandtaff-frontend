@@ -6,6 +6,7 @@ import Head from 'next/head'
 import styles from '@/styles/register/register.module.css'
 import Header from '@/pages/header';
 import Footer from '@/pages/footer';
+import InputError from '@/components/InputError'
 
 const Register = ({isLogged, user, logout, register}) => {
     // const router = useRouter()

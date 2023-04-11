@@ -6,6 +6,7 @@ import Footer from '@/pages/footer';
 import styles from '@/styles/password/password.module.css'
 import Head from 'next/head';
 import Router from 'next/router';
+import InputError from '@/components/InputError'
 
 const ForgotPassword = ({isLogged, user, logout})=> {
     const { forgotPassword } = useAuth({ middleware: 'guest' })

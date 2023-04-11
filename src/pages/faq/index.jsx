@@ -6,7 +6,6 @@ import { useRef } from 'react';
 import Link from 'next/link';
 
 export default function Faq({isLogged, user, logout, search, data}) {
-    console.log(data)
     const parent = useRef()
     const form = useRef()
     const input = useRef()
@@ -47,6 +46,8 @@ export default function Faq({isLogged, user, logout, search, data}) {
         }
       ]
     }
+
+    // faqData = data.faqs
 
     let faqKeys = Object.keys(faqData)
     let faqValues = Object.values(faqData)
@@ -93,10 +94,10 @@ export default function Faq({isLogged, user, logout, search, data}) {
                         return(
                             <div key={index} className={`expandAccordion ${styles.accordion}`} ref={parent} >
                                 <h1 className={styles.header} onClick={()=> toggleAccordion(mainIndex, index)}>
-                                    {item.heading}
+                                    {item.question}
                                 </h1>
                                 <div className={styles.content}>
-                                    {item.content}
+                                    {item.answer}
                                 </div>
                             </div>
                         )
@@ -206,6 +207,9 @@ export async function getServerSideProps(context){
     let data
 
     if(context.query.search){
+        console.log(context.query.search);
+        // const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/faq`)
+        // data = await response.json()
         return{
             props: {
                 search: context.query.search
@@ -214,7 +218,6 @@ export async function getServerSideProps(context){
     }else{
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/faq`)
         data = await response.json()
-        console.log(data)
         return{
             props: {
                 search: false,
