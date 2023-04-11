@@ -14,16 +14,17 @@ import Plans from '@/components/registerComponents/Plans.jsx';
 import Stripe from '@/pages/stripe';
 import { useAjax } from '@/hooks/ajax';
 import useCheckRequired from '@/hooks/requiredInputs';
+import { useRef } from 'react';
 
-export default function recruiterRegister({isLogged, user, login, logout, register}){
+export default function recruiterRegister({isLogged, user, login, logout, register, industries, positions}){
     const [step, setStep] = useState(1)
     const [showPlans, setShowPlans] = useState(false)
     const [showStripe, setShowStripe] = useState(false)
+    const uploadedData = useRef({})
 
-    let companyAjax = false
     let jobAjax = false
 
-    const {sendMediaData, sendData} = useAjax()
+    const {sendMediaData, sendData, patchMediaData} = useAjax()
 
     const maxSteps = 3
 
@@ -41,79 +42,79 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
 
     const galleryPictures = []
 
-    const [data, setData] = useState({
-        establishment_name: '',
-        company_name: '',  
-        logo: '',
-        industry: '',
-        country: '',
-        city: '',
-        number_of_employees: '',
-        description: '',
-        website: '',
-        instagram: '',
-        linkedin: '',
-        facebook: '',
-        twitter: '',
-        pinterest: '',
-        youtube: '',
-        tiktok: '',
-        gallery: [],
+    const companyData = useRef({
+        name: '', company_name: '', logo: '', industry: '', country: '', city: '', number_of_employees: '', description: '', website: '', instagram: '', linkedin: '', facebook: '', twitter: '', pinterest: '', youtube: '', tiktok: '', gallery: [], address: ''
     })
 
-    const [jobData, setJobData] = useState({
-        start_date: null,
-        end_date: null,
-        first: '',
-        second: '',
-        third: '',
-        fourth: '',
-        fifth: '',
-        sixth: '',
-        seventh: '',
-        eighth: ''
+    const jobData = useRef({
+        start_date: null, end_date: null, position: '', salary: '', currency: '', type_of_contract: '', type_of_attendance: '', period_type: '', availability: ''
     })
         
     function setNewData (key, value, arr){
-        companyAjax = false
-        
+
         if(arr) {
-            data[key].push(value)
+            companyData.current[key].push(value)
             return
         }
 
-        data[key] = value
+        companyData.current[key] = value
     }
         
     function setNewJobData (key, value){
         jobAjax = false
-        jobData[key] = value
+        jobData.current[key] = value
     }
 
-    async function nextStep(stepNum){
-        const validated = useCheckRequired()
+    async function sendEstablishmentData(stepNum){
+        const validated = useCheckRequired({parentClass: 'establishment-register'})
 
         if(validated) {
-            // scrollTo(0, 0)
-            // setStep(stepNum)
-        }
-
-        if(!companyAjax){
-            let formData = new FormData()
-            
-            Object.keys(data).forEach((item, index)=>{
+            document.body.classList.add('disabledSection')
+            let formData = new FormData()   
+            Object.keys(companyData.current).forEach((item, index)=>{
                 if(item == 'gallery') {
-                    Object.values(data)[index].forEach(item => {
+                    Object.values(companyData.current)[index].forEach(item => {
                         formData.append('file[]', item)
                     })
                 }else{
-                    formData.append(item, Object.values(data)[index])
+                    formData.append(item, Object.values(companyData.current)[index])
                 }
             })
-    
-            await sendMediaData('/api/v1/establishment/store', formData)
-            companyAjax = true
+            if(uploadedData.current.id) {
+                formData.append('_method', 'PATCH')
+                await sendMediaData(`/api/v1/establishment/update/${uploadedData.current.id}`, formData, (res)=> {
+                    scrollTo(0, 0)
+                    setStep(stepNum)
+                    uploadedData.current = res.data.data
+                    document.body.classList.remove('disabledSection')
+                })
+                return
+            }else{
+                await sendMediaData('/api/v1/establishment/store', formData, (res)=> {
+                    scrollTo(0, 0)
+                    setStep(stepNum)
+                    uploadedData.current = res.data.data
+                    document.body.classList.remove('disabledSection')
+                })
+            }
+                
+        }else{
+            scrollTo(0, 0)
         }
+    }
+
+    async function sendJobData(){
+        const validated = useCheckRequired({parentClass: 'job-register'})
+
+        if(validated) {
+
+            if(validated){
+                setShowPlans(true); 
+                scrollTo(0, 0)
+            }
+            
+        }
+
     }
 
     return(
@@ -140,10 +141,10 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                 {isLogged === 1 && user && user.data.verified && (
                     <>
 
-                        <RecruiterFlow className={step != 2 ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep} data={data} galleryPictures={galleryPictures} setNewData={setNewData}
+                        <RecruiterFlow className={`${step != 2 ? styles.hideSection : ''} establishment-register`} styles={styles} step={step} setStep={setStep} companyData={companyData.current} galleryPictures={galleryPictures} setNewData={setNewData} industries={industries} jobData={jobData.current}
         
                             nextButton={
-                                <div className={styles.nextButton} onClick={()=> {nextStep(3)}}>
+                                <div className={styles.nextButton} onClick={()=> {sendEstablishmentData(3)}}>
                                     suivant
                                     <i className="fa-solid fa-chevron-right"></i>
                                 </div>
@@ -152,10 +153,10 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
                         />
                         
         
-                        <PostJob className={step != 3 || showPlans || showStripe ? styles.hideSection : ''} styles={styles} step={step} setStep={setStep} data={data} jobData={jobData} setNewJobData={setNewJobData}
+                        <PostJob className={`${step != 3 || showPlans || showStripe ? styles.hideSection : ''} job-register`} styles={styles} step={step} setStep={setStep} companyData={uploadedData.current} jobData={jobData.current} setNewJobData={setNewJobData} positions={positions}
         
                             nextButton={
-                                <div className={styles.nextButton} onClick={()=> {setShowPlans(true); scrollTo(0, 0)}}>
+                                <div className={styles.nextButton} onClick={()=> sendJobData()}>
                                     suivant
                                     <i className="fa-solid fa-chevron-right"></i>
                                 </div>
@@ -163,9 +164,9 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
         
                         />
         
-                        <Plans className={!showPlans || showStripe ? styles.hideSection : ''} inheritedStyles={styles} step={step} setStep={setStep} setShowStripe={setShowStripe} setShowPlans={setShowPlans} />
+                        <Plans className={!showPlans || showStripe ? styles.hideSection : ''} inheritedStyles={styles} step={step} setStep={setStep} setShowStripe={setShowStripe} setShowPlans={setShowPlans}/>
         
-                        <Stripe className={!showStripe || showPlans ? styles.hideSection : ''} inheritedStyles={styles} step={step} setShowPlans={setShowPlans} setShowStripe={setShowStripe}/>
+                        <Stripe className={!showStripe || showPlans ? styles.hideSection : ''} inheritedStyles={styles} step={step} setShowPlans={setShowPlans} setShowStripe={setShowStripe} jobData={jobData.current} user={user} companyData={uploadedData.current}/>
                     </>
                 )}
 
@@ -175,4 +176,19 @@ export default function recruiterRegister({isLogged, user, login, logout, regist
         </>
     )
 
+}
+
+export async function getServerSideProps(){
+    const industryResponse = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/industries`)
+    let industryData = await industryResponse.json()
+    
+    const positionResponse = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/positions`)
+    let positionData = await positionResponse.json()
+
+     return{
+        props: {
+            industries: industryData.data,
+            positions: positionData.data,
+        }
+    }
 }

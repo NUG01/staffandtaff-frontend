@@ -1,7 +1,7 @@
-export default function useCheckRequired(){
+export default function useCheckRequired({parentClass}){
     let validated = true
     
-    document.querySelectorAll('.required-record').forEach(inp => {
+    document.querySelector(`.${parentClass}`).querySelectorAll('.required-record').forEach(inp => {
         if(inp.value === '') {
             if(inp.type === 'file'){
                 inp.parentNode.classList.add('inputParentError')
@@ -18,7 +18,6 @@ export default function useCheckRequired(){
             validated = false
         }
     })
-    validated = true
 
     return validated
 }

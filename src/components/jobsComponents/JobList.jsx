@@ -23,16 +23,25 @@ export default function JobList({data}) {
     }, [])
 
     async function loadMore(e){
+        e.target.style.opacity = '0.4'; 
+        e.target.style.pointerEvents = 'none';
+
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs`)
-        const jobsData = await response.json()
+        const { data } = await response.json()
+
+        console.log(data);
 
         e.target.style.opacity = '1'; 
         e.target.style.pointerEvents = 'unset'; 
 
-        setLoadedData([...loadedData, ...jobsData])
+        setLoadedData([...loadedData, ...data])
         setPage(page + 1)
 
-        dispatch(pushData([...loadedData, ...jobsData]))
+        dispatch(pushData([...loadedData, ...data]))
+    }
+
+    function addToFavourites(id){
+        alert(id)
     }
     
     return (
@@ -41,9 +50,9 @@ export default function JobList({data}) {
                 {
                     loadedData.map((item, index) =>{
                         return (
-                            <Link onClick={()=>localStorage.setItem("jobsScroll", scrollY)} href={`jobs/${item.id}`} key={item.id} className={styles.jobHolder}>
-                                <div className={styles.addToFavourites}></div>
-                                <div>
+                            <div key={item.id} className={styles.jobHolder}>
+                                <div className={styles.addToFavourites} onClick={()=> addToFavourites(item.id)}></div>
+                                <Link onClick={()=>localStorage.setItem("jobsScroll", scrollY)} href={`jobs/${item.id}`} >
                                     <div className={styles.jobTop}>
                                         <div className={styles.jobsDesc}>
                                             <div className={styles.name}>{item.id}</div>
@@ -74,14 +83,14 @@ export default function JobList({data}) {
                                             Start / End: <span>12.12.23-17.12.23</span>
                                         </div>
                                     </div>
-                                </div>
-                            </Link>
+                                </Link>
+                            </div>
                         )
                     })
                 }
             </div>
 
-            <div className={styles.loadMore} onClick={ (e) => {loadMore(e); e.target.style.opacity = '0.4'; e.target.style.pointerEvents = 'none';}}>
+            <div className={styles.loadMore} onClick={ (e) => {loadMore(e)}}>
                 LOAD MORE
             </div>
         </>

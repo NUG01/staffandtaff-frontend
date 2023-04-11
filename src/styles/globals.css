@@ -421,7 +421,10 @@ header.scrolled {
 }
 
 .mobile-nav a{
+  width: 100%;
   color: black !important;
+  padding: 5px 0px;
+  text-align: center;
 }
 
 select{
@@ -429,6 +432,10 @@ select{
 }
 
 @media(max-width: 992px) {
+  .hover-panel{
+    display: none;
+  }
+
   .logout-auth-nav{
     display: flex;
   }
@@ -579,6 +586,9 @@ main.stripe h3{
 }
 
 @media(max-width: 576px){
+  .account-panel-wrapper span{
+    display: none;
+  }
   .input{
     width: 100%;
   }
@@ -602,6 +612,72 @@ main.stripe h3{
   text-align: center;
   margin-top: 10px;
   width: 100%;
+}
+
+.account-panel{
+  padding: 10px 20px;
+  position: fixed;
+  transition: 0.3s;
+  right: 25px;
+  color: white;
+}
+
+.account-panel-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  padding: 5px;
+  position: relative;
+}
+
+.account-panel:hover .hover-panel{
+  pointer-events: unset;
+  opacity: 1;
+  display: flex;
+}
+
+.hover-panel{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0;
+  transform: translateY(100%);
+  width: 180px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.hover-panel a, .hover-panel div{
+  padding: 15px;
+  color: black !important;
+  display: flex;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.hover-panel a:hover{
+  background-color: var(--color-6);
+}
+
+.hover-panel a img, .hover-panel div img{
+  padding-right: 20px;
+}
+
+.account-panel svg{
+  filter: unset !important;
+  transition: 0.3s;
+}
+
+header.scrolled .account-panel svg path{
+  fill: var(--color-1)
+}
+
+header.scrolled .account-panel{
+  color: var(--color-1);
 }
 
 /* input[type=date]{

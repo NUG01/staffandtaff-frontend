@@ -1,6 +1,6 @@
 import Banner from '@/components/jobsComponents/Banner'
 import JobList from '@/components/jobsComponents/JobList'
-import GeneralInformation from '@/components/jobsComponents/GeneralInformation'
+import GeneralInformation from '@/components/jobsComponents/generalInformation'
 import Header from '@/pages/header'
 import Footer from '@/pages/footer'
 import Head from 'next/head'
@@ -9,12 +9,7 @@ import CountryJobs from '@/components/jobsComponents/CountryJobs'
 import { countries } from '@/components/countries'
 import styles from '@/styles/homepage/homepage.module.css'
 
-export default function Jobs({jobDataList, isLogged, user, logout}, props) {
-import axios from '@/lib/axios';
-import { useAjax } from '@/hooks/ajax';
-
-
-export default function Jobs({ jobDataList, isLogged, user, logout }) {
+export default function Jobs({ jobDataList, isLogged, user, logout }, props) {
     let tipsData = {
         'Category 1': [
             {
@@ -54,16 +49,7 @@ export default function Jobs({ jobDataList, isLogged, user, logout }) {
                 <title>Emplois</title>
             </Head>
 
-<<<<<<< HEAD
-            <Header isLogged={isLogged} user={user} active="job"/>
-=======
-            <Header
-                isLogged={isLogged}
-                user={user}
-                logout={logout}
-                active="job"
-            />
->>>>>>> da9eff3 (merge)
+            <Header isLogged={isLogged} user={user} active="job" />
 
             <Banner />
 
@@ -82,57 +68,34 @@ export default function Jobs({ jobDataList, isLogged, user, logout }) {
     )
 }
 
-<<<<<<< HEAD
-export async function getServerSideProps(context){
-    let sData;
-
-    if(context.query.search){
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${context.query.search}`)
-        sData = await response.json()
-    }else{
-<<<<<<< HEAD
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs`)
-        sData = await response.json()
-=======
-        // await getData('/api/v1/jobs', (res)=>{
-        //   jobData = res.data
-        //   jobData.push(res.data)
-        //   console.log(jobData)
-        // })
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users`)
-        const sData = await response.json()
-        jobData = sData
-=======
 export async function getServerSideProps(context) {
-    let data = []
+    let data
 
-    if (context.query.search) {
+    if (context.resolvedUrl.includes('/jobs?search=')) {
         const response = await fetch(
-            `https://jsonplaceholder.typicode.com/posts/${context.query.search}`,
-        )
-        const sData = await response.json()
-        data.push(sData)
-    } else {
-        const response = await fetch(
-            `https://jsonplaceholder.typicode.com/posts`,
+            process.env.NEXT_PUBLIC_BACKEND_URL +
+                '/api/v1' +
+                context.resolvedUrl,
         )
         data = await response.json()
->>>>>>> 2b74713 (merge)
->>>>>>> da9eff3 (merge)
+    } else {
+        const response = await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs`,
+        )
+        data = await response.json()
     }
 
-    return {
-        props: {
-<<<<<<< HEAD
-            jobDataList: sData,
-=======
-<<<<<<< HEAD
-            jobDataList: jobData,
->>>>>>> da9eff3 (merge)
+    if (data.data) {
+        return {
+            props: {
+                jobDataList: data.data,
+            },
         }
-=======
-            jobDataList: data,
-        },
->>>>>>> 2b74713 (merge)
+    } else {
+        return {
+            props: {
+                jobDataList: data,
+            },
+        }
     }
 }

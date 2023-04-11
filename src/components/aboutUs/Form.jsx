@@ -39,7 +39,6 @@ const Form = ({}) => {
         })
         .then((res) => {
           setSent(true)
-          console.log(res)
         }).catch(()=>{
           setFormError('failed text here')
           e.target.querySelector('input[type="submit"]').style.opacity = '1'

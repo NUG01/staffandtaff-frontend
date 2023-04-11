@@ -9,11 +9,9 @@ export default function Token({info, user}){
     let email = info.params[0].split('&')[0].split('=')[1]
 
     useEffect(()=>{
-        if(user && !user.data.verified){
-            sendData('/api/v1/verify-email', {code, email }, res => {
-                location.href = '/recruiter-register'
-            })
-        }
+        sendData('/api/v1/verify-email', {code, email }, res => {
+            location.href = '/recruiter-register'
+        })
     })
 
     return (

@@ -5,8 +5,8 @@ import styles from '@/styles/faq/faq.module.css'
 import { useRef } from 'react';
 import Link from 'next/link';
 
-export default function Faq({isLogged, user, logout, search}) {
-
+export default function Faq({isLogged, user, logout, search, data}) {
+    console.log(data)
     const parent = useRef()
     const form = useRef()
     const input = useRef()
@@ -203,6 +203,8 @@ export default function Faq({isLogged, user, logout, search}) {
 
 export async function getServerSideProps(context){
 
+    let data
+
     if(context.query.search){
         return{
             props: {
@@ -210,9 +212,13 @@ export async function getServerSideProps(context){
             }
         }
     }else{
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/faq`)
+        data = await response.json()
+        console.log(data)
         return{
             props: {
-                search: false
+                search: false,
+                data
             }
         }
     }

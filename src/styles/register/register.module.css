@@ -409,6 +409,10 @@
     pointer-events: none;
 }
 
+.cityInputPadding{
+    padding-right: 40px;
+}
+
 .showCityList{
     opacity: 1;
     pointer-events: unset;
@@ -418,6 +422,7 @@
     cursor: pointer;
     transition: 0.3s;
     padding: 20px 0px;
+    font-size: 13px;
     border-bottom: 1px solid var(--color-6);
 }
 
@@ -427,7 +432,16 @@
 
 .locationSelect > div {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
+}
+
+.inputParentFull{
+    width: 100%;
+}
+
+.inputParentFull input{
+    margin-top: 0px;
 }
 
 .socialInputs input{
@@ -721,12 +735,38 @@
     caret-color: transparent;
 }
 
+.loadSpinner{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    top: 50%
+}
+
+.inputParent option::first{
+    text-transform: capitalize;
+}
+
+.industryName:first{
+    text-transform: capitalize;
+}
+
 @media(max-width: 768px){
     .wizard > div:before{
         display: none;
     }
+
     .wizard > div.currentStep:before{
         display: block;
+    }
+
+    .locationSelect select, .locationSelect .cityListHolder{
+        width: 100%;
+        flex: unset;
+    }
+
+    .cityInputPadding{
+        margin-top: 0px !important;
     }
 }
 

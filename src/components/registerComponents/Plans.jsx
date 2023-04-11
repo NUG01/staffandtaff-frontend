@@ -1,6 +1,6 @@
 import styles from '@/styles/register/plans.module.css'
 
-const Plans = ({className, setShowStripe, setShowPlans, inheritedStyles}) => {
+const Plans = ({className, setShowStripe, setShowPlans, inheritedStyles, logCurrentJob}) => {
     const data = 
     [
         {
@@ -231,7 +231,7 @@ const Plans = ({className, setShowStripe, setShowPlans, inheritedStyles}) => {
                                 })
                             }
                         </ul>
-                        <button className={styles.button} onClick={()=>{setShowStripe(true); setShowPlans(false); scrollTo(0, 0)}}>subscribe</button>
+                        <button className={styles.button} onClick={()=>{setShowStripe(true); setShowPlans(false); scrollTo(0, 0);}}>subscribe</button>
                     </div>
                 )
             })

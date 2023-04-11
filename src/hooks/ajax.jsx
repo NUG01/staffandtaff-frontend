@@ -14,11 +14,29 @@ export const useAjax = () => {
             .catch(error);
     };
 
+    const patchData = async (url, data, callback, error) => {
+        await csrf();
+        
+        axios
+            .patch(url, data)
+            .then(callback)
+            .catch(error);
+    };
+
     const sendMediaData = async (url, data, callback, error) => {
         await csrf();
         
         mediaAxios
             .post(url, data)
+            .then(callback)
+            .catch(error);
+    };
+
+    const patchMediaData = async (url, data, callback, error) => {
+        await csrf();
+        
+        mediaAxios
+            .patch(url, data)
             .then(callback)
             .catch(error);
     };
@@ -36,6 +54,8 @@ export const useAjax = () => {
         sendData,
         sendMediaData,
         getData,
+        patchMediaData,
+        patchData,
         csrf
     };
 };

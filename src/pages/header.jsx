@@ -1,19 +1,18 @@
 import { FaBars } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import axios from '@/lib/axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAuthData } from '@/redux/userAuth';
 import { useAjax } from '@/hooks/ajax';
+import AccountPanelIcon from '@/components/Icons'
 
 export default function Header({active, isLogged, user, isMobile}) {
     const {sendData} = useAjax()
-    
+
     const userAuthCheck = useSelector(state => state.userAuthData.value)
     
     const dispatch = useDispatch()
     
-
     const [expanded, setExpanded] = useState(false);
     const [scrl, setScroll] = useState(0)
 
@@ -67,15 +66,33 @@ export default function Header({active, isLogged, user, isMobile}) {
                 </Link>
             )}
 
-            {userAuthCheck &&(
-                <div className={`${active === 'login' || active === 'register' ? 'hide-nav' : 'auth-nav'}`} onClick={logout}>
-                    <p>DÉCONNEXION</p>
-                </div>
+            {userAuthCheck && user &&(
+                <>
+                    <div className={`${active === 'login' || active === 'register' ? 'hide-nav' : 'account-panel'}`}>
+                        <div className='account-panel-wrapper'>
+                            <AccountPanelIcon /> <span>Bonjour, {user.data.name}</span>
+                            <div className='hover-panel'>
+                                <Link href="/jobs">
+                                    <img src="profile.png" alt="" /> My Profile
+                                </Link>
+                                <Link href="/jobs">
+                                    <img src="submissions.png" alt="" /> My Submissions
+                                </Link>
+                                <Link href="/jobs">
+                                    <img src="settings.png" alt="" /> My Settings
+                                </Link>
+                                <div>
+                                    <img src="power-icon.png" alt="" onClick={logout}/> Log Out
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </>
             )}
 
             <FaBars className='menu-toggler' onClick={() => setExpanded(!expanded)} />
             <div className={`mobile-nav ${expanded ? 'expanded' : ''}`}>
-                <Link href="/">Emplois</Link>
+                <Link href="/jobs">Emplois</Link>
                 <Link href="/about">À propos de nous</Link>
                 <Link href="/tips">Conseils</Link>
                 <Link href="/faq">F.A.Q</Link>
