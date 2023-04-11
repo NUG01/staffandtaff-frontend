@@ -53,7 +53,7 @@ export default function Faq({ isLogged, user, logout, search, data }) {
         ],
     }
 
-    // faqData = data.faqs
+    faqData = data
 
     let faqKeys = Object.keys(faqData)
     let faqValues = Object.values(faqData)
@@ -266,7 +266,17 @@ export async function getServerSideProps(context) {
     let data
 
     if (context.query.search) {
-        console.log(context.query.search)
+        const response = await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/faq/${context.query.search}`,
+        )
+        data = await response.json()
+        return {
+            props: {
+                search: context.query.search,
+                data,
+            },
+        }
+    } else {
         const response = await fetch(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/faq`,
         )
@@ -277,16 +287,17 @@ export async function getServerSideProps(context) {
                 search: context.query.search,
             },
         }
-    } else {
-        const response = await fetch(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/faq`,
-        )
-        data = await response.json()
-        return {
-            props: {
-                search: false,
-                data,
-            },
-        }
     }
+    // else {
+    //     const response = await fetch(
+    //         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/faq`,
+    //     )
+    //     data = await response.json()
+    //     return {
+    //         props: {
+    //             search: false,
+    //             data: data.faqs
+    //         }
+    //     }
+    // }
 }

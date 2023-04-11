@@ -81,9 +81,9 @@ export default function Header({active, isLogged, user, isMobile}) {
                                 <Link href="/jobs">
                                     <img src="settings.png" alt="" /> My Settings
                                 </Link>
-                                <div>
-                                    <img src="power-icon.png" alt="" onClick={logout}/> Log Out
-                                </div>
+                                <a onClick={()=> logout()}>
+                                    <img src="power-icon.png" alt=""/> Log Out
+                                </a>
                             </div>
                         </div>
                     </div>
