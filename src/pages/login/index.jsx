@@ -1,6 +1,5 @@
 "use client"
 
-import InputError from '@/components/InputError'
 import Link from 'next/link'
 import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'

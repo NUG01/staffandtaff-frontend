@@ -1,4 +1,3 @@
-import InputError from '@/components/InputError'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useState, useRef } from 'react'
