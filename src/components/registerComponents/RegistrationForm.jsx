@@ -1,4 +1,3 @@
-import InputError from '@/components/InputError'
 import Link from 'next/link'
 import { useState, useRef } from 'react'
 import styles from '@/styles/register/register.module.css'
