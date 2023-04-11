@@ -3,11 +3,9 @@ import '@/styles/footer.css'
 import Loader from '@/components/Loader';
 import Router from 'next/router';
 import { useEffect, useState } from 'react';
-import { useAuth } from '@/hooks/auth';
 import store from '@/redux/store'
 import { Provider } from 'react-redux'
 import { useAjax } from '@/hooks/ajax';
-import Head from 'next/head';
 
 const App = ({ Component, pageProps }) => {
     const [user, setUser] = useState()
@@ -34,11 +32,8 @@ const App = ({ Component, pageProps }) => {
         setLoading(false)
     })
 
-
     if (loading) return <Loader className="show-loader" />
 
-    // console.log(isLogged)
-    // console.log(user)
     if (isLogged) {
         return (
             <Provider store={store}>

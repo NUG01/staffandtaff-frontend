@@ -23,16 +23,21 @@ export default function JobList({data}) {
     }, [])
 
     async function loadMore(e){
+        e.target.style.opacity = '0.4'; 
+        e.target.style.pointerEvents = 'none';
+
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs`)
-        const jobsData = await response.json()
+        const { data } = await response.json()
+
+        console.log(data);
 
         e.target.style.opacity = '1'; 
         e.target.style.pointerEvents = 'unset'; 
 
-        setLoadedData([...loadedData, ...jobsData])
+        setLoadedData([...loadedData, ...data])
         setPage(page + 1)
 
-        dispatch(pushData([...loadedData, ...jobsData]))
+        dispatch(pushData([...loadedData, ...data]))
     }
 
     function addToFavourites(id){
@@ -85,7 +90,7 @@ export default function JobList({data}) {
                 }
             </div>
 
-            <div className={styles.loadMore} onClick={ (e) => {loadMore(e); e.target.style.opacity = '0.4'; e.target.style.pointerEvents = 'none';}}>
+            <div className={styles.loadMore} onClick={ (e) => {loadMore(e)}}>
                 LOAD MORE
             </div>
         </>

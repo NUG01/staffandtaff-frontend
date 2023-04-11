@@ -13,7 +13,6 @@ export default function Header({active, isLogged, user, isMobile}) {
     
     const dispatch = useDispatch()
     
-
     const [expanded, setExpanded] = useState(false);
     const [scrl, setScroll] = useState(0)
 
@@ -73,13 +72,13 @@ export default function Header({active, isLogged, user, isMobile}) {
                         <div className='account-panel-wrapper'>
                             <AccountPanelIcon /> <span>Bonjour, {user.data.name}</span>
                             <div className='hover-panel'>
-                                <Link href="/">
+                                <Link href="/jobs">
                                     <img src="profile.png" alt="" /> My Profile
                                 </Link>
-                                <Link href="/">
+                                <Link href="/jobs">
                                     <img src="submissions.png" alt="" /> My Submissions
                                 </Link>
-                                <Link href="/">
+                                <Link href="/jobs">
                                     <img src="settings.png" alt="" /> My Settings
                                 </Link>
                                 <div>
