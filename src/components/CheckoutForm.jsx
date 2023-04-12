@@ -41,8 +41,6 @@ export default function CheckoutForm({isLoading, intent, user, stripe, cardNumbe
 
 				let formData = new FormData()
 				Object.keys(jobData).forEach((item, index)=>{
-					console.log(item)
-					console.log(Object.values(jobData)[index])
 					formData.append(item, Object.values(jobData)[index])
 				})
 				
