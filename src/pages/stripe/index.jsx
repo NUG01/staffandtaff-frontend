@@ -24,7 +24,7 @@ export default function App({ user, isLogged, className, setShowPlans, setShowSt
 	const [cardExpiryValidation, setExpiryValidation] = useState(false)
 	const [cardCvcValidation, setCvcValidation] = useState(false)
 
-	const [successPayment, setPaymentSuccess] = useState(false)
+	const [successPayment, setPaymentSuccess] = useState(true)
 
 	let intent;
 	let stripe;

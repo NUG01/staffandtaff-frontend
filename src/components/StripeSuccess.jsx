@@ -1,12 +1,8 @@
 import Head from "next/head";
 import Header from "@/pages/header";
-import Footer from "@/pages/footer";
+import Link from "next/link";
 
 export default function StripeSuccess({isLogged, user, styles, companyData, jobData}) {
-    console.log(companyData);
-    console.log(jobData);
-
-
 	return (
         <>
         <Head>
@@ -52,6 +48,9 @@ export default function StripeSuccess({isLogged, user, styles, companyData, jobD
                             </div>
                        </div>
                     </div>
+                    <Link href="/">
+                        View My Job Post
+                    </Link>
             </div>
         </div>
         </>
