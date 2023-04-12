@@ -48,7 +48,7 @@ export default function StripeSuccess({isLogged, user, styles, companyData, jobD
                             </div>
                        </div>
                     </div>
-                    <Link href="/">
+                    <Link href="/jobs">
                         View My Job Post
                     </Link>
             </div>
