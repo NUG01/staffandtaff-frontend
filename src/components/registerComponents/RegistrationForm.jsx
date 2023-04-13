@@ -8,7 +8,7 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
-    const [error, setError] = useState('')
+    const [errors, setErrors] = useState({email: [], password: []})
     const [passwordType, setType] = useState('password')
     const [passwordConfirmType, setConfirmType] = useState('password')
     
@@ -23,10 +23,14 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
 
     const form = useRef()
 
+    function updateErrorState(key, value){
+        errors[key] = value
+    }
+
     const submitForm = async function (event) {
         event.preventDefault()
         form.current.classList.add('disabledSection')
-
+        setErrors({email: [], password: []})
         const csrf = () => axios.get('/sanctum/csrf-cookie');
         await csrf();
         
@@ -37,7 +41,12 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
                 scrollTo(0, 0)
             })
             .catch(error => {
-                if (error.response.status !== 422) throw error;
+                updateErrorState('email', error.response.data.errors.email)
+                updateErrorState('password', error.response.data.errors.password)
+                setErrors({
+                     email: error.response.data.errors.email,
+                    password: error.response.data.errors.password
+                })
                 form.current.classList.remove('disabledSection')
             });
     }
@@ -62,7 +71,11 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
                                 placeholder="Email"
                                 required/>
                         </div>
-
+                        {errors.email.map(err => {
+                            return(
+                                <span className="error-text">{err}</span>
+                            )
+                        })}
                         
                         <div className={styles.inputControl}>
                                 <svg width="16" height="21" viewBox="0 0 16 21" xmlns="http://www.w3.org/2000/svg">
@@ -119,6 +132,11 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
                                 </svg>
                         </div>
 
+                        {errors.password.map(err => {
+                            return(
+                                <span className="error-text">{err}</span>
+                            )
+                        })}
 
                         <div className={styles.inputControl}>
                             <input type="submit" value="SUBMIT" className={styles.submitInput} />
