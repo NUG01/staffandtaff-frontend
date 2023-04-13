@@ -19,6 +19,7 @@ const ForgotPassword = ({isLogged, user, query})=> {
     
     const {sendData} = useAjax()
     const [sent, setSent] = useState()
+    const [error, setError] = useState('')
 
     const [errors, setErrors] = useState([])
 
@@ -31,10 +32,14 @@ const ForgotPassword = ({isLogged, user, query})=> {
         form.current.classList.add('disabledSection')
         emInput.current.blur()
         let email = emInput.current.value
+        setError('')
 
         sendData('/api/v1/forgot-password', {email}, (res)=>{
             form.current.classList.remove('disabledSection')
             Router.push(`/forgot-password/1?email=${email}`)
+        }, (error)=>{
+            setError('The selected email is invalid.')
+            form.current.classList.remove('disabledSection')
         })
     }
 
@@ -61,9 +66,7 @@ const ForgotPassword = ({isLogged, user, query})=> {
 
                         <input ref={emInput} type="email" placeholder="exemple@staffandtaff.com" className={styles.singleInput} required name="email" />
                     </div>
-                    <div className={styles.inputContainer}>
-                        <InputError messages={errors.email} className="error-text" id={styles.errorText} />
-                    </div>
+                    <span className='error-text'>{error}</span>
                     <input type="submit" value="ENVOYER" className={styles.submitInput} />
                     <Link href="/login">Retourner à la page de connexion</Link>
                     <div className={styles.sentSuccessfully}>

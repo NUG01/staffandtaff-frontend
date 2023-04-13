@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
-import InputError from '@/components/InputError'
 
 import Header from '@/pages/header';
 import Footer from '@/pages/footer';
@@ -26,21 +25,13 @@ const Login = ({isLogged, user})=> {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [shouldRemember, setShouldRemember] = useState(false)
-    const [errors, setErrors] = useState([])
-    const [status, setStatus] = useState(null)
+    const [error, setError] = useState('')
     const [passwordType, setType] = useState('password')
     const [mobilePreview, setMobilePreview] = useState('')
 
     const form = useRef()
 
     useEffect(() => {
-        if (router.query.reset?.length > 0 && errors.length === 0) {
-            setStatus(atob(router.query.reset))
-        } else {
-            setStatus(null)
-        }
-
         setMobilePreview(location.hash)
     })
     
@@ -62,15 +53,13 @@ const Login = ({isLogged, user})=> {
         e.preventDefault()
         setSubmited(true)
         form.current.classList.add('disabledSection')
-
-        sendData('/api/v1/login', {email, password}, ()=>{
-
+        setError('')
+        sendData('/api/v1/login', {email, password}, (res)=>{
+            console.log(res);
             dispatch(setAuthData(true))
             window.location.pathname = '/jobs';
-
         }, (error)=>{
-
-            console.log(error)
+            setError('These credentials do not match our records.')
             form.current.classList.remove('disabledSection')
 
         })
@@ -127,8 +116,7 @@ const Login = ({isLogged, user})=> {
                                 <Link href="/forgot-password" className={styles.passwordRecovery}> Mot de passe oublié ? </Link>
                             </div>
 
-                                <InputError messages={errors.email} className="error-text" />
-                                <InputError messages={errors.password} className="error-text"/>
+                                <span className="error-text">{error}</span>
 
                             <div className={styles.inputControl}>
                                 <input type="submit" value="CONNEXION" className={styles.submitInput} />

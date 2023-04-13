@@ -180,7 +180,9 @@ body {
   color: var(--red);
 }
 
-.error-text {
+.error-text:not(:empty){
+  padding-top: 15px;
+  text-align: center;
   color: var(--red) !important;
 }
 

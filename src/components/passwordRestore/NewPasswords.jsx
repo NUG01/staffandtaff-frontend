@@ -12,6 +12,7 @@ export default function NewPasswords({styles, isLogged, user}){
     
     const {sendData} = useAjax()
     const form = useRef()
+    const [error, setError] = useState('')
 
     const [password, setPassword] = useState('')
     const [password_confirmation, setPasswordConfirmation ] = useState('')
@@ -30,13 +31,22 @@ export default function NewPasswords({styles, isLogged, user}){
     const submitForm = event => {
         event.preventDefault()
 
+        if(password !== password_confirmation){
+            setError('The password field confirmation does not match.')
+            return
+        }
+
         form.current.classList.add('disabledSection')
         let token = router.query.token
         let email = router.query.email
+        setError('')
 
         sendData('/api/v1/reset-password', {password, password_confirmation, token, email}, (res)=>{
             form.current.classList.remove('disabledSection')
             Router.push('/forgot-password/3')
+        }, (error)=>{
+            form.current.classList.remove('disabledSection')
+            setError('The password field confirmation does not match.')
         })
         console.log(password, password_confirmation, router.query.token)
     }
@@ -105,7 +115,8 @@ export default function NewPasswords({styles, isLogged, user}){
                                 fill="#757575" />
                         </svg>
                     </div>
-        
+                    
+                    <span className="error-text">{error}</span>
                     <button>RÉINITIALISER LE MOT DE PASSE</button>
                     <Link href="/login">Retourner à la page de connexion</Link>
                 </form>
