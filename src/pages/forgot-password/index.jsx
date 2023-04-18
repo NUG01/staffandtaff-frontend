@@ -1,30 +1,46 @@
+"use client"
+
 import Link from 'next/link'
-import { useAuth } from '@/hooks/auth'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Header from '@/pages/header';
 import Footer from '@/pages/footer';
 import styles from '@/styles/password/password.module.css'
 import Head from 'next/head';
-import Router from 'next/router';
 import InputError from '@/components/InputError'
+import { useAjax } from '@/hooks/ajax'
+import Router from 'next/router';
 
-const ForgotPassword = ({isLogged, user, logout})=> {
-    const { forgotPassword } = useAuth({ middleware: 'guest' })
+const ForgotPassword = ({isLogged, user, query})=> {
+    useEffect(()=>{
+        if(query.token != undefined){
+            Router.push(`/forgot-password/2?token=${query.token}&email=${query.email}`)
+        }
+    })
+    
+    const {sendData} = useAjax()
+    const [sent, setSent] = useState()
+    const [error, setError] = useState('')
 
-    const [email, setEmail] = useState('')
     const [errors, setErrors] = useState([])
-    const [status, setStatus] = useState(null)
 
     const form = useRef()
+    const emInput = useRef()
 
     const submitForm = event => {
         event.preventDefault()
 
-        // form.current.classList.add('disabledSection')
+        form.current.classList.add('disabledSection')
+        emInput.current.blur()
+        let email = emInput.current.value
+        setError('')
 
-        // forgotPassword({ email, setErrors, setStatus, form })
-        Router.push('/forgot-password/1')
-
+        sendData('/api/v1/forgot-password', {email}, (res)=>{
+            form.current.classList.remove('disabledSection')
+            Router.push(`/forgot-password/1?email=${email}`)
+        }, (error)=>{
+            setError('The selected email is invalid.')
+            form.current.classList.remove('disabledSection')
+        })
     }
 
     return (
@@ -48,13 +64,14 @@ const ForgotPassword = ({isLogged, user, logout})=> {
                                 fill="#757575"/>
                         </svg>
 
-                        <input onChange={event => setEmail(event.target.value)} type="email" placeholder="exemple@staffandtaff.com" className={styles.singleInput} required name="email" />
+                        <input ref={emInput} type="email" placeholder="exemple@staffandtaff.com" className={styles.singleInput} required name="email" />
                     </div>
-                    <div className={styles.inputContainer}>
-                        <InputError messages={errors.email} className="error-text" id={styles.errorText} />
-                    </div>
+                    <span className='error-text'>{error}</span>
                     <input type="submit" value="ENVOYER" className={styles.submitInput} />
                     <Link href="/login">Retourner à la page de connexion</Link>
+                    <div className={styles.sentSuccessfully}>
+                        {sent}
+                    </div>
                 </form>
             </main>
             
@@ -64,3 +81,12 @@ const ForgotPassword = ({isLogged, user, logout})=> {
 }
 
 export default ForgotPassword
+
+
+export async function getServerSideProps(context){
+    return{
+        props:{
+            query: context.query
+        }
+    }
+}

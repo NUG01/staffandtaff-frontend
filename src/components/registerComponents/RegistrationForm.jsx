@@ -2,14 +2,13 @@ import Link from 'next/link'
 import { useState, useRef } from 'react'
 import styles from '@/styles/register/register.module.css'
 import axios from '@/lib/axios'
-import InputError from '@/components/InputError'
 
 export default function RegisterForm({isLogged, user, register, type, setStep, className}) {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState({email: [], password: []})
     const [passwordType, setType] = useState('password')
     const [passwordConfirmType, setConfirmType] = useState('password')
     
@@ -24,10 +23,14 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
 
     const form = useRef()
 
+    function updateErrorState(key, value){
+        errors[key] = value
+    }
+
     const submitForm = async function (event) {
         event.preventDefault()
         form.current.classList.add('disabledSection')
-
+        setErrors({email: [], password: []})
         const csrf = () => axios.get('/sanctum/csrf-cookie');
         await csrf();
         
@@ -38,9 +41,13 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
                 scrollTo(0, 0)
             })
             .catch(error => {
-                if (error.response.status !== 422) throw error;
+                updateErrorState('email', error.response.data.errors.email)
+                updateErrorState('password', error.response.data.errors.password)
+                setErrors({
+                     email: error.response.data.errors.email,
+                    password: error.response.data.errors.password
+                })
                 form.current.classList.remove('disabledSection')
-                setErrors(error.response.data.errors);
             });
     }
 
@@ -63,9 +70,12 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
                                 onChange={event => setEmail(event.target.value)}
                                 placeholder="Email"
                                 required/>
-                                <InputError messages={errors.email} className="mt-2" />
                         </div>
-
+                        {errors.email.map(err => {
+                            return(
+                                <span className="error-text">{err}</span>
+                            )
+                        })}
                         
                         <div className={styles.inputControl}>
                                 <svg width="16" height="21" viewBox="0 0 16 21" xmlns="http://www.w3.org/2000/svg">
@@ -90,10 +100,6 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
                                         d="M1 1.27L2.28 0L19 16.72L17.73 18L14.65 14.92C13.5 15.3 12.28 15.5 11 15.5C6 15.5 1.73 12.39 0 8C0.69 6.24 1.79 4.69 3.19 3.46L1 1.27ZM11 5C11.7956 5 12.5587 5.31607 13.1213 5.87868C13.6839 6.44129 14 7.20435 14 8C14 8.35 13.94 8.69 13.83 9L10 5.17C10.31 5.06 10.65 5 11 5ZM11 0.5C16 0.5 20.27 3.61 22 8C21.18 10.08 19.79 11.88 18 13.19L16.58 11.76C17.94 10.82 19.06 9.54 19.82 8C18.17 4.64 14.76 2.5 11 2.5C9.91 2.5 8.84 2.68 7.84 3L6.3 1.47C7.74 0.85 9.33 0.5 11 0.5ZM2.18 8C3.83 11.36 7.24 13.5 11 13.5C11.69 13.5 12.37 13.43 13 13.29L10.72 11C9.29 10.85 8.15 9.71 8 8.28L4.6 4.87C3.61 5.72 2.78 6.78 2.18 8Z"
                                         fill="#757575" />
                                 </svg>
-                            <InputError
-                                messages={errors.password}
-                                className="mt-2"
-                            />
                         </div>
 
                         
@@ -124,12 +130,13 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
                                         d="M1 1.27L2.28 0L19 16.72L17.73 18L14.65 14.92C13.5 15.3 12.28 15.5 11 15.5C6 15.5 1.73 12.39 0 8C0.69 6.24 1.79 4.69 3.19 3.46L1 1.27ZM11 5C11.7956 5 12.5587 5.31607 13.1213 5.87868C13.6839 6.44129 14 7.20435 14 8C14 8.35 13.94 8.69 13.83 9L10 5.17C10.31 5.06 10.65 5 11 5ZM11 0.5C16 0.5 20.27 3.61 22 8C21.18 10.08 19.79 11.88 18 13.19L16.58 11.76C17.94 10.82 19.06 9.54 19.82 8C18.17 4.64 14.76 2.5 11 2.5C9.91 2.5 8.84 2.68 7.84 3L6.3 1.47C7.74 0.85 9.33 0.5 11 0.5ZM2.18 8C3.83 11.36 7.24 13.5 11 13.5C11.69 13.5 12.37 13.43 13 13.29L10.72 11C9.29 10.85 8.15 9.71 8 8.28L4.6 4.87C3.61 5.72 2.78 6.78 2.18 8Z"
                                         fill="#757575" />
                                 </svg>
-                            <InputError
-                                messages={errors.password}
-                                className="mt-2"
-                            />
                         </div>
 
+                        {errors.password.map(err => {
+                            return(
+                                <span className="error-text">{err}</span>
+                            )
+                        })}
 
                         <div className={styles.inputControl}>
                             <input type="submit" value="SUBMIT" className={styles.submitInput} />

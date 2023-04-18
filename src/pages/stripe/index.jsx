@@ -115,7 +115,7 @@ export default function App({ user, isLogged, className, setShowPlans, setShowSt
 
 
 	if(successPayment){
-		return <StripeSuccess isLogged={isLogged} user={user} styles={styles}/>
+		return <StripeSuccess companyData={companyData} jobData={jobData} isLogged={isLogged} user={user} styles={styles}/>
 	}
 
 
