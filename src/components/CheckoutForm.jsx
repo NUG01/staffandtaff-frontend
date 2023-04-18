@@ -27,33 +27,49 @@ export default function CheckoutForm({
     async function submitForm(e) {
         e.preventDefault()
 
-        let formData = new FormData()
-        Object.keys(jobData).forEach((item, index) => {
-            formData.append(item, Object.values(jobData)[index])
-        })
-
-        sendMediaData(`/api/v1/job/store/${companyData.id}`, formData, res => {
-            setPaymentSuccess(true)
-            document.body.classList.remove('disabledSection')
-        }).then(() => {
-            let formData = new FormData()
-            Object.keys(jobData).forEach((item, index) => {
-                console.log(item)
-                console.log(Object.values(jobData)[index])
-                formData.append(item, Object.values(jobData)[index])
-            })
-
-            sendMediaData(
-                `/api/v1/job/store/${companyData.id}`,
-                formData,
-                res => {
-                    setPaymentSuccess(true)
-                    document.body.classList.remove('disabledSection')
+        if (!numberVal || !expVal || !cvcVal) {
+            setError('Error')
+            return
+        } else {
+            document.body.classList.add('disabledSection')
+            setError('')
+            const { setupIntent, error } = await stripe.confirmCardSetup(
+                intent.intent.client_secret,
+                {
+                    payment_method: {
+                        card: cardNumber,
+                        billing_details: { name: user.data.name },
+                    },
                 },
             )
-        })
+
+            stripe.createToken(cardNumber).then(result => {})
+
+            setIntent(setupIntent.payment_method)
+            axios
+                .post('/api/v1/payment', {
+                    plan: selectedProduct,
+                    payment_method: setupIntent.payment_method,
+                    // Plan id refers element numeration
+                    plan_id: 'plan_4',
+                })
+                .then(() => {
+                    let formData = new FormData()
+                    Object.keys(jobData).forEach((item, index) => {
+                        formData.append(item, Object.values(jobData)[index])
+                    })
+
+                    sendMediaData(
+                        `/api/v1/job/store/${companyData.id}`,
+                        formData,
+                        res => {
+                            setPaymentSuccess(true)
+                            document.body.classList.remove('disabledSection')
+                        },
+                    )
+                })
+        }
     }
-    // }
 
     return (
         <div id="form-holder" className={isLoading ? 'skeleton' : ''}>
