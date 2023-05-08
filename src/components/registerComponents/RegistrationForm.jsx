@@ -43,11 +43,28 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
             .catch(error => {
                 updateErrorState('email', error.response.data.errors.email)
                 updateErrorState('password', error.response.data.errors.password)
-                setErrors({
-                     email: error.response.data.errors.email,
-                    password: error.response.data.errors.password
-                })
+                
                 form.current.classList.remove('disabledSection')
+                
+                if(
+                    error.response.data.errors.email && 
+                    error.response.data.errors.password
+                ) {
+                    setErrors({
+                        email: error.response.data.errors.email,
+                        password: [...error.response.data.errors.password]
+                    })
+                    return
+                }
+
+                if(error.response.data.errors.email){
+                    setErrors({email: error.response.data.errors.email})
+                    return
+                }
+                if(error.response.data.errors.password){
+                    setErrors({password: error.response.data.errors.password})
+                    return
+                }
             });
     }
 
@@ -71,7 +88,7 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
                                 placeholder="Email"
                                 required/>
                         </div>
-                        {errors.email.map(err => {
+                        {errors.email != undefined && errors.email.map(err => {
                             return(
                                 <span className="error-text">{err}</span>
                             )
@@ -132,7 +149,7 @@ export default function RegisterForm({isLogged, user, register, type, setStep, c
                                 </svg>
                         </div>
 
-                        {errors.password.map(err => {
+                        {errors.password != undefined && errors.password.map(err => {
                             return(
                                 <span className="error-text">{err}</span>
                             )
