@@ -11,7 +11,7 @@
     padding-bottom: 40px;
 }
 
-.nextButton{
+.nextButton {
     text-transform: uppercase;
     padding: 15px;
     background-color: var(--color-1);
@@ -26,11 +26,11 @@
     right: 0;
 }
 
-.nextButton i{
+.nextButton i {
     padding-left: 10px;
 }
 
-.formHolder{
+.formHolder {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,7 +38,7 @@
     max-width: 400px;
 }
 
-.form{
+.form {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -46,7 +46,7 @@
     position: relative;
 }
 
-.form >div{
+.form > div {
     display: flex;
     flex-direction: column;
 }
@@ -59,14 +59,13 @@
 }
 
 .singleInput:focus {
-    border-color: #8B4F3C;
+    border-color: #8b4f3c;
 }
 
 .inputControl {
     margin-top: 10px;
     position: relative;
 }
-
 
 #hideUnhide {
     left: unset;
@@ -94,7 +93,7 @@
     transition: 0.3s;
 }
 
-.alreadyRegParent{
+.alreadyRegParent {
     text-align: center;
     color: var(--color-1);
     font-weight: bold;
@@ -106,7 +105,7 @@
     display: inline;
 }
 
-.wizardMain{
+.wizardMain {
     display: flex;
     width: 70%;
     max-width: 600px;
@@ -116,21 +115,21 @@
     padding-bottom: 130px;
 }
 
-.wizardMain h1{
+.wizardMain h1 {
     font-size: 24px;
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
 }
 
-.wizardMain p{
+.wizardMain p {
     margin-top: 20px;
     font-size: 14px;
     font-weight: bold;
     text-align: center;
 }
 
-.wizard{
+.wizard {
     background: var(--color-6);
     width: 100%;
     height: 3px;
@@ -138,14 +137,14 @@
     position: relative;
 }
 
-.wizard > div{
+.wizard > div {
     position: absolute;
     transform: translateX(-50%);
     z-index: 2;
     top: -6px;
 }
 
-.recruiterWizardStepOne::after{
+.recruiterWizardStepOne::after {
     content: '';
     position: absolute;
     width: 50%;
@@ -154,7 +153,7 @@
     background-color: var(--color-5);
 }
 
-.recruiterWizardStepTwo::after{
+.recruiterWizardStepTwo::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -163,27 +162,27 @@
     background-color: var(--color-5);
 }
 
-.wizard > div > div{
+.wizard > div > div {
     width: 14px;
     height: 14px;
     background-color: var(--color-4);
     border-radius: 50%;
 }
 
-.wizard > div i{
+.wizard > div i {
     display: none;
     color: white;
 }
 
-.wizard > div:nth-child(2){
+.wizard > div:nth-child(2) {
     left: 50%;
 }
 
-.wizard > div:nth-child(3){
+.wizard > div:nth-child(3) {
     left: 100%;
 }
 
-.wizard > div:before{
+.wizard > div:before {
     content: attr(txt);
     font-weight: bold;
     position: absolute;
@@ -195,14 +194,15 @@
     transform: translateX(-50%);
 }
 
-@media(min-width: 576px){
-    .wizard > div.currentStep:before{
+@media (min-width: 576px) {
+    .wizard > div.currentStep:before {
         top: 35px;
         font-size: 17px;
     }
 }
 
-.wizard > div.currentStep > div, .wizard > div.completedStep > div{
+.wizard > div.currentStep > div,
+.wizard > div.completedStep > div {
     position: relative;
     width: 18px;
     height: 18px;
@@ -213,11 +213,11 @@
     font-size: 13px;
 }
 
-.wizard > div.completedStep i{
+.wizard > div.completedStep i {
     display: inherit;
 }
 
-.wizard > div.currentStep{
+.wizard > div.currentStep {
     background-color: white;
     border-radius: 50%;
     width: 30px;
@@ -229,26 +229,25 @@
     align-items: center;
 }
 
-.wizard > div.completeStep > div{
+.wizard > div.completeStep > div {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.seeker > div:nth-child(2){
+.seeker > div:nth-child(2) {
     left: 25% !important;
 }
 
-.seeker > div:nth-child(3){
+.seeker > div:nth-child(3) {
     left: 50% !important;
 }
 
-.seeker > div:nth-child(4){
+.seeker > div:nth-child(4) {
     left: 75% !important;
 }
 
-
-.seeker > div:nth-child(5){
+.seeker > div:nth-child(5) {
     left: 100% !important;
 }
 
@@ -272,7 +271,7 @@
     font-size: 24px;
 }
 
-.bottom span{
+.bottom span {
     text-decoration: underline;
     font-weight: bold;
     cursor: pointer;
@@ -300,7 +299,7 @@
     transition: 0.3s;
 }
 
-.consideration{
+.consideration {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -310,36 +309,37 @@
     max-width: 1600px;
 }
 
-.consideration p{
+.consideration p {
     max-width: 710px;
 }
 
-.consideration span{
+.consideration span {
     font-weight: bold;
 }
 
-.form{
+.form {
     margin: 0px auto;
     width: 90%;
     max-width: 850px;
     text-align: center;
 }
 
-.form h4 span, .intro span{
+.form h4 span,
+.intro span {
     display: inline;
     color: red;
 }
 
-.form .intro{
+.form .intro {
     padding-bottom: 20px;
     font-weight: bold;
 }
 
-.form .intro p{
+.form .intro p {
     margin-top: 5px;
 }
 
-.section{
+.section {
     width: 100%;
     background-color: white;
     padding: 30px 20px;
@@ -347,11 +347,13 @@
     border: 2px solid var(--color-6);
 }
 
-.section h5{
+.section h5 {
     padding-top: 10px;
 }
 
-.section input, .section select, .section textarea{
+.section input,
+.section select,
+.section textarea {
     border: 2px solid var(--color-6);
     width: 100%;
     margin-top: 20px;
@@ -359,20 +361,20 @@
     resize: none;
 }
 
-.textareaParent{
+.textareaParent {
     border: 2px solid var(--color-6);
     padding-bottom: 30px;
     margin-top: 20px;
     position: relative;
 }
 
-.textareaParent textarea{
+.textareaParent textarea {
     border: 0px;
     margin-top: 0px;
     height: 250px;
 }
 
-.wordCount{
+.wordCount {
     position: absolute;
     right: 15px;
     bottom: 15px;
@@ -380,20 +382,21 @@
     color: var(--color-4);
 }
 
-.section select{
+.section select {
     cursor: pointer;
 }
 
-.locationSelect select, .locationSelect .cityListHolder{
+.locationSelect select,
+.locationSelect .cityListHolder {
     width: unset;
     flex: 1;
 }
 
-.cityListHolder{
+.cityListHolder {
     position: relative;
 }
 
-.cityList{
+.cityList {
     width: 100%;
     min-width: 200px;
     right: 0;
@@ -404,21 +407,21 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
     opacity: 0;
     pointer-events: none;
 }
 
-.cityInputPadding{
+.cityInputPadding {
     padding-right: 40px;
 }
 
-.showCityList{
+.showCityList {
     opacity: 1;
     pointer-events: unset;
 }
 
-.cityList div{
+.cityList div {
     cursor: pointer;
     transition: 0.3s;
     padding: 20px 0px;
@@ -426,8 +429,8 @@
     border-bottom: 1px solid var(--color-6);
 }
 
-.cityList div:hover{
-    background-color: rgba(0,0,0,0.03);
+.cityList div:hover {
+    background-color: rgba(0, 0, 0, 0.03);
 }
 
 .locationSelect > div {
@@ -436,35 +439,35 @@
     gap: 20px;
 }
 
-.inputParentFull{
+.inputParentFull {
     width: 100%;
 }
 
-.inputParentFull input{
+.inputParentFull input {
     margin-top: 0px;
 }
 
-.socialInputs input{
+.socialInputs input {
     padding-left: 40px;
 }
 
-.socialInputs .inputParent{
+.socialInputs .inputParent {
     display: flex;
     margin-top: 30px;
     gap: 20px;
     flex-wrap: wrap;
 }
 
-.socialInputs .inputParent >div{
+.socialInputs .inputParent > div {
     position: relative;
     width: calc(50% - 20px);
 }
 
-.socialInputs .inputParent >div input{
+.socialInputs .inputParent > div input {
     margin-top: 0px;
 }
 
-.socialInputs i{
+.socialInputs i {
     color: var(--color-4);
     position: absolute;
     left: 15px;
@@ -472,12 +475,12 @@
     transform: translateY(-50%);
 }
 
-.disabledInput{
+.disabledInput {
     pointer-events: none;
     background-color: var(--color-6);
 }
 
-.section.hasImageUpload .logoUpload{
+.section.hasImageUpload .logoUpload {
     margin-top: 30px;
     display: flex;
     flex-wrap: wrap;
@@ -486,7 +489,8 @@
     gap: 30px;
 }
 
-.section.hasImageUpload label, .galleryParentHolder label{
+.section.hasImageUpload label,
+.galleryParentHolder label {
     text-transform: uppercase;
     padding: 15px;
     background-color: var(--color-1);
@@ -494,7 +498,7 @@
     cursor: pointer;
 }
 
-.section.hasImageUpload .imageInfo{
+.section.hasImageUpload .imageInfo {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -502,7 +506,7 @@
     gap: 30px;
 }
 
-.section.hasImageUpload .imageInfo p{
+.section.hasImageUpload .imageInfo p {
     width: 140px;
     text-align: left;
     white-space: nowrap;
@@ -510,36 +514,37 @@
     text-overflow: ellipsis;
 }
 
-.section.hasImageUpload .imageInfo input, .galleryParentHolder input{
+.section.hasImageUpload .imageInfo input,
+.galleryParentHolder input {
     display: none;
 }
 
-.galleryParentHolder label{
+.galleryParentHolder label {
     margin-top: 40px;
     display: inline-block;
 }
 
-.disabledLabel{
+.disabledLabel {
     background-color: var(--color-4) !important;
     pointer-events: none !important;
 }
 
-.section.hasImageUpload img{
+.section.hasImageUpload img {
     width: 131px;
     height: 131px;
     object-fit: contain;
 }
 
-.section input[type=number]::-webkit-outer-spin-button,
-.section input[type=number]::-webkit-inner-spin-button{
+.section input[type='number']::-webkit-outer-spin-button,
+.section input[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-.section input[type=number] {
+.section input[type='number'] {
     -moz-appearance: textfield;
 }
 
-.deleteImage{
+.deleteImage {
     background: url('/delete-cross.png') center center no-repeat;
     background-size: contain;
     width: 15px;
@@ -549,14 +554,14 @@
     cursor: pointer;
 }
 
-.galleryParent{
+.galleryParent {
     margin-top: 50px;
     gap: 30px;
     flex-wrap: wrap;
     display: flex;
 }
 
-.gallery{
+.gallery {
     display: flex;
     align-items: flex-start;
     position: relative;
@@ -566,35 +571,34 @@
     flex-direction: column;
 }
 
-.gallery.hide{
+.gallery.hide {
     display: none;
     justify-content: baseline;
 }
 
-
-.gallery img{
+.gallery img {
     width: 100%;
     height: 110px;
     object-fit: contain;
 }
 
-.gallery .deleteImage{
+.gallery .deleteImage {
     right: 0;
     bottom: 5px;
 }
 
-.gallery .imageName{
+.gallery .imageName {
     width: 100px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.hideSection{
+.hideSection {
     display: none !important;
 }
 
-.verificationMain{
+.verificationMain {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -602,14 +606,14 @@
     justify-content: center;
 }
 
-.postGoBack{
+.postGoBack {
     position: absolute !important;
     left: 20px;
     width: unset !important;
     bottom: -80px;
 }
 
-.goBack{
+.goBack {
     width: 100%;
     text-transform: uppercase;
     color: var(--color-1);
@@ -617,64 +621,66 @@
     position: relative;
 }
 
-.goBack i{
+.goBack i {
     position: absolute;
     transform: translate(-120%, -55%);
     top: 50%;
 }
 
-.goBack span{
+.goBack span {
     cursor: pointer;
     position: absolute;
     left: 30%;
     top: 30px;
 }
 
-.multipleChild{
+.multipleChild {
     display: flex;
     gap: 15px;
 }
 
-.multipleChild > div, .multipleChild > select{
+.multipleChild > div,
+.multipleChild > select {
     width: 100%;
     min-width: 200px;
 }
 
-.multipleChild > input, .selectF{
+.multipleChild > input,
+.selectF {
     min-width: 350px !important;
 }
 
-
-@media (max-width: 992px){
-    .multipleChild > input, .selectF{
+@media (max-width: 992px) {
+    .multipleChild > input,
+    .selectF {
         min-width: unset !important;
     }
 
-    .multipleChild{
+    .multipleChild {
         flex-wrap: wrap;
     }
 
-    .gallery{
+    .gallery {
         width: 100%;
         max-width: 500px;
         margin: 20px auto;
     }
-    
-    .wizard > div.currentStep:before{
+
+    .wizard > div.currentStep:before {
         width: 90px;
     }
 
-    .inboxCheck{
+    .inboxCheck {
         flex-direction: column;
     }
 
-    .bottom h1{
+    .bottom h1 {
         font-size: 24px;
         padding-bottom: 10px;
     }
 }
 
-.showCase{
+.showCase {
     display: flex;
     margin: 30px auto;
     gap: 20px;
@@ -683,45 +689,45 @@
     justify-content: center;
 }
 
-.showCase h1{
+.showCase h1 {
     padding-bottom: 15px;
 }
 
-.showCase > img{
+.showCase > img {
     width: 132px;
     height: 132px;
     object-fit: contain;
     border: 2px solid var(--color-6);
 }
 
-.showCaseInfo{
+.showCaseInfo {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
 }
 
-.showCaseInfo *{
+.showCaseInfo * {
     text-align: left;
 }
 
-.showCaseLocation{
+.showCaseLocation {
     display: flex;
     margin-top: 10px;
     gap: 5px;
     flex-wrap: wrap;
 }
 
-.showCaseLocation p{
+.showCaseLocation p {
     display: flex;
     gap: 5px;
 }
 
-.datePickerHolder{
+.datePickerHolder {
     position: relative;
 }
 
-.datePickerImg{
+.datePickerImg {
     position: absolute;
     width: 20px;
     height: 20px;
@@ -730,55 +736,92 @@
     pointer-events: none;
 }
 
-.datePickerHolder input{
+.datePickerHolder input {
     cursor: pointer;
     caret-color: transparent;
 }
 
-.loadSpinner{
+.loadSpinner {
     width: 20px;
     height: 20px;
     position: absolute;
     right: 10px;
-    top: 50%
+    top: 50%;
 }
 
-.inputParent option::first{
+.inputParent option::first {
     text-transform: capitalize;
 }
 
-.industryName:first{
+.industryName:first {
     text-transform: capitalize;
 }
 
-@media(max-width: 768px){
-    .wizard > div:before{
+.textStyling {
+    color: #000;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.redSpan {
+    color: #d52b1e;
+}
+
+@media (max-width: 768px) {
+    .wizard > div:before {
         display: none;
     }
 
-    .wizard > div.currentStep:before{
+    .wizard > div.currentStep:before {
         display: block;
     }
 
-    .locationSelect select, .locationSelect .cityListHolder{
+    .locationSelect select,
+    .locationSelect .cityListHolder {
         width: 100%;
         flex: unset;
     }
 
-    .cityInputPadding{
+    .cityInputPadding {
         margin-top: 0px !important;
     }
 }
 
-@media(max-width: 576px){
-    .last .inboxCheck{
+@media (max-width: 576px) {
+    .last .inboxCheck {
         flex-wrap: wrap;
         text-align: center;
     }
     .bottom {
         text-align: center;
     }
-    .socialInputs .inputParent >div{
+    .socialInputs .inputParent > div {
         width: 100%;
     }
+}
+
+.positionsInput {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    max-height: 200px;
+    background-color: inherit;
+    z-index: 200;
+    background-color: white;
+    border: 2px solid #ebebeb;
+    overflow: scroll;
+}
+.position {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+.position:hover {
+    background-color: #fff8f4;
 }
