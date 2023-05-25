@@ -15,14 +15,19 @@ export default function seekerRegister({
     logout,
     register,
 }) {
-    const [step, setStep] = useState(1)
+    const [step, setStep] = useState(3)
     const maxSteps = 5
 
     const [stepOnePayload, setStepOnePayload] = useState(null)
+    const [stepTwoPayload, setStepTwoPayload] = useState(null)
+    const [stepThreePayload, setStepThreePayload] = useState(null)
+    const [stepFourPayload, setStepFourPayload] = useState(null)
 
     // useEffect(() => {
     //     if (isLogged === 1 && user && user.data.verified) setStep(2)
     // }, [])
+
+    let completedSteps = [false, false, false, false, false, false]
 
     return (
         <>
@@ -38,6 +43,7 @@ export default function seekerRegister({
                     step={step}
                     maxSteps={maxSteps}
                     type="seeker"
+                    completedSteps={completedSteps}
                 />
                 {step == 1 && isLogged != 1 && (
                     <RegisterForm
@@ -53,35 +59,71 @@ export default function seekerRegister({
                         <EmailVerification
                             styles={styles}
                             step={step}
-                            setStep={setStep}
+                            setStep={value => setStep(value)}
                         />
                     </>
                 )}{' '}
                 {isLogged === 1 && user && user.data.verified && (
                     <div>
-                        <p className={styles.textStyling}>
-                            <span> Présentez-vous aux recruteurs.</span>
-                            <br />{' '}
-                            <span>
-                                Augmentez la crédibilité de votre CV en y
-                                ajoutant des informations détaillées.
-                            </span>
-                        </p>
-                        <div
-                            className={`${styles.textStyling}`}
-                            style={{ marginTop: '20px', marginBottom: '30px' }}>
-                            <p>
-                                Veuillez noter que les champs marqués de (
-                                <span className={styles.redSpan}>*</span>) sont
-                                obligatoires.
-                            </p>
-                        </div>
+                        {step < 5 && (
+                            <div>
+                                <p className={styles.textStyling}>
+                                    <span> Présentez-vous aux recruteurs.</span>
+                                    <br />{' '}
+                                    <span>
+                                        Augmentez la crédibilité de votre CV en
+                                        y ajoutant des informations détaillées.
+                                    </span>
+                                </p>
+                                <div
+                                    className={`${styles.textStyling}`}
+                                    style={{
+                                        marginTop: '20px',
+                                        marginBottom: '30px',
+                                    }}>
+                                    <p>
+                                        Veuillez noter que les champs marqués de
+                                        (
+                                        <span className={styles.redSpan}>
+                                            *
+                                        </span>
+                                        ) sont obligatoires.
+                                    </p>
+                                </div>
+                            </div>
+                        )}
+                        {step == 5 && (
+                            <div
+                                style={{
+                                    marginBottom: '30px',
+                                }}>
+                                <p className={styles.textStyling}>
+                                    Ajoutez une lettre de motivation pour
+                                    augmenter vos chances d'intéresser le
+                                    recruteur.
+                                </p>
+                            </div>
+                        )}
                     </div>
                 )}
                 {isLogged === 1 && user && user.data.verified && (
                     <SeekerFlow
+                        setStep={value => setStep(value)}
                         stepOneUpdate={value => {
+                            setStep(3)
                             setStepOnePayload(value)
+                        }}
+                        stepTwoUpdate={value => {
+                            setStep(4)
+                            setStepTwoPayload(value)
+                        }}
+                        stepThreeUpdate={value => {
+                            setStep(5)
+                            setStepThreePayload(value)
+                        }}
+                        stepFourUpdate={value => {
+                            setStep(6)
+                            setStepFourPayload(value)
                         }}
                     />
                 )}

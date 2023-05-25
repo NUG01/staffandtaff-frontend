@@ -1,5 +1,11 @@
-export default function EmailVerification({styles, setStep, className}){
-    return(
+import { useEffect } from 'react'
+
+export default function EmailVerification({ styles, setStep, className }) {
+    // useEffect(() => {
+    //     setStep(1)
+    // }, [])
+
+    return (
         <div className={`${styles.verificationMain}  ${className}`}>
             <div className={`${styles.inboxCheck}`}>
                 <div className={styles.heading}>
@@ -7,28 +13,30 @@ export default function EmailVerification({styles, setStep, className}){
                 </div>
                 <div className={styles.bottom}>
                     <h1>Please check your inbox</h1>
-                    Not your email address? <span>Use a Different Email Address</span>
+                    Not your email address?{' '}
+                    <span>Use a Different Email Address</span>
                 </div>
             </div>
 
             <div className={styles.resendEmail}>
                 <p>
-                    Didn’t receive the verification email? Please, check the spam folder 
+                    Didn’t receive the verification email? Please, check the
+                    spam folder
                     <br />
                     or click the “Resend” button
                 </p>
 
                 {/* <p className={styles.sendAgain} onClick={()=> {setStep(2); scrollTo(0, 0)}}> */}
-                <p className={styles.sendAgain}>
-                    RESEND EMAIL
-                </p>
+                <p className={styles.sendAgain}>RESEND EMAIL</p>
             </div>
 
-            <div className={styles.consideration}>  
+            <div className={styles.consideration}>
                 <img src="/attention.png" alt="" />
                 <p>
                     <span>Please consider: </span>
-                    If you found the verification email in a spam folder, please mark it as “Not Spam” to be able to receive the applicant notifications in the future.
+                    If you found the verification email in a spam folder, please
+                    mark it as “Not Spam” to be able to receive the applicant
+                    notifications in the future.
                 </p>
             </div>
         </div>
