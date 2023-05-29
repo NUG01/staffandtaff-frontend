@@ -37,6 +37,90 @@ export default function SeekerFlow({
 
     let dataArray = []
 
+    function collectInformation(data, dataExtra, nodes, index, type = 0) {
+        if (nodes[index].getAttribute('name') == 'position') {
+            if (type == 1) {
+                data.position = nodes[index].value
+            } else {
+                if (nodes[index].getAttribute('code') == 'experience-1') {
+                    dataExtra.position = nodes[index].value
+                }
+            }
+        }
+        if (nodes[index].getAttribute('name') == 'establishment') {
+            if (type == 1) {
+                data.establishment = nodes[index].value
+            } else {
+                if (nodes[index].getAttribute('code') == 'experience-1') {
+                    dataExtra.establishment = nodes[index].value
+                }
+            }
+        }
+        if (nodes[index].getAttribute('name') == 'day') {
+            if (type == 1) {
+                data.date.day = nodes[index].value
+            } else {
+                if (nodes[index].getAttribute('code') == 'experience-1') {
+                    dataExtra.date.day = nodes[index].value
+                }
+            }
+        }
+        if (nodes[index].getAttribute('name') == 'month') {
+            if (type == 1) {
+                data.date.month = nodes[index].value
+            } else {
+                if (nodes[index].getAttribute('code') == 'experience-1') {
+                    dataExtra.date.month = nodes[index].value
+                }
+            }
+        }
+        if (nodes[index].getAttribute('name') == 'year') {
+            if (type == 1) {
+                data.date.year = nodes[index].value
+            } else {
+                if (nodes[index].getAttribute('code') == 'experience-1') {
+                    dataExtra.date.year = nodes[index].value
+                }
+            }
+        }
+        if (nodes[index].getAttribute('name') == 'finishDay') {
+            if (type == 1) {
+                data.finishDate.day = nodes[index].value
+            } else {
+                if (nodes[index].getAttribute('code') == 'experience-1') {
+                    dataExtra.finishDate.day = nodes[index].value
+                }
+            }
+        }
+        if (nodes[index].getAttribute('name') == 'finishMonth') {
+            if (type == 1) {
+                data.finishDate.month = nodes[index].value
+            } else {
+                if (nodes[index].getAttribute('code') == 'experience-1') {
+                    dataExtra.finishDate.month = nodes[index].value
+                }
+            }
+        }
+        if (nodes[index].getAttribute('name') == 'finishYear') {
+            if (type == 1) {
+                data.finishDate.year = nodes[index].value
+            } else {
+                if (nodes[index].getAttribute('code') == 'experience-1') {
+                    dataExtra.finishDate.year = nodes[index].value
+                }
+            }
+        }
+        if (nodes[index].getAttribute('name') == 'info') {
+            if (type == 1) {
+                data.info = nodes[index].value
+            } else {
+                if (nodes[index].getAttribute('code') == 'experience-1') {
+                    dataExtra.info = nodes[index].value
+                }
+            }
+        }
+    }
+
     function updateDate(date, end) {
         var dateObj = new Date(date)
         var month = dateObj.getMonth() + 1
@@ -92,21 +176,37 @@ export default function SeekerFlow({
         stepFourUpdate(data)
     }
 
-    // let data = {
-    //     position: '',
-    //     establishment: '',
-    //     date: {
-    //         day: '',
-    //         month: '',
-    //         year: '',
-    //     },
-    //     finishDate: {
-    //         finishDay: '',
-    //         finishMonth: '',
-    //         finishYear: '',
-    //     },
-    //     info: '',
-    // }
+    let data = {
+        position: '',
+        establishment: '',
+        date: {
+            day: '',
+            month: '',
+            year: '',
+        },
+        finishDate: {
+            day: '',
+            month: '',
+            year: '',
+        },
+        info: '',
+    }
+    let dataExtra = {
+        position: '',
+        establishment: '',
+        date: {
+            day: '',
+            month: '',
+            year: '',
+        },
+        finishDate: {
+            day: '',
+            month: '',
+            year: '',
+        },
+        info: '',
+    }
+
     function collectData() {
         const inputs = document.querySelectorAll('input')
         const selects = document.querySelectorAll('select')
@@ -114,8 +214,8 @@ export default function SeekerFlow({
 
         const nodes = [...inputs, ...selects, ...textarea]
 
-        for (let k = 0; k <= experienceArray.length || 1; k++) {
-            let data = {
+        for (let k = 0; k <= experienceArray.length; k++) {
+            data = {
                 position: '',
                 establishment: '',
                 date: {
@@ -124,75 +224,34 @@ export default function SeekerFlow({
                     year: '',
                 },
                 finishDate: {
-                    finishDay: '',
-                    finishMonth: '',
-                    finishYear: '',
+                    day: '',
+                    month: '',
+                    year: '',
                 },
                 info: '',
             }
 
-            console.log(nodes)
             for (let index = 0; index < nodes.length; index++) {
                 let attr = nodes[index].closest('form').getAttribute('id')
-                console.log(attr)
-                console.log(`experience-${(k + 1).toString()}`)
-                if (attr != `experience-${(k + 1).toString()}`) {
+                collectInformation(data, dataExtra, nodes, index)
+
+                if (
+                    nodes[index].getAttribute('identification') !=
+                        'experience-inputs' ||
+                    nodes[index].getAttribute('code') != attr ||
+                    nodes[index].getAttribute('code') !=
+                        `experience-${experienceArray[k]?.key}`
+                ) {
                     continue
                 }
 
-                if (
-                    nodes[index].getAttribute('identification') ==
-                        'experience-inputs' &&
-                    nodes[index].getAttribute('code') == attr
-                ) {
-                    if (nodes[index].getAttribute('name') == 'position') {
-                        data.position = nodes[index].value
-                    }
-                    if (nodes[index].getAttribute('name') == 'establishment') {
-                        data.establishment = nodes[index].value
-                    }
-                    if (nodes[index].getAttribute('name') == 'day') {
-                        data.date.day = nodes[index].value
-                    }
-                    if (nodes[index].getAttribute('name') == 'month') {
-                        data.date.month = nodes[index].value
-                    }
-                    if (nodes[index].getAttribute('name') == 'year') {
-                        data.date.year = nodes[index].value
-                    }
-                    if (nodes[index].getAttribute('name') == 'finishDay') {
-                        data.finishDate.day = nodes[index].value
-                    }
-                    if (nodes[index].getAttribute('name') == 'finishMonth') {
-                        data.finishDate.month = nodes[index].value
-                    }
-                    if (nodes[index].getAttribute('name') == 'finishYear') {
-                        data.finishDate.year = nodes[index].value
-                    }
-                    if (nodes[index].getAttribute('name') == 'info') {
-                        data.info = nodes[index].value
-                    }
-                }
-                // console.log(data)
+                collectInformation(data, dataExtra, nodes, index, 1)
             }
             dataArray.push(data)
-            console.log(dataArray)
+            let mainData = dataArray.filter(x => x.position != '')
+            mainData.push(dataExtra)
+            console.log(mainData)
         }
-        // data = {
-        //     position: '',
-        //     establishment: '',
-        //     date: {
-        //         day: '',
-        //         month: '',
-        //         year: '',
-        //     },
-        //     finishDate: {
-        //         finishDay: '',
-        //         finishMonth: '',
-        //         finishYear: '',
-        //     },
-        //     info: '',
-        // }
     }
 
     return (
