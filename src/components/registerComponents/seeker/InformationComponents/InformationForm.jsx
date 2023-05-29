@@ -132,6 +132,24 @@ export default function InformationForm({ stepOneUpdateEmit }) {
             if (type == 'desired') setDesiredPositions(res.data)
         } catch (error) {}
     }
+
+    function updateDate(date, end) {
+        var dateObj = new Date(date)
+        var month = dateObj.getMonth() + 1
+        var day = dateObj.getDate()
+        var year = dateObj.getFullYear()
+        var newData = Date.parse(date)
+
+        if (day.toString().length == 1) day = `0${day}`
+        if (month.toString().length == 1) month = `0${month}`
+
+        end
+            ? setEndDate(year + '-' + month + '-' + day)
+            : setStartDate(year + '-' + month + '-' + day)
+        end ? setEndPickerDate(date) : setStartPickerDate(date)
+        setDate(year + '-' + month + '-' + day)
+    }
+
     return (
         <form
             onSubmit={submitHandler}
