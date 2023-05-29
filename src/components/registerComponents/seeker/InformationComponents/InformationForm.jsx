@@ -88,7 +88,6 @@ export default function InformationForm({ stepOneUpdateEmit }) {
             more_info: words,
             social_links: socialLinks,
         }
-        console.log(data)
 
         setStepOneData(data)
         stepOneUpdateEmit(data)

@@ -15,7 +15,7 @@ export default function seekerRegister({
     logout,
     register,
 }) {
-    const [step, setStep] = useState(3)
+    const [step, setStep] = useState(1)
     const maxSteps = 5
 
     const [stepOnePayload, setStepOnePayload] = useState(null)
@@ -108,6 +108,7 @@ export default function seekerRegister({
                 )}
                 {isLogged === 1 && user && user.data.verified && (
                     <SeekerFlow
+                        step={step}
                         setStep={value => setStep(value)}
                         stepOneUpdate={value => {
                             setStep(3)

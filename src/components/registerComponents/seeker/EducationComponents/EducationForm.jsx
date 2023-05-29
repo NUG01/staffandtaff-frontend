@@ -62,11 +62,13 @@ export default function EducationForm({ index }) {
                         code={`education-${index}`}
                         identification="education-inputs"
                         name="field_study"
+                        className="required-record"
                         style={{ marginBottom: '30px' }}
                         type="text"
                         placeholder="Domaine d'étude"
                         value={studyField}
                         onChange={ev => {
+                            ev.target.classList.remove('input-error')
                             setStudyField(ev.target.value)
                         }}
                     />
@@ -81,9 +83,11 @@ export default function EducationForm({ index }) {
                         code={`education-${index}`}
                         identification="education-inputs"
                         name="edu_establishment"
+                        className="required-record"
                         placeholder="Lycée, faculté, école, etc."
                         value={establishment}
                         onChange={ev => {
+                            ev.target.classList.remove('input-error')
                             setEstablishment(ev.target.value)
                         }}
                     />

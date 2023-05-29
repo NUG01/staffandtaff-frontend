@@ -9,6 +9,7 @@ import ExperienceForm from './ExperienceComponents/ExperienceForm'
 import InformationForm from './InformationComponents/InformationForm'
 import AddExperienceIcon from './ExperienceComponents/AddExperienceIcon'
 import EducationForm from './EducationComponents/EducationForm'
+import BasicAxios from '../../../lib/axios'
 
 export default function SeekerFlow({
     stepOneUpdate,
@@ -16,6 +17,7 @@ export default function SeekerFlow({
     stepThreeUpdate,
     stepFourUpdate,
     setStep,
+    step,
 }) {
     const [date, setDate] = useState('')
     const [expCount, setExpCount] = useState(1)
@@ -173,7 +175,11 @@ export default function SeekerFlow({
                 collectInformation(data, dataExtra, nodes, index, 1)
             }
             dataArray.push(data)
-            let mainData = dataArray.filter(x => x.position != '')
+            let mainData = dataArray
+                .filter(x => x.position != '')
+                .filter(y => y.establishment != '')
+                .filter(d => d.date.month != '')
+                .filter(m => m.date.year != '')
             mainData.push(dataExtra)
             setStepTwoData(mainData)
         }
@@ -220,16 +226,32 @@ export default function SeekerFlow({
                 )
             }
             eduDataArray.push(eduData)
-            let mainEduData = eduDataArray.filter(x => x.studyField != '')
+            let mainEduData = eduDataArray
+                .filter(x => x.studyField != '')
+                .filter(y => y.establishment != '')
+                .filter(d => d.date.month != '')
+                .filter(m => m.date.year != '')
             mainEduData.push(eduDataExtra)
-            console.log(mainEduData)
             setStepThreeData(mainEduData)
         }
     }
 
     async function finalSubmitHandler(ev) {
         ev.preventDefault()
-        console.log(stepOneData, stepTwoData, stepThreeData, coverLetter)
+        try {
+            const res = await BasicAxios.post(
+                'api/v1/seeker-information/store',
+                {
+                    information: stepOneData,
+                    experience: stepTwoData,
+                    education: stepThreeData,
+                    letter: coverLetter,
+                },
+            )
+            console.log(res)
+        } catch (error) {
+            console.log(error)
+        }
     }
     return (
         <>
@@ -367,21 +389,13 @@ export default function SeekerFlow({
                             </div>
                         </div>
                     </section>
+
+                    <button className={styles.nextButton} type="submit">
+                        suivant
+                        <i className="fa-solid fa-chevron-right"></i>
+                    </button>
                 </form>
             )}
-            <div
-                className={styles.nextButton}
-                onClick={() => {
-                    console.log({
-                        one: stepOneData,
-                        two: stepTwoData,
-                        three: stepThreeData,
-                        four: { cover_letter: coverLetter },
-                    })
-                }}>
-                suivant
-                <i className="fa-solid fa-chevron-right"></i>
-            </div>
         </>
     )
 }
