@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styles from '../../../../styles/register/register.module.css'
 import useCheckRequired from '@/hooks/requiredInputs'
 
-export default function EducationForm({ index, submitted }) {
+export default function EducationForm({ index }) {
     const [studyField, setStudyField] = useState('')
     const [establishment, setEstablishment] = useState('')
     const [certification, setCertification] = useState('')
@@ -15,19 +15,6 @@ export default function EducationForm({ index, submitted }) {
     async function submitHandler(ev) {
         ev.preventDefault()
     }
-
-    useEffect(() => {
-        if (submitted) {
-            const validated = useCheckRequired({
-                parentClass: 'seeker-step-three-register-' + index,
-            })
-
-            if (!validated) {
-                scrollTo(0, 0)
-                return
-            }
-        }
-    }, [submitted])
 
     let max = new Date().getFullYear()
     let min = max - 100

@@ -266,10 +266,10 @@ export default function SeekerFlow({
                                     submitted={submitProp}
                                     key={expCount + 1}
                                     index={expCount + 1}
-                                    stepTwoUpdateEmit={data => {
-                                        setStepTwoData(data)
-                                        stepTwoUpdate(data)
-                                    }}
+                                    // stepTwoUpdateEmit={data => {
+                                    //     setStepTwoData(data)
+                                    //     stepTwoUpdate(data)
+                                    // }}
                                 />,
                             ])
                         }}>
@@ -277,12 +277,17 @@ export default function SeekerFlow({
                     </div>
                     <button
                         onClick={() => {
-                            setSubmitProp(true)
-                            setTimeout(() => {
-                                setSubmitProp(false)
-                            }, 1200)
+                            const validated = useCheckRequired({
+                                parentClass: 'seeker-step-two-register-1',
+                            })
 
-                            collectData()
+                            if (!validated) {
+                                scrollTo(0, 0)
+                                return
+                            } else {
+                                collectData()
+                                setStep(4)
+                            }
                         }}
                         type="button"
                         className={styles.nextButton}>
@@ -315,10 +320,10 @@ export default function SeekerFlow({
                                     submitted={submitEduProp}
                                     key={eduCount + 1}
                                     index={eduCount + 1}
-                                    stepThreeUpdateEmit={data => {
-                                        setStepThreeData(data)
-                                        stepThreeUpdate(data)
-                                    }}
+                                    // stepThreeUpdateEmit={data => {
+                                    //     setStepThreeData(data)
+                                    //     stepThreeUpdate(data)
+                                    // }}
                                 />,
                             ])
                         }}>
@@ -326,12 +331,17 @@ export default function SeekerFlow({
                     </div>
                     <button
                         onClick={() => {
-                            setSubmitEduProp(true)
-                            setTimeout(() => {
-                                setSubmitEduProp(false)
-                            }, 1200)
+                            const validated = useCheckRequired({
+                                parentClass: 'seeker-step-three-register-1',
+                            })
 
-                            collectEduData()
+                            if (!validated) {
+                                scrollTo(0, 0)
+                                return
+                            } else {
+                                collectEduData()
+                                setStep(5)
+                            }
                         }}
                         type="button"
                         className={styles.nextButton}>
@@ -351,12 +361,6 @@ export default function SeekerFlow({
                                 placeholder="Lettre de motivation"
                                 onChange={ev => {
                                     setCoverLetter(ev.target.value)
-                                    console.log({
-                                        one: stepOneData,
-                                        two: stepTwoData,
-                                        three: stepThreeData,
-                                        four: { cover_letter: coverLetter },
-                                    })
                                 }}></textarea>
                             <div className={styles.wordCount}>
                                 {coverLetter.length} / 1000
@@ -368,7 +372,12 @@ export default function SeekerFlow({
             <div
                 className={styles.nextButton}
                 onClick={() => {
-                    sendEstablishmentData(3)
+                    console.log({
+                        one: stepOneData,
+                        two: stepTwoData,
+                        three: stepThreeData,
+                        four: { cover_letter: coverLetter },
+                    })
                 }}>
                 suivant
                 <i className="fa-solid fa-chevron-right"></i>

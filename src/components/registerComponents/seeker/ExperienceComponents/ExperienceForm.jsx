@@ -4,11 +4,7 @@ import axios from '@/lib/axios'
 import styles from '../../../../styles/register/register.module.css'
 import AddExperienceIcon from './AddExperienceIcon'
 
-export default function ExperienceForm({
-    stepTwoUpdateEmit,
-    index,
-    submitted,
-}) {
+export default function ExperienceForm({ stepTwoUpdateEmit, index }) {
     const [experiencePosition, setExperiencePosition] = useState(null)
     const [experiencePositions, setExperiencePositions] = useState(null)
 
@@ -26,19 +22,6 @@ export default function ExperienceForm({
     const [stepTwoData, setStepTwoData] = useState(null)
 
     const [workingStatus, setWorkingStatus] = useState(false)
-
-    useEffect(() => {
-        if (submitted) {
-            const validated = useCheckRequired({
-                parentClass: 'seeker-step-two-register-' + index,
-            })
-
-            if (!validated) {
-                scrollTo(0, 0)
-                return
-            }
-        }
-    }, [submitted])
 
     async function fetchPositions(pos) {
         setExperiencePositions(null)
