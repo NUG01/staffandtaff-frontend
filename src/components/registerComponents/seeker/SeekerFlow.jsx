@@ -10,6 +10,7 @@ import InformationForm from './InformationComponents/InformationForm'
 import AddExperienceIcon from './ExperienceComponents/AddExperienceIcon'
 import EducationForm from './EducationComponents/EducationForm'
 import BasicAxios from '../../../lib/axios'
+import { useRouter } from 'next/router'
 
 export default function SeekerFlow({
     stepOneUpdate,
@@ -45,43 +46,11 @@ export default function SeekerFlow({
     let dataArray = []
     let eduDataArray = []
 
+    const router = useRouter()
+
     useEffect(() => {
         setStep(2)
     }, [])
-
-    // function submitHandlerTHree(ev) {
-    //     ev.preventDefault()
-    //     const validated = useCheckRequired({
-    //         parentClass: 'seeker-step-three-register',
-    //     })
-
-    //     if (!validated) {
-    //         scrollTo(0, 0)
-    //         return
-    //     }
-    //     const data = {
-    //         cover_letter: coverLetter,
-    //     }
-    //     setStepThreeData(data)
-    //     stepThreeUpdate(data)
-    // }
-
-    // function submitHandlerFour(ev) {
-    //     ev.preventDefault()
-    //     const validated = useCheckRequired({
-    //         parentClass: 'seeker-step-four-register',
-    //     })
-
-    //     if (!validated) {
-    //         scrollTo(0, 0)
-    //         return
-    //     }
-    //     const data = {
-    //         cover_letter: coverLetter,
-    //     }
-    //     setStepFourData(data)
-    //     stepFourUpdate(data)
-    // }
 
     let data = {
         position: '',
@@ -250,7 +219,7 @@ export default function SeekerFlow({
                     letter: coverLetter,
                 },
             )
-            console.log(res)
+            router.push('/jobs')
         } catch (error) {
             console.log(error)
         }
@@ -328,10 +297,6 @@ export default function SeekerFlow({
                         key={1}
                         index="1"
                         submitted={submitEduProp}
-                        // stepThreeUpdateEmit={data => {
-                        //     setStepThreeData(data)
-                        //     stepThreeUpdate(data)
-                        // }}
                     />
                     {educationArray.map(edu => {
                         return edu
@@ -346,10 +311,6 @@ export default function SeekerFlow({
                                     submitted={submitEduProp}
                                     key={eduCount + 1}
                                     index={eduCount + 1}
-                                    // stepThreeUpdateEmit={data => {
-                                    //     setStepThreeData(data)
-                                    //     stepThreeUpdate(data)
-                                    // }}
                                 />,
                             ])
                         }}>
