@@ -136,7 +136,6 @@ textarea.singleInput {
 .checkbox {
     position: relative;
     display: flex;
-    /* align-content: center; */
     justify-content: flex-start;
     text-align: left;
     font-size: 14px;

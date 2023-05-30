@@ -174,7 +174,6 @@ export default function ExperienceForm({ stepTwoUpdateEmit, index }) {
                                 marginBottom: '30px',
                                 width: '100%',
                             }}
-                            // onChange={ev => setGender(ev.target.value)}
                             defaultValue={''}>
                             <option value="" disabled selected>
                                 JJ
@@ -223,9 +222,7 @@ export default function ExperienceForm({ stepTwoUpdateEmit, index }) {
                             onChange={ev => {
                                 ev.target.classList.remove('input-error')
                                 setYear(ev.target.value)
-                            }}
-                            // onChange={ev => setGender(ev.target.value)}
-                        >
+                            }}>
                             <option value="" disabled selected>
                                 AAAA
                                 <span className={styles.redSpan}>*</span>

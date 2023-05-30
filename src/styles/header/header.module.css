@@ -1,0 +1,10 @@
+.borderBottom {
+    border-bottom: 2px;
+    border-color: #ebebeb;
+    border-style: solid;
+}
+
+.fakeHeader {
+    height: 70px;
+    width: 100vw;
+}

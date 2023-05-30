@@ -260,10 +260,6 @@ export default function SeekerFlow({
                                     submitted={submitProp}
                                     key={expCount + 1}
                                     index={expCount + 1}
-                                    // stepTwoUpdateEmit={data => {
-                                    //     setStepTwoData(data)
-                                    //     stepTwoUpdate(data)
-                                    // }}
                                 />,
                             ])
                         }}>
