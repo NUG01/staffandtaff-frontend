@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import styles from '../../../../styles/register/register.module.css'
 import useCheckRequired from '@/hooks/requiredInputs'
+import styles2 from '@/styles/about/about.module.css'
 
 export default function EducationForm({ index }) {
     const [studyField, setStudyField] = useState('')
@@ -114,33 +115,25 @@ export default function EducationForm({ index }) {
                 style={{
                     width: '100%',
                     display: 'flex',
+                    flexDirection: 'row',
                     alignItems: 'start',
                     justifyContent: 'start',
                     paddingLeft: '20px',
-                }}>
-                <div className={styles['checkbox-wrapper-18']}>
-                    <div
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '10px',
-                        }}>
-                        <p>Already Graduated</p>
-                        <div className={styles.round}>
-                            <input
-                                code={`education-${index}`}
-                                identification="education-inputs"
-                                onClick={() =>
-                                    setGraduationStatus(!graduationStatus)
-                                }
-                                type="checkbox"
-                                id={`checkbox-18-${index}`}
-                            />
-                            <label htmlFor={`checkbox-18-${index}`}></label>
-                        </div>
-                    </div>
-                </div>
+                    marginTop: '0',
+                }}
+                className={styles2.checkbox}>
+                <input
+                    className={styles2.checkboxInput}
+                    code={`education-${index}`}
+                    identification="education-inputs"
+                    onClick={() => setGraduationStatus(!graduationStatus)}
+                    type="checkbox"
+                    id={`checkbox-18-${index}`}
+                    style={{ display: 'inline-block', width: '20px' }}
+                />
+                <label htmlFor={`checkbox-18-${index}`}>
+                    Already Graduated
+                </label>
             </div>
             {!graduationStatus && (
                 <section
@@ -222,8 +215,7 @@ export default function EducationForm({ index }) {
                                 onChange={ev => {
                                     ev.target.classList.remove('input-error')
                                     setYear(ev.target.value)
-                                }}
-                            >
+                                }}>
                                 <option value="" disabled selected>
                                     AAAA
                                     <span className={styles.redSpan}>*</span>

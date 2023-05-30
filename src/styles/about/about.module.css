@@ -26,15 +26,14 @@
 .box {
     width: 50%;
     padding: 50px;
-    
 }
 
 .vl {
-    border-left: 1px solid #F2E7D4;
-  height: 421px;
-  position: absolute;
-  left: 50%;
-  margin-left: -0.5px;
+    border-left: 1px solid #f2e7d4;
+    height: 421px;
+    position: absolute;
+    left: 50%;
+    margin-left: -0.5px;
 }
 
 .formContent {
@@ -71,7 +70,8 @@
     position: relative;
 }
 
-.inputControl svg,.inputControl p {
+.inputControl svg,
+.inputControl p {
     position: absolute;
     top: 25.4px;
     transition: 0.3s;
@@ -80,13 +80,12 @@
     pointer-events: none;
 }
 
-
 .inputControl svg {
     left: 10px;
 }
 
 .inputControl p {
-    left : 41.5px;
+    left: 41.5px;
     font-size: 14px;
     pointer-events: none;
     color: #00000000;
@@ -96,14 +95,14 @@
 }
 
 .inputControl p span {
-    color: #D52B1E;
+    color: #d52b1e;
 }
 /* 
 .inputControl input:valid + p {
     display: none;
   } */
 
-.inputControl svg path{
+.inputControl svg path {
     fill: var(--color-4) !important;
 }
 
@@ -115,19 +114,18 @@
 }
 
 .singleInputInvalid {
-    border: 2px solid #D52B1E;
+    border: 2px solid #d52b1e;
     padding: 15px 40px 15px 40px;
     width: 100%;
     transition: all 0.3s;
 }
 
-
-textarea.singleInput{
+textarea.singleInput {
     padding-left: 15px;
 }
 
 .singleInput:focus {
-    border-color: #8B4F3C;
+    border-color: #8b4f3c;
 }
 
 #message {
@@ -146,7 +144,7 @@ textarea.singleInput{
     padding: 10px 0px;
 }
 
-.mailFailed{
+.mailFailed {
     color: red;
     text-align: center;
     padding: 10px 0px;
@@ -174,12 +172,13 @@ textarea.singleInput{
     font-weight: bold;
 }
 
-.checkbox span{
+.checkbox span {
     color: var(--red);
 }
 
-.checkboxTextInvalid,.checkboxTextInvalid a {
-    color: #D52B1E;
+.checkboxTextInvalid,
+.checkboxTextInvalid a {
+    color: #d52b1e;
     transition: all 0.3s;
 }
 
@@ -197,7 +196,7 @@ textarea.singleInput{
 .errorMessage {
     /* display: block; */
     background-color: #fff;
-    border: 2px solid #EBEBEB;
+    border: 2px solid #ebebeb;
     padding: 10px 20px;
     width: max-content;
     position: absolute;
@@ -217,12 +216,12 @@ textarea.singleInput{
     position: absolute;
     left: 50%;
     top: 100%;
-    transform: translate(-50%,-50%) rotate(45deg);
+    transform: translate(-50%, -50%) rotate(45deg);
     width: 15px;
     height: 15px;
     background-color: #fff;
     border-width: 0 2px 2px 0;
-    border-color: #EBEBEB;
+    border-color: #ebebeb;
     border-style: solid;
 }
 
@@ -236,17 +235,16 @@ textarea.singleInput{
 
 .successText p {
     padding-left: 20px;
-    color: #00A944;
+    color: #00a944;
 }
 
-@media(max-width: 992px) {
-
-    .formContent{
+@media (max-width: 992px) {
+    .formContent {
         padding: 15px;
         padding-bottom: 0px;
     }
 
-    .box{
+    .box {
         padding: 15px;
     }
 
@@ -255,7 +253,8 @@ textarea.singleInput{
         width: 96%;
     }
 
-    .box, .formContent  {
+    .box,
+    .formContent {
         width: 100%;
         align-items: center;
     }
@@ -270,12 +269,12 @@ textarea.singleInput{
         width: 100%;
     }
 
-    .formController{
+    .formController {
         width: 100%;
         max-width: unset;
     }
 
-    .title{
+    .title {
         font-size: 24px;
         padding-bottom: 15px;
     }

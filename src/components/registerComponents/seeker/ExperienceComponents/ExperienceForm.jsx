@@ -3,6 +3,7 @@ import useCheckRequired from '@/hooks/requiredInputs'
 import axios from '@/lib/axios'
 import styles from '../../../../styles/register/register.module.css'
 import AddExperienceIcon from './AddExperienceIcon'
+import styles2 from '@/styles/about/about.module.css'
 
 export default function ExperienceForm({ stepTwoUpdateEmit, index }) {
     const [experiencePosition, setExperiencePosition] = useState(null)
@@ -237,33 +238,24 @@ export default function ExperienceForm({ stepTwoUpdateEmit, index }) {
                     style={{
                         width: '100%',
                         display: 'flex',
-                        alignItems: 'start',
+                        alignItems: 'center',
                         justifyContent: 'start',
                         paddingLeft: '20px',
-                    }}>
-                    <div className={styles['checkbox-wrapper-18']}>
-                        <div
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                gap: '10px',
-                            }}>
-                            <p>Currently work here</p>
-                            <div className={styles.round}>
-                                <input
-                                    code={`experience-${index}`}
-                                    identification="experience-inputs"
-                                    onClick={() =>
-                                        setWorkingStatus(!workingStatus)
-                                    }
-                                    type="checkbox"
-                                    id={`checkbox-18-${index}`}
-                                />
-                                <label htmlFor={`checkbox-18-${index}`}></label>
-                            </div>
-                        </div>
-                    </div>
+                        marginTop: '0',
+                    }}
+                    className={styles2.checkbox}>
+                    <input
+                        className={styles2.checkboxInput}
+                        code={`experience-${index}`}
+                        identification="experience-inputs"
+                        onClick={() => setWorkingStatus(!workingStatus)}
+                        type="checkbox"
+                        id={`checkbox-18-${index}`}
+                        style={{ display: 'inline', width: '20px' }}
+                    />
+                    <label htmlFor={`checkbox-18-${index}`}>
+                        I currently work here!
+                    </label>
                 </div>
             </section>
             {!workingStatus && (
