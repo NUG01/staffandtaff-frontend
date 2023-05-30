@@ -49,39 +49,39 @@ export default function SeekerFlow({
         setStep(2)
     }, [])
 
-    function submitHandlerTHree(ev) {
-        ev.preventDefault()
-        const validated = useCheckRequired({
-            parentClass: 'seeker-step-three-register',
-        })
+    // function submitHandlerTHree(ev) {
+    //     ev.preventDefault()
+    //     const validated = useCheckRequired({
+    //         parentClass: 'seeker-step-three-register',
+    //     })
 
-        if (!validated) {
-            scrollTo(0, 0)
-            return
-        }
-        const data = {
-            cover_letter: coverLetter,
-        }
-        setStepThreeData(data)
-        stepThreeUpdate(data)
-    }
+    //     if (!validated) {
+    //         scrollTo(0, 0)
+    //         return
+    //     }
+    //     const data = {
+    //         cover_letter: coverLetter,
+    //     }
+    //     setStepThreeData(data)
+    //     stepThreeUpdate(data)
+    // }
 
-    function submitHandlerFour(ev) {
-        ev.preventDefault()
-        const validated = useCheckRequired({
-            parentClass: 'seeker-step-four-register',
-        })
+    // function submitHandlerFour(ev) {
+    //     ev.preventDefault()
+    //     const validated = useCheckRequired({
+    //         parentClass: 'seeker-step-four-register',
+    //     })
 
-        if (!validated) {
-            scrollTo(0, 0)
-            return
-        }
-        const data = {
-            cover_letter: coverLetter,
-        }
-        setStepFourData(data)
-        stepFourUpdate(data)
-    }
+    //     if (!validated) {
+    //         scrollTo(0, 0)
+    //         return
+    //     }
+    //     const data = {
+    //         cover_letter: coverLetter,
+    //     }
+    //     setStepFourData(data)
+    //     stepFourUpdate(data)
+    // }
 
     let data = {
         position: '',
@@ -226,18 +226,20 @@ export default function SeekerFlow({
                 )
             }
             eduDataArray.push(eduData)
+            console.log(eduDataArray)
+
             let mainEduData = eduDataArray
                 .filter(x => x.studyField != '')
                 .filter(y => y.establishment != '')
-                .filter(d => d.date.month != '')
-                .filter(m => m.date.year != '')
             mainEduData.push(eduDataExtra)
+
             setStepThreeData(mainEduData)
         }
     }
 
     async function finalSubmitHandler(ev) {
         ev.preventDefault()
+
         try {
             const res = await BasicAxios.post(
                 'api/v1/seeker-information/store',
@@ -253,6 +255,7 @@ export default function SeekerFlow({
             console.log(error)
         }
     }
+
     return (
         <>
             {!stepOneData && (
@@ -309,6 +312,7 @@ export default function SeekerFlow({
                             } else {
                                 collectData()
                                 setStep(4)
+                                scrollTo(0, 0)
                             }
                         }}
                         type="button"
@@ -324,10 +328,10 @@ export default function SeekerFlow({
                         key={1}
                         index="1"
                         submitted={submitEduProp}
-                        stepThreeUpdateEmit={data => {
-                            setStepThreeData(data)
-                            stepThreeUpdate(data)
-                        }}
+                        // stepThreeUpdateEmit={data => {
+                        //     setStepThreeData(data)
+                        //     stepThreeUpdate(data)
+                        // }}
                     />
                     {educationArray.map(edu => {
                         return edu
@@ -363,6 +367,7 @@ export default function SeekerFlow({
                             } else {
                                 collectEduData()
                                 setStep(5)
+                                scrollTo(0, 0)
                             }
                         }}
                         type="button"
@@ -498,7 +503,7 @@ function collectEducationInformation(data, dataExtra, nodes, index, type = 0) {
         if (type == 1) {
             data.establishment = nodes[index].value
         } else {
-            if (nodes[index].getAttribute('code') == 'expereducationience-1') {
+            if (nodes[index].getAttribute('code') == 'education-1') {
                 dataExtra.establishment = nodes[index].value
             }
         }

@@ -503,11 +503,9 @@ export default function InformationForm({ stepOneUpdateEmit }) {
                     </div>
                 </div>
             </section>
-            {/* <button type="submit">submit</button> */}
             <button
                 type="submit"
                 className={styles.nextButton}
-                // onClick={() => sendJobData()}
             >
                 suivant
                 <i className="fa-solid fa-chevron-right"></i>

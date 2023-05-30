@@ -175,7 +175,6 @@ export default function EducationForm({ index }) {
                                     marginBottom: '30px',
                                     width: '100%',
                                 }}
-                                // onChange={ev => setGender(ev.target.value)}
                                 defaultValue={''}>
                                 <option value="" disabled selected>
                                     JJ
@@ -200,7 +199,6 @@ export default function EducationForm({ index }) {
                                     width: '100%',
                                 }}
                                 className="required-record"
-                                // onChange={ev => setGender(ev.target.value)}
                                 defaultValue={''}>
                                 <option value="" disabled selected>
                                     MM*
@@ -225,7 +223,6 @@ export default function EducationForm({ index }) {
                                     ev.target.classList.remove('input-error')
                                     setYear(ev.target.value)
                                 }}
-                                // onChange={ev => setGender(ev.target.value)}
                             >
                                 <option value="" disabled selected>
                                     AAAA

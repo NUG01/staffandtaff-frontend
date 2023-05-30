@@ -23,6 +23,12 @@ export default function ExperienceForm({ stepTwoUpdateEmit, index }) {
 
     const [workingStatus, setWorkingStatus] = useState(false)
 
+    useEffect(() => {
+        if (index == 1) {
+            scrollTo(0, 0)
+        }
+    }, [])
+
     async function fetchPositions(pos) {
         setExperiencePositions(null)
         if (!pos) return
@@ -293,7 +299,6 @@ export default function ExperienceForm({ stepTwoUpdateEmit, index }) {
                                     marginBottom: '30px',
                                     width: '100%',
                                 }}
-                                // onChange={ev => setGender(ev.target.value)}
                                 defaultValue={''}>
                                 <option value="" disabled selected>
                                     JJ
@@ -318,7 +323,6 @@ export default function ExperienceForm({ stepTwoUpdateEmit, index }) {
                                     width: '100%',
                                 }}
                                 className="required-record"
-                                // onChange={ev => setGender(ev.target.value)}
                                 defaultValue={''}>
                                 <option value="" disabled selected>
                                     MM*
@@ -342,9 +346,7 @@ export default function ExperienceForm({ stepTwoUpdateEmit, index }) {
                                 onChange={ev => {
                                     ev.target.classList.remove('input-error')
                                     setFinishYear(ev.target.value)
-                                }}
-                                // onChange={ev => setGender(ev.target.value)}
-                            >
+                                }}>
                                 <option value="" disabled selected>
                                     AAAA
                                     <span className={styles.redSpan}>*</span>
@@ -376,18 +378,6 @@ export default function ExperienceForm({ stepTwoUpdateEmit, index }) {
                     </div>
                 </div>
             </section>
-            {/* <div>
-                <AddExperienceIcon addExperience={() => emitExperienceAdd()} />
-            </div> */}
-
-            {/* <button
-                type="submit"
-                className={styles.nextButton}
-                // onClick={() => sendJobData()}
-            >
-                suivant
-                <i className="fa-solid fa-chevron-right"></i>
-            </button> */}
         </form>
     )
 }
