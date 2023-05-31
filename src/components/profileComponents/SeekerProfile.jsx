@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from '../../pages/header'
 import styles from '../../styles/profile/profile.module.css'
 import { FaSearch } from 'react-icons/fa'
@@ -11,10 +11,15 @@ import BuildingIcon from '@/icons/BuildingIcon'
 import useCheckRequired from '@/hooks/requiredInputs'
 import FranceIcon from '@/icons/FranceIcon'
 import SwitzerlandIcon from '@/icons/SwitzerlandIcon'
+import axios from '@/lib/axios'
 
 export default function index({ isLogged, user, profile }) {
     const [expanded, setExpanded] = useState(false)
     const [chosen, setChosenCity] = useState(null)
+
+    const [data, setData] = useState(null)
+    const [socialLinks, setSocialLinks] = useState(null)
+    const [isFetched, setIsFetched] = useState(false)
 
     const [establishmentInput, setEstablishmentInput] = useState('')
     const [reccommendationText, setReccommendationText] = useState('')
@@ -25,6 +30,8 @@ export default function index({ isLogged, user, profile }) {
         ev.preventDEfault()
         console.log('ok')
     }
+
+    console.log(data)
 
     function submitHandler(ev) {
         ev.preventDefault()
@@ -39,13 +46,34 @@ export default function index({ isLogged, user, profile }) {
             console.log('wow')
         }
     }
+
+    useEffect(() => {
+        axios.get('api/v1/seeker-information/' + user.data.id).then(res => {
+            setData(res.data.data)
+            setSocialLinks(res.data.social_links[0])
+            setIsFetched(true)
+        })
+    }, [])
+    function convertDate(date, day = 1) {
+        let parts = date.split('-')
+        let formattedDate
+        if (day) formattedDate = parts[2] + '/' + parts[1] + '/' + parts[0]
+        if (!day) formattedDate = parts[1] + '/' + parts[0]
+        return formattedDate
+    }
+
+    if (!isFetched) return
     return (
         <div>
             <Header isLogged={isLogged} user={user} profile={profile} />
             <div className={styles.fakeHeader}></div>
             <div className={styles.mainWrapper}>
                 <div className={styles.searchPlace}>
-                    <p style={{ whiteSpace: 'nowrap', textAlign: 'center' }}>
+                    <p
+                        style={{
+                            textAlign: 'center',
+                            wordBreak: 'break-word',
+                        }}>
                         Texte énumérant tous les avantages de la plateforme et
                         invitant l'utilisateur à s'inscrire en ligne.
                     </p>
@@ -84,7 +112,9 @@ export default function index({ isLogged, user, profile }) {
                         <span style={{ color: '#472E23' }}> Candidat</span>
                     </p>
                 </div>
-                <div className={styles.candidatName}>Lorem ipsum</div>
+                <div className={styles.candidatName}>
+                    {data.seeker_info.fullname}
+                </div>
                 <div style={{ width: '100%' }}>
                     <div
                         style={{
@@ -112,64 +142,86 @@ export default function index({ isLogged, user, profile }) {
                                         marginRight: '5px',
                                         alignItems: 'center',
                                     }}>
-                                    {true ? (
+                                    {data.seeker_info.desired_country ==
+                                    'FR' ? (
                                         <FranceIcon />
                                     ) : (
                                         <SwitzerlandIcon />
                                     )}
                                 </span>
-                                <p>Paris, France</p>
+                                <p>
+                                    {data.seeker_info.desired_country == 'FR'
+                                        ? 'France'
+                                        : 'Switzerland'}
+                                    , {data.seeker_info.desired_city}
+                                </p>
                             </div>
                         </div>
                         <div className={styles.candidatDetailsSmallBox}>
                             <p style={{ fontWeight: '700' }}>Poste</p>
-                            <p>Chef</p>
+                            <p>{data.seeker_info.current_position}</p>
                         </div>
                         <div className={styles.candidatDetailsSmallBox}>
                             <p style={{ fontWeight: '700' }}>
                                 Date d'anniversaire
                             </p>
-                            <p>05/05/1991</p>
+                            <p>{convertDate(data.seeker_info.birthdate)}</p>
                         </div>
                         <div className={styles.candidatDetailsSmallBox}>
                             <p style={{ fontWeight: '700' }}>
                                 Identité de genre
                             </p>
-                            <p>Female</p>
+                            <p>{data.seeker_info.gender}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className={`${styles.experience} ${styles.borderBottomHalf}`}>
-                <SocialLinks />
+            <div
+                className={`${styles.experience} ${styles.borderBottomHalf}`}
+                style={{ gap: '40px' }}>
+                <SocialLinks data={socialLinks} />
                 <div className={styles.experienceName}>
                     EXPÉRIENCE PROFESSIONNELLE
                 </div>
-                <div
-                    style={{
-                        alignSelf: 'start',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '40px',
-                    }}>
-                    <div className={styles.experienceSubConatainer}>
-                        <p style={{ fontWeight: '700', fontSize: '18px' }}>
-                            Au Pain Perdu
-                        </p>
+                {data.seeker_info.experiences.map(exp => {
+                    return (
                         <div
                             style={{
+                                alignSelf: 'start',
                                 display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                marginRight: '5px',
+                                flexDirection: 'column',
+                                gap: '40px',
                             }}>
-                            <div className={styles.experienceSubSubContainer}>
-                                <p>09/2017 - 12/2022</p>
-                                <p>Chef</p>
+                            <div className={styles.experienceSubConatainer}>
+                                <p
+                                    style={{
+                                        fontWeight: '700',
+                                        fontSize: '18px',
+                                    }}>
+                                    {exp.establishment}
+                                </p>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        marginRight: '5px',
+                                    }}>
+                                    <div
+                                        className={
+                                            styles.experienceSubSubContainer
+                                        }>
+                                        <p>
+                                            {convertDate(exp.start_date, 0)} -{' '}
+                                            {convertDate(exp.end_date, 0)}
+                                        </p>
+                                        <p>{exp.position}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    )
+                })}
             </div>
             <div className={`${styles.experience} ${styles.borderBottomHalf}`}>
                 <div className={styles.experienceName}>ÉDUCATION</div>
@@ -180,23 +232,39 @@ export default function index({ isLogged, user, profile }) {
                         flexDirection: 'column',
                         gap: '40px',
                     }}>
-                    <div className={styles.experienceSubConatainer}>
-                        <p style={{ fontWeight: '700', fontSize: '18px' }}>
-                            Le Cordon Bleu Paris
-                        </p>
-                        <div
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                marginRight: '5px',
-                            }}>
-                            <div className={styles.experienceSubSubContainer}>
-                                <p>07/2017</p>
-                                <p>Diploma - Cuisine, Culinary Arts</p>
+                    {data.seeker_info.educations.map(edu => {
+                        return (
+                            <div className={styles.experienceSubConatainer}>
+                                <p
+                                    style={{
+                                        fontWeight: '700',
+                                        fontSize: '18px',
+                                    }}>
+                                    {edu.field_of_study}
+                                </p>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        marginRight: '5px',
+                                    }}>
+                                    <div
+                                        className={
+                                            styles.experienceSubSubContainer
+                                        }>
+                                        <p>
+                                            {convertDate(
+                                                edu.graduation_date,
+                                                0,
+                                            )}
+                                        </p>
+                                        <p>{edu.certification_type}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        )
+                    })}
                 </div>
             </div>
             <div className={`${styles.experience}`}>
@@ -219,34 +287,12 @@ export default function index({ isLogged, user, profile }) {
                                 justifyContent: 'center',
                                 marginRight: '5px',
                             }}>
-                            <p style={{ fontSize: '14px' }}>
-                                J'ai une passion pour la cuisine et le travail
-                                en équipe pour faire passer de délicieux
-                                concepts de l'esprit d'un chef à l'assiette d'un
-                                restaurant. Avec plusieurs années d'expérience
-                                de formation auprès de grands chefs dans
-                                plusieurs régions, j'ai appris une variété de
-                                compétences et de plats nécessaires dans une
-                                cuisine occupée. Je suis le candidat idéal pour
-                                le poste de cuisinier à la chaîne disponible
-                                dans votre restaurant. Un cuisinier à la chaîne
-                                doit avoir d'excellentes capacités de
-                                communication ainsi que de la créativité, de la
-                                dextérité et de l'endurance. La capacité à
-                                travailler en équipe est nécessaire dans une
-                                cuisine efficace. Mon expérience professionnelle
-                                m'a appris à gérer une variété de commandes, à
-                                communiquer sur les besoins des clients et à
-                                être un membre efficace d'une équipe tout en
-                                exécutant les compétences nécessaires à la
-                                réalisation de plats fantastiques. Mon permis et
-                                ma formation en matière de sécurité sanitaire
-                                sont tous à jour et je suis prêt à commencer à
-                                travailler dans cet État immédiatement.
-                                J'attends avec impatience votre réponse et je me
-                                réjouis de pouvoir discuter de ma candidature
-                                avec vous lors d'un entretien. Je vous remercie
-                                de votre temps et de votre attention.
+                            <p
+                                style={{
+                                    fontSize: '14px',
+                                    wordBreak: 'break-word',
+                                }}>
+                                {data.seeker_info.cover_letter}
                             </p>
                         </div>
                     </div>
