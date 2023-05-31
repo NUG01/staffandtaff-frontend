@@ -3,6 +3,18 @@
     border-bottom-color: #ebebeb;
     border-bottom-style: solid;
 }
+.borderBottomHalf {
+    border-bottom: 2px;
+    border-bottom-color: #ebebeb;
+    border-bottom-style: solid;
+    border-bottom-width: 60%;
+}
+
+.borderTop {
+    border-top: 2px;
+    border-top-color: #ebebeb;
+    border-top-style: solid;
+}
 
 .fakeHeader {
     height: 70px;
@@ -157,12 +169,13 @@
 .candidat {
     background-color: #fff;
     width: 100%;
-    padding: 15px 345px;
+    padding: 30px 18%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 55px;
+    padding-top: 50px;
+    position: relative;
 }
 .candidatName {
     color: #472e23;
@@ -191,4 +204,155 @@
     color: #757575;
     position: absolute;
     top: 10px;
+    left: 12%;
+}
+
+.experience {
+    background-color: #fff8f4;
+    width: 65%;
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: auto;
+}
+.experienceName {
+    color: #472e23;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.socialLinks {
+    position: absolute;
+    top: 10px;
+    left: 12%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.experienceSubContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 10px;
+    width: 20%;
+}
+.experienceSubSubContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+.experienceSubSubContainer::before {
+    content: '';
+    background-color: #ebebeb;
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    top: 3px;
+    left: 0;
+    margin-left: 10px;
+}
+
+.reccommendations {
+    background-color: #fff8f4;
+    width: 100%;
+    padding: 30px 18%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+    position: relative;
+}
+
+.reccommenationItem {
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    margin: auto;
+}
+
+.reccommenationName {
+    color: #472e23;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+.inputContainer {
+    width: 100%;
+    position: relative;
+}
+
+.input {
+    border: #ebebeb 2px solid;
+    background-color: #fff;
+    width: 100%;
+    height: 60px;
+    padding: 20px 30px 22px 50px;
+    display: block;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: #757575;
+    font-size: 14px;
+}
+
+.building {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translate(0, -50%);
+}
+
+.textarea {
+    border: #ebebeb 2px solid;
+    background-color: #fff;
+    width: 100%;
+    min-height: 160px;
+    padding: 20px;
+    display: block;
+    resize: none;
+}
+
+.checkbox {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 10px 0px;
+}
+
+.checkboxInput {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-1);
+}
+
+.button {
+    background-color: #472e23;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    cursor: pointer;
 }

@@ -1,16 +1,13 @@
-import { useState, useRef, useEffect } from 'react'
-import styles from '../../../styles/register/register.module.css'
-import axios from '@/lib/axios'
-import Axios from 'axios'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
 import useCheckRequired from '@/hooks/requiredInputs'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import 'react-datepicker/dist/react-datepicker.css'
+import BasicAxios from '../../../lib/axios'
+import styles from '../../../styles/register/register.module.css'
+import EducationForm from './EducationComponents/EducationForm'
+import AddExperienceIcon from './ExperienceComponents/AddExperienceIcon'
 import ExperienceForm from './ExperienceComponents/ExperienceForm'
 import InformationForm from './InformationComponents/InformationForm'
-import AddExperienceIcon from './ExperienceComponents/AddExperienceIcon'
-import EducationForm from './EducationComponents/EducationForm'
-import BasicAxios from '../../../lib/axios'
-import { useRouter } from 'next/router'
 
 export default function SeekerFlow({
     stepOneUpdate,
