@@ -9,6 +9,8 @@ import FeedbackStars from './FeedbackStars'
 import Footer from '@/pages/footer'
 import BuildingIcon from '@/icons/BuildingIcon'
 import useCheckRequired from '@/hooks/requiredInputs'
+import FranceIcon from '@/icons/FranceIcon'
+import SwitzerlandIcon from '@/icons/SwitzerlandIcon'
 
 export default function index({ isLogged, user, profile }) {
     const [expanded, setExpanded] = useState(false)
@@ -101,13 +103,23 @@ export default function index({ isLogged, user, profile }) {
                     <div className={styles.candidatDetailsContainer}>
                         <div className={styles.candidatDetailsSmallBox}>
                             <p style={{ fontWeight: '700' }}>Ville, Pays</p>
-                            <p>
-                                <span style={{ marginRight: '5px' }}>
-                                    {' '}
-                                    <ThreeDotsIcon />
+                            <div
+                                style={{
+                                    display: 'flex',
+                                }}>
+                                <span
+                                    style={{
+                                        marginRight: '5px',
+                                        alignItems: 'center',
+                                    }}>
+                                    {true ? (
+                                        <FranceIcon />
+                                    ) : (
+                                        <SwitzerlandIcon />
+                                    )}
                                 </span>
-                                Paris, France
-                            </p>
+                                <p>Paris, France</p>
+                            </div>
                         </div>
                         <div className={styles.candidatDetailsSmallBox}>
                             <p style={{ fontWeight: '700' }}>Poste</p>
