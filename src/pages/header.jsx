@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setAuthData } from '@/redux/userAuth'
 import { useAjax } from '@/hooks/ajax'
 import AccountPanelIcon from '@/components/Icons'
-import styles from '../styles/header/header.module.css'
+import styles from '../styles/profile/profile.module.css'
 
 export default function Header({ active, isLogged, user, isMobile, profile }) {
     const { sendData } = useAjax()
@@ -52,7 +52,10 @@ export default function Header({ active, isLogged, user, isMobile, profile }) {
                 className={`${scrl > 5 || expanded ? 'scrolled' : ''}, ${
                     profile ? styles.borderBottom : undefined
                 }`}
-                style={{ padding: profile ? '30px 110px' : '' }}
+                style={{
+                    padding: profile ? '30px 110px' : '',
+                    backgroundColor: profile ? '#FFF8F4' : undefined,
+                }}
                 id={active === 'home' || active === 'job' ? 'home' : ''}>
                 <h1 className={isMobile ? 'hide-nav' : ''}>
                     <Link href="/jobs">
