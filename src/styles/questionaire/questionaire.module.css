@@ -1,0 +1,30 @@
+.fakeHeader {
+    height: 70px;
+    width: 100vw;
+}
+
+.navigationPath {
+    color: #757575;
+    position: absolute;
+    top: 90px;
+    left: 7%;
+}
+
+.mainName {
+    color: #472e23;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.main {
+    background-color: #fff8f4;
+    width: 65%;
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: auto;
+    margin-top: 50px;
+}
