@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../header'
 import styles from '../../styles/profile/profile.module.css'
 import SeekerProfile from '../..//components/profileComponents/SeekerProfile'
+import RecruiterProfile from '@/components/profileComponents/RecruiterProfile'
 
 export default function index({ isLogged, user }) {
     console.log(user)
@@ -14,7 +15,12 @@ export default function index({ isLogged, user }) {
                     isLogged={isLogged}
                     user={user}></SeekerProfile>
             )}
-            {user.data.role != 'Seeker' && <div>Not seeker</div>}
+            {user.data.role == 'Recruiter' && (
+                <RecruiterProfile
+                    profile={true}
+                    isLogged={isLogged}
+                    user={user}></RecruiterProfile>
+            )}
         </div>
     )
 }

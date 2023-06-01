@@ -351,7 +351,7 @@ export default function index({ isLogged, user, profile }) {
                                 gap: '10px',
                             }}>
                             <p style={{ fontWeight: '700' }}>Hôtel Grandiose</p>
-                            <FeedbackStars />
+                            <FeedbackStars rating={4} />
                             <p style={{ fontSize: '14px' }}>
                                 J'aimerais profiter de l'occasion pour
                                 recommander Anna Augustin pour le personnel de
@@ -390,8 +390,8 @@ export default function index({ isLogged, user, profile }) {
                     Laisser une recommandation
                 </div>
                 <p style={{ fontSize: '14px', marginBottom: '10px' }}>
-                    Avez-vous travaillé avec Anna Augustin ? Laissez un
-                    recommandation.
+                    Avez-vous travaillé avec {data.seeker_info.fullname}?
+                    Laissez un recommandation.
                 </p>
                 <div
                     style={{
@@ -423,7 +423,7 @@ export default function index({ isLogged, user, profile }) {
                                 ev.target.classList.remove('input-error')
                                 setReccommendationText(ev.target.value)
                             }}
-                            placeholder="Nom de l'établissement*"
+                            placeholder="Recommandation*"
                             type="text"
                             className={`${styles.textarea} required-record`}
                         />

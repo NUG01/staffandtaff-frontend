@@ -3,6 +3,7 @@ import React from 'react'
 export default function ThreeDotsIcon() {
     return (
         <svg
+            style={{ cursor: 'pointer' }}
             width="4"
             height="16"
             viewBox="0 0 4 16"
