@@ -13,7 +13,7 @@ export default function Footer({ className, noMarginToP }) {
     return (
         <footer
             className={className}
-            style={{ marginTop: noMarginToP ? '0px' : undef }}>
+            style={{ marginTop: noMarginToP ? '0px' : undefined }}>
             <div className="top-footer">
                 <div className="column column-1">
                     <Link href="/">

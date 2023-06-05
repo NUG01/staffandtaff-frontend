@@ -25,6 +25,8 @@ export default function index({ isLogged, user, profile }) {
     const [chosen, setChosenCity] = useState(null)
     const [feedbackCount, setFeedbackCount] = useState(0)
 
+    const array = ['one', 'two', 'three', 'four', 'five']
+
     console.log(user)
 
     const [data, setData] = useState(null)
@@ -453,117 +455,129 @@ export default function index({ isLogged, user, profile }) {
             </form>
             <div
                 className={styles.establishmentsGrid}
-                style={{ backgroundColor: '#F8F0EB', padding: '45px 35px' }}>
-                <div
-                    className={styles.extablishmentItem}
-                    style={{ padding: '20px', overflowX: 'hidden' }}>
-                    <div
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                        }}>
-                        <p
-                            style={{
-                                color: '#000',
-                                fontWeight: '700',
-                                fontSize: '18px',
-                            }}>
-                            Chef de rang
-                        </p>
-                        <div>
-                            <HeartIcon />
-                        </div>
-                    </div>
-                    <div
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'start',
-                            justifyContent: 'center',
-                            gap: '10px',
-                            marginTop: '6px',
-                        }}>
-                        <p style={{ fontSize: '14px' }}>Restaurant Gourmet</p>
-                    </div>
-                    <div
-                        style={{
-                            display: 'grid',
-                            gridTemplateColumns: '1fr 1fr',
-                            gridTemplateRows: '1fr 1fr',
-                            marginTop: '20px',
-                            gap: '10px',
-                        }}>
+                style={{
+                    backgroundColor: '#F8F0EB',
+                    padding: '45px 35px',
+                    width: '100%',
+                }}>
+                {array.map(est => {
+                    return (
                         <div
-                            style={{
-                                display: 'flex',
-                            }}>
-                            <span
+                            className={styles.extablishmentItem}
+                            style={{ padding: '20px', overflowX: 'hidden' }}>
+                            <div
                                 style={{
-                                    marginRight: '5px',
+                                    display: 'flex',
                                     alignItems: 'center',
+                                    justifyContent: 'space-between',
                                 }}>
-                                {'FR' == 'FR' ? (
-                                    <FranceIcon />
-                                ) : (
-                                    <SwitzerlandIcon />
-                                )}
-                            </span>
-                            <p>
-                                {'FR' == 'FR' ? 'France' : 'Switzerland'},{' '}
-                                {'Paris'}
+                                <p
+                                    style={{
+                                        color: '#000',
+                                        fontWeight: '700',
+                                        fontSize: '18px',
+                                    }}>
+                                    Chef de rang
+                                </p>
+                                <div>
+                                    <HeartIcon />
+                                </div>
+                            </div>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'start',
+                                    justifyContent: 'center',
+                                    gap: '10px',
+                                    marginTop: '6px',
+                                }}>
+                                <p style={{ fontSize: '14px' }}>
+                                    Restaurant Gourmet
+                                </p>
+                            </div>
+                            <div
+                                style={{
+                                    display: 'grid',
+                                    gridTemplateColumns: '1fr 1fr',
+                                    gridTemplateRows: '1fr 1fr',
+                                    marginTop: '20px',
+                                    gap: '10px',
+                                }}>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                    }}>
+                                    <span
+                                        style={{
+                                            marginRight: '5px',
+                                            alignItems: 'center',
+                                        }}>
+                                        {'FR' == 'FR' ? (
+                                            <FranceIcon />
+                                        ) : (
+                                            <SwitzerlandIcon />
+                                        )}
+                                    </span>
+                                    <p>
+                                        {'FR' == 'FR'
+                                            ? 'France'
+                                            : 'Switzerland'}
+                                        , {'Paris'}
+                                    </p>
+                                </div>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                    }}>
+                                    <span
+                                        style={{
+                                            marginRight: '5px',
+                                            alignItems: 'center',
+                                        }}>
+                                        <LocationIcon />
+                                    </span>
+                                    <p>Présentiel</p>
+                                </div>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                    }}>
+                                    <span
+                                        style={{
+                                            marginRight: '5px',
+                                            alignItems: 'center',
+                                        }}>
+                                        <MoneyIcon />
+                                    </span>
+                                    <p>€3200-3500</p>
+                                </div>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                    }}>
+                                    <span
+                                        style={{
+                                            marginRight: '5px',
+                                            alignItems: 'center',
+                                        }}>
+                                        <ClockIcon />
+                                    </span>
+                                    <p>Temps plein</p>
+                                </div>
+                            </div>
+                            <p
+                                style={{
+                                    color: '#757575',
+                                    fontSize: '12px',
+                                    marginTop: '15px',
+                                    marginBottom: '20px',
+                                }}>
+                                Il y a 2 jours
                             </p>
                         </div>
-                        <div
-                            style={{
-                                display: 'flex',
-                            }}>
-                            <span
-                                style={{
-                                    marginRight: '5px',
-                                    alignItems: 'center',
-                                }}>
-                                <LocationIcon />
-                            </span>
-                            <p>Présentiel</p>
-                        </div>
-                        <div
-                            style={{
-                                display: 'flex',
-                            }}>
-                            <span
-                                style={{
-                                    marginRight: '5px',
-                                    alignItems: 'center',
-                                }}>
-                                <MoneyIcon />
-                            </span>
-                            <p>€3200-3500</p>
-                        </div>
-                        <div
-                            style={{
-                                display: 'flex',
-                            }}>
-                            <span
-                                style={{
-                                    marginRight: '5px',
-                                    alignItems: 'center',
-                                }}>
-                                <ClockIcon />
-                            </span>
-                            <p>Temps plein</p>
-                        </div>
-                    </div>
-                    <p
-                        style={{
-                            color: '#757575',
-                            fontSize: '12px',
-                            marginTop: '15px',
-                            marginBottom: '20px',
-                        }}>
-                        Il y a 2 jours
-                    </p>
-                </div>
+                    )
+                })}
             </div>
             <Footer noMarginToP={true} />
         </div>
