@@ -23,6 +23,7 @@ export default function seekerRegister({
     const [stepThreePayload, setStepThreePayload] = useState(null)
     const [stepFourPayload, setStepFourPayload] = useState(null)
 
+    
     // useEffect(() => {
     //     if (isLogged === 1 && user && user.data.verified) setStep(2)
     // }, [])
