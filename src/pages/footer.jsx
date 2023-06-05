@@ -1,17 +1,19 @@
-import Link from "next/link"
-import Router from 'next/router';
+import Link from 'next/link'
+import Router from 'next/router'
 import { useDispatch } from 'react-redux'
-import { pushData } from '@/redux/jobsData';
+import { pushData } from '@/redux/jobsData'
 
-export default function Footer({className}) {
-
+export default function Footer({ className, noMarginToP }) {
     const dispatch = useDispatch()
     Router.events.on('routeChangeComplete', () => {
-        if(!Router.router._inFlightRoute.includes('/jobs')) dispatch(pushData([]))
+        if (!Router.router._inFlightRoute.includes('/jobs'))
+            dispatch(pushData([]))
     })
 
     return (
-        <footer className={className}> 
+        <footer
+            className={className}
+            style={{ marginTop: noMarginToP ? '0px' : undef }}>
             <div className="top-footer">
                 <div className="column column-1">
                     <Link href="/">
@@ -20,7 +22,9 @@ export default function Footer({className}) {
                 </div>
                 <div className="column column-2">
                     <div className="footer-contact">
-                        <a href="https://goo.gl/maps/PVTyp9jp5HyCN9d59" target="_blank">
+                        <a
+                            href="https://goo.gl/maps/PVTyp9jp5HyCN9d59"
+                            target="_blank">
                             <img src="/pin.svg" alt="" />
                             <p>
                                 Kornquaderweg 70, <br />
@@ -37,7 +41,7 @@ export default function Footer({className}) {
                 </div>
                 <div className="column column-3">
                     <Link href="/">Emplois</Link>
-                <Link href="/about">À propos de nous</Link>
+                    <Link href="/about">À propos de nous</Link>
                 </div>
                 <div className="column column-4">
                     <Link href="/tips">Conseils</Link>
@@ -50,8 +54,10 @@ export default function Footer({className}) {
                 </div>
             </div>
             <p className="bottom-footer">
-            Tous Droits Réservés © <Link href="/terms">Termes et Conditions</Link> | <Link href="/privacy">Politique de Confidentialité</Link>
+                Tous Droits Réservés ©{' '}
+                <Link href="/terms">Termes et Conditions</Link> |{' '}
+                <Link href="/privacy">Politique de Confidentialité</Link>
             </p>
         </footer>
-    );
+    )
 }

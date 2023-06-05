@@ -14,6 +14,11 @@ import SwitzerlandIcon from '@/icons/SwitzerlandIcon'
 import axios from '@/lib/axios'
 import EmptyStarIcon from '@/icons/EmptyStarIcon'
 import GalleryIcon from '@/icons/GalleryIcon'
+import MoneyIcon from '@/icons/MoneyIcon'
+import LocationIcon from '@/icons/LocationIcon'
+import ClockIcon from '@/icons/ClockIcon'
+import IdCardIcon from '@/icons/IdCardIcon'
+import HeartIcon from '@/icons/HeartIcon'
 
 export default function index({ isLogged, user, profile }) {
     const [expanded, setExpanded] = useState(false)
@@ -246,35 +251,13 @@ export default function index({ isLogged, user, profile }) {
                         style={{
                             display: 'grid',
                             gridTemplateColumns: 'repeat(5, 1fr)',
-                            gap: '10px',
+                            gap: '12px',
                         }}>
                         <img
-                            style={{ width: '100%' }}
-                            src="/user2.png"
-                            alt="Establishment images"
-                        />
-                        <img
-                            style={{ width: '100%' }}
-                            src="/user2.png"
-                            alt="Establishment images"
-                        />
-                        <img
-                            style={{ width: '100%' }}
-                            src="/user2.png"
-                            alt="Establishment images"
-                        />
-                        <img
-                            style={{ width: '100%' }}
-                            src="/user2.png"
-                            alt="Establishment images"
-                        />
-                        <img
-                            style={{ width: '100%' }}
-                            src="/user2.png"
-                            alt="Establishment images"
-                        />
-                        <img
-                            style={{ width: '100%' }}
+                            style={{
+                                width: '100%',
+                                objectFit: 'cover',
+                            }}
                             src="/user2.png"
                             alt="Establishment images"
                         />
@@ -282,7 +265,63 @@ export default function index({ isLogged, user, profile }) {
                 </div>
             </div>
             <div className={`${styles.experience} ${styles.borderBottomHalf}`}>
-                very first hii
+                <div className={styles.experienceName}>
+                    AVIS DE NOS EMPLOYÉS
+                    <div
+                        className={styles.feedbackAfter}
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginTop: '10px',
+                        }}>
+                        <FeedbackStars rating={4} />
+                    </div>
+                </div>
+                <div
+                    style={{
+                        alignSelf: 'start',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '40px',
+                    }}>
+                    <div className={`${styles.reccommenationItem}`}>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '10px',
+                            }}>
+                            <p style={{ fontWeight: '700' }}>Hôtel Grandiose</p>
+                            <FeedbackStars rating={4} />
+                            <p style={{ fontSize: '14px' }}>
+                                J'aimerais profiter de l'occasion pour
+                                recommander Anna Augustin pour le personnel de
+                                cuisine de votre organisation.
+                                <br />
+                                La cuisine n'est pas seulement son travail,
+                                c'est aussi sa passion. Elle n'a jamais essayé
+                                de rester des heures durant devant la flamme du
+                                feu. Elle a une grande résistance et un esprit
+                                fort. Elle n'a jamais abandonné son travail sous
+                                les critiques des autres.
+                                <br />
+                                Elle possède toutes les qualités qui font d'elle
+                                une bonne employée de cuisine. J'espère donc que
+                                vous tiendrez compte de ma recommandation et que
+                                vous lui donnerez une chance d'exprimer ses
+                                compétences.
+                            </p>
+                            <p
+                                style={{
+                                    color: '#757575',
+                                    fontSize: '12px',
+                                }}>
+                                2023-04-27
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <form
@@ -412,7 +451,121 @@ export default function index({ isLogged, user, profile }) {
                     ENVOYER
                 </button>
             </form>
-            <Footer />
+            <div
+                className={styles.establishmentsGrid}
+                style={{ backgroundColor: '#F8F0EB', padding: '45px 35px' }}>
+                <div
+                    className={styles.extablishmentItem}
+                    style={{ padding: '20px', overflowX: 'hidden' }}>
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                        }}>
+                        <p
+                            style={{
+                                color: '#000',
+                                fontWeight: '700',
+                                fontSize: '18px',
+                            }}>
+                            Chef de rang
+                        </p>
+                        <div>
+                            <HeartIcon />
+                        </div>
+                    </div>
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'start',
+                            justifyContent: 'center',
+                            gap: '10px',
+                            marginTop: '6px',
+                        }}>
+                        <p style={{ fontSize: '14px' }}>Restaurant Gourmet</p>
+                    </div>
+                    <div
+                        style={{
+                            display: 'grid',
+                            gridTemplateColumns: '1fr 1fr',
+                            gridTemplateRows: '1fr 1fr',
+                            marginTop: '20px',
+                            gap: '10px',
+                        }}>
+                        <div
+                            style={{
+                                display: 'flex',
+                            }}>
+                            <span
+                                style={{
+                                    marginRight: '5px',
+                                    alignItems: 'center',
+                                }}>
+                                {'FR' == 'FR' ? (
+                                    <FranceIcon />
+                                ) : (
+                                    <SwitzerlandIcon />
+                                )}
+                            </span>
+                            <p>
+                                {'FR' == 'FR' ? 'France' : 'Switzerland'},{' '}
+                                {'Paris'}
+                            </p>
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                            }}>
+                            <span
+                                style={{
+                                    marginRight: '5px',
+                                    alignItems: 'center',
+                                }}>
+                                <LocationIcon />
+                            </span>
+                            <p>Présentiel</p>
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                            }}>
+                            <span
+                                style={{
+                                    marginRight: '5px',
+                                    alignItems: 'center',
+                                }}>
+                                <MoneyIcon />
+                            </span>
+                            <p>€3200-3500</p>
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                            }}>
+                            <span
+                                style={{
+                                    marginRight: '5px',
+                                    alignItems: 'center',
+                                }}>
+                                <ClockIcon />
+                            </span>
+                            <p>Temps plein</p>
+                        </div>
+                    </div>
+                    <p
+                        style={{
+                            color: '#757575',
+                            fontSize: '12px',
+                            marginTop: '15px',
+                            marginBottom: '20px',
+                        }}>
+                        Il y a 2 jours
+                    </p>
+                </div>
+            </div>
+            <Footer noMarginToP={true} />
         </div>
     )
 }
