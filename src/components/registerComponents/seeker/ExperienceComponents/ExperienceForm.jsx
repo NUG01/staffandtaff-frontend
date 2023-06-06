@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react'
-import useCheckRequired from '@/hooks/requiredInputs'
 import axios from '@/lib/axios'
-import styles from '../../../../styles/register/register.module.css'
-import AddExperienceIcon from './AddExperienceIcon'
 import styles2 from '@/styles/about/about.module.css'
+import { useEffect, useState } from 'react'
+import styles from '../../../../styles/register/register.module.css'
 
 export default function ExperienceForm({ stepTwoUpdateEmit, index }) {
     const [experiencePosition, setExperiencePosition] = useState(null)

@@ -426,3 +426,64 @@
     margin-left: 3px;
     opacity: 0.8;
 }
+
+.section {
+    width: 100%;
+    background-color: white;
+    padding: 30px 20px;
+    margin-top: 10px;
+    border: 2px solid var(--color-6);
+}
+
+.section h5 {
+    padding-top: 10px;
+}
+
+.section input,
+.section select,
+.section textarea {
+    border: 2px solid var(--color-6);
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px 15px;
+    resize: none;
+}
+
+.textareaParent {
+    border: 2px solid var(--color-6);
+    padding-bottom: 30px;
+    margin-top: 20px;
+    position: relative;
+}
+
+.textareaParent textarea {
+    border: 0px;
+    margin-top: 0px;
+    height: 250px;
+}
+
+.wordCount {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    font-size: 13px;
+    color: var(--color-4);
+}
+
+.section select {
+    cursor: pointer;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 70%;
+    position: relative;
+    margin: auto;
+}
+
+.form > div {
+    display: flex;
+    flex-direction: column;
+}
