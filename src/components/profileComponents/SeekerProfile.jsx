@@ -31,7 +31,7 @@ export default function index({ isLogged, user, profile }) {
         console.log('ok')
     }
 
-    console.log(data)
+    console.log(user)
 
     function submitHandler(ev) {
         ev.preventDefault()
@@ -381,104 +381,106 @@ export default function index({ isLogged, user, profile }) {
                     </div>
                 </div>
             </div>
-            <form
-                onSubmit={submitHandler}
-                className={`${styles.reccommendations} seeker-profile`}>
-                <div
-                    className={styles.reccommenationName}
-                    style={{ fontSize: '18px', fontWeight: '800' }}>
-                    Laisser une recommandation
-                </div>
-                <p style={{ fontSize: '14px', marginBottom: '10px' }}>
-                    Avez-vous travaillé avec {data.seeker_info.fullname}?
-                    Laissez un recommandation.
-                </p>
-                <div
-                    style={{
-                        alignSelf: 'start',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '40px',
-                        width: '100%',
-                    }}>
-                    <div className={styles.inputContainer}>
-                        <div className={styles.building}>
-                            <BuildingIcon />
-                        </div>
-                        <input
-                            value={establishmentInput}
-                            onChange={ev => {
-                                ev.target.classList.remove('input-error')
-                                setEstablishmentInput(ev.target.value)
-                            }}
-                            placeholder="Nom de l'établissement*"
-                            type="text"
-                            className={`${styles.input} required-record`}
-                        />
+            {user.data.role != 'Seeker2' && (
+                <form
+                    onSubmit={submitHandler}
+                    className={`${styles.reccommendations} seeker-profile`}>
+                    <div
+                        className={styles.reccommenationName}
+                        style={{ fontSize: '18px', fontWeight: '800' }}>
+                        Laisser une recommandation
                     </div>
-                    <div className={styles.inputContainer}>
-                        <textarea
-                            value={reccommendationText}
-                            onChange={ev => {
-                                ev.target.classList.remove('input-error')
-                                setReccommendationText(ev.target.value)
-                            }}
-                            placeholder="Recommandation*"
-                            type="text"
-                            className={`${styles.textarea} required-record`}
-                        />
-                    </div>
-                </div>
-                <div
-                    style={{
-                        width: '100%',
-                        display: 'flex',
-                        flexDirection: 'row',
-                        alignItems: 'start',
-                        justifyContent: 'start',
-
-                        marginTop: '0',
-                    }}
-                    className={styles.checkbox}>
-                    <input
-                        className={`${styles.checkboxInput}`}
-                        // onClick={() => setGraduationStatus(!graduationStatus)}
-                        type="checkbox"
-                        id={`checkbox-18`}
-                        onChange={ev => setTerms(!terms)}
-                        style={{ display: 'inline-block', width: '20px' }}
-                    />
-                    <label
-                        htmlFor={`checkbox-18`}
+                    <p style={{ fontSize: '14px', marginBottom: '10px' }}>
+                        Avez-vous travaillé avec {data.seeker_info.fullname}?
+                        Laissez un recommandation.
+                    </p>
+                    <div
                         style={{
-                            color:
-                                terms == false && termsClicked > 0
-                                    ? '#D52B1E'
-                                    : '#000',
+                            alignSelf: 'start',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '40px',
+                            width: '100%',
                         }}>
-                        J'accepte les{' '}
-                        <span
+                        <div className={styles.inputContainer}>
+                            <div className={styles.building}>
+                                <BuildingIcon />
+                            </div>
+                            <input
+                                value={establishmentInput}
+                                onChange={ev => {
+                                    ev.target.classList.remove('input-error')
+                                    setEstablishmentInput(ev.target.value)
+                                }}
+                                placeholder="Nom de l'établissement*"
+                                type="text"
+                                className={`${styles.input} required-record`}
+                            />
+                        </div>
+                        <div className={styles.inputContainer}>
+                            <textarea
+                                value={reccommendationText}
+                                onChange={ev => {
+                                    ev.target.classList.remove('input-error')
+                                    setReccommendationText(ev.target.value)
+                                }}
+                                placeholder="Recommandation*"
+                                type="text"
+                                className={`${styles.textarea} required-record`}
+                            />
+                        </div>
+                    </div>
+                    <div
+                        style={{
+                            width: '100%',
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'start',
+                            justifyContent: 'start',
+
+                            marginTop: '0',
+                        }}
+                        className={styles.checkbox}>
+                        <input
+                            className={`${styles.checkboxInput}`}
+                            // onClick={() => setGraduationStatus(!graduationStatus)}
+                            type="checkbox"
+                            id={`checkbox-18`}
+                            onChange={ev => setTerms(!terms)}
+                            style={{ display: 'inline-block', width: '20px' }}
+                        />
+                        <label
+                            htmlFor={`checkbox-18`}
                             style={{
-                                fontWeight: '700',
-                                textDecoration: 'underline',
+                                color:
+                                    terms == false && termsClicked > 0
+                                        ? '#D52B1E'
+                                        : '#000',
                             }}>
-                            Termes et Conditions
-                        </span>{' '}
-                        et la &nbsp;
-                        <span
-                            style={{
-                                fontWeight: '700',
-                                textDecoration: 'underline',
-                            }}>
-                            Politique de Confidentialité
-                        </span>
-                        <span style={{ color: '#D52B1E' }}>*</span>
-                    </label>
-                </div>
-                <button type="submit" className={styles.button}>
-                    ENVOYER
-                </button>
-            </form>
+                            J'accepte les{' '}
+                            <span
+                                style={{
+                                    fontWeight: '700',
+                                    textDecoration: 'underline',
+                                }}>
+                                Termes et Conditions
+                            </span>{' '}
+                            et la &nbsp;
+                            <span
+                                style={{
+                                    fontWeight: '700',
+                                    textDecoration: 'underline',
+                                }}>
+                                Politique de Confidentialité
+                            </span>
+                            <span style={{ color: '#D52B1E' }}>*</span>
+                        </label>
+                    </div>
+                    <button type="submit" className={styles.button}>
+                        ENVOYER
+                    </button>
+                </form>
+            )}
             <Footer />
         </div>
     )
